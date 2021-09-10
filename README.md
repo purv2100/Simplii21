@@ -4,4 +4,4 @@
 
 
 
-this repository is our team's work for september
+This repository is our team's work for september
