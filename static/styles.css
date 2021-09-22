@@ -1,0 +1,81 @@
+
+.container{
+  font-size: x-large;
+}
+.p{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#greet-block{
+  background-color: lightblue;
+  grid-area: greet;
+  height: auto;
+  
+}
+#quote-block{
+  background-color: lightblue;
+  grid-area: quote;
+  height: auto;
+
+}
+#status-block{
+  background: lightblue;
+  grid-area: status;
+  height: auto;
+}
+#settings-block{
+  background: lightblue;
+  grid-area: settings;
+  height: auto;
+}
+#task-block{
+  background: lightblue;
+  grid-area: task;
+  height: auto;
+}
+#list-block{
+  background: lightblue;
+  grid-area: list;
+  height: auto;
+}
+#footer-block{
+  background: lightblue;
+  grid-area: footer;
+  height: auto;
+}
+
+
+@media (min-width:  1000px){
+  #main-container{
+    display : grid;
+    grid-template-columns : 33% 34% 33%;
+    grid-template-rows : 10% 10% 70% 10%;
+    grid-gap: 10px 10px;
+
+    grid-template-areas: 
+    "greet quote quote"
+    "status status status"
+    "settings task list"
+    "footer footer footer"
+  }
+}
+
+@media (max-width:  999px){
+  #main-container{
+    display : grid;
+    grid-row-gap: 10px;
+
+    grid-template-areas: 
+    "quote"
+    "status"
+    "task"
+    "settings"
+    "list"
+    "footer"
+  }
+
+  #greet-block{
+    display: none;
+  }
+
+}

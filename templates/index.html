@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    
+
+  <!-- Bootstrap CSS -->
+  <link href="/static/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+  
+
+  <!-- Custom CSS -->
+  <link href="/static/styles.css" rel = "stylesheet">
+
+
+  <!-- jQuery -->
+  <script src="/static/jquery-3.6.0.min.js"></script>
+
+
+  <!-- Bootstrap JS -->
+  <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <title>Simpli</title>
+
+</head>
+<body>
+    
+  <!-- DEMO CODE ONLY TO CHECK IF BOOTSTRAP WORKS PROPERLY -->
+  <!-- <h1>Hello, world!</h1> -->
+  <!-- DEMO CODE END -->
+
+
+  
+  <div class="container " id="main-container">
+    
+    <div class="container overflow-auto" id="greet-block">
+      <br>
+      <p>
+        Hi, Isham
+      </p>
+    </div>
+    
+    <div class="container overflow-auto" id = "quote-block">
+      <br>
+      <p id = "quotation" style="font-style: italic;">
+        {% block quote %} {{quote}} {% endblock %} 
+      </p>
+      <p id = "author" align="right">
+        {% block author %} {{author}} {% endblock %}
+      </p>
+    </div>
+
+
+    <div class="container overflow-auto" id = "status-block">
+      <br>
+      <p>
+        Status of your work list.
+      </p>
+    </div>
+
+
+    <div class="container overflow-auto" id = "settings-block">
+      <p>
+        Settings <br>
+        Only put off until tomorrow what you are willing to die having left undone.minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim panim quis do officia officia in sit non amet ex pariatur eiusmod aliqua quis. Lorem ipsum non aute laboris et dolor do occaecat commodo in cillum dolor ut in commodo sit officia anim do. Minim proident proident dolore in elit cillumo. Minim proident proident dolore in elit cillum consequat occaecat eiusmod nostrud reprehenderit do qui id excepteur nulla. In ut sunt nisi sint sunt laboris sunt enim ut amet sint in. Ut enim laboris pariatur eu minim velit dolor in irure ad labore ut quis commodo adipisicing in nulla. Id consectetur proident ex esse du
+      </p>
+    </div>
+
+    <div class="container overflow-auto" id = "task-block">
+      <p>
+        Main TASK and two buttons <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.minim id esse officia cute laboris et dolor do occaecat commodo in cillum dolor ut in commodo sit officia anim do. Minim proident proident dolore in elit cillum consequat occaecat eiusmod nostrud reprehenderit do 
+      </p>
+    </div>
+
+
+
+    <div class="container overflow-auto" id = "list-block">
+      <p>
+        Task List <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis 
+      </p>
+    </div>
+
+
+    <div class="container" id = "footer-block">
+      <p>
+        Footer <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo
+      </p>
+    </div>
+  </div>
+
+
+
+<!--   <script>
+    $(document).ready(function(){
+      $.getJSON("quotes.json", function(data){
+        console.log(data.quotes); 
+        console.log(data.authors);
+      }).fail(function(){
+        console.log("An error has occurred.");
+      });
+    });
+  </script> -->
+
+
+<!--   <script type="text/javascript">
+    function customize() {
+      var q = JSON.parse(quotes_corpus);    
+      console.log(q[Math.round(Math.random() * (q.length-1))].quote);
+      console.log(q[Math.round(Math.random() * (q.length-1))].author);
+
+
+      }
+    window.onload = customize;
+  </script> -->
+
+</body>
+</html>
