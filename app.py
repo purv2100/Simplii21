@@ -14,7 +14,7 @@ app = Flask(__name__)
 
 ALL_QUOTES = []
 ALL_AUTHORS = []
-with open(os.path.join("static", "quotes_dataset.csv"), "r") as csv_file:
+with open(os.path.join("static", "quotes_dataset.csv"), "r", encoding="utf-8") as csv_file:
   reader = csv.DictReader(csv_file)
 
   for row in reader:
@@ -26,7 +26,7 @@ with open(os.path.join("static", "quotes_dataset.csv"), "r") as csv_file:
 def refresh_data():
 
 
-  with open(os.path.join("static", "user_information.json"), "r") as json_file:
+  with open(os.path.join("static", "user_information.json"), "r", encoding="utf-8") as json_file:
     json_data = json.load(json_file)
 
   initialized = json_data["initialized"]
@@ -58,7 +58,7 @@ def delete_user_information():
     "email_notifications" : "no"
   }
 
-  with open(os.path.join("static", "user_information.json"), "w") as json_file:
+  with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
     json.dump(empty_user_information, json_file)
 
 
@@ -73,7 +73,7 @@ def update_user_information():
   
   user_information = json.loads(request.data)
   
-  with open(os.path.join("static", "user_information.json"), "w") as json_file:
+  with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
     json.dump(user_information, json_file)
 
   return render_template("index.html", data=refresh_data())
