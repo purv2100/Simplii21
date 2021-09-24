@@ -22,31 +22,144 @@
 
   <title>Simpli</title>
 
+  <!-- Custom JS -->
+  <script type="text/javascript">
+
+    // Email verification copied from :  https://stackoverflow.com/a/46181
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function change_pref(){
+      
+      let new_preferences = {
+        "initialized" : "yes",
+        "name" : "",
+        "email_id" : "",
+        "email_notifications" : ""
+      }
+
+
+      let new_name = null;
+      while(new_name == null || new_name == ""){
+      new_name = prompt('Please enter your name (required)','{{data["name_block"]["name"]}}');
+      }
+      new_preferences["name"] = new_name;
+
+
+      let new_email_id = null; 
+      while(new_email_id == null || !validateEmail(new_email_id)){
+        new_email_id = prompt('Please enter your e-mail (keep empty if you do not wish to share)','{{data["name_block"]["email_id"]}}');
+
+        if(new_email_id == ""){
+          break;
+        }
+      }
+      new_preferences["email_id"] = new_email_id;
+
+
+      if(new_preferences["email_id"] != ""){
+        let new_email_notifications = prompt('Do you want critical e-mail notifications for your tasks? (yes/no) - NOT IMPLEMENTED YET','{{data["name_block"]["email_notifications"]}}');
+        if(String(new_email_notifications).toLowerCase() == "yes"){
+          new_preferences["email_notifications"] = "yes";
+        }
+        else{
+          new_preferences["email_notifications"] = "no";
+        }
+      }else{
+        new_preferences["email_notifications"] = "no";
+      }
+
+      let httpReq = new XMLHttpRequest();
+      httpReq.open("POST", "/update_user_info", false);
+      httpReq.send(JSON.stringify(new_preferences));
+
+    }
+
+
+    function force_initialization(){
+      if('{{data["name_block"]["initialized"]}}' != "yes"){
+        alert ("Welcome to Simpli! Please enter some information to get started!")
+        change_pref();
+      }
+
+    }
+
+    function reset_things(){
+      
+      let reset_tasks = prompt("Type 'yes' if you want to reset the task-list", "no");
+      let reset_user_information = prompt("Type 'yes' if you want to delete all user_infromation", "no");
+
+
+      if(reset_tasks == "yes"){
+        let httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "/reset_tasks", false);
+        httpReq.send();
+      }
+      if(reset_user_information == "yes"){
+        let httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "/reset_all", false);
+        httpReq.send();
+      }
+      
+
+
+
+
+    }
+
+  </script>
 </head>
-<body>
+<body onload="force_initialization()">
     
-  <!-- DEMO CODE ONLY TO CHECK IF BOOTSTRAP WORKS PROPERLY -->
-  <!-- <h1>Hello, world!</h1> -->
-  <!-- DEMO CODE END -->
-
-
   
   <div class="container " id="main-container">
     
+
+    <div class="container overflow-auto" id="header-block">
+      <p>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+      </p>
+    </div>
+    
+
     <div class="container overflow-auto" id="greet-block">
       <br>
       <p>
-        Hi, Isham
+        Hi, <b>{{data["name_block"]["name"]}}</b>  <br>
+        email-id: <a href = "#"> {{data["name_block"]["email_id"]}} </a><br>
+        E-mail notifications: <b>{{data["name_block"]["email_notifications"]}}</b>
+        <table class = "container-fluid"> 
+          <tr>
+              <td>
+                <form method="GET" onsubmit="change_pref()">
+                  <input type="submit" value = "Change Preferences...">
+                </form>
+              </td>
+              <td style = "align-content: right;">
+                <form method="GET" onsubmit="reset_things()">
+                  <input type="submit" value = "Reset">
+                </form>
+              </td>
+          </tr>
+        </table>
+
       </p>
     </div>
     
     <div class="container overflow-auto" id = "quote-block">
       <br>
       <p id = "quotation" style="font-style: italic;">
-        {% block quote %} {{quote}} {% endblock %} 
+        {{data["quote_block"]["quote"]}}  
       </p>
       <p id = "author" align="right">
-        {% block author %} {{author}} {% endblock %}
+        {{data["quote_block"]["author"]}}
       </p>
     </div>
 
@@ -92,29 +205,6 @@
   </div>
 
 
-
-<!--   <script>
-    $(document).ready(function(){
-      $.getJSON("quotes.json", function(data){
-        console.log(data.quotes); 
-        console.log(data.authors);
-      }).fail(function(){
-        console.log("An error has occurred.");
-      });
-    });
-  </script> -->
-
-
-<!--   <script type="text/javascript">
-    function customize() {
-      var q = JSON.parse(quotes_corpus);    
-      console.log(q[Math.round(Math.random() * (q.length-1))].quote);
-      console.log(q[Math.round(Math.random() * (q.length-1))].author);
-
-
-      }
-    window.onload = customize;
-  </script> -->
 
 </body>
 </html>
