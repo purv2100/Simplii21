@@ -60,7 +60,7 @@
   #main-container{
     display : grid;
     grid-template-columns : 33% 34% 33%;
-    grid-template-rows : 15% 15% 10% 55%% 5%;
+    grid-template-rows : 15% 15% 10% 55% 5%;
     grid-gap: 10px 10px;
 
     grid-template-areas: 
