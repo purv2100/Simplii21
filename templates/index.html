@@ -102,12 +102,14 @@
         httpReq.open("POST", "/reset_all", false);
         httpReq.send();
       }
-      
-
-
-
 
     }
+  
+  // Code to set up current time on deadline datefield. 
+  window.addEventListener('load', () => {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('deadline').value = now.toISOString().slice(0, -1);
 
   </script>
 </head>
@@ -174,8 +176,30 @@
 
     <div class="container overflow-auto" id = "settings-block">
       <p>
-        Settings <br>
-        Only put off until tomorrow what you are willing to die having left undone.minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim panim quis do officia officia in sit non amet ex pariatur eiusmod aliqua quis. Lorem ipsum non aute laboris et dolor do occaecat commodo in cillum dolor ut in commodo sit officia anim do. Minim proident proident dolore in elit cillumo. Minim proident proident dolore in elit cillum consequat occaecat eiusmod nostrud reprehenderit do qui id excepteur nulla. In ut sunt nisi sint sunt laboris sunt enim ut amet sint in. Ut enim laboris pariatur eu minim velit dolor in irure ad labore ut quis commodo adipisicing in nulla. Id consectetur proident ex esse du
+        <form action="task.html" method="post" id="task">
+          <h1> Task Entry </h1>
+          <div class="field">
+            <label for="taskName"> Task Details:</label>
+            <textarea name="taskName" rows="4" cols="20" placeholder="Buy groceries/Finish assignment.">
+              </textarea>
+            <small></small>
+          </div>
+          <div class="field">
+            <label for="deadline">Choose the deadline of the task:</label>
+            <input type="datetime-local" id="deadline" name="deadline">
+          </div>
+          <div class="field">
+            <label for="estimate">Choose the duration of the task:</label>
+            <input type="text" id="estimateInput" name="estimateInput">
+            <select id="estimate" name="estimate">
+              <option value="months">Months</option>
+              <option value="days">Days</option>
+              <option value="hours">Hours</option>
+              </select>
+            </div>
+            <br>
+          <button type="submit"> Submit </button>
+        </form>
       </p>
     </div>
 
