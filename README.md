@@ -15,7 +15,7 @@ sudo apt-get upgrade
 
 sudo apt install python3.8-venv
 
-## Flask installation (Linux/Mac)
+## Flask installation (Mac)
 python3 -m venv venv
 
 
