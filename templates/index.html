@@ -41,7 +41,7 @@
     });
   </script>
 </head>
-<body onload="force_initialization('page_data')">
+<body onload='force_initialization({{data|tojson}})'>
     
   
   <div class="container " id="main-container">
@@ -68,7 +68,7 @@
         <table class = "container-fluid"> 
           <tr>
               <td>
-                <form method="GET" onsubmit="change_pref('page_data')">
+                <form method="GET" onsubmit='change_pref({{data|tojson}})'>
                   <input type="submit" value = "Change Preferences...">
                 </form>
               </td>

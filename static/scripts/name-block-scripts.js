@@ -5,7 +5,6 @@ function validateEmail(email) {
 }
 
 function change_pref(data){
-  data = JSON.parse(data);
   let new_preferences = {
     "initialized" : "yes",
     "name" : "",
@@ -52,7 +51,6 @@ function change_pref(data){
 
 
 function force_initialization(data){
-  data = JSON.parse(data);
 
   if(String(data["name_block"]["initialized"]) != "yes"){
     alert ("Welcome to Simpli! Please enter some information to get started!");
