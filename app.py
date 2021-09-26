@@ -47,7 +47,12 @@ def refresh_data():
 
 
 def delete_tasks():
-  pass
+  for file in os.path.join("static", "tasks", "completed_tasks"):
+    os.remove(os.path.join("static", "tasks", "completed_tasks", file))
+
+  for file in os.path.join("static", "tasks", "todo"):
+    os.remove(os.path.join("static", "tasks", "todo", file))
+
 
 
 def delete_user_information():
@@ -94,4 +99,7 @@ def delete_tasks_only():
 
   return render_template("index.html", data=refresh_data())
 
+
 app.run(debug = True)
+
+
