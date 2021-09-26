@@ -35,6 +35,7 @@
   background: lightblue;
   grid-area: settings;
   height: auto;
+  width: 643px;
 }
 #task-block{
   background: lightblue;
@@ -45,6 +46,8 @@
   background: lightblue;
   grid-area: list;
   height: auto;
+  width: 643px;
+  margin-left: -9em;
 }
 #footer-block{
   background: lightblue;

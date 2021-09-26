@@ -19,7 +19,6 @@
   <!-- Bootstrap JS -->
   <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
-
   <title>Simpli</title>
 
   <!-- Custom JS -->
@@ -104,6 +103,10 @@
       }
 
     }
+
+    function showVal(newVal){
+    document.getElementById("valBox").innerHTML=newVal;
+}
   
   // Code to set up current time on deadline datefield. 
   window.addEventListener('load', () => {
@@ -180,14 +183,16 @@
           <h1> Task Entry </h1>
           <div class="field">
             <label for="taskName"> Task Details:</label>
-            <textarea name="taskName" rows="4" cols="20" placeholder="Buy groceries/Finish assignment.">
+            <textarea name="taskName" rows="2" cols="20" placeholder="Buy groceries/Finish assignment.">
               </textarea>
             <small></small>
           </div>
+          <br>
           <div class="field">
             <label for="deadline">Choose the deadline of the task:</label>
             <input type="datetime-local" id="deadline" name="deadline">
           </div>
+          <br>
           <div class="field">
             <label for="estimate">Choose the duration of the task:</label>
             <input type="text" id="estimateInput" name="estimateInput">
@@ -198,19 +203,28 @@
               </select>
             </div>
             <br>
-          <button type="submit"> Submit </button>
+            <div class="field">
+              <label for="taskType">Task type: </label> <br>
+                <input type="radio" id="physical" name="taskType" value="physical">
+                <label for="physical">Physical</label> <br>
+                <input type="radio" id="neutral" name="taskType" value="neutral">
+                <label for="neutral">Neutral</label> <br>
+                <input type="radio" id="intellectual" name="taskType" value="intellectual">
+                <label for="intellectual">Intellectual</label>
+              </div>
+            <br>
+            <div class="field">
+              <label for="difficulty">Difficulty of task:</label>
+              <span id="valBox"></span>
+              <input type="range" id="difficulty" name="difficulty" min="0" max="5" step="1"
+              oninput="showVal(this.value)" onchange="showVal(this.value)">
+              </input>
+              </div>
+              <br>
+          <button type="submit" class="submit"> Submit </button>
         </form>
       </p>
     </div>
-
-    <div class="container overflow-auto" id = "task-block">
-      <p>
-        Main TASK and two buttons <br>
-        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.minim id esse officia cute laboris et dolor do occaecat commodo in cillum dolor ut in commodo sit officia anim do. Minim proident proident dolore in elit cillum consequat occaecat eiusmod nostrud reprehenderit do 
-      </p>
-    </div>
-
-
 
     <div class="container overflow-auto" id = "list-block">
       <p>
