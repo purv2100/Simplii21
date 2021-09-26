@@ -25,21 +25,8 @@
   <title>Simpli</title>
 
   <!-- Custom JS -->
-  <script type="text/javascript">
+  <script src="/static/scripts/task-block-scripts.js"> </script>
 
-    let page_data = '{{ data|tojson }}'; 
-
-    function showVal(newVal){
-    document.getElementById("valBox").innerHTML=newVal;
-    }
-  
-    // Code to set up current time on deadline datefield. 
-    window.addEventListener('load', () => {
-    const now = new Date();
-    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
-    document.getElementById('deadline').value = now.toISOString().slice(0, -1);
-    });
-  </script>
 </head>
 <body onload='force_initialization({{data|tojson}})'>
     
@@ -106,7 +93,7 @@
       <p>
       	<h2> + Add a task </h2>
           
-        <form action="#" method="post" id="add-task-form">
+        <form onsubmit="submitTask({{data|tojson}})" method="GET" id="add-task-form">
           <div class="field">
             <label for="taskName"> Title</label>
             <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants">
@@ -114,7 +101,7 @@
           
           <div class="field">
             <label for="deadline">Deadline:</label>
-            <input type="datetime-local" id="deadline" name="deadline" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
+            <input type="datetime-local" id="deadline" name="deadline">
           </div>
           <br>
           <div class="field">

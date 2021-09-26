@@ -94,4 +94,13 @@
     vertical-align: top;
   }
 
+  form label {
+    display: inline-block;
+    width: 100px;
+  }
+
+  form div {
+    margin-bottom: 10px;
+  }
+
 }
