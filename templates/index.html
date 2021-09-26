@@ -79,7 +79,7 @@
 
     function force_initialization(){
       if('{{data["name_block"]["initialized"]}}' != "yes"){
-        alert ("Welcome to Simpli! Please enter some information to get started!")
+        alert ("Welcome to Simpli! Please enter some information to get started!");
         change_pref();
       }
 
@@ -113,7 +113,7 @@
   const now = new Date();
   now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
   document.getElementById('deadline').value = now.toISOString().slice(0, -1);
-
+	});
   </script>
 </head>
 <body onload="force_initialization()">
