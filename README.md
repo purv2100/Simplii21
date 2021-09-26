@@ -15,11 +15,17 @@ sudo apt install python3.8-venv
 
 ## Flask installation (Linux/Mac)
 python3 -m venv venv
+
+
 . venv/bin/activate
+
+
 pip install Flask
 
 
 ## Python insstalltion (Windows) 
 py -3 -m venv venv
+
 venv\Scripts\activate
+
 pip install Flask
