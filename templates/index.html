@@ -104,18 +104,17 @@
 
     <div class="container overflow-auto" id = "settings-block">
       <p>
-        <form action="task.html" method="post" id="task">
-          <h1> Task Entry </h1>
+      	<h2> + Add a task </h2>
+          
+        <form action="#" method="post" id="add-task-form">
           <div class="field">
-            <label for="taskName"> Task Details:</label>
-            <textarea name="taskName" rows="2" cols="20" placeholder="Buy groceries/Finish assignment.">
-              </textarea>
-            <small></small>
+            <label for="taskName"> Title</label>
+            <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants">
           </div>
-          <br>
+          
           <div class="field">
-            <label for="deadline">Choose the deadline of the task:</label>
-            <input type="datetime-local" id="deadline" name="deadline">
+            <label for="deadline">Deadline:</label>
+            <input type="datetime-local" id="deadline" name="deadline" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}" required>
           </div>
           <br>
           <div class="field">
