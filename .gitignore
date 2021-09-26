@@ -2,3 +2,4 @@ __pycache__
 bootstrap_testingGround.html
 venv
 static/user_information.json
+static/tasks
