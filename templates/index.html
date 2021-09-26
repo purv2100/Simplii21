@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    
+
+  <!-- Bootstrap CSS -->
+  <link href="/static/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
+  
+
+  <!-- Custom CSS -->
+  <link href="/static/styles.css" rel = "stylesheet">
+
+
+  <!-- jQuery -->
+  <script src="/static/jquery-3.6.0.min.js"></script>
+
+
+  <!-- Bootstrap JS -->
+  <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+
+
+  <title>Simpli</title>
+
+  <!-- Custom JS -->
+  <script type="text/javascript">
+
+    // Email verification copied from :  https://stackoverflow.com/a/46181
+    function validateEmail(email) {
+      const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+
+    function change_pref(){
+      
+      let new_preferences = {
+        "initialized" : "yes",
+        "name" : "",
+        "email_id" : "",
+        "email_notifications" : ""
+      }
+
+
+      let new_name = null;
+      while(new_name == null || new_name == ""){
+      new_name = prompt('Please enter your name (required)','{{data["name_block"]["name"]}}');
+      }
+      new_preferences["name"] = new_name;
+
+
+      let new_email_id = null; 
+      while(new_email_id == null || !validateEmail(new_email_id)){
+        new_email_id = prompt('Please enter your e-mail (keep empty if you do not wish to share)','{{data["name_block"]["email_id"]}}');
+
+        if(new_email_id == ""){
+          break;
+        }
+      }
+      new_preferences["email_id"] = new_email_id;
+
+
+      if(new_preferences["email_id"] != ""){
+        let new_email_notifications = prompt('Do you want critical e-mail notifications for your tasks? (yes/no) - NOT IMPLEMENTED YET','{{data["name_block"]["email_notifications"]}}');
+        if(String(new_email_notifications).toLowerCase() == "yes"){
+          new_preferences["email_notifications"] = "yes";
+        }
+        else{
+          new_preferences["email_notifications"] = "no";
+        }
+      }else{
+        new_preferences["email_notifications"] = "no";
+      }
+
+      let httpReq = new XMLHttpRequest();
+      httpReq.open("POST", "/update_user_info", false);
+      httpReq.send(JSON.stringify(new_preferences));
+
+    }
+
+
+    function force_initialization(){
+      if('{{data["name_block"]["initialized"]}}' != "yes"){
+        alert ("Welcome to Simpli! Please enter some information to get started!")
+        change_pref();
+      }
+
+    }
+
+    function reset_things(){
+      
+      let reset_tasks = prompt("Type 'yes' if you want to reset the task-list", "no");
+      let reset_user_information = prompt("Type 'yes' if you want to delete all user_infromation", "no");
+
+
+      if(reset_tasks == "yes"){
+        let httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "/reset_tasks", false);
+        httpReq.send();
+      }
+      if(reset_user_information == "yes"){
+        let httpReq = new XMLHttpRequest();
+        httpReq.open("POST", "/reset_all", false);
+        httpReq.send();
+      }
+
+    }
+  
+  // Code to set up current time on deadline datefield. 
+  window.addEventListener('load', () => {
+  const now = new Date();
+  now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+  document.getElementById('deadline').value = now.toISOString().slice(0, -1);
+
+  </script>
+</head>
+<body onload="force_initialization()">
+    
+  
+  <div class="container " id="main-container">
+    
+
+    <div class="container overflow-auto" id="header-block">
+      <p>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+        HEADER BLOCK <br>
+      </p>
+    </div>
+    
+
+    <div class="container overflow-auto" id="greet-block">
+      <br>
+      <p>
+        Hi, <b>{{data["name_block"]["name"]}}</b>  <br>
+        email-id: <a href = "#"> {{data["name_block"]["email_id"]}} </a><br>
+        E-mail notifications: <b>{{data["name_block"]["email_notifications"]}}</b>
+        <table class = "container-fluid"> 
+          <tr>
+              <td>
+                <form method="GET" onsubmit="change_pref()">
+                  <input type="submit" value = "Change Preferences...">
+                </form>
+              </td>
+              <td style = "align-content: right;">
+                <form method="GET" onsubmit="reset_things()">
+                  <input type="submit" value = "Reset">
+                </form>
+              </td>
+          </tr>
+        </table>
+
+      </p>
+    </div>
+    
+    <div class="container overflow-auto" id = "quote-block">
+      <br>
+      <p id = "quotation" style="font-style: italic;">
+        {{data["quote_block"]["quote"]}}  
+      </p>
+      <p id = "author" align="right">
+        {{data["quote_block"]["author"]}}
+      </p>
+    </div>
+
+
+    <div class="container overflow-auto" id = "status-block">
+      <br>
+      <p>
+        Status of your work list.
+      </p>
+    </div>
+
+
+    <div class="container overflow-auto" id = "settings-block">
+      <p>
+        <form action="task.html" method="post" id="task">
+          <h1> Task Entry </h1>
+          <div class="field">
+            <label for="taskName"> Task Details:</label>
+            <textarea name="taskName" rows="4" cols="20" placeholder="Buy groceries/Finish assignment.">
+              </textarea>
+            <small></small>
+          </div>
+          <div class="field">
+            <label for="deadline">Choose the deadline of the task:</label>
+            <input type="datetime-local" id="deadline" name="deadline">
+          </div>
+          <div class="field">
+            <label for="estimate">Choose the duration of the task:</label>
+            <input type="text" id="estimateInput" name="estimateInput">
+            <select id="estimate" name="estimate">
+              <option value="months">Months</option>
+              <option value="days">Days</option>
+              <option value="hours">Hours</option>
+              </select>
+            </div>
+            <br>
+          <button type="submit"> Submit </button>
+        </form>
+      </p>
+    </div>
+
+    <div class="container overflow-auto" id = "task-block">
+      <p>
+        Main TASK and two buttons <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.minim id esse officia cute laboris et dolor do occaecat commodo in cillum dolor ut in commodo sit officia anim do. Minim proident proident dolore in elit cillum consequat occaecat eiusmod nostrud reprehenderit do 
+      </p>
+    </div>
+
+
+
+    <div class="container overflow-auto" id = "list-block">
+      <p>
+        Task List <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis 
+      </p>
+    </div>
+
+
+    <div class="container" id = "footer-block">
+      <p>
+        Footer <br>
+        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo
+      </p>
+    </div>
+  </div>
+
+
+
+</body>
+</html>

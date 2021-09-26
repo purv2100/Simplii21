@@ -5,3 +5,15 @@
 
 
 This repository is our team's work for september
+
+## Python installation (Linux)
+
+sudo apt-get update
+sudo apt-get upgrade
+
+sudo apt install python3.8-venv
+
+## Flask installation (Linux/Mac)
+python3 -m venv venv
+. venv/bin/activate
+pip install Flask
