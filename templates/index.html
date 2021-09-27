@@ -88,40 +88,50 @@
     <div class="container overflow-auto rounded" id = "settings-block">
       <p>
       	<h2> + Add a task </h2>
-          
         <form onsubmit="submitTask({{data|tojson}})" method="GET" id="add-task-form">
           <div class="field">
-            <label for="taskName"> Title</label>
+            <label for="taskName"> Title:</label>
             <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants">
           </div>
-          
+          <br>
           <div class="field">
             <label for="deadline">Deadline:</label>
             <input type="datetime-local" id="deadline" name="deadline">
           </div>
           <br>
           <div class="field">
-            <label for="estimate">Choose the duration of the task:</label>
+            <label for="estimate">Duration of the task:</label>
             <input type="text" id="estimateInput" name="estimateInput">
-            <select id="estimate" name="estimate">
-              <option value="months">Months</option>
-              <option value="days">Days</option>
-              <option value="hours">Hours</option>
-              </select>
+            <label for="title">Hours</label>
             </div>
             <br>
             <div class="field">
               <label for="taskType">Task type: </label> <br>
                 <input type="radio" id="physical" name="taskType" value="physical">
                 <label for="physical">Physical</label> <br>
-                <input type="radio" id="neutral" name="taskType" value="neutral">
-                <label for="neutral">Neutral</label> <br>
                 <input type="radio" id="intellectual" name="taskType" value="intellectual">
                 <label for="intellectual">Intellectual</label>
               </div>
+              <br>
+              <div id = "intellectualSplit" class="desc" style="display:none">
+                <div class="field">
+                  <label for="intellectualType">What kind of intellectual task is it?: </label> <br>
+                  <label for="quant/verbal">Quantitative/Verbal:</label>
+                  <span id="val1Box"></span>
+              <input type="range" id="quant/verbal" name="quant/verbal" min="0" max="5" step="1"
+              oninput="show1Val(this.value)" onchange="show1Val(this.value)">
+              </input>
+              <br>
+              <label for="contentconsump">Content Creation/Consumption:</label>
+              <span id="val2Box"></span>
+            <input type="range" id="contentconsump" name="contentconsump" min="0" max="5" step="1"
+            oninput="show2Val(this.value)" onchange="show2Val(this.value)">
+            </input>
+                </div>
+              </div>
             <br>
             <div class="field">
-              <label for="difficulty">Difficulty of task:</label>
+              <label for="difficulty">Difficulty of task (0 - Easy, 5 - Difficult):</label>
               <span id="valBox"></span>
               <input type="range" id="difficulty" name="difficulty" min="0" max="5" step="1"
               oninput="showVal(this.value)" onchange="showVal(this.value)">
@@ -130,6 +140,7 @@
               <br>
           <button type="submit" class="submit"> Submit </button>
         </form>
+        </div>
       </p>
     </div>
 
