@@ -24,6 +24,22 @@
 
   <!-- Custom JS -->
   <script src="/static/scripts/task-block-scripts.js"> </script>
+  <script type="text/javascript">
+    var today = new Date();
+    var date = today.toDateString().split(' ');
+    today = date[2] + " " + date[1] + " " + date[3];
+    document.getElementById("today").innerHTML = today;
+    let page_data = JSON.parse('{{ data|tojson }}'); 
+
+    console.log(page_data["task-list-block"]);
+    function edit_task(a){
+      console.log("Edit" + String(a));
+    }
+
+    function delete_task(a){
+      console.log("Delete" + String(a));
+    }
+</script>
 
   <title>Simpli</title>
 </head>
@@ -142,7 +158,6 @@
         </form>
         </div>
       </p>
-    </div>
 
     <div class="container overflow-auto rounded" id = "list-block">
       
@@ -184,9 +199,6 @@
 
 		  	</tr>
 	    {% endfor %}
-
-
-		  
 
       </table>
     </div>
