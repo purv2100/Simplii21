@@ -2,27 +2,25 @@
 <html>
 <head>
   <meta charset="utf-8">
-    
 
+	<!-- Font Awesome icons (free version)-->
+  <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
   <!-- Bootstrap CSS -->
   <link href="/static/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
   
-
-  <!-- Custom CSS -->
-  <link href="/static/styles.css" rel = "stylesheet">
-
+  <!-- Bootstrap JS -->
+  <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
   <!-- jQuery -->
   <script src="/static/jquery-3.6.0.min.js"></script>
 
 
-  <!-- Bootstrap JS -->
-  <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom CSS -->
+  <link href="/static/styles.css" rel = "stylesheet">
 
   <!-- Custom JS -->
   <script src="/static/scripts/name-block-scripts.js"></script>
 
-  <title>Simpli</title>
 
   <!-- Custom JS -->
   <script src="/static/scripts/task-block-scripts.js"> </script>
@@ -34,7 +32,7 @@
   <div class="container " id="main-container">
     
 
-    <div class="container overflow-auto" id="header-block">
+    <div class="container overflow-auto rounded" id="header-block">
       <p>
         HEADER BLOCK <br>
         HEADER BLOCK <br>
@@ -46,8 +44,7 @@
     </div>
     
 
-    <div class="container overflow-auto" id="greet-block">
-      <br>
+    <div class="container overflow-auto rounded" id="greet-block">
       <p>
         Hi, <b>{{data["name_block"]["name"]}}</b>  <br>
         email-id: <a href = "#"> {{data["name_block"]["email_id"]}} </a><br>
@@ -70,7 +67,7 @@
       </p>
     </div>
     
-    <div class="container overflow-auto" id = "quote-block">
+    <div class="container overflow-auto rounded" id = "quote-block">
       <br>
       <p id = "quotation" style="font-style: italic;">
         {{data["quote_block"]["quote"]}}  
@@ -81,15 +78,14 @@
     </div>
 
 
-    <div class="container overflow-auto" id = "status-block">
-      <br>
+    <div class="container overflow-auto rounded" id = "status-block">
       <p>
         Status of your work list.
       </p>
     </div>
 
 
-    <div class="container overflow-auto" id = "settings-block">
+    <div class="container overflow-auto rounded" id = "settings-block">
       <p>
       	<h2> + Add a task </h2>
           
@@ -137,15 +133,55 @@
       </p>
     </div>
 
-    <div class="container overflow-auto" id = "list-block">
-      <p>
-        Task List <br>
-        In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure.In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo irure. In quis 
-      </p>
+    <div class="container overflow-auto rounded" id = "list-block">
+      
+      <h2>
+        Task List
+      </h2>
+
+	    <table class = "table table-striped">
+	    <tr>
+		    <th>Task</th>
+		    <th>Time Reqd.</th>
+		    <th>Due Date</th>
+		    <th>Edit</th>
+		    <th>Delete</th>
+		    
+		  </tr>
+		  
+		  {% for task in data["task-list-block"]["task-list"] %}
+		  	<tr>
+		  		<td>
+		  			{{data["task-list-block"]["task-list"][task]["taskName"]}}
+		  		</td>
+		  		<td>
+		  			{{data["task-list-block"]["task-list"][task]["approximateTime"]}}
+		  		</td>
+		  		<td>
+		  			{{data["task-list-block"]["task-list"][task]["endDate"]}}
+		  		</td>
+		  		
+
+		  		<td>
+		  			<a href= "#" onclick='edit_task("{{task}}")'><i class="fas fa-edit" title = "Edit"></i></a>
+		  		</td>
+		  		
+		  		<td>
+						<a href= "#" onclick='delete_task("{{task}}")'><i class="fas fa-trash" title = "Delete"></i></a>
+		  		</td>
+		  		
+
+		  	</tr>
+	    {% endfor %}
+
+
+		  
+
+      </table>
     </div>
 
 
-    <div class="container" id = "footer-block">
+    <div class="container rounded" id = "footer-block">
       <p>
         Footer <br>
         In quis dolor sunt eiusmod cillum in magna anim enim minim anim pariatur dolor in minim id esse officia commodo
