@@ -35,19 +35,12 @@
   background: lightblue;
   grid-area: settings;
   height: auto;
-  width: 643px;
-}
-#task-block{
-  background: lightblue;
-  grid-area: task;
-  height: auto;
 }
 #list-block{
   background: lightblue;
   grid-area: list;
   height: auto;
-  width: 643px;
-  margin-left: -9em;
+  /*margin-left: -9em;*/
 }
 #footer-block{
   background: lightblue;
@@ -67,7 +60,7 @@
     "header header header"
     "greet quote quote"
     "status status status"
-    "settings task list"
+    "settings list list"
     "footer footer footer"
   }
 }
@@ -80,7 +73,6 @@
     grid-template-areas: 
     "quote"
     "status"
-    "task"
     "settings"
     "list"
     "footer"
