@@ -24,6 +24,10 @@
 
   <!-- Custom inline JS   THIS SHOULD BE REMOVED!! -->
   <script type="text/javascript">
+      var today = new Date();
+    var date = today.toDateString().split(' ');
+    today = date[2] + " " + date[1] + " " + date[3];
+    document.getElementById("today").innerHTML = today;
     let page_data = JSON.parse('{{ data|tojson }}'); 
 
     console.log(page_data["task-list-block"]);
@@ -59,15 +63,14 @@
   <div class="container " id="main-container">
     
 
-    <div class="container overflow-auto rounded" id="header-block">
-      <p>
-        HEADER BLOCK <br>
-        HEADER BLOCK <br>
-        HEADER BLOCK <br>
-        HEADER BLOCK <br>
-        HEADER BLOCK <br>
-        HEADER BLOCK <br>
-      </p>
+       <div class="container overflow-auto" id="header-block">
+        <p><img src="../static/calendar.png" alt="" style="float:left;width:100px;height:100px;padding-top:20px;padding-left:10px"></p>
+        <p>
+        <h2 style="padding-top:30px;">Welcome to Task Scheduler Application</h2>
+        </p>
+        <p style="padding-left:70%;">Schedule for : <script type="text/javascript">
+        document.write(today)
+      </script> </p>
     </div>
     
 
