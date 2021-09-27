@@ -8,44 +8,60 @@
 }
 
 #header-block{
-  background-color: lightblue;
+  border-radius: 10px;
+  background-color:#Ebedee;
   grid-area: header;
   height: auto;
 
 }
 
 #greet-block{
-  background-color: lightblue;
+  border-radius: 10px;
+  background-color:#Ebedee;
   grid-area: greet;
   height: auto;
   
 }
 #quote-block{
-  background-color: lightblue;
+  border-radius: 10px;
+  background-color: #Ebedee;
   grid-area: quote;
   height: auto;
 
 }
 #status-block{
-  background: lightblue;
+  border-radius: 10px;
+  background: #Ebedee;
   grid-area: status;
   height: auto;
 }
 #settings-block{
-  background: lightblue;
+  border-radius: 10px;
+  background: #Ebedee;
   grid-area: settings;
   height: auto;
 }
+#task-block{
+  border-radius: 10px;
+  background: #Ebedee;
+  grid-area: task;
+  height: auto;
+}
 #list-block{
-  background: lightblue;
+  border-radius: 10px;
+  background: #Ebedee;
   grid-area: list;
   height: auto;
   /*margin-left: -9em;*/
 }
 #footer-block{
-  background: lightblue;
+  /* background: lightgrey; */
+  border-radius: 25px;
   grid-area: footer;
   height: auto;
+  color:wheat;
+  padding-bottom: 10%;
+  background-image: url('insurance-footer-background.png');
 }
 
 
