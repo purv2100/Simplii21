@@ -2,9 +2,6 @@ from flask import Flask
 from flask import render_template
 from flask import request, jsonify, redirect
 
-
-
-
 import os, sys
 import random
 import csv
@@ -114,10 +111,19 @@ def homePage():
 @app.route("/update_user_info", methods = ["POST"])
 def update_user_information():
   
-  user_information = json.loads(request.data)
+  user_information = request.form
   
+  new_info = {}
+
+  new_info["name"] = user_information["name"] 
+  new_info["email_id"] = user_information["email"]
+  new_info["initialized"] = "yes"
+  new_info["email_notifications"] = user_information["emailChoose"] 
+
+
+
   with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-    json.dump(user_information, json_file)
+    json.dump(new_info, json_file)
 
   return render_template("index.html", data=refresh_data())
 

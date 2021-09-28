@@ -70,16 +70,16 @@
 @media (min-width:  1000px){
   #main-container{
     display : grid;
-    grid-template-columns : 33% 34% 33%;
+    grid-template-columns : 35% 65%;
     grid-template-rows : 10% 15% 10% 55% 5%;
     grid-gap: 10px 10px;
 
     grid-template-areas: 
-    "header header header"
-    "greet quote quote"
-    "status status status"
-    "settings list list"
-    "footer footer footer"
+    "header header"
+    "greet quote"
+    "status status"
+    "settings list"
+    "footer footer"
   }
 }
 
