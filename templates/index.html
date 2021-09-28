@@ -5,9 +5,9 @@
 
 	<!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
   <!-- Bootstrap CSS -->
   <link href="/static/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-  
   <!-- Bootstrap JS -->
   <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
 
@@ -32,13 +32,32 @@
     let page_data = JSON.parse('{{ data|tojson }}'); 
 
     console.log(page_data["task-list-block"]);
-    function edit_task(a){
-      console.log("Edit" + String(a));
-    }
+    
+    // function edit_task(a){
+    //   console.log("Edit" + String(a));
+    // }
 
-    function delete_task(a){
-      console.log("Delete" + String(a));
-    }
+   //  function delete_task(a){
+		 //  let httpReq = new XMLHttpRequest();
+  		
+  	// 	httpReq.open("POST", "/delete_task", false);
+  	// 	httpReq.send(String(a));
+  	// }
+
+
+      // function delete_task(a){
+      //   $.ajax({
+      //     url: "/delete_task",
+      //     type: "POST",
+      //     data: {jsdata: String(a)},
+      //     success: function(response) {
+      //       $("#place_for_suggestions").html(response);
+      //     },
+      //     error: function(xhr) {
+      //       //Do Something to handle error
+      //     }
+      //   });
+      // }
 </script>
 
   <title>Simpli</title>
@@ -104,26 +123,25 @@
     <div class="container overflow-auto rounded" id = "settings-block">
       <p>
       	<h2> + Add a task </h2>
-        <form onsubmit="submitTask({{data|tojson}})" method="GET" id="add-task-form">
+        <form method="POST" id="add-task-form" action="/add_task">
           <div class="field">
             <label for="taskName"> Title:</label>
-            <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants">
+            <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants" required>
           </div>
           <br>
           <div class="field">
             <label for="deadline">Deadline:</label>
-            <input type="datetime-local" id="deadline" name="deadline">
+            <input type="datetime-local" id="deadline" name="deadline" required>
           </div>
           <br>
           <div class="field">
-            <label for="estimate">Duration of the task:</label>
-            <input type="text" id="estimateInput" name="estimateInput">
-            <label for="title">Hours</label>
+            <label for="estimate">Duration of the task (in Hrs.):</label>
+            <input type="text" id="estimateInput" name="estimateInput"  required>
             </div>
             <br>
             <div class="field">
               <label for="taskType">Task type: </label> <br>
-                <input type="radio" id="physical" name="taskType" value="physical">
+                <input type="radio" id="physical" name="taskType" value="physical" checked>
                 <label for="physical">Physical</label> <br>
                 <input type="radio" id="intellectual" name="taskType" value="intellectual">
                 <label for="intellectual">Intellectual</label>
@@ -135,13 +153,13 @@
                   <label for="quant/verbal">Quantitative/Verbal:</label>
                   <span id="val1Box"></span>
               <input type="range" id="quant/verbal" name="quant/verbal" min="0" max="5" step="1"
-              oninput="show1Val(this.value)" onchange="show1Val(this.value)">
+              oninput="show1Val(this.value)" onchange="show1Val(this.value)" required>
               </input>
               <br>
               <label for="contentconsump">Content Creation/Consumption:</label>
               <span id="val2Box"></span>
             <input type="range" id="contentconsump" name="contentconsump" min="0" max="5" step="1"
-            oninput="show2Val(this.value)" onchange="show2Val(this.value)">
+            oninput="show2Val(this.value)" onchange="show2Val(this.value)" required>
             </input>
                 </div>
               </div>
@@ -150,11 +168,11 @@
               <label for="difficulty">Difficulty of task (0 - Easy, 5 - Difficult):</label>
               <span id="valBox"></span>
               <input type="range" id="difficulty" name="difficulty" min="0" max="5" step="1"
-              oninput="showVal(this.value)" onchange="showVal(this.value)">
+              oninput="showVal(this.value)" onchange="showVal(this.value)" required>
               </input>
               </div>
               <br>
-          <button type="submit" class="submit"> Submit </button>
+          <button type="submit" class="submit"> Add task! </button>
         </form>
         </div>
       </p>
@@ -170,7 +188,8 @@
 		    <th>Task</th>
 		    <th>Time Reqd.</th>
 		    <th>Due Date</th>
-		    <th>Edit</th>
+		    <!-- We have not created the edit functionality yet -->
+		    <!-- <th>Edit</th> -->
 		    <th>Delete</th>
 		    
 		  </tr>
@@ -178,22 +197,30 @@
 		  {% for task in data["task-list-block"]["task-list"] %}
 		  	<tr>
 		  		<td>
-		  			{{data["task-list-block"]["task-list"][task]["taskName"]}}
+		  			{{data["task-list-block"]["task-list"][task]["task_name"]}}
 		  		</td>
 		  		<td>
-		  			{{data["task-list-block"]["task-list"][task]["approximateTime"]}}
+		  			{{data["task-list-block"]["task-list"][task]["estimate"]}}
 		  		</td>
 		  		<td>
-		  			{{data["task-list-block"]["task-list"][task]["endDate"]}}
+		  			{{data["task-list-block"]["task-list"][task]["deadline"]}}
 		  		</td>
 		  		
-
-		  		<td>
+<!-- We have not implemented the edit functionality yet -->
+<!-- 		  		<td>
 		  			<a href= "#" onclick='edit_task("{{task}}")'><i class="fas fa-edit" title = "Edit"></i></a>
 		  		</td>
-		  		
+ -->		  		
 		  		<td>
-						<a href= "#" onclick='delete_task("{{task}}")'><i class="fas fa-trash" title = "Delete"></i></a>
+						  <form method="POST" action = "/delete_task">
+              <input type="hidden" name="id" value="{{task}}">
+
+              <button type = "submit" name = "delete">
+                <i class="fas fa-trash"></i>
+              </button>
+              <!-- <input type="submit" name="delete" value="Delete">  -->
+              </form>
+            <!-- <a onclick='delete_task("{{task}}")'><i class="fas fa-trash" title = "Delete"></i></a> -->
 		  		</td>
 		  		
 
