@@ -3,3 +3,4 @@ bootstrap_testingGround.html
 venv
 static/user_information.json
 static/tasks
+.DS_Store

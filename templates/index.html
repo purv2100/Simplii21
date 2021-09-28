@@ -24,6 +24,7 @@
 
   <!-- Custom JS -->
   <script src="/static/scripts/task-block-scripts.js"> </script>
+
   <script type="text/javascript">
     var today = new Date();
     var date = today.toDateString().split(' ');
@@ -61,6 +62,7 @@
 </script>
 
   <title>Simpli</title>
+  <link rel="shortcut icon" href="../static/calendar.png">
 </head>
 <body onload='force_initialization({{data|tojson}})'>
     
@@ -69,9 +71,9 @@
     
 
        <div class="container overflow-auto" id="header-block">
-        <p><img src="../static/calendar.png" alt="" style="float:left;width:100px;height:100px;padding-top:20px;padding-left:10px"></p>
+        <!-- <p><img src="../static/calendar.png" alt="" style="float:left;width:100px;height:100px;padding-top:20px;padding-left:10px"></p> -->
         <p>
-        <h2 style="padding-top:30px;">Welcome to Task Scheduler Application</h2>
+        <h1 style="padding-top:30px;" align="center">Welcome to Task Scheduler</h1>
         </p>
         <p style="padding-left:70%;">Schedule for : <script type="text/javascript">
         document.write(today)
@@ -87,9 +89,55 @@
         <table class = "container-fluid"> 
           <tr>
               <td>
-                <form method="GET" onsubmit='change_pref({{data|tojson}})'>
+                <!-- <form method="GET" onsubmit='change_pref({{data|tojson}})'>
                   <input type="submit" value = "Change Preferences...">
-                </form>
+                </form> -->
+                <button id="prefBtn" onclick="showPrefModal()" >Change Preferences</button>
+
+                <!-- The Modal -->
+                <div id="prefModal" class="modal" role="dialog" aria-labelledby="myLargeModalLabel">
+                  <div class="modal-dialog" role="document">
+                  <div class="vertical-alignment-helper">
+                    <div class="modal-dialog vertical-align-center">
+                  <!-- Modal content -->
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+                        </button>
+                         <h4 class="modal-title" id="myModalLabel">Change Preferences</h4>
+  
+                    </div>
+                    <div class="modal-body">
+                      <form onsubmit="submitUserInfo({{data|tojson}})" method="GET" id="add-task-form">
+                        <div class="field">
+                          <label for="name"> Name:</label>
+                          <input type="text" name="name" placeholder="Enter your name" value='{{data["name_block"]["name"]}}'>
+                        </div>
+                        <br>
+                        <div class="field">
+                          <label for="email">Email:</label>
+                          <input type="text" name="email" placeholder="Enter your email">
+                        </div>
+                        <br>
+                        <div class="field">
+                          <label for="emailChoose">Do you wish to get email notifications?</label> <br>
+                          <input type="radio" id="yes" name="emailChoose" value="yes">
+                        <label for="yes">Yes</label> <br>
+                        <input type="radio" id="no" name="emailChoose" value="no">
+                        <label for="no">No</label>
+                          </div>
+                          <br>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal" onclick="closeModal()">Close
+                        </button>
+                      <button type="button" class="btn btn-primary" onclick="saveAndCloseModal()">Save changes</button>
+                  </div>
+                  </div>
+                  </div>
+                    </div>
+                </div>
+                </div>
               </td>
               <td style = "align-content: right;">
                 <form method="GET" onsubmit="reset_things()">
@@ -232,12 +280,10 @@
 
 
     <div class="container" id = "footer-block" >
-      <div class = "row">
             <!-- <img src=""> -->
             <center><h3>NC State University </h3></center>
             <center><small font-size: 1.0em;>Created by: Ishan, Krishika, Apurva, Arpitha, Unnati</small></center>
             <center><small>© 2021 NC State University. All rights reserved.</small></center>
-      </div>
     </div>
   </div>
 

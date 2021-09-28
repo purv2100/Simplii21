@@ -19,12 +19,12 @@ COMPLETED_TASKS_PATH = os.path.join("static", "tasks", "completed")
 
 ALL_QUOTES = []
 ALL_AUTHORS = []
-with open(os.path.join("static", "quotes_dataset.csv"), "r", encoding="utf-8") as csv_file:
+with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
   reader = csv.DictReader(csv_file)
 
   for row in reader:
-    ALL_QUOTES.append(row["quote"])
-    ALL_AUTHORS.append(row["author"])
+    ALL_QUOTES.append(row["Quote"])
+    ALL_AUTHORS.append(row["Author"])
 
 
 
