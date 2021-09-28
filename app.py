@@ -1,12 +1,12 @@
 from flask import Flask
 from flask import render_template
-from flask import request
-
+from flask import request, jsonify, redirect
 
 import os, sys
 import random
 import csv
 import json
+import string
 
 app = Flask(__name__)
 
@@ -41,21 +41,21 @@ def refresh_data():
   index = random.randint(0, len(ALL_AUTHORS)-1)
   #####
 
-  # ##### Load the todo task list
-  # tasks = {}
-  # for file in os.listdir(TODO_TASKS_PATH):
-  #   if ".json" in file:
-  #     with open(os.path.join(TODO_TASKS_PATH, file), "r", encoding="utf-8") as json_file:
-  #       json_data = json.load(json_file)
+  ##### Load the todo task list
+  tasks = {}
+  for file in os.listdir(TODO_TASKS_PATH):
+    if ".json" in file:
+      with open(os.path.join(TODO_TASKS_PATH, file), "r", encoding="utf-8") as json_file:
+        json_data = json.load(json_file)
 
-  #     tasks[json_data["task_id"]] = json_data
-  #####
+      tasks[json_data["id"]] = json_data
+  ####
 
-  ##DUMMY JSON
-  tasks = {
-   "task2": {"taskName": "Interactive narrative home work", "endDate": "2021-09-29", "approximateTime": 5, "difficulty": 2, "status": 0},
-   "task1": {"taskName": "Algos home work", "endDate": "2021-09-30", "approximateTime": 6, "difficulty": 1, "status": 0}
-  }
+  # ##DUMMY JSON
+  # tasks = {
+  #  "task2": {"taskName": "Interactive narrative home work", "endDate": "2021-09-29", "approximateTime": 5, "difficulty": 2, "status": 0},
+  #  "task1": {"taskName": "Algos home work", "endDate": "2021-09-30", "approximateTime": 6, "difficulty": 1, "status": 0}
+  # }
 
 
   ##### Compile the data and send as json!
@@ -111,10 +111,19 @@ def homePage():
 @app.route("/update_user_info", methods = ["POST"])
 def update_user_information():
   
-  user_information = json.loads(request.data)
+  user_information = request.form
   
+  new_info = {}
+
+  new_info["name"] = user_information["name"] 
+  new_info["email_id"] = user_information["email"]
+  new_info["initialized"] = "yes"
+  new_info["email_notifications"] = user_information["emailChoose"] 
+
+
+
   with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-    json.dump(user_information, json_file)
+    json.dump(new_info, json_file)
 
   return render_template("index.html", data=refresh_data())
 
@@ -125,8 +134,7 @@ def delete_user():
   delete_tasks()
   delete_user_information()
 
-  return render_template("index.html", data=refresh_data())
-
+  return redirect("/")
 
 @app.route("/reset_tasks", methods = ["POST"])
 def delete_tasks_only():
@@ -137,23 +145,60 @@ def delete_tasks_only():
 
 
 
-
 @app.route("/add_task", methods = ["POST"])
 def add_new_task():
-  new_task_information = json.loads(request.data)
-
+  
+  form_data = request.values
+  
   new_id = getnewTaskID()
 
-  new_task_information["id"] = new_id
+  new_task_information = {}
 
+  new_task_information["id"] = new_id
+  new_task_information["task_name"] = form_data["taskName"]
+  new_task_information["deadline"] = form_data["deadline"]
+  new_task_information["estimate"] = form_data["estimateInput"]
+
+  new_task_information["task_type"] = form_data["taskType"]
+
+  if new_task_information["task_type"] == "intellectual":
+    new_task_information["quant_verbal"] = form_data["quant/verbal"]
+    new_task_information["creat_consum"] = form_data["contentconsump"]
+
+  elif new_task_information["task_type"] == "physical":
+    new_task_information["quant_verbal"] = "NA"
+    new_task_information["creat_consum"] = "NA"
+
+  else:
+    print("Error! task_type is neither intellectual nor physical")
+
+
+  new_task_information["difficulty"] = form_data["difficulty"]
+
+  print(new_task_information)
   with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
     json.dump(new_task_information, json_file)
 
-  return render_template("index.html", data=refresh_data())
+  return redirect("/")
 
-@app.route("/edit_task", methods = ["POST"])
-def edit_task_byID():
-  pass
+@app.route("/delete_task", methods = ["POST"])
+def delete_task_byID():
+  
+  # task_id = request.data.decode("utf-8")
+
+  print(request.values)
+  task_id = request.values["id"]
+
+  with open(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"), "r", encoding="utf-8") as json_file:
+    task_information = json.load(json_file)
+
+
+  os.remove(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"))
+
+  with open(os.path.join(COMPLETED_TASKS_PATH, str(task_id)+".json"), "w", encoding="utf-8") as json_file:
+    json.dump(task_information, json_file)
+
+  return redirect("/")
 
 app.run(debug = True)
 

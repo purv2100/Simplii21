@@ -25,7 +25,7 @@ python3 -m venv venv
 pip install Flask
 
 
-## Python insstalltion (Windows) 
+## Python installation (Windows) 
 py -3 -m venv venv
 
 venv\Scripts\activate
