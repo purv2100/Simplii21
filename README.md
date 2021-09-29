@@ -5,8 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/ivbhatt/se-project-september)](https://github.com/ivbhatt/se-project-september/issues)
 
 
-
-This repository is our team's work for september
+In the fast world of technology today, all of us aim to be our productive best. However, despite a lot of planning, most of us struggle to get as much done as we were supposed to. We are trying to build a tool that will enable fast execution of our tasks under any mood. We parameterize emotions, deadlines, task difficulty and display a task to get done in the given situation. 
 
 ## Python installation (Linux)
 
