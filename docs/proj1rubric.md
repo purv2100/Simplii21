@@ -1,20 +1,20 @@
 ### Review
 | Points | Self Assesment| Evidence|
 | -------------- | ---------- |----------|
-| Workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 0| evidence|
+| Workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 3 | [contributor stats](https://github.com/ivbhatt/Simplii/graphs/contributors)|
 | But nevertheless, here is a track record that everyone is contributing a lot)	evidence in GH| 3 | GH |
-| Number of commits	| 3 | https://github.com/ivbhatt/Simplii/graphs/commit-activity |
-| Number of commits: by different people | 3 | https://github.com/ivbhatt/Simplii/graphs/contributors |
-| Issues reports: there are many | 3 |  |
-| issues are being closed |3 | evidence in GH |
+| Number of commits	| 3 | [commit stats](https://github.com/ivbhatt/Simplii/graphs/commit-activity) |
+| Number of commits: by different people | 3 | [commit stats](https://github.com/ivbhatt/Simplii/graphs/commit-activity) |
+| Issues reports: there are many | 3 | [bug reports](https://github.com/ivbhatt/Simplii/projects/1?card_filter_query=label%3Abug) |
+| issues are being closed |3 | [closed tasks](https://github.com/ivbhatt/Simplii/projects/1?card_filter_query=is%3Aclosed) |
 | DOI badge: | 3 | in GH |
-| Docs: doco generated , format not ugly| 3 | in GH |
-| Docs: what: point descriptions of each class/function (in isolation)| 3 | |
-| Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z doc page entries | 3 | |
-| Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing	|0| evidence|
+| Docs: doco generated , format not ugly| 3 | [README.md](https://github.com/ivbhatt/Simplii/blob/main/README.md) [Installation/Testing guide](https://github.com/ivbhatt/Simplii/blob/main/Installation.md)|
+| Docs: what: point descriptions of each class/function (in isolation)| 3 | [README.md](https://github.com/ivbhatt/Simplii/blob/main/README.md) |
+| Docs: how: for common use cases X,Y,Z mini-tutorials showing worked examples on how to do X,Y,Z doc page entries | 3 | [README.md](https://github.com/ivbhatt/Simplii/blob/main/README.md)|
+| Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing	| 3 | |
 | Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|	0| evidence|
 | Use of version control tools| 3 | evidence|
-| Use of style checkers	| 3 | evidence|
+| Use of style checkers	| 3 | |
 | Use of code formatters.| 3 | evidence|
 | Use of syntax checkers.| 3 | evidence|
 | Use of code coverage | 3 | evidence|
