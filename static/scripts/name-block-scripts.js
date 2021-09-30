@@ -75,19 +75,19 @@ function change_pref(data){
       break;
     }
   }
-  new_preferences["email_id"] = new_email_id;
+  new_preferences["email"] = new_email_id;
 
 
-  if(new_preferences["email_id"] != ""){
+  if(new_preferences["email"] != ""){
     let new_email_notifications = prompt('Do you want critical e-mail notifications for your tasks? (yes/no) - NOT IMPLEMENTED YET',String(data["name_block"]["email_notifications"]));
     if(String(new_email_notifications).toLowerCase() == "yes"){
-      new_preferences["email_notifications"] = "yes";
+      new_preferences["emailChoose"] = "yes";
     }
     else{
-      new_preferences["email_notifications"] = "no";
+      new_preferences["emailChoose"] = "no";
     }
   }else{
-    new_preferences["email_notifications"] = "no";
+    new_preferences["emailChoose"] = "no";
   }
 
   let httpReq = new XMLHttpRequest();
@@ -106,21 +106,21 @@ function force_initialization(data){
 
 }
 
-function reset_things(){
+// function reset_things(){
   
-  let reset_tasks = prompt("Type 'yes' if you want to reset the task-list", "no");
-  let reset_user_information = prompt("Type 'yes' if you want to delete all user_infromation", "no");
+//   let reset_tasks = prompt("Type 'yes' if you want to reset the task-list", "no");
+//   let reset_user_information = prompt("Type 'yes' if you want to delete all user_infromation", "no");
 
 
-  if(reset_tasks == "yes"){
-    let httpReq = new XMLHttpRequest();
-    httpReq.open("POST", "/reset_tasks", false);
-    httpReq.send();
-  }
-  if(reset_user_information == "yes"){
-    let httpReq = new XMLHttpRequest();
-    httpReq.open("POST", "/reset_all", false);
-    httpReq.send();
-  }
+//   if(reset_tasks == "yes"){
+//     let httpReq = new XMLHttpRequest();
+//     httpReq.open("POST", "/reset_tasks", false);
+//     httpReq.send();
+//   }
+//   if(reset_user_information == "yes"){
+//     let httpReq = new XMLHttpRequest();
+//     httpReq.open("POST", "/reset_all", false);
+//     httpReq.send();
+//   }
 
-}
+// }

@@ -62,29 +62,29 @@ def refresh_data():
     return data
 
 
-def delete_tasks():
-    """Function to delete a task."""
-    for file in os.listdir(COMPLETED_TASKS_PATH):
-        if ".json" in file:
-            os.remove(os.path.join(COMPLETED_TASKS_PATH, file))
+# def delete_tasks():
+#     """Function to delete a task."""
+#     for file in os.listdir(COMPLETED_TASKS_PATH):
+#         if ".json" in file:
+#             os.remove(os.path.join(COMPLETED_TASKS_PATH, file))
 
-    for file in os.listdir(TODO_TASKS_PATH):
-        if ".json" in file:
-            os.remove(os.path.join(TODO_TASKS_PATH, file))
+#     for file in os.listdir(TODO_TASKS_PATH):
+#         if ".json" in file:
+#             os.remove(os.path.join(TODO_TASKS_PATH, file))
 
 
 
-def delete_user_information():
-    """This is a dummy way to delete user information."""
-    empty_user_information = {
-      "initialized" : "no",
-      "name" : "",
-      "email_id" : "",
-      "email_notifications" : "no"
-    }
+# def delete_user_information():
+#     """This is a dummy way to delete user information."""
+#     empty_user_information = {
+#       "initialized" : "no",
+#       "name" : "",
+#       "email_id" : "",
+#       "email_notifications" : "no"
+#     }
 
-    with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-        json.dump(empty_user_information, json_file)
+#     with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
+#         json.dump(empty_user_information, json_file)
 
 
 def getnewTaskID():
@@ -119,24 +119,24 @@ def update_user_information():
     with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
         json.dump(new_info, json_file)
 
-    return render_template("index.html", data=refresh_data())
-
-
-@app.route("/reset_all", methods = ["POST"])
-def delete_user():
-    """Function to delete a user that deletes all the tasks of the user and user information."""
-    delete_tasks()
-    delete_user_information()
-
     return redirect("/")
 
 
-@app.route("/reset_tasks", methods = ["POST"])
-def delete_tasks_only():
-    """Function to reset tasks of a user."""
-    delete_tasks()
+# @app.route("/reset_all", methods = ["POST"])
+# def delete_user():
+#     """Function to delete a user that deletes all the tasks of the user and user information."""
+#     delete_tasks()
+#     delete_user_information()
 
-    return render_template("index.html", data=refresh_data())
+#     return redirect("/")
+
+
+# @app.route("/reset_tasks", methods = ["POST"])
+# def delete_tasks_only():
+#     """Function to reset tasks of a user."""
+#     delete_tasks()
+
+#     return redirect("/")
 
 
 @app.route("/add_task", methods = ["POST"])
