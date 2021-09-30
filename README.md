@@ -24,7 +24,7 @@ https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-
 
 ER Diagram                 |  Application Flowchart
 :-------------------------:|:-------------------------:
-<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/webappFlowchart.png" width="500" height="350" />
+<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/webappFlowchart.png" width="500" height="350" />
 
 ## Quick look:
 
