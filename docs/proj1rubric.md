@@ -2,7 +2,7 @@
 | Points | Self Assesment| Evidence|
 | -------------- | ---------- |----------|
 | Workload is spread over the whole team (one team member is often Xtimes more productive than the others... | 3 | [contributor stats](https://github.com/ivbhatt/Simplii/graphs/contributors)|
-| But nevertheless, here is a track record that everyone is contributing a lot)	evidence in GH| 3 | GH |
+| But nevertheless, here is a track record that everyone is contributing a lot)	evidence in GH| 3 | in GH |
 | Number of commits	| 3 | [commit stats](https://github.com/ivbhatt/Simplii/graphs/commit-activity) |
 | Number of commits: by different people | 3 | [commit stats](https://github.com/ivbhatt/Simplii/graphs/commit-activity) |
 | Issues reports: there are many | 3 | [bug reports](https://github.com/ivbhatt/Simplii/projects/1?card_filter_query=label%3Abug) |
@@ -15,9 +15,9 @@
 | Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code.|	0| evidence|
 | Use of version control tools| 3 | evidence|
 | Use of style checkers	| 3 | |
-| Use of code formatters.| 3 | evidence|
+| Use of code formatters.| 3 | [pylint](https://github.com/ivbhatt/Simplii/blob/main/.vscode/settings.json) [Evidence](https://github.com/ivbhatt/Simplii/blob/main/docs/lintingEvidence/app.pyLinting.png) |
 | Use of syntax checkers.| 3 | evidence|
-| Use of code coverage | 3 | evidence|
+| Use of code coverage | 3 | [pylint](https://github.com/ivbhatt/Simplii/blob/main/.vscode/settings.json) [Evidence](https://github.com/ivbhatt/Simplii/blob/main/docs/lintingEvidence/app.pyLinting.png) |
 | other automated analysis tools | 3 | evidence|
 | test cases exist | 3 | dozens of tests and those test cases are more than 30% of the code base |
 | test cases are routinely executed	| 3 | |
