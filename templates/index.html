@@ -6,13 +6,14 @@
 	<!-- Font Awesome icons (free version)-->
   <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
-  <!-- Bootstrap CSS -->
-  <link href="/static/bootstrap-5.0.2-dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap JS -->
-  <script src="/static/bootstrap-5.0.2-dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery slim -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-  <!-- jQuery -->
-  <script src="/static/jquery-3.6.0.min.js"></script>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- Bootstrap (and Popper) JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 
   <!-- Custom CSS -->
@@ -20,9 +21,6 @@
 
   <!-- Custom JS -->
   <script src="/static/scripts/name-block-scripts.js"></script>
-
-
-  <!-- Custom JS -->
   <script src="/static/scripts/task-block-scripts.js"> </script>
 
   <script type="text/javascript">
@@ -33,32 +31,6 @@
     let page_data = JSON.parse('{{ data|tojson }}'); 
 
     console.log(page_data["task-list-block"]);
-    
-    // function edit_task(a){
-    //   console.log("Edit" + String(a));
-    // }
-
-   //  function delete_task(a){
-		 //  let httpReq = new XMLHttpRequest();
-  		
-  	// 	httpReq.open("POST", "/delete_task", false);
-  	// 	httpReq.send(String(a));
-  	// }
-
-
-      // function delete_task(a){
-      //   $.ajax({
-      //     url: "/delete_task",
-      //     type: "POST",
-      //     data: {jsdata: String(a)},
-      //     success: function(response) {
-      //       $("#place_for_suggestions").html(response);
-      //     },
-      //     error: function(xhr) {
-      //       //Do Something to handle error
-      //     }
-      //   });
-      // }
 </script>
 
   <title>Simpli</title>
