@@ -1,12 +1,14 @@
-from flask import Flask
-from flask import render_template
-from flask import request, jsonify, redirect
-
-import os, sys
+"""Importing all the standard Python modules."""
+import os
 import random
 import csv
 import json
 import string
+
+from flask import Flask
+from flask import render_template
+from flask import request, redirect
+
 
 app = Flask(__name__)
 
@@ -17,189 +19,182 @@ COMPLETED_TASKS_PATH = os.path.join("static", "tasks", "completed")
 ALL_QUOTES = []
 ALL_AUTHORS = []
 with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
-  reader = csv.DictReader(csv_file)
+    reader = csv.DictReader(csv_file)
 
-  for row in reader:
-    ALL_QUOTES.append(row["Quote"])
-    ALL_AUTHORS.append(row["Author"])
-
+    for row in reader:
+        ALL_QUOTES.append(row["Quote"])
+        ALL_AUTHORS.append(row["Author"])
 
 
 def refresh_data():
+    """This function loads up user data from user config file."""
 
-  ##### Load user information from file
-  with open(os.path.join("static", "user_information.json"), "r", encoding="utf-8") as json_file:
-    json_data = json.load(json_file)
-
-  initialized = json_data["initialized"]
-  name = json_data["name"]
-  email_id = json_data["email_id"]
-  email_notifications = json_data["email_notifications"]
-  #####
-
-  ##### Load a random quote
-  index = random.randint(0, len(ALL_AUTHORS)-1)
-  #####
-
-  ##### Load the todo task list
-  tasks = {}
-  for file in os.listdir(TODO_TASKS_PATH):
-    if ".json" in file:
-      with open(os.path.join(TODO_TASKS_PATH, file), "r", encoding="utf-8") as json_file:
+    ##### Load user information from file
+    with open(os.path.join("static", "user_information.json"), "r", encoding="utf-8") as json_file:
         json_data = json.load(json_file)
 
-      tasks[json_data["id"]] = json_data
-  ####
+    initialized = json_data["initialized"]
+    name = json_data["name"]
+    email_id = json_data["email_id"]
+    email_notifications = json_data["email_notifications"]
 
-  # ##DUMMY JSON
-  # tasks = {
-  #  "task2": {"taskName": "Interactive narrative home work", "endDate": "2021-09-29", "approximateTime": 5, "difficulty": 2, "status": 0},
-  #  "task1": {"taskName": "Algos home work", "endDate": "2021-09-30", "approximateTime": 6, "difficulty": 1, "status": 0}
-  # }
+    ##### Load a random quote
+    index = random.randint(0, len(ALL_AUTHORS)-1)
+
+    ##### Load the todo task list
+    tasks = {}
+    for file in os.listdir(TODO_TASKS_PATH):
+        if ".json" in file:
+            with open(os.path.join(TODO_TASKS_PATH, file), "r", encoding="utf-8") as json_file:
+                json_data = json.load(json_file)
+
+            tasks[json_data["id"]] = json_data
 
 
   ##### Compile the data and send as json!
-  data = {
-    "name_block" : {"initialized":initialized, "name": name, "email_id": email_id,
-    "email_notifications": email_notifications},
-    "quote_block" : {"quote": ALL_QUOTES[index], "author": ALL_AUTHORS[index]},
-    "task-list-block" : {"task-list": tasks}
-  }
+    data = {
+      "name_block" : {"initialized":initialized, "name": name, "email_id": email_id,
+      "email_notifications": email_notifications},
+      "quote_block" : {"quote": ALL_QUOTES[index], "author": ALL_AUTHORS[index]},
+      "task-list-block" : {"task-list": tasks}
+    }
   #####
-  return data
+    return data
 
 
 def delete_tasks():
-  for file in os.listdir(COMPLETED_TASKS_PATH):
-    if ".json" in file:
-      os.remove(os.path.join(COMPLETED_TASKS_PATH, file))
+    """Function to delete a task."""
+    for file in os.listdir(COMPLETED_TASKS_PATH):
+        if ".json" in file:
+            os.remove(os.path.join(COMPLETED_TASKS_PATH, file))
 
-  for file in os.listdir(TODO_TASKS_PATH):
-    if ".json" in file:
-      os.remove(os.path.join(TODO_TASKS_PATH, file))
+    for file in os.listdir(TODO_TASKS_PATH):
+        if ".json" in file:
+            os.remove(os.path.join(TODO_TASKS_PATH, file))
 
 
 
 def delete_user_information():
-  empty_user_information = {
-    "initialized" : "no",
-    "name" : "",
-    "email_id" : "",
-    "email_notifications" : "no"
-  }
+    """This is a dummy way to delete user information."""
+    empty_user_information = {
+      "initialized" : "no",
+      "name" : "",
+      "email_id" : "",
+      "email_notifications" : "no"
+    }
 
-  with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-    json.dump(empty_user_information, json_file)
+    with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
+        json.dump(empty_user_information, json_file)
+
 
 def getnewTaskID():
-  todo_ids = [f[0:6] for f in os.listdir(TODO_TASKS_PATH)]
-  completed_ids = [f[0:6] for f in os.listdir(COMPLETED_TASKS_PATH)]
-  
-  while True:
-    possible_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 5))
+    """Gets a task to be shown to the user."""
+    todo_ids = [f[0:6] for f in os.listdir(TODO_TASKS_PATH)]
+    completed_ids = [f[0:6] for f in os.listdir(COMPLETED_TASKS_PATH)]
+    while True:
+        possible_id = ''.join(random.choices(string.ascii_uppercase + string.digits, k = 5))
 
-    if possible_id not in todo_ids and possible_id not in completed_ids:
-      return possible_id
+        if possible_id not in todo_ids and possible_id not in completed_ids:
+            return possible_id
 
 
 
 @app.route("/")
 def homePage():
-  return render_template("index.html", data=refresh_data())
-  
-  
+    """Renders the home page."""
+    return render_template("index.html", data=refresh_data())
+
+
 @app.route("/update_user_info", methods = ["POST"])
 def update_user_information():
-  
-  user_information = request.form
-  
-  new_info = {}
+    """Updates user information into JSON."""
+    user_information = request.form
+    new_info = {}
 
-  new_info["name"] = user_information["name"] 
-  new_info["email_id"] = user_information["email"]
-  new_info["initialized"] = "yes"
-  new_info["email_notifications"] = user_information["emailChoose"] 
+    new_info["name"] = user_information["name"]
+    new_info["email_id"] = user_information["email"]
+    new_info["initialized"] = "yes"
+    new_info["email_notifications"] = user_information["emailChoose"]
 
+    with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
+        json.dump(new_info, json_file)
 
-
-  with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-    json.dump(new_info, json_file)
-
-  return render_template("index.html", data=refresh_data())
-
+    return render_template("index.html", data=refresh_data())
 
 
 @app.route("/reset_all", methods = ["POST"])
 def delete_user():
-  delete_tasks()
-  delete_user_information()
+    """Function to delete a user that deletes all the tasks of the user and user information."""
+    delete_tasks()
+    delete_user_information()
 
-  return redirect("/")
+    return redirect("/")
+
 
 @app.route("/reset_tasks", methods = ["POST"])
 def delete_tasks_only():
-  delete_tasks()
+    """Function to reset tasks of a user."""
+    delete_tasks()
 
-  return render_template("index.html", data=refresh_data())
-
-
+    return render_template("index.html", data=refresh_data())
 
 
 @app.route("/add_task", methods = ["POST"])
 def add_new_task():
-  
-  form_data = request.values
-  
-  new_id = getnewTaskID()
+    """Add a new task to the JSON."""
+    form_data = request.values
 
-  new_task_information = {}
+    new_id = getnewTaskID()
 
-  new_task_information["id"] = new_id
-  new_task_information["task_name"] = form_data["taskName"]
-  new_task_information["deadline"] = form_data["deadline"]
-  new_task_information["estimate"] = form_data["estimateInput"]
+    new_task_information = {}
 
-  new_task_information["task_type"] = form_data["taskType"]
+    new_task_information["id"] = new_id
+    new_task_information["task_name"] = form_data["taskName"]
+    new_task_information["deadline"] = form_data["deadline"]
+    new_task_information["estimate"] = form_data["estimateInput"]
 
-  if new_task_information["task_type"] == "intellectual":
-    new_task_information["quant_verbal"] = form_data["quant/verbal"]
-    new_task_information["creat_consum"] = form_data["contentconsump"]
+    new_task_information["task_type"] = form_data["taskType"]
 
-  elif new_task_information["task_type"] == "physical":
-    new_task_information["quant_verbal"] = "NA"
-    new_task_information["creat_consum"] = "NA"
+    if new_task_information["task_type"] == "intellectual":
+        new_task_information["quant_verbal"] = form_data["quant/verbal"]
+        new_task_information["creat_consum"] = form_data["contentconsump"]
 
-  else:
-    print("Error! task_type is neither intellectual nor physical")
+    elif new_task_information["task_type"] == "physical":
+        new_task_information["quant_verbal"] = "NA"
+        new_task_information["creat_consum"] = "NA"
+
+    else:
+        print("Error! task_type is neither intellectual nor physical")
 
 
-  new_task_information["difficulty"] = form_data["difficulty"]
+    new_task_information["difficulty"] = form_data["difficulty"]
 
-  print(new_task_information)
-  with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
-    json.dump(new_task_information, json_file)
+    print(new_task_information)
+    with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
+        json.dump(new_task_information, json_file)
 
-  return redirect("/")
+    return redirect("/")
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
-  
+    """Deleting a task by its ID."""
   # task_id = request.data.decode("utf-8")
 
-  print(request.values)
-  task_id = request.values["id"]
+    print(request.values)
+    task_id = request.values["id"]
 
-  with open(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"), "r", encoding="utf-8") as json_file:
-    task_information = json.load(json_file)
+    with open(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"),
+    "r", encoding="utf-8") as json_file:
+        task_information = json.load(json_file)
 
 
-  os.remove(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"))
+    os.remove(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"))
 
-  with open(os.path.join(COMPLETED_TASKS_PATH, str(task_id)+".json"), "w", encoding="utf-8") as json_file:
-    json.dump(task_information, json_file)
+    with open(os.path.join(COMPLETED_TASKS_PATH, str(task_id)+".json"),
+    "w", encoding="utf-8") as json_file:
+        json.dump(task_information, json_file)
 
-  return redirect("/")
+    return redirect("/")
+
 
 app.run(debug = True)
-
-
