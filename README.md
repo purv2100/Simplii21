@@ -1,35 +1,48 @@
-# se-project-september
+# Simplii
+**Task Scheduler Web App**
+
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![GitHub Release](https://img.shields.io/github/release/ivbhatt/se-project-september)](https://github.com/ivbhatt/se-project-september/issues)
-[![GitHub issues](https://img.shields.io/github/issues/ivbhatt/se-project-september)](https://github.com/ivbhatt/se-project-september/issues)
+![example event parameter](https://github.com/bradley-erickson/project1/actions/workflows/python-app.yml/badge.svg?event=push)
+![GitHub issues](https://img.shields.io/github/issues-raw/bradley-erickson/CmyPlot)
+![Github closes issues](https://img.shields.io/github/issues-closed-raw/bradley-erickson/CmyPlot)
+![Github pull requests](https://img.shields.io/github/issues-pr/bradley-erickson/CmyPlot)
+[![codecov](https://codecov.io/gh/bradley-erickson/CmyPlot/branch/main/graph/badge.svg?token=PYRZHGZC5R)](https://codecov.io/gh/bradley-erickson/CmyPlot)
 
+## Why schedule tasks on this app?
 
-In the fast world of technology today, all of us aim to be our productive best. However, despite a lot of planning, most of us struggle to get as much done as we were supposed to. We are trying to build a tool that will enable fast execution of our tasks under any mood. We parameterize emotions, deadlines, task difficulty and display a task to get done in the given situation. 
+Do you feel that your basic task scheduling apps could also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
 
-## Python installation (Linux)
+## Built with:
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" />
 
-sudo apt-get update
-sudo apt-get upgrade
+## Architecture:
 
-sudo apt install python3.8-venv
+## Visual Walkthrough:
 
-## Flask installation (Mac)
-python3 -m venv venv
+## Quick look:
 
+## Getting Started: 
+- ### Prerequisite:
+  - Download [Python3.x](https://www.python.org/downloads/) on your system.
 
-. venv/bin/activate
-
-
-pip install Flask
-
-
-## Python installation (Windows) 
-py -3 -m venv venv
-
-venv\Scripts\activate
-
-pip install Flask
+- ### Installation: 
+  E.g If you downloaded `Python 3.9.7` above, then
+  
+  **Steps to setup virtual environment**
+  - Create a virtual environment using
+    `python 3.9 -m venv project_venv`
+  - Activate the virtual environment 
+    `source project_venv/bin/activate`
+  - Build the virtual environment:(must be present in project directory)
+    `pip install -r requirements.txt`
+  
+- ### How to Run:
+    **To run the application locally:**
+    - Clone [this (Simplii) github repo] (https://github.com/ivbhatt/Simplii)
+    - Run `flask run`
+    - Site will be hosted at:
+      `http://127.0.0.1:5000/`
 
 ## Contributors
 
