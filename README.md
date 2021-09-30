@@ -18,6 +18,10 @@ Do you feel that your basic task scheduling apps could also track your mood and 
 
 ## Architecture:
 
+ER Diagram                 |  Application Flowchart
+:-------------------------:|:-------------------------:
+<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/webappFlowchart.png" width="500" height="350" />
+
 ## Visual Walkthrough:
 
 ## Quick look:
