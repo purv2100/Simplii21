@@ -26,7 +26,7 @@
 | Chat channel: exists	| 3 | https://discord.gg/jFWP5v2C |
 | test cases:.a large proportion of the issues related to handling failing cases. | 3 | if a test case fails, open an issue and fix it |
 | evidence that the whole team is using the same tools: everyone can get to all tools and files	| 3 | We can clearly see that entire codebase has been written in Python(https://github.com/ivbhatt/Simplii/search?l=python) and JavaScript(https://github.com/ivbhatt/Simplii/search?l=javascript). Everyone has the same access to the repository and also have equal access to comitting directly to the main branch.|
-| evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)	| 3 | evidence|
+| evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people)	| 3 | |
 | evidence that the whole team is using the same tools (e.g. tutor can ask anyone to share screen, they demonstrate the system running on their computer)| 3 | [contributor stats](https://github.com/ivbhatt/Simplii/graphs/contributors) |
 | evidence that the members of the team are working across multiple places in the code base	| 3 | [contributor stats](https://github.com/ivbhatt/Simplii/graphs/contributors) |
 | short release cycles | 3 | We had two major releases and committed the code regularly so that everyone was up to date. |
