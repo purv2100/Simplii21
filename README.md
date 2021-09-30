@@ -13,6 +13,10 @@
 
 Do you feel that your basic task scheduling apps could also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
 
+## Visual Walkthrough:
+
+https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-a979-4390026cb71d.mp4
+
 ## Built with:
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" />
 
@@ -21,8 +25,6 @@ Do you feel that your basic task scheduling apps could also track your mood and 
 ER Diagram                 |  Application Flowchart
 :-------------------------:|:-------------------------:
 <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/archimages/webappFlowchart.png" width="500" height="350" />
-
-## Visual Walkthrough:
 
 ## Quick look:
 
