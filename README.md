@@ -12,7 +12,7 @@
 
 ## Why schedule tasks on this app?
 
-Do you feel that your basic task scheduling apps could also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
+Do you feel that your basic task scheduling apps should also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
 
 ## Visual Walkthrough:
 
