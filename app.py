@@ -12,12 +12,15 @@ from flask import request, redirect
 
 app = Flask(__name__)
 
-
+"""Global constant to store directory path""" 
 TODO_TASKS_PATH = os.path.join("static", "tasks", "todo")
 COMPLETED_TASKS_PATH = os.path.join("static", "tasks", "completed")
 
+"""List declaration for storing the quotes and authors """
 ALL_QUOTES = []
 ALL_AUTHORS = []
+
+"""Loading our code dataset in memory""" 
 with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
     reader = csv.DictReader(csv_file)
 
@@ -64,32 +67,6 @@ def refresh_data():
   #####
     return data
 
-
-# def delete_tasks():
-#     """Function to delete a task."""
-#     for file in os.listdir(COMPLETED_TASKS_PATH):
-#         if ".json" in file:
-#             os.remove(os.path.join(COMPLETED_TASKS_PATH, file))
-
-#     for file in os.listdir(TODO_TASKS_PATH):
-#         if ".json" in file:
-#             os.remove(os.path.join(TODO_TASKS_PATH, file))
-
-
-
-# def delete_user_information():
-#     """This is a dummy way to delete user information."""
-#     empty_user_information = {
-#       "initialized" : "no",
-#       "name" : "",
-#       "email_id" : "",
-#       "email_notifications" : "no"
-#     }
-
-#     with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
-#         json.dump(empty_user_information, json_file)
-
-
 def getnewTaskID():
     """Gets a task to be shown to the user."""
     todo_ids = [f[0:6] for f in os.listdir(TODO_TASKS_PATH)]
@@ -124,22 +101,6 @@ def update_user_information():
 
     return redirect("/")
 
-
-# @app.route("/reset_all", methods = ["POST"])
-# def delete_user():
-#     """Function to delete a user that deletes all the tasks of the user and user information."""
-#     delete_tasks()
-#     delete_user_information()
-
-#     return redirect("/")
-
-
-# @app.route("/reset_tasks", methods = ["POST"])
-# def delete_tasks_only():
-#     """Function to reset tasks of a user."""
-#     delete_tasks()
-
-#     return redirect("/")
 
 
 @app.route("/add_task", methods = ["POST"])
