@@ -22,7 +22,6 @@ https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-
 <table>
   <tr>
 <td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" /></td>
-<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="40" height="40" /></td>
 <td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" /></td>
 <td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" height="40"/></td>
 <td><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" height="40"/></td>
@@ -39,6 +38,11 @@ ER Diagram                 |  Application Flowchart
 <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/webappFlowchart.png" width="500" height="350" />
 
 ## Quick look:
+
+- ### Website Screenshots
+<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Screenshot_Header.PNG" width="1000" height="350" />
+<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Task%20list%20Screenshot.PNG" width="1000" height="750" />
+<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Footer%20Screenshot.PNG" width="1000" height="150" />
 
 ## Getting Started: 
 - ### Prerequisite:
