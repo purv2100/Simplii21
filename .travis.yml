@@ -2,7 +2,6 @@ name: Testing
 language: python
 os:
   - linux
-
   - osx
 python:
   - "3.6"      # current default Python on Travis CI
