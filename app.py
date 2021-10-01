@@ -4,16 +4,13 @@ import random
 import csv
 import json
 import string
-import sys
-from static import *
+
 from flask import Flask
 from flask import render_template
 from flask import request, redirect
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 
 app = Flask(__name__)
-
 
 
 TODO_TASKS_PATH = os.path.join("static", "tasks", "todo")
@@ -21,10 +18,7 @@ COMPLETED_TASKS_PATH = os.path.join("static", "tasks", "completed")
 
 ALL_QUOTES = []
 ALL_AUTHORS = []
-
-print(os.path.abspath("."))
-
-with open(os.path.join("static", "quotes.csv").replace("\\", "\"), "r", encoding="utf-8") as csv_file:
+with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
     reader = csv.DictReader(csv_file)
 
     for row in reader:
