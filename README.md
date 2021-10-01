@@ -20,6 +20,9 @@ https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-
 
 ## Built with:
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" />
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" />
+
 
 ## Architecture:
 
