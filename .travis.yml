@@ -15,4 +15,5 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install requests
+  - flask run
   - python -m unittest
