@@ -9,7 +9,7 @@
 ![Github pull requests](https://img.shields.io/github/issues-pr/bradley-erickson/CmyPlot)
 [![codecov](https://codecov.io/gh/bradley-erickson/CmyPlot/branch/main/graph/badge.svg?token=PYRZHGZC5R)](https://codecov.io/gh/bradley-erickson/CmyPlot)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-
+[![Build Status](https://app.travis-ci.com/ivbhatt/se-project-september.svg?branch=main)](https://app.travis-ci.com/ivbhatt/se-project-september)
 ## Why schedule tasks on this app?
 
 Do you feel that your basic task scheduling apps should also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
