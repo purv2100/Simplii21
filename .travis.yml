@@ -14,6 +14,7 @@ python:
 install:
   - pip install -r requirements.txt
   - pip install requests
+script:
   - flask run &
   - sleep 5
   - python -m unittest
