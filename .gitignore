@@ -4,6 +4,7 @@ venv
 static/user_information.json
 static/tasks/completed/*
 static/tasks/todo/*
+.DS_Store
+.vscode
 !static/tasks/completed/.completed
 !static/tasks/todo/.todo
-.DS_Store

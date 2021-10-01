@@ -27,7 +27,7 @@ with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_fi
 
 
 def refresh_data():
-    """This function loads up user data from user config file."""
+    """This function loads all the data required to display the home page from file-system."""
 
     ##### Load user information from file
     with open(os.path.join("static", "user_information.json"), "r", encoding="utf-8") as json_file:
@@ -50,6 +50,9 @@ def refresh_data():
 
             tasks[json_data["id"]] = json_data
 
+    ##### Sorting the tasks
+    tasks = {key:value for (key,value) in sorted(tasks.items(), key = lambda item: item[1]["deadline"])}
+    #####
 
   ##### Compile the data and send as json!
     data = {
@@ -101,7 +104,7 @@ def getnewTaskID():
 
 @app.route("/")
 def homePage():
-    """Renders the home page."""
+    """This function renders the home page."""
     return render_template("index.html", data=refresh_data())
 
 

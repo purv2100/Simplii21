@@ -34,15 +34,15 @@
 </script>
 
   <title>Simpli</title>
-  <link rel="shortcut icon" href="../static/calendar.png">
+  <link rel="shortcut icon" href="../static/images/calendar.png">
 </head>
 <body onload='force_initialization({{data|tojson}})'>
     
   
-  <div class="container " id="main-container">
+  <div class="container" id="main-container">
     
 
-    <div class="container overflow-auto" id="header-block">
+    <div class="container overflow-auto rounded" id="header-block">
       <p>
         <h2 align="center">Welcome to Task Scheduler</h2>
       </p>
@@ -133,7 +133,7 @@
     </div>
 
 
-    <div class="container overflow-auto rounded" id = "status-block">
+<!--     <div class="container overflow-auto rounded" id = "status-block">
       <div class='row'>
         <div class='col-sm-11'>
           <center><h1>Algorithms Homework</h1></center>
@@ -143,7 +143,7 @@
           <img src='static/scripts/cross.png' style="width: 12%;">
         </div>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="container overflow-auto rounded" id = "settings-block">
@@ -152,7 +152,8 @@
         <form method="POST" id="add-task-form" action="/add_task">
           <div class="field">
             <label for="taskName"> Title:</label>
-            <input type="text" name="taskName" placeholder="Algo Assignment 2 / Water Plants" required>
+            <br>
+            <input type="text" name="taskName" placeholder="Algo Assignment 2" required>
           </div>
           <br>
           <div class="field">
@@ -162,7 +163,7 @@
           <br>
           <div class="field">
             <label for="estimate">Duration of the task (in Hrs.):</label>
-            <input type="text" id="estimateInput" name="estimateInput"  required>
+            <input type="text" id="estimateInput" name="estimateInput" placeholder="2.5"  required>
             </div>
             <br>
             <div class="field">
@@ -176,7 +177,7 @@
               <div id = "intellectualSplit" class="desc" style="display:none">
                 <div class="field">
                   <label for="intellectualType">What kind of intellectual task is it?: </label> <br>
-                  <label for="quant/verbal">Quantitative/Verbal:</label>
+                  <label for="quant/verbal">Quantitative/Verbal:</label><br>
                   <span id="val1Box"></span>
               <input type="range" id="quant/verbal" name="quant/verbal" min="0" max="5" step="1"
               oninput="show1Val(this.value)" onchange="show1Val(this.value)" required>
@@ -213,7 +214,7 @@
   	    <tr>
   		    <th>Task</th>
   		    <th>Time Reqd.</th>
-  		    <th>Due Date</th>
+  		    <th>Due on:<br>yyyy-mm-ddThh:mm</th>
   		    <!-- We have not created the edit functionality yet -->
   		    <!-- <th>Edit</th> -->
   		    <th>Delete</th>
@@ -259,7 +260,6 @@
 
 
     <div class="container" id = "footer-block" >
-            <!-- <img src=""> -->
             <center><h3>NC State University </h3></center>
             <center><small font-size: 1.0em;>Created by: Ishan, Krishika, Apurva, Arpitha, Unnati</small></center>
             <center><small>© 2021 NC State University. All rights reserved.</small></center>
