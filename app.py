@@ -186,18 +186,19 @@ def delete_task_byID():
     print(request.values)
     task_id = request.values["id"]
 
-    with open(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"),
-    "r", encoding="utf-8") as json_file:
-        task_information = json.load(json_file)
+    if os.path.exists(os.path.join(TODO_TASKS_PATH, str(task_id)+".json")):
+        with open(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"),
+        "r", encoding="utf-8") as json_file:
+            task_information = json.load(json_file)
 
 
-    os.remove(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"))
+        os.remove(os.path.join(TODO_TASKS_PATH, str(task_id)+".json"))
 
-    with open(os.path.join(COMPLETED_TASKS_PATH, str(task_id)+".json"),
-    "w", encoding="utf-8") as json_file:
-        json.dump(task_information, json_file)
+        with open(os.path.join(COMPLETED_TASKS_PATH, str(task_id)+".json"),
+        "w", encoding="utf-8") as json_file:
+            json.dump(task_information, json_file)
 
     return redirect("/")
 
 
-app.run(debug = True)
+#app.run(debug = True)
