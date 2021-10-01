@@ -1,5 +1,7 @@
 name: Testing
 language: python
+env:
+  - CODECOV_TOKEN='13d7f7c4-84e7-48ab-b951-8257e4432983'
 os:
   - linux
 python:
