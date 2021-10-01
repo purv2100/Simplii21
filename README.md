@@ -19,10 +19,13 @@ Do you feel that your basic task scheduling apps should also track your mood and
 https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-a979-4390026cb71d.mp4
 
 ## Built with:
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="40" height="40" />
-<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" />
-
+<table>
+  <tr>
+<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" /></td>
+<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flask/flask-original.svg" width="40" height="40" /></td>
+<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" /></td>
+  </tr>
+</table>
 
 ## Architecture:
 
