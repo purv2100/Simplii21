@@ -29,7 +29,6 @@
     today = date[2] + " " + date[1] + " " + date[3];
     document.getElementById("today").innerHTML = today;
     let page_data = JSON.parse('{{ data|tojson }}'); 
-
     console.log(page_data["task-list-block"]);
 </script>
 
