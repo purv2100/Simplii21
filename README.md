@@ -3,7 +3,6 @@
 
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![example event parameter](https://github.com/bradley-erickson/project1/actions/workflows/python-app.yml/badge.svg?event=push)
 ![GitHub issues](https://img.shields.io/github/issues-raw/ivbhatt/Simplii)
 ![Github closes issues](https://img.shields.io/github/issues-closed-raw/ivbhatt/Simplii)
 ![Github pull requests](https://img.shields.io/github/issues-pr/ivbhatt/Simplii)
