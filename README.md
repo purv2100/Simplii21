@@ -77,7 +77,7 @@ ER Diagram                 |  Application Flowchart
     </tr>
   </table>
 </center>
-## Support
 
+## Support
 For any queries and help, please reach out to us at: krishika510@gmail.com
 
