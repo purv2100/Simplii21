@@ -1,7 +1,7 @@
 
 import unittest
-#from app import app
-from app import add_new_task
+from app import *
+#from app import add_new_task
 import requests
 
 class TestModule(unittest.TestCase):
