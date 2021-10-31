@@ -3,9 +3,6 @@
 
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub issues](https://img.shields.io/github/issues-raw/ivbhatt/Simplii)
-![Github closes issues](https://img.shields.io/github/issues-closed-raw/ivbhatt/Simplii)
-![Github pull requests](https://img.shields.io/github/issues-pr/ivbhatt/Simplii)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Build Status](https://app.travis-ci.com/UnnatiPrema/Simplii.svg?branch=main)](https://app.travis-ci.com/UnnatiPrema/Simplii)
 [![codecov](https://codecov.io/gh/deekay2310/Simplii/branch/main/graph/badge.svg?token=9ZXVRIPHLO)](https://codecov.io/gh/deekay2310/Simplii)
@@ -20,6 +17,15 @@
 </a>
 <a href="https://github.com/deekay2310/Simplii/stargazers" target="blank">
 <img src="https://img.shields.io/github/stars/deekay2310/Simplii?style=flat-square" alt="Simplii stars"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
+<img src="https://img.shields.io/github/issues/deekay2310/Simplii?style=flat-square" alt="Simplii issues"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
+<img src="https://img.shields.io/github/issues-closed/deekay2310/Simplii" alt="Simplii issues closed"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/deekay2310/Simplii?style=flat-square" alt="cheapBuy pull-requests"/>
 </a>
 <a href="https://github.com/deekay2310/Simplii/graphs/contributors" alt="Contributors">
 <img src="https://img.shields.io/github/contributors/deekay2310/Simplii" /></a>
