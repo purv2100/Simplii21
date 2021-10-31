@@ -48,6 +48,7 @@
 <a href="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" alt="total lines">
 <img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
 </br>
+
 <p align="center">
     <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
     /
