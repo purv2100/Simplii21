@@ -48,6 +48,12 @@
 <a href="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" alt="total lines">
 <img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
 </br>
+<p align="center">
+    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
+    /
+    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Request Feature</a>
+</p>
+
 ## Why schedule tasks on this app?
 
 Do you feel that your basic task scheduling apps should also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
