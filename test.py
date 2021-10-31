@@ -1,6 +1,6 @@
 
 import unittest
-from app import app
+#from app import app
 from app import add_new_task
 import requests
 
