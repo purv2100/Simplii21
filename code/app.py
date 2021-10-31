@@ -13,15 +13,15 @@ from flask import request, redirect
 app = Flask(__name__)
 
 """Global constant to store directory path""" 
-TODO_TASKS_PATH = os.path.join("static", "tasks", "todo")
-COMPLETED_TASKS_PATH = os.path.join("static", "tasks", "completed")
+TODO_TASKS_PATH = os.path.join("../static", "tasks", "todo")
+COMPLETED_TASKS_PATH = os.path.join("../static", "tasks", "completed")
 
 """List declaration for storing the quotes and authors """
 ALL_QUOTES = []
 ALL_AUTHORS = []
 
 """Loading our code dataset in memory""" 
-with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
+with open(os.path.join("../static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
     reader = csv.DictReader(csv_file)
 
     for row in reader:
@@ -33,7 +33,7 @@ def refresh_data():
     """This function loads all the data required to display the home page from file-system."""
 
     ##### Load user information from file
-    with open(os.path.join("static", "user_information.json"), "r", encoding="utf-8") as json_file:
+    with open(os.path.join("../static", "user_information.json"), "r", encoding="utf-8") as json_file:
         json_data = json.load(json_file)
 
     initialized = json_data["initialized"]
@@ -96,7 +96,7 @@ def update_user_information():
     new_info["initialized"] = "yes"
     new_info["email_notifications"] = user_information["emailChoose"]
 
-    with open(os.path.join("static", "user_information.json"), "w", encoding="utf-8") as json_file:
+    with open(os.path.join("../static", "user_information.json"), "w", encoding="utf-8") as json_file:
         json.dump(new_info, json_file)
 
     return redirect("/")
