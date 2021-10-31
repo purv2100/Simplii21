@@ -16,19 +16,10 @@
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
 <!--Badges-->
 <a href="https://github.com/deekay2310/Simplii/fork" target="blank">
-<img src="https://img.shields.io/github/forks/deekay2310/Simplii?style=flat-square" alt="cheapBuy forks"/>
+<img src="https://img.shields.io/github/forks/deekay2310/Simplii?style=flat-square" alt="Simplii forks"/>
 </a>
 <a href="https://github.com/deekay2310/Simplii/stargazers" target="blank">
-<img src="https://img.shields.io/github/stars/deekay2310/Simplii?style=flat-square" alt="gcheapBuy stars"/>
-</a>
-<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
-<img src="https://img.shields.io/github/issues/deekay2310/Simplii?style=flat-square" alt="cheapBuy issues"/>
-</a>
-<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
-<img src="https://img.shields.io/github/issues-closed/deekay2310/Simplii" alt="cheapBuy issues closed"/>
-</a>
-<a href="https://github.com/deekay2310/Simplii/pulls" target="blank">
-<img src="https://img.shields.io/github/issues-pr/deekay2310/Simplii?style=flat-square" alt="cheapBuy pull-requests"/>
+<img src="https://img.shields.io/github/stars/deekay2310/Simplii?style=flat-square" alt="Simplii stars"/>
 </a>
 <a href="https://github.com/deekay2310/Simplii/graphs/contributors" alt="Contributors">
 <img src="https://img.shields.io/github/contributors/deekay2310/Simplii" /></a>
