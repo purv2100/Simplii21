@@ -1,12 +1,12 @@
 import unittest
-import code
+from code.code import app
 import requests
 
 
 class TestModule(unittest.TestCase):
 
-     def test_home(self):
-         print("")
+      def test_home(self):
+          print()
     #     tester = app.test_client(self)
     #     response = tester.get("/", content_type='html/text')
     #     self.assertEqual(response.status_code, 200)
