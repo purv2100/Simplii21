@@ -18,4 +18,4 @@ install:
 script:
   - flask run &
   - sleep 5
-  - python -m unittest
+  - python -m unittest test
