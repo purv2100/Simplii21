@@ -21,7 +21,7 @@ ALL_QUOTES = []
 ALL_AUTHORS = []
 
 """Loading our code dataset in memory""" 
-with open(os.path.join("../static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
+with open(os.path.join("static", "quotes.csv"), "r", encoding="utf-8") as csv_file:
     reader = csv.DictReader(csv_file)
 
     for row in reader:
