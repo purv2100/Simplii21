@@ -1,5 +1,5 @@
 import unittest
-from code import refresh_data
+from src import app
 import requests
 
 
