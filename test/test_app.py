@@ -1,5 +1,5 @@
 import unittest
-from code.app import app
+from code import app
 import requests
 
 
