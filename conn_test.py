@@ -7,7 +7,7 @@ from pymongo import MongoClient
 #MongoDB connection using cluster's connection string
 client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mongodb.net/simplii?retryWrites=true&w=majority")
 
-#database to which connections are to be made
+#database to which connections are to be made, here the name of our database is "simplii"
 db = client.simplii
 
 #testing of password hashing for security purposes
@@ -31,6 +31,7 @@ user1 = {
     "email_id":"rbraman@ncsu.edu",
     "password":"sdfsdf"
 }
+
 
 testUserInfo = db.testUserInfo
 result = testUserInfo.insert_one(user1)
