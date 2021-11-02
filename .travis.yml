@@ -1,7 +1,7 @@
 name: Testing
 language: python
 env:
-  - CODECOV_TOKEN='13d7f7c4-84e7-48ab-b951-8257e4432983'
+  - CODECOV_TOKEN='18a8beea-4407-498f-8b15-990517519ac2'
 os:
   - linux
 python:
@@ -16,6 +16,6 @@ install:
   - pip install -r requirements.txt
   - pip install requests
 script:
-  - flask run &
+  - flask run
   - sleep 5
-  - python -m unittest
+  - python -m unittest test
