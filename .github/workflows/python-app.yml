@@ -36,5 +36,5 @@ jobs:
         cd src
         python app.py &
         sleep 5
-        cd ../test
-        python test_app.py
+        cd ..
+        pytest

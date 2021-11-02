@@ -3,6 +3,8 @@ from src.app import app
 import requests
 
 
+app.testing = True
+
 class TestModule(unittest.TestCase):
 
     def test_home(self):
