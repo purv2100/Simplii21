@@ -82,7 +82,7 @@ def getnewTaskID():
 @app.route("/")
 def homePage():
     """This function renders the home page."""
-    return render_template("../templates/index.html", data=refresh_data())
+    return render_template("index.html", data=refresh_data())
 
 
 @app.route("/update_user_info", methods = ["POST"])
