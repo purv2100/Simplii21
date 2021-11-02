@@ -11,7 +11,6 @@ from flask import request, redirect
 
 
 app = Flask(__name__)
-print(os.path)
 """Global constant to store directory path""" 
 TODO_TASKS_PATH = os.path.join("../static", "tasks", "todo")
 COMPLETED_TASKS_PATH = os.path.join("../static", "tasks", "completed")
