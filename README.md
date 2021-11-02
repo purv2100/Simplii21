@@ -3,11 +3,55 @@
 
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-![GitHub issues](https://img.shields.io/github/issues-raw/deekay2310/Simplii)
-![Github closes issues](https://img.shields.io/github/issues-closed-raw/deekay2310/Simplii)
-![Github pull requests](https://img.shields.io/github/issues-pr/deekay2310/Simplii)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Build Status](https://app.travis-ci.com/UnnatiPrema/Simplii.svg?branch=main)](https://app.travis-ci.com/UnnatiPrema/Simplii)
+[![codecov](https://codecov.io/gh/deekay2310/Simplii/branch/main/graph/badge.svg?token=9ZXVRIPHLO)](https://codecov.io/gh/deekay2310/Simplii)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/unit_test.yml/badge.svg)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/python-app.yml/badge.svg)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/code_cov.yml/badge.svg)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
+<!--Badges-->
+<a href="https://github.com/deekay2310/Simplii/fork" target="blank">
+<img src="https://img.shields.io/github/forks/deekay2310/Simplii?style=flat-square" alt="Simplii forks"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/stargazers" target="blank">
+<img src="https://img.shields.io/github/stars/deekay2310/Simplii?style=flat-square" alt="Simplii stars"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
+<img src="https://img.shields.io/github/issues/deekay2310/Simplii?style=flat-square" alt="Simplii issues"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/issues" target="blank">
+<img src="https://img.shields.io/github/issues-closed/deekay2310/Simplii" alt="Simplii issues closed"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/pulls" target="blank">
+<img src="https://img.shields.io/github/issues-pr/deekay2310/Simplii?style=flat-square" alt="cheapBuy pull-requests"/>
+</a>
+<a href="https://github.com/deekay2310/Simplii/graphs/contributors" alt="Contributors">
+<img src="https://img.shields.io/github/contributors/deekay2310/Simplii" /></a>
+
+<a href="https://github.com/deekay2310/Simplii/milestones" alt="milestones">
+<img src="https://img.shields.io/github/milestones/all/deekay2310/Simplii" /></a> 
+
+<a href="https://github.com/deekay2310/Simplii/graphs/commit-activity" alt="commit activity">
+<img src="https://img.shields.io/github/commit-activity/w/deekay2310/Simplii" /></a> 
+
+<a href="https://github.com/deekay2310/Simplii/discussions" alt="discussion">
+<img src="https://img.shields.io/github/discussions/deekay2310/Simplii" /></a> 
+
+<a href="https://img.shields.io/github/repo-size/deekay2310/Simplii" alt="repo size">
+<img src="https://img.shields.io/github/repo-size/deekay2310/Simplii" /></a>
+
+<a href="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" alt="total lines">
+<img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
+</br>
+
+<p align="center">
+    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
+    /
+    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Request Feature</a>
+</p>
+
 ## Why schedule tasks on this app?
 
 Do you feel that your basic task scheduling apps should also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
