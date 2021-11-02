@@ -22,7 +22,5 @@ jobs:
           echo requirements installed
       - name: Run tests
         run: |
-          flask run &
-          sleep 5
           cd test
           python -m unittest test
