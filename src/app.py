@@ -33,7 +33,7 @@ def refresh_data():
     """This function loads all the data required to display the home page from file-system."""
 
     ##### Load user information from file
-    with open(os.path.join("../static", "user_information.json"), "r", encoding="utf-8") as json_file:
+    with open(os.path.join(package_dir,"user_information.json"), "r", encoding="utf-8") as json_file:
         json_data = json.load(json_file)
 
     initialized = json_data["initialized"]
@@ -96,7 +96,7 @@ def update_user_information():
     new_info["initialized"] = "yes"
     new_info["email_notifications"] = user_information["emailChoose"]
 
-    with open(os.path.join("../static", "user_information.json"), "w", encoding="utf-8") as json_file:
+    with open(os.path.join(package_dir, "user_information.json"), "w", encoding="utf-8") as json_file:
         json.dump(new_info, json_file)
 
     return redirect("/")
