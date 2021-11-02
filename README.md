@@ -8,7 +8,7 @@
 [![codecov](https://codecov.io/gh/deekay2310/Simplii/branch/main/graph/badge.svg?token=9ZXVRIPHLO)](https://codecov.io/gh/deekay2310/Simplii)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/unit_test.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/main.yml/badge.svg)
+![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/python-app.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/code_cov.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
 <!--Badges-->
