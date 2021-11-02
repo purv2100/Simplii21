@@ -27,7 +27,7 @@ jobs:
         cd src
         python app.py &
         sleep 5
-        cd test
+        cd ../test
         pytest --cov=./
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
