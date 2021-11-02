@@ -20,8 +20,9 @@ COMPLETED_TASKS_PATH = os.path.join("../static", "tasks", "completed")
 ALL_QUOTES = []
 ALL_AUTHORS = []
 
-"""Loading our code dataset in memory""" 
-with open(os.path.join("/../static","quotes.csv"), "r", encoding="utf-8") as csv_file:
+"""Loading our code dataset in memory"""
+package_dir = os.path.dirname(os.path.abspath(__file__))
+with open(os.path.join(package_dir,"quotes.csv"), "r", encoding="utf-8") as csv_file:
     reader = csv.DictReader(csv_file)
 
     for row in reader:
