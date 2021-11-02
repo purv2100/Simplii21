@@ -37,4 +37,4 @@ jobs:
         python app.py &
         sleep 5
         cd ../test
-        python -m unittest test
+        python test_app.py
