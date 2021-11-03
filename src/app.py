@@ -153,7 +153,7 @@ def add_new_task():
 
     new_task_information["id"] = new_id
     new_task_information["task_name"] = form_data["taskName"]
-    new_task_information["deadline"] = form_data["deadline"]
+    new_task_information["deadline"] = form_data["deadline"].replace("T"," ")
     new_task_information["estimate"] = form_data["estimateInput"]
 
     new_task_information["task_type"] = form_data["taskType"]
