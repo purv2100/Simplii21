@@ -19,3 +19,11 @@ jobs:
       - name: Check for modified files
         id: git-check
         run: echo ::set-output name=modified::$(if git diff-index --quiet HEAD --; then echo "false"; else echo "true"; fi)
+      - name: Push changes
+        if: steps.git-check.outputs.modified == 'true'
+        run: |
+          git config --global user.name 'PrakruthiSomashekar'
+          git config --global user.email 'prakruthi1796@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ deekay2310/Simplii }}
+          git commit -am "Automated autoyapf fixes"
+          git push
