@@ -10,8 +10,12 @@
       <h1>New User? Sign Up!</h1>
       <br>
       <form action="" method="post">
-        <input type="text" placeholder="Name" name="name" value="{{
-          request.form.name }}">
+        <input type="text" placeholder="User ID" name="userid" value="{{
+          request.form.userid }}">
+        <input type="text" placeholder="First Name" name="firstname" value="{{
+          request.form.firstname }}">
+        <input type="text" placeholder="Last Name" name="lastname" value="{{
+          request.form.lastname }}">
         <input type="email" placeholder="E-mail" name="email" value="{{
           request.form.email }}">
          <input type="password" placeholder="Password" name="password" value="{{
