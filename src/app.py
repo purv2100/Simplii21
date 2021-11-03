@@ -137,7 +137,10 @@ def login_post():
             return redirect(url_for('mainPage'))
     return render_template('index.html')
 
+
 '''
+
+
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     error = None
@@ -217,6 +220,10 @@ def mainPage():
     #email = session["email"]
     return render_template("index.html", data=refresh_data())
 
+@app.route('/logout')
+def logout():
+    #session.pop('user', None)
+    return redirect('/')
 
 @app.route("/update_user_info", methods = ["POST"])
 def update_user_information():
