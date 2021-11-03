@@ -7,14 +7,16 @@
   </head>
   <body>
     <div class="container">
-      <h1>Login</h1>
+      <h1>New User? Sign Up!</h1>
       <br>
       <form action="" method="post">
+        <input type="text" placeholder="Name" name="name" value="{{
+          request.form.name }}">
         <input type="email" placeholder="E-mail" name="email" value="{{
           request.form.email }}">
          <input type="password" placeholder="Password" name="password" value="{{
           request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Login">
+        <input class="btn btn-default" type="submit" value="Sign Up">
       </form>
       {% if error %}
         <p class="error"><strong>Error:</strong> {{ error }}
