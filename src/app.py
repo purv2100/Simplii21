@@ -14,7 +14,7 @@ from pymongo import MongoClient
 from flask import Flask
 from flask import render_template, url_for
 from flask import request, redirect
-from flask import flash
+from flask import flash, session
 
 #MongoDB connection using cluster's connection string
 client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mongodb.net/simplii?retryWrites=true&w=majority")
@@ -108,11 +108,34 @@ def login_get():
 def login_post():
     error = None
     if request.method == 'POST':
-        if request.form['email'] != 'admin@gmail.com' or request.form['password'] != 'admin':
-            error = 'Invalid Credentials. Please try again.'
+        user_id = request.form.get("userid")
+        print(user_id)
+        email = request.form.get("email")
+        user_password = request.form.get("password")
+        print(user_password)
+
+        db_user = testUserInfo.find_one({"user_id": user_id})
+        db_userid = db_user['user_id']
+        print(db_userid)
+        db_password = db_user['password']
+        valid_password = bcrypt.checkpw(user_password.encode(), db_password)
+        print(valid_password)
+
+        if user_id != db_userid:
+            flash('The entered user ID does not exist, please login with valid credentials or sign up.')
+            return redirect(url_for('login_post'))
+
+
+        elif user_id == db_userid and valid_password != True:
+            flash('The entered password is invalid, please login with valid credentials.')
+            return redirect(url_for('login_post'))
+
         else:
-            return redirect("/index")
-    return render_template('login.html')
+            session['user_id'] = user_id
+            session['email'] = email
+            
+            return redirect(url_for('mainPage'))
+    return render_template('index.html')
 
 '''
 @app.route("/signup", methods=['GET','POST'])
@@ -191,6 +214,7 @@ def signup_post():
 @app.route("/index")
 def mainPage():
     """This function renders the home page."""
+    #email = session["email"]
     return render_template("index.html", data=refresh_data())
 
 
