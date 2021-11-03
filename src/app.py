@@ -94,6 +94,26 @@ def login():
             return redirect("/index")
     return render_template('login.html')
 
+@app.route("/signup", methods=['GET','POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        name = request.form["name"]
+        username = request.form["email"]
+        password = request.form["password"]
+        # Check if username exists in database
+        #query = "SELECT username FROM users WHERE username = :username"
+        #if db.execute(query, {'username': reg_username}).first():
+        #    flash('Username already exists')
+        #    return render_template('register.html')
+        #else:
+        new_user = User(name, username, password)
+        #db.session.add(new_user)
+        #db.session.commit()
+        #session['username'] = reg_username
+        return redirect(url_for('login'))
+    return render_template('signup.html')
+
 @app.route("/index")
 def mainPage():
     """This function renders the home page."""
