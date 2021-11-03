@@ -1,16 +1,15 @@
 """Importing all the standard Python modules."""
-import os
-import random
 import csv
 import json
+import os
+import random
 import string
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 from flask import request, redirect
 
-
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 package_dir = os.path.dirname(os.path.abspath(__file__))
 """Global constant to store directory path""" 
 TODO_TASKS_PATH = os.path.join(package_dir, "../static", "tasks", "todo")
@@ -82,6 +81,41 @@ def getnewTaskID():
 
 @app.route("/")
 def homePage():
+    """This function renders the landing page."""
+    return render_template("base.html")
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['email'] != 'admin@gmail.com' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect("/index")
+    return render_template('login.html')
+
+@app.route("/signup", methods=['GET','POST'])
+def signup():
+    error = None
+    if request.method == 'POST':
+        name = request.form["name"]
+        username = request.form["email"]
+        password = request.form["password"]
+        # Check if username exists in database
+        #query = "SELECT username FROM users WHERE username = :username"
+        #if db.execute(query, {'username': reg_username}).first():
+        #    flash('Username already exists')
+        #    return render_template('register.html')
+        #else:
+        #new_user = User(name, username, password)
+        #db.session.add(new_user)
+        #db.session.commit()
+        #session['username'] = reg_username
+        return redirect(url_for('login'))
+    return render_template('signup.html')
+
+@app.route("/index")
+def mainPage():
     """This function renders the home page."""
     return render_template("index.html", data=refresh_data())
 
@@ -100,7 +134,7 @@ def update_user_information():
     with open(os.path.join(package_dir,"../static", "user_information.json"), "w", encoding="utf-8") as json_file:
         json.dump(new_info, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 
 
@@ -115,7 +149,7 @@ def add_new_task():
 
     new_task_information["id"] = new_id
     new_task_information["task_name"] = form_data["taskName"]
-    new_task_information["deadline"] = form_data["deadline"]
+    new_task_information["deadline"] = form_data["deadline"].replace("T"," ")
     new_task_information["estimate"] = form_data["estimateInput"]
 
     new_task_information["task_type"] = form_data["taskType"]
@@ -138,7 +172,7 @@ def add_new_task():
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
@@ -160,7 +194,7 @@ def delete_task_byID():
         "w", encoding="utf-8") as json_file:
             json.dump(task_information, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 if __name__ == "__main__":
     app.run(debug=True)
