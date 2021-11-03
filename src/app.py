@@ -1,16 +1,15 @@
 """Importing all the standard Python modules."""
-import os
-import random
 import csv
 import json
+import os
+import random
 import string
 
 from flask import Flask
-from flask import render_template
+from flask import render_template, url_for
 from flask import request, redirect
 
-
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
 package_dir = os.path.dirname(os.path.abspath(__file__))
 """Global constant to store directory path""" 
 TODO_TASKS_PATH = os.path.join(package_dir, "../static", "tasks", "todo")
