@@ -182,6 +182,10 @@ def mainPage():
     """This function renders the home page."""
     return render_template("index.html", data=refresh_data())
 
+@app.route('/logout')
+def logout():
+    #session.pop('user', None)
+    return redirect('/')
 
 @app.route("/update_user_info", methods = ["POST"])
 def update_user_information():
