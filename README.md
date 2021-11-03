@@ -12,7 +12,6 @@
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/python-app.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/code_cov.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/code_formatter.yml/badge.svg)
 <!--Badges-->
 <a href="https://github.com/deekay2310/Simplii/fork" target="blank">
 <img src="https://img.shields.io/github/forks/deekay2310/Simplii?style=flat-square" alt="Simplii forks"/>
