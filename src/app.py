@@ -88,7 +88,7 @@ def homePage():
 def login():
     error = None
     if request.method == 'POST':
-        if request.form['email'] != 'admin' or request.form['password'] != 'admin':
+        if request.form['email'] != 'admin@gmail.com' or request.form['password'] != 'admin':
             error = 'Invalid Credentials. Please try again.'
         else:
             return redirect("/index")
