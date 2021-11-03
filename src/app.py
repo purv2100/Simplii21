@@ -83,6 +83,11 @@ def getnewTaskID():
 @app.route("/")
 def homePage():
     """This function renders the home page."""
+    return render_template("base.html")
+
+
+def mainPage():
+    """This function renders the home page."""
     return render_template("index.html", data=refresh_data())
 
 
