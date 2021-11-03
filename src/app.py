@@ -81,6 +81,21 @@ def getnewTaskID():
 
 @app.route("/")
 def homePage():
+    """This function renders the landing page."""
+    return render_template("base.html")
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['email'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect("/index")
+    return render_template('login.html')
+
+@app.route("/index")
+def mainPage():
     """This function renders the home page."""
     return render_template("base.html")
 
@@ -103,7 +118,7 @@ def update_user_information():
     with open(os.path.join(package_dir,"../static", "user_information.json"), "w", encoding="utf-8") as json_file:
         json.dump(new_info, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 
 
@@ -141,7 +156,7 @@ def add_new_task():
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
@@ -163,7 +178,7 @@ def delete_task_byID():
         "w", encoding="utf-8") as json_file:
             json.dump(task_information, json_file)
 
-    return redirect("/")
+    return redirect("/index")
 
 if __name__ == "__main__":
     app.run(debug=True)
