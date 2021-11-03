@@ -5,9 +5,23 @@ import os
 import random
 import string
 
+import pymongo
+import datetime
+import bcrypt
+
+from pymongo import MongoClient
+
 from flask import Flask
 from flask import render_template, url_for
 from flask import request, redirect
+
+#MongoDB connection using cluster's connection string
+client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mongodb.net/simplii?retryWrites=true&w=majority")
+
+#database to which connections are to be made
+db = client.simplii
+testUserInfo = db.testUserInfo
+
 
 app = Flask(__name__, static_folder='static')
 package_dir = os.path.dirname(os.path.abspath(__file__))
@@ -94,6 +108,7 @@ def login():
             return redirect("/index")
     return render_template('login.html')
 
+
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     error = None
@@ -113,6 +128,53 @@ def signup():
         #session['username'] = reg_username
         return redirect(url_for('login'))
     return render_template('signup.html')
+
+'''
+@app.route("/signup", methods=['GET', 'POST'])
+def signup():
+    message = ''
+
+    
+    if "email" in session:
+        return redirect(url_for("logged_in"))
+
+
+    if request.method == 'POST':
+        #user_id = request.form.get("userid")
+        #user_first_name = request.form.get("firstname")
+        user_name = request.form.get("name")
+        #user_last_name = request.form.get("lastname")
+        email = request.form.get("email")
+        user_password = request.form.get("password")
+
+        user_found = testUserInfo.find_one({"first_name": user_name})
+        email_found = testUserInfo.find_one({"email_id": email})
+
+
+        if user_found:
+            message = 'User ID already taken, please enter a different user ID'
+            return render_template('signup.html', message=message)
+
+
+        if email_found:
+            message = 'This email already exists in database'
+            return render_template('signup.html', message=message)
+
+
+        else:
+            pw_hashAndSalt = bcrypt.hashpw(user_password.encode(), bcrypt.gensalt())
+
+            #user_input_data = {'user_id':user_id, 'first_name': user_first_name, 'last_name': user_last_name, 'email_id': email, 'password': pw_hashAndSalt}
+            user_input_data = {'first_name': user_name, 'email_id': email, 'password': pw_hashAndSalt}
+
+            testUserInfo.insert_one(user_input_data)
+
+            user_data = testUserInfo.find_one({"email_id": email})
+            new_email = user_data['email_id']
+
+            return render_template('index.html', email=new_email)
+    return render_template('index.html')
+'''
 
 @app.route("/index")
 def mainPage():
