@@ -94,11 +94,12 @@ def login():
             return redirect("/index")
     return render_template('login.html')
 
-@app.route("/index")
+
 def mainPage():
     """This function renders the home page."""
     return render_template("base.html")
 
+@app.route("/index")
 def mainPage():
     """This function renders the home page."""
     return render_template("index.html", data=refresh_data())
