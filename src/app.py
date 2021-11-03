@@ -107,7 +107,7 @@ def signup():
         #    flash('Username already exists')
         #    return render_template('register.html')
         #else:
-        new_user = User(name, username, password)
+        #new_user = User(name, username, password)
         #db.session.add(new_user)
         #db.session.commit()
         #session['username'] = reg_username
