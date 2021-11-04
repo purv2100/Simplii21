@@ -109,23 +109,23 @@ def login_post():
     error = None
     if request.method == 'POST':
         user_id = request.form.get("userid")
-        print(user_id)
+        #print(user_id)
         email = request.form.get("email")
         user_password = request.form.get("password")
-        print(user_password)
+        #print(user_password)
 
         db_user = testUserInfo.find_one({"user_id": user_id})
-        print(db_user)
+        #print(db_user)
 
         if(db_user==None):
             flash('The entered user ID does not exist, please login with valid credentials or sign up.')
             return redirect(url_for('login_post'))
         else:
             db_userid = db_user['user_id']
-            print(db_userid)
+            #print(db_userid)
             db_password = db_user['password']
             valid_password = bcrypt.checkpw(user_password.encode(), db_password)
-            print(valid_password)
+            #print(valid_password)
 
             if user_id == db_userid and valid_password != True:
                 flash('The entered password is invalid, please login with valid credentials.')
