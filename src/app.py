@@ -135,6 +135,7 @@ def login_post():
                 return redirect(url_for('login_post'))
 
             else:
+                #Storing user information in session variables
                 session['user_id'] = user_id
                 session['email'] = db_emailid
                 session['name'] = name
