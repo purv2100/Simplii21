@@ -122,6 +122,8 @@ def login_post():
             return redirect(url_for('login_post'))
         else:
             db_userid = db_user['user_id']
+            db_emailid = db_user['email_id']
+            name = db_user['first_name'] + " " + db_user['last_name']
             #print(db_userid)
             db_password = db_user['password']
             valid_password = bcrypt.checkpw(user_password.encode(), db_password)
@@ -133,8 +135,8 @@ def login_post():
 
             else:
                 session['user_id'] = user_id
-                session['email'] = email
-            
+                session['email'] = db_emailid
+                session['name'] = name
                 return redirect(url_for('mainPage'))
         return render_template('index.html')
 
