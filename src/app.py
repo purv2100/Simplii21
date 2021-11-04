@@ -135,6 +135,7 @@ def login_post():
                 return redirect(url_for('login_post'))
 
             else:
+                #Storing user information in session variables
                 session['user_id'] = user_id
                 session['email'] = db_emailid
                 session['name'] = name
@@ -143,9 +144,14 @@ def login_post():
 
 @app.route("/send_email", methods=['GET','POST'])
 def send_email():
+    #Connection to the server
     server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+    
+    #Storing sender's email address and password
     sender_email = "simplii.reminder@gmail.com"
     sender_password = "Temp@1234"
+    
+    #Logging in with sender details
     server.login(sender_email,sender_password)
     user_id = session['user_id']
     db_task = ""
@@ -238,6 +244,7 @@ def signup_post():
 def mainPage():
     """This function renders the home page."""
     #email = session["email"]
+    #Sending user details to HTML page
     return render_template("index.html", name = session["name"], e = session["email"], data=refresh_data())
 
 @app.route('/logout')
