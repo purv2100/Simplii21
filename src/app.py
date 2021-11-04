@@ -1,16 +1,17 @@
 """Importing all the standard Python modules."""
 import csv
+
 import json
 import os
 import random
 import string
-
+import smtplib
 import pymongo
 import datetime
 import bcrypt
 
 from pymongo import MongoClient
-
+from tabulate import tabulate
 from flask import Flask
 from flask import render_template, url_for
 from flask import request, redirect
@@ -22,7 +23,7 @@ client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mo
 #database to which connections are to be made
 db = client.simplii
 testUserInfo = db.testUserInfo
-
+testTaskInfo = db.testTaskInfo
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = "simpliitesting"
@@ -122,6 +123,8 @@ def login_post():
             return redirect(url_for('login_post'))
         else:
             db_userid = db_user['user_id']
+            db_emailid = db_user['email_id']
+            name = db_user['first_name'] + " " + db_user['last_name']
             #print(db_userid)
             db_password = db_user['password']
             valid_password = bcrypt.checkpw(user_password.encode(), db_password)
@@ -133,11 +136,27 @@ def login_post():
 
             else:
                 session['user_id'] = user_id
-                session['email'] = email
-            
+                session['email'] = db_emailid
+                session['name'] = name
                 return redirect(url_for('mainPage'))
         return render_template('index.html')
 
+@app.route("/send_email", methods=['GET','POST'])
+def send_email():
+    server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+    sender_email = "simplii.reminder@gmail.com"
+    sender_password = "Temp@1234"
+    server.login(sender_email,sender_password)
+    user_id = session['user_id']
+    db_task = ""
+    table = [['Task_name','Deadline','Estimate','Task_type','Difficulty','Status']]
+    for db_task in testTaskInfo.find({"user_id": user_id}):
+        a = [db_task['task_name'],db_task['deadline'],db_task['estimate'],db_task['task_type'],db_task['difficulty'],db_task['status']]
+        table.append(a)
+    message = 'Subject: Task List\n\n{}'.format(tabulate(table))
+    server.sendmail(sender_email,session['email'],message)
+    server.quit()
+    return redirect("/index")
 
 '''
 
@@ -219,7 +238,7 @@ def signup_post():
 def mainPage():
     """This function renders the home page."""
     #email = session["email"]
-    return render_template("index.html", data=refresh_data())
+    return render_template("index.html", name = session["name"], e = session["email"], data=refresh_data())
 
 @app.route('/logout')
 def logout():
