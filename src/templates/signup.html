@@ -46,32 +46,10 @@
       }
     </style>
   </head>
-  <body>
+  <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
     {% for message in get_flashed_messages() %}
       <div class="alert-error">Error: {{ message }}</div>
     {% endfor %}
-  </body>
-  <body>
-    <div class="container">
-      <h1>New User? Sign Up!</h1>
-      <br>
-      <form action="" method="post">
-        <input type="text" placeholder="User ID" name="userid" value="{{
-          request.form.userid }}">
-        <input type="text" placeholder="First Name" name="firstname" value="{{
-          request.form.firstname }}">
-        <input type="text" placeholder="Last Name" name="lastname" value="{{
-          request.form.lastname }}">
-        <input type="email" placeholder="E-mail" name="email" value="{{
-          request.form.email }}">
-         <input type="password" placeholder="Password" name="password" value="{{
-          request.form.password }}">
-        <input class="btn btn-default" type="submit" value="Sign Up">
-      </form>
-      {% if error %}
-        <p class="error"><strong>Error:</strong> {{ error }}
-      {% endif %}
-  <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
   <div class="container">
     <div class="row">
       <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
