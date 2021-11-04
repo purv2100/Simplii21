@@ -45,7 +45,7 @@
 
 <a href="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" alt="total lines">
 <img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
-</br>
+<br>
 
 <p align="center">
     <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
@@ -64,12 +64,17 @@ https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-
 ## Built with:
 <table border = "0px">
   <tr>
-<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" /></td>
-<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" /></td>
-<td><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" height="40"/></td>
-<td><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" height="40"/></td>
-<td><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="40" height="40"/></td>
-<td><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" width="40" height="40"/></td>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="40" height="40" /><b>Python</b></td>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" /><b>JavaScript</b></td>
+<td align="center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" height="40"/><b>HTML5</b></td>
+<td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" height="40"/><b>CSS3</b></td>
+<td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="40" height="40"/><b>Bootstrap</b></td>
+<td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" width="40" height="40"/><b>jQuery</b></td>
+<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/flask/flask-original.svg" width="40" height="40"/><b>Flask</b></td>
+<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/mongodb/mongodb-original.svg" width="40" height="40"/><b>MongoDB</b></td>
+
+
+
     
   </tr>
 </table>
@@ -113,11 +118,11 @@ ER Diagram                 |  Application Flowchart
 <center>
   <table>
     <tr>
-        <td align="center"><a href="https://github.com/apurva-s"><img src="https://avatars.githubusercontent.com/u/32777604?v=4" width="100px;" alt=""/><br /><sub><b>Apurva Sonavane</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/ArpithaVijayakumar/"><img src="https://avatars.githubusercontent.com/u/45428701?s=400&u=15851f4800b87dcd2b8cbf9ff0a040bc8987e7c0&v=4" width="100px;" alt=""/><br /><sub><b>Arpitha Vijayakumar</b></sub></a></td>
-    <td align="center"><a href="https://github.com/ivbhatt"><img src="https://avatars.githubusercontent.com/u/20361038?v=4" width="100px;" alt=""/><br /><sub><b>Ishan Bhatt</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/Krishika510"><img src="https://avatars.githubusercontent.com/u/17769434?v=4" width="100px;" alt=""/><br /><sub><b>Krishika Shivnani</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/UnnatiPrema/"><img src="https://avatars.githubusercontent.com/u/24750759?s=400&u=ab27d86edc758ff53bd68808430d8e5bf172e34a&v=4" width="100px;" alt=""/><br /><sub><b>Unnati Nadupalli</b></sub></a><br /></td>
+        <td align="center"><a href="https://github.com/deekay2310"><img src="https://avatars.githubusercontent.com/u/29257773?v=4" width="100px;" alt=""/><br /><sub><b>Dev Kumar</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/PrakruthiSomashekar"><img src="https://avatars.githubusercontent.com/u/62984587?v=4" width="100px;" alt=""/><br /><sub><b>Prakruthi Somashekar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/radhikaraman20"><img src="https://avatars.githubusercontent.com/u/89432698?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Radhika Raman</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/RohanSinha96"><img src="https://avatars.githubusercontent.com/u/15325746?v=4" width="100px;" alt=""/><br /><sub><b>Rohan Sinha</b></sub></a><br /></td>
+      <td align="center"><a href="https://github.com/SunidhiHegde"><img src="https://avatars.githubusercontent.com/u/62884191?v=4" width="100px;" alt=""/><br /><sub><b>Sunidhi Hegde</b></sub></a><br /></td>
     </tr>
   </table>
 </center>
