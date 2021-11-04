@@ -71,8 +71,7 @@ https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-
 <td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="40" height="40"/><b>Bootstrap</b></td>
 <td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" width="40" height="40"/><b>jQuery</b></td>
 <td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/flask/flask-original.svg" width="40" height="40"/><b>Flask</b></td>
-<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/mongodb/mongodb-original.svg
-" width="40" height="40"/><b>MongoDB</b></td>
+<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/mongodb/mongodb-original.svg" width="40" height="40"/><b>MongoDB</b></td>
 
 
 
