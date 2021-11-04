@@ -115,27 +115,28 @@ def login_post():
         print(user_password)
 
         db_user = testUserInfo.find_one({"user_id": user_id})
-        db_userid = db_user['user_id']
-        print(db_userid)
-        db_password = db_user['password']
-        valid_password = bcrypt.checkpw(user_password.encode(), db_password)
-        print(valid_password)
+        print(db_user)
 
-        if user_id != db_userid:
+        if(db_user==None):
             flash('The entered user ID does not exist, please login with valid credentials or sign up.')
             return redirect(url_for('login_post'))
-
-
-        elif user_id == db_userid and valid_password != True:
-            flash('The entered password is invalid, please login with valid credentials.')
-            return redirect(url_for('login_post'))
-
         else:
-            session['user_id'] = user_id
-            session['email'] = email
+            db_userid = db_user['user_id']
+            print(db_userid)
+            db_password = db_user['password']
+            valid_password = bcrypt.checkpw(user_password.encode(), db_password)
+            print(valid_password)
+
+            if user_id == db_userid and valid_password != True:
+                flash('The entered password is invalid, please login with valid credentials.')
+                return redirect(url_for('login_post'))
+
+            else:
+                session['user_id'] = user_id
+                session['email'] = email
             
-            return redirect(url_for('mainPage'))
-    return render_template('index.html')
+                return redirect(url_for('mainPage'))
+        return render_template('index.html')
 
 
 '''

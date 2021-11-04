@@ -29,6 +29,20 @@
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </head>
+<head>
+    <style>
+      .alert-error {
+        padding: 8px;
+        background-color: red;
+        color: white;
+      }
+    </style>
+</head>
+ <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
+    {% for message in get_flashed_messages() %}
+      <div class="alert-error">Error: {{ message }}</div>
+    {% endfor %}
+ </body>
 <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
   <div class="container">
     <div class="row">
