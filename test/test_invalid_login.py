@@ -14,4 +14,4 @@ class TestModule(unittest.TestCase):
         self.assertTrue(re.search('Error: The entered user ID does not exist, please login with valid credentials or sign up.', response.get_data(as_text = True))
 
 if __name__ == "__main__":
-    unittest.main()
+        unittest.main()
