@@ -32,7 +32,7 @@
     console.log(page_data["task-list-block"]);
 </script>
 
-  <title>Simpli</title>
+  <title>Simplii</title>
   <link rel="shortcut icon" href="../static/images/calendar.png">
 </head>
 <body onload='force_initialization({{data|tojson}})'>
@@ -42,6 +42,9 @@
     
 
     <div class="container overflow-auto rounded" id="header-block">
+      <p align="right">
+      <a href="/logout">Logout</a>
+      </p>
       <p>
         <h2 align="center">Welcome to Task Scheduler</h2>
       </p>
