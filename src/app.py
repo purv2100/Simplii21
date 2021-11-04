@@ -149,6 +149,8 @@ def send_email():
     #Storing sender's email address and password
     sender_email = "simplii.reminder@gmail.com"
     sender_password = "Temp@1234"
+    
+    #Logging in with sender details
     server.login(sender_email,sender_password)
     user_id = session['user_id']
     db_task = ""
