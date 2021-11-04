@@ -215,7 +215,7 @@ def signup_post():
             new_email = user_data['email_id']
 
             return redirect(url_for('mainPage'))
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route("/index")
 def mainPage():
