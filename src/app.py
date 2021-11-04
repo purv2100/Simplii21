@@ -274,17 +274,13 @@ def add_new_task():
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
 
-    for x in testTaskInfo.find({"user_id": curr_user}):
-        table_taskname = x['task_name']
-        table_timereqd = x['estimate']
-        table_deadline = x['deadline']
-        #print(table_taskname)
-        #print(x)
+    det = []
+    for tmp in testTaskInfo.find({"user_id": session['user_id']}):
+        det.append([tmp['task_name'],tmp['estimate'],tmp['deadline']])
+    
+    #return redirect("/index")    
+    return render_template("index.html",det=det,data=refresh_data())
 
-    #print(tasks)
-    #return render_template('index.html', testTaskInfo=testTaskInfo)
-
-    return redirect("/index")
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
