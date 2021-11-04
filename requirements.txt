@@ -8,3 +8,4 @@ requests==2.26.0
 pymongo[srv]==3.12.1
 # Install bcrypt (and it's dependencies)
 bcrypt==3.2.0
+tabulate==0.8.7
