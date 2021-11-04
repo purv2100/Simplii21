@@ -277,6 +277,10 @@ def add_new_task():
     det = []
     for tmp in testTaskInfo.find({"user_id": session['user_id']}):
         det.append([tmp['task_name'],tmp['estimate'],tmp['deadline']])
+    
+    #return redirect("/index")    
+    return render_template("index.html",det=det,data=refresh_data())
+
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
