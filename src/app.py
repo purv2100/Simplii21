@@ -219,7 +219,7 @@ def signup_post():
 def mainPage():
     """This function renders the home page."""
     #email = session["email"]
-    return render_template("index.html", data=refresh_data())
+    return render_template("index.html", name = session["name"], e = session["email"], data=refresh_data())
 
 @app.route('/logout')
 def logout():
