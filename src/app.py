@@ -22,7 +22,7 @@ client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mo
 #database to which connections are to be made
 db = client.simplii
 testUserInfo = db.testUserInfo
-
+testTaskInfo = db.testTaskInfo
 
 app = Flask(__name__, static_folder='static')
 app.secret_key = "simpliitesting"
@@ -140,6 +140,22 @@ def login_post():
                 return redirect(url_for('mainPage'))
         return render_template('index.html')
 
+@app.route("/send_email", methods=['GET','POST'])
+def send_email():
+    server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+    sender_email = "simplii.reminder@gmail.com"
+    sender_password = "Temp@1234"
+    server.login(sender_email,sender_password)
+    user_id = session['user_id']
+    db_task = ""
+    table = [['Task_name','Deadline','Estimate','Task_type','Difficulty','Status']]
+    for db_task in testTaskInfo.find({"user_id": user_id}):
+        a = [db_task['task_name'],db_task['deadline'],db_task['estimate'],db_task['task_type'],db_task['difficulty'],db_task['status']]
+        table.append(a)
+    message = 'Subject: Task List\n\n{}'.format(tabulate(table))
+    server.sendmail(sender_email,session['email'],message)
+    server.quit()
+    return redirect("/index")
 
 '''
 
