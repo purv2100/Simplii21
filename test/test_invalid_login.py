@@ -1,7 +1,7 @@
 import unittest
 from src.app import app
 import requests
-
+import re
 
 app.testing = True
 
