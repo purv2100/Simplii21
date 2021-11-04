@@ -222,6 +222,7 @@ def mainPage():
 
 @app.route('/logout')
 def logout():
+    """This function ends the session and logs the user out."""
     #session.pop('user', None)
     return redirect('/')
 
