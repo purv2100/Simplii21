@@ -158,7 +158,7 @@ def send_email():
     db_task = ""
     table = [['Task_name','Deadline','Estimate','Task_type','Difficulty','Status']]
     for db_task in testTaskInfo.find({"user_id": user_id}):
-        a = [db_task['task_name'],db_task['deadline'],db_task['estimate'],db_task['task_type'],db_task['difficulty'],db_task['status']]
+        a = [db_task['task_name'],db_task['deadline'],db_task['estimate'],db_task['task_type'],db_task['difficulty'],db_task['task_status']]
         table.append(a)
     message = 'Subject: Task List\n\n{}'.format(tabulate(table))
     server.sendmail(sender_email,session['email'],message)
