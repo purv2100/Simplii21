@@ -22,6 +22,7 @@ client = pymongo.MongoClient("mongodb+srv://radhika:Radhika1997@simplii.tvhh1.mo
 #database to which connections are to be made
 db = client.simplii
 testUserInfo = db.testUserInfo
+testTaskInfo = db.testTaskInfo
 
 
 app = Flask(__name__, static_folder='static')
@@ -140,8 +141,6 @@ def login_post():
 
 
 '''
-
-
 @app.route("/signup", methods=['GET','POST'])
 def signup():
     error = None
@@ -224,7 +223,7 @@ def mainPage():
 @app.route('/logout')
 def logout():
     """This function ends the session and logs the user out."""
-    #session.pop('user', None)
+    session.pop('user_id', None)
     return redirect('/')
 
 @app.route("/update_user_info", methods = ["POST"])
@@ -274,8 +273,16 @@ def add_new_task():
 
 
     new_task_information["difficulty"] = form_data["difficulty"]
+    new_task_information["task_status"] = "Pending"
 
     print(new_task_information)
+    print(session['user_id'])
+
+    #add task to db
+    user_task_data = {'user_id': session['user_id'], 'task_id': new_id, 'task_name': new_task_information["task_name"], 'deadline': new_task_information["deadline"], 'estimate': new_task_information["estimate"], 'task_type': new_task_information["task_type"], 'quant_verbal': new_task_information["quant_verbal"], 'creat_consum': new_task_information["creat_consum"], 'difficulty': new_task_information["difficulty"], 'task_status': new_task_information["task_status"]}
+    testTaskInfo.insert_one(user_task_data)
+    flash('Your new task has been recorded!')
+
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
 

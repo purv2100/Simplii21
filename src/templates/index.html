@@ -35,6 +35,20 @@
   <title>Simplii</title>
   <link rel="shortcut icon" href="../static/images/calendar.png">
 </head>
+<head>
+    <style>
+      .alert-error {
+        padding: 8px;
+        background-color: blue;
+        color: white;
+      }
+    </style>
+</head>
+ <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
+    {% for message in get_flashed_messages() %}
+      <div align="center" class="alert-error">{{ message }}</div>
+    {% endfor %}
+ </body>
 <body onload='force_initialization({{data|tojson}})'>
     
   
