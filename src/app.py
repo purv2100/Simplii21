@@ -230,24 +230,6 @@ def logout():
     session.pop('user_id', None)
     return redirect('/')
 
-@app.route("/update_user_info", methods = ["POST"])
-def update_user_information():
-    """Updates user information into JSON."""
-    user_information = request.form
-    new_info = {}
-
-    new_info["name"] = user_information["name"]
-    new_info["email_id"] = user_information["email"]
-    new_info["initialized"] = "yes"
-    new_info["email_notifications"] = user_information["emailChoose"]
-
-    with open(os.path.join(package_dir,"../static", "user_information.json"), "w", encoding="utf-8") as json_file:
-        json.dump(new_info, json_file)
-
-    return redirect("/index")
-
-
-
 @app.route("/add_task", methods = ["POST"])
 def add_new_task():
     """Add a new task to the JSON."""
