@@ -45,7 +45,7 @@
 
 <a href="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" alt="total lines">
 <img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
-</br>
+<br>
 
 <p align="center">
     <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
@@ -113,7 +113,7 @@ ER Diagram                 |  Application Flowchart
 <center>
   <table>
     <tr>
-        <td align="center"><a href="https://github.com/apurva-s"><img src="https://avatars.githubusercontent.com/u/32777604?v=4" width="100px;" alt=""/><br /><sub><b>Apurva Sonavane</b></sub></a><br /></td>
+        <td align="center"><a href="https://github.com/deekay2310"><img src="https://avatars.githubusercontent.com/u/29257773?v=4" width="100px;" alt=""/><br /><sub><b>Dev Kumar</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/ArpithaVijayakumar/"><img src="https://avatars.githubusercontent.com/u/45428701?s=400&u=15851f4800b87dcd2b8cbf9ff0a040bc8987e7c0&v=4" width="100px;" alt=""/><br /><sub><b>Arpitha Vijayakumar</b></sub></a></td>
     <td align="center"><a href="https://github.com/ivbhatt"><img src="https://avatars.githubusercontent.com/u/20361038?v=4" width="100px;" alt=""/><br /><sub><b>Ishan Bhatt</b></sub></a><br /></td>
       <td align="center"><a href="https://github.com/Krishika510"><img src="https://avatars.githubusercontent.com/u/17769434?v=4" width="100px;" alt=""/><br /><sub><b>Krishika Shivnani</b></sub></a><br /></td>
