@@ -278,6 +278,8 @@ def add_new_task():
     print(new_task_information)
     print(session['user_id'])
 
+    curr_user = session['user_id']
+
     #add task to db
     user_task_data = {'user_id': session['user_id'], 'task_id': new_id, 'task_name': new_task_information["task_name"], 'deadline': new_task_information["deadline"], 'estimate': new_task_information["estimate"], 'task_type': new_task_information["task_type"], 'quant_verbal': new_task_information["quant_verbal"], 'creat_consum': new_task_information["creat_consum"], 'difficulty': new_task_information["difficulty"], 'task_status': new_task_information["task_status"]}
     testTaskInfo.insert_one(user_task_data)
@@ -285,6 +287,16 @@ def add_new_task():
 
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
+
+    for x in testTaskInfo.find({"user_id": curr_user}):
+        table_taskname = x['task_name']
+        table_timereqd = x['estimate']
+        table_deadline = x['deadline']
+        #print(table_taskname)
+        #print(x)
+
+    #print(tasks)
+    #return render_template('index.html', testTaskInfo=testTaskInfo)
 
     return redirect("/index")
 
