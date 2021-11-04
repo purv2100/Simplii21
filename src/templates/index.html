@@ -208,6 +208,20 @@
   <title>Simplii</title>
   <link rel="shortcut icon" href="../static/images/calendar.png">
 </head>
+<head>
+    <style>
+      .alert-error {
+        padding: 8px;
+        background-color: blue;
+        color: white;
+      }
+    </style>
+</head>
+ <body style="background: #96c8a2;background-image: linear-gradient(to right, #96c8a2 , #008080)">
+    {% for message in get_flashed_messages() %}
+      <div align="center" class="alert-error">{{ message }}</div>
+    {% endfor %}
+ </body>
 <body onload='force_initialization({{data|tojson}})'>
     
   
@@ -219,9 +233,9 @@
       <a href="/logout">Logout</a>
       </p>
       <p>
-        <h2 align="center">Welcome to Task Scheduler</h2>
+        <h2 align="center">Welcome to Simplii - A Custom Task Scheduler</h2>
       </p>
-      <p style="text-align: right;">Schedule for : 
+      <p style="text-align: right;">Schedule for:
         <script type="text/javascript"> document.write(today) </script> 
       </p>
     </div>
@@ -236,9 +250,9 @@
           <tr>
               <td>
                 <!-- <form method="GET" onsubmit='change_pref({{data|tojson}})'>
-                  <input type="submit" value = "Change Preferences...">
+                  
                 </form> -->
-                <button id="prefBtn" onclick="showPrefModal()" >Change Preferences</button>
+                
 		<form method="get" action="/send_email">
     			<button type="submit">Send Task List to User Email ID</button>
 		</form>
@@ -325,10 +339,10 @@
 
     <div class="container overflow-auto rounded" id = "settings-block">
       <p>
-      	<h2> + Add a task </h2>
+      	<h2> + ADD A TASK </h2>
         <form method="POST" id="add-task-form" action="/add_task">
           <div class="field">
-            <label for="taskName"> Title:</label>
+            <label for="taskName">Task Title:</label>
             <br>
             <input type="text" name="taskName" placeholder="Algo Assignment 2" required>
           </div>
@@ -339,7 +353,7 @@
           </div>
           <br>
           <div class="field">
-            <label for="estimate">Duration of the task (in Hrs.):</label>
+            <label for="estimate">Duration of the task (in hours):</label>
             <input type="text" id="estimateInput" name="estimateInput" placeholder="2.5"  required>
             </div>
             <br>
@@ -369,7 +383,7 @@
               </div>
             <br>
             <div class="field">
-              <label for="difficulty">Difficulty of task (0 - Easy, 5 - Difficult):</label>
+              <label for="difficulty">Difficulty level of the task (0 - Easy, 5 - Difficult):</label>
               <span id="valBox"></span>
               <input type="range" id="difficulty" name="difficulty" min="0" max="5" step="1"
               oninput="showVal(this.value)" onchange="showVal(this.value)" required>
@@ -384,17 +398,17 @@
     <div class="container overflow-auto rounded" id = "list-block">
       <p>
         <h2>
-          Task List
+          Your Current Task List
         </h2>
 
   	    <table class = "table table-striped">
   	    <tr>
   		    <th>Task</th>
-  		    <th>Time Reqd.</th>
+  		    <th>Time Required<br>(In hours)</th>
   		    <th>Due on:<br>yyyy-mm-dd hh:mm</th>
   		    <!-- We have not created the edit functionality yet -->
   		    <!-- <th>Edit</th> -->
-  		    <th>Delete</th>
+  		    <th>Delete Task</th>
   		    
   		  </tr>
   		  
@@ -438,7 +452,7 @@
 
     <div class="container" id = "footer-block" >
             <center><h3>NC State University </h3></center>
-            <center><small font-size: 1.0em;>Created by: Ishan, Krishika, Apurva, Arpitha, Unnati</small></center>
+            <center><small font-size: 1.0em;>Created by: Dev, Prakruthi, Radhika, Rohan, Sunidhi</small></center>
             <center><small>© 2021 NC State University. All rights reserved.</small></center>
     </div>
   </div>
