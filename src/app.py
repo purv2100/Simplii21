@@ -214,7 +214,7 @@ def signup_post():
             user_data = testUserInfo.find_one({"email_id": email})
             new_email = user_data['email_id']
 
-            return redirect(url_for('mainPage'))
+            return render_template('login.html')
     return render_template('login.html')
 
 @app.route("/index")
