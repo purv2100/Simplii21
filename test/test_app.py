@@ -14,8 +14,7 @@ class TestModule(unittest.TestCase):
 
     def test_add_task(self):
         tester = app.test_client(self)
-        inp = {"taskName": "dummy_task", "deadline": "2021-03-30T21:08", "estimateInput": 1, "taskType": "physical",
-               'quant/verbal': "NA", "contentconsump": "NA", "difficulty": "3"}
+        inp = {"id": "7X9UE", "task_name": "dummy_task", "deadline": "2021-03-30 21:08", "estimate": 1, "task_type": "physical", "quant_verbal": "NA", "creat_consum": "NA", "difficulty": "3", "task_status":"Pending"}
         response = requests.post("http://127.0.0.1:5000/add_task", data=inp)
         self.assertEqual(response.status_code, 200)
 
