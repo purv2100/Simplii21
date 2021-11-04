@@ -143,7 +143,10 @@ def login_post():
 
 @app.route("/send_email", methods=['GET','POST'])
 def send_email():
+    #Connection to the server
     server = smtplib.SMTP_SSL("smtp.gmail.com",465)
+    
+    #Storing sender's email address and password
     sender_email = "simplii.reminder@gmail.com"
     sender_password = "Temp@1234"
     server.login(sender_email,sender_password)
