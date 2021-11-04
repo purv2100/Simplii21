@@ -275,7 +275,8 @@ def add_new_task():
         json.dump(new_task_information, json_file)
 
     det = []
-    
+    for tmp in testTaskInfo.find({"user_id": session['user_id']}):
+        det.append([tmp['task_name'],tmp['estimate'],tmp['deadline']])
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
