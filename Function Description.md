@@ -6,4 +6,5 @@ getnewTaskID()
 - This function randomly produces a possible TaskID and checks if it is already in use. If the generated TaskID is in use, then we keep on generating random TaskIDs until we find one that is not in use
 
 homePage()
+- This function renders the home page
 
