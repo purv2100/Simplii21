@@ -15,3 +15,7 @@ login()
 send_email()
 - This function is used to send an email to user's email ID containing all tasks
 - The email is sent from simplii.reminder@gmail.com
+
+logout()
+- This function is used for login by the user
+- Using userID, passoword is validated and the user is directed to index
