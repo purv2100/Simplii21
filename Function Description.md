@@ -19,3 +19,8 @@ send_email()
 logout()
 - This function is used for login by the user
 - Using userID, passoword is validated and the user is directed to index
+
+signUp()
+- This function is used for registering new users
+- Details of new users are stored in the database and the user is automatically logged in
+
