@@ -14,7 +14,7 @@
 |.5|issues are discussed before they are closed | Scheduled regular zoom meetings and met in person to discuss about various issues, implementations and tasks. Reviewed each other's changes before wrapping up issues. Had continuous discussions over team WhatsApp group as well.|0.5|
 |.5|Use of syntax checkers. | https://github.com/deekay2310/Simplii/blob/main/.github/workflows/syntax_checker.yml|0.5|
 |1|Issues reports: there are many  |https://github.com/deekay2310/Simplii/issues?q=is%3Aopen+is%3Aissue |1|
-|.5|Use of code formatters. | config files in GH showing your this formatter's config||
+|.5|Use of code formatters. | https://github.com/deekay2310/Simplii/blob/main/.github/workflows/code_formatter.yml|0.5|
 |.5|Use of style checkers | config files in GH showing your config||
 |.5|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | ||
 |.5|test cases exist  | dozens of tests and those test cases are more than 30% of the code base||
