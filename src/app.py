@@ -165,28 +165,6 @@ def send_email():
     server.quit()
     return redirect("/index")
 
-'''
-@app.route("/signup", methods=['GET','POST'])
-def signup():
-    error = None
-    if request.method == 'POST':
-        name = request.form["name"]
-        username = request.form["email"]
-        password = request.form["password"]
-        # Check if username exists in database
-        #query = "SELECT username FROM users WHERE username = :username"
-        #if db.execute(query, {'username': reg_username}).first():
-        #    flash('Username already exists')
-        #    return render_template('register.html')
-        #else:
-        #new_user = User(name, username, password)
-        #db.session.add(new_user)
-        #db.session.commit()
-        #session['username'] = reg_username
-        return redirect(url_for('login'))
-    return render_template('signup.html')
-'''
-
 @app.route("/signup", methods=['GET'])
 def signup_get():
     return render_template('signup.html')
@@ -235,9 +213,11 @@ def signup_post():
 
             user_data = testUserInfo.find_one({"email_id": email})
             new_email = user_data['email_id']
-
+            session['user_id'] = user_id
+            session['email'] = email
+            session['name'] = user_first_name + " " + user_last_name
             return redirect(url_for('mainPage'))
-    return render_template('index.html')
+    return render_template('login.html')
 
 @app.route("/index")
 def mainPage():
@@ -251,24 +231,6 @@ def logout():
     """This function ends the session and logs the user out."""
     session.pop('user_id', None)
     return redirect('/')
-
-@app.route("/update_user_info", methods = ["POST"])
-def update_user_information():
-    """Updates user information into JSON."""
-    user_information = request.form
-    new_info = {}
-
-    new_info["name"] = user_information["name"]
-    new_info["email_id"] = user_information["email"]
-    new_info["initialized"] = "yes"
-    new_info["email_notifications"] = user_information["emailChoose"]
-
-    with open(os.path.join(package_dir,"../static", "user_information.json"), "w", encoding="utf-8") as json_file:
-        json.dump(new_info, json_file)
-
-    return redirect("/index")
-
-
 
 @app.route("/add_task", methods = ["POST"])
 def add_new_task():
@@ -314,17 +276,13 @@ def add_new_task():
     with open(os.path.join(TODO_TASKS_PATH, new_id+".json"), "w", encoding="utf-8") as json_file:
         json.dump(new_task_information, json_file)
 
-    for x in testTaskInfo.find({"user_id": curr_user}):
-        table_taskname = x['task_name']
-        table_timereqd = x['estimate']
-        table_deadline = x['deadline']
-        #print(table_taskname)
-        #print(x)
+    det = []
+    for tmp in testTaskInfo.find({"user_id": session['user_id']}):
+        det.append([tmp['task_name'],tmp['estimate'],tmp['deadline']])
+    
+    #return redirect("/index")    
+    return render_template("index.html",det=det,data=refresh_data())
 
-    #print(tasks)
-    #return render_template('index.html', testTaskInfo=testTaskInfo)
-
-    return redirect("/index")
 
 @app.route("/delete_task", methods = ["POST"])
 def delete_task_byID():
