@@ -30,3 +30,6 @@ delete_task_byID()
 add_new_task()
 - User fills details of tasks on a form which gets added to the database
 - User can also see their tasks and their details on index page
+
+delete_task_byID()
+- This function deletes the tasks that are already stored by the user
