@@ -10,8 +10,8 @@
 |.5|evidence that the members of the team are working across multiple places in the code base | ||
 |1|Docs: what: point descriptions of each class/function (in isolation)  | ||
 |.5|Number of commits: by different people  | in GH||
-|1|issues are being closed | https://github.com/deekay2310/Simplii/issues?q=is%3Aissue+is%3Aclosed|0.5|
-|.5|issues are discussed before they are closed | even if you discuss in slack, need a sumamry statement here||
+|1|issues are being closed | https://github.com/deekay2310/Simplii/issues?q=is%3Aissue+is%3Aclosed|1|
+|.5|issues are discussed before they are closed | Scheduled regular zoom meetings and met in person to discuss about various issues, implementations and tasks. Reviewed each other's changes before wrapping up issues. Had continuous discussions over team WhatsApp group as well.|0.5|
 |.5|Use of syntax checkers. | config files iin GH showing this checker's config||
 |1|Issues reports: there are many  | ||
 |.5|Use of code formatters. | config files in GH showing your this formatter's config||
