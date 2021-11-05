@@ -18,7 +18,7 @@
 |.5|Use of style checkers | https://github.com/deekay2310/Simplii/blob/main/.github/workflows/style_checker.yml|0.5|
 |.5|Docs: short video, animated, hosted on your repo. That convinces people why they want to work on your code. | ||
 |.5|test cases exist  | dozens of tests and those test cases are more than 30% of the code base||
-|.5|Use of code coverage  | config files in GH||
+|.5|Use of code coverage  | https://github.com/deekay2310/Simplii/blob/main/.github/workflows/code_cov.yml|0.5|
 |.5|other automated analysis tools  | config files in GH||
 |.5|test cases:.a large proportion of the issues related to handling failing cases. | if a test case fails, open an issue and fix it||
 |.5|test cases are routinely executed | e.g. travis-com.com or github actions or something||
