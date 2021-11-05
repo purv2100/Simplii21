@@ -14,4 +14,6 @@
       <li>Database Connection</li>
     </ul>
   </li>
+  <li>Improved repository with multiple badges indicating development status of project.</li>
+  <li>Added code coverage for the repository.</li>
 </ol>
