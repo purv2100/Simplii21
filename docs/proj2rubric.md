@@ -5,7 +5,7 @@
 |.5| workload is spread over the whole team (so one team member is often Xtimes more productive than the others...|https://github.com/deekay2310/Simplii/pulse|0.4|
 |.5|Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing |https://github.com/deekay2310/Simplii/blob/main/README.md |0.5|
 |.5|the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up  |https://github.com/deekay2310/Simplii/blob/main/CONTRIBUTING.md |0.5|
-|.5|Docs: doco generated , format not ugly  | in GH||
+|.5|Docs: doco generated , format not ugly  | in GH: https://github.com/deekay2310/Simplii/tree/main/docs|0.5|
 |.5|evidence that the whole team is using the same tools (e.g. config files in the repo, updated by lots of different people) | ||
 |.5|evidence that the members of the team are working across multiple places in the code base | ||
 |1|Docs: what: point descriptions of each class/function (in isolation)  | ||
