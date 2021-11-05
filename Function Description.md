@@ -24,3 +24,9 @@ signUp()
 - This function is used for registering new users
 - Details of new users are stored in the database and the user is automatically logged in
 
+delete_task_byID()
+- Deletes a task from the to-do list given its ID. This API moves a task from the TODO list to the COMPLETED list
+
+add_new_task()
+- User fills details of tasks on a form which gets added to the database
+- User can also see their tasks and their details on index page
