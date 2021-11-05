@@ -8,3 +8,7 @@ getnewTaskID()
 homePage()
 - This function renders the home page
 
+login()
+- This function is used for login by the user
+- Using userID, passoword is validated and the user is directed to index
+
