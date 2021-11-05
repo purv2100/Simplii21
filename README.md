@@ -61,6 +61,11 @@ Do you feel that your basic task scheduling apps should also track your mood and
 
 https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-a979-4390026cb71d.mp4
 
+
+https://user-images.githubusercontent.com/89432698/140456563-6b1126c5-7830-4fc5-bcac-a9463b96c135.mp4
+
+
+
 ## Built with:
 <table border = "0px">
   <tr>
