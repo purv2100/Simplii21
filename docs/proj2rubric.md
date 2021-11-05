@@ -1,8 +1,8 @@
 ### Review
 | Score | Notes | Evidence| Self Assessment| 
 | -------------- | ---------- |----------|----------|
-|.5| short release cycles|||
-|.5| workload is spread over the whole team (so one team member is often Xtimes more productive than the others...|||
+|.5| short release cycles|https://github.com/deekay2310/Simplii/releases|0.5|
+|.5| workload is spread over the whole team (so one team member is often Xtimes more productive than the others...|https://github.com/deekay2310/Simplii/pulse|0.4|
 |.5|Docs: why: docs tell a story, motivate the whole thing, deliver a punchline that makes you want to rush out and use the thing | ||
 |.5|the files CONTRIBUTING.md lists coding standards and lots of tips on how to extend the system without screwing things up  | ||
 |.5|Docs: doco generated , format not ugly  | in GH||
