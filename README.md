@@ -9,8 +9,6 @@
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/unit_test.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
-<!---![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/python-app.yml/badge.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/code_cov.yml/badge.svg)-->
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
 <!--Badges-->
 <a href="https://github.com/deekay2310/Simplii/fork" target="blank">
@@ -121,7 +119,7 @@ ER Diagram                 |  Application Flowchart
   
 - ### How to Run:
     **To run the application locally:**
-    - Clone [this (Simplii) github repo] (https://github.com/ivbhatt/Simplii)
+    - Clone [this (Simplii) github repo] (https://github.com/deekay2310/Simplii)
     - Run `flask run`
     - Site will be hosted at:
       `http://127.0.0.1:5000/`
