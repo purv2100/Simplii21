@@ -37,7 +37,7 @@ def home():
 # Output: Out function will redirect to the login page
 # ########################## 
     if session.get('email'):
-        return redirect(url_for('dummy'))
+        return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('login'))
 
@@ -47,8 +47,7 @@ def forgotPassword():
 
 @app.route("/dashboard")
 def dashboard():
-    return redirect(url_for('dummy'))
-
+    return render_template('dashboard.html')
 @app.route("/about")
 def about():
 # ############################ 
@@ -90,7 +89,8 @@ def task():
 # Input: Task, Category, start date, end date, number of hours
 # Output: Value update in database and redirected to home login page
 # ########################## 
-    if not session.get('email'):
+    print(session)
+    if session.get('email'):
         form = TaskForm()
         if form.validate_on_submit():
             print("inside form")
