@@ -1,9 +1,9 @@
 from flask_wtf import FlaskForm
+from wtforms.fields.html5 import DateField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.fields.core import SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from apps import App
-
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username',
@@ -23,6 +23,17 @@ class RegistrationForm(FlaskForm):
         temp = mongo.db.ath.find_one({'email': email.data}, {'email', 'pwd'})
         if temp:
             raise ValidationError('Email already exists!')
+
+class TaskForm(FlaskForm):
+    taskname = StringField('Taskname',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    category = StringField('Category',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    startdate = DateField('Start Date', format='%Y-%m-%d')
+    duedate = DateField('End Date', format='%Y-%m-%d')
+    hours = StringField('Hours',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    submit = SubmitField('Add')
 
 
 class LoginForm(FlaskForm):

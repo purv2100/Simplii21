@@ -8,7 +8,7 @@ from flask import json
 from flask.helpers import make_response
 from flask.json import jsonify
 from flask_mail import Mail, Message
-from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm
+from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm
 import bcrypt
 
 from flask_login import LoginManager, login_required
@@ -81,6 +81,32 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
 
+@app.route("/task", methods=['GET', 'POST'])
+def task():
+# ############################ 
+# task() function displays the Add Task portal (task.html) template
+# route "/task" will redirect to task() function.
+# TaskForm() called and if the form is submitted then new task values are fetched and updated into database
+# Input: Task, Category, start date, end date, number of hours
+# Output: Value update in database and redirected to home login page
+# ########################## 
+    if not session.get('email'):
+        form = TaskForm()
+        if form.validate_on_submit():
+            print("inside form")
+            if request.method == 'POST':
+                email = session.get('email')
+                taskname = request.form.get('taskname')
+                category = request.form.get('category')
+                startdate = request.form.get('startdate')
+                duedate = request.form.get('duedate')
+                hours = request.form.get('hours')
+                mongo.db.tasks.insert({'email':email, 'taskname': taskname, 'category': category, 'startdate': startdate,'duedate': duedate, 'hours': hours})
+            flash(f' {form.taskname.data} Task Added!', 'success')
+            return redirect(url_for('login'))
+    else:
+        return redirect(url_for('home'))
+    return render_template('task.html', title='Task', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
