@@ -103,7 +103,7 @@ def task():
                 hours = request.form.get('hours')
                 mongo.db.tasks.insert({'email':email, 'taskname': taskname, 'category': category, 'startdate': startdate,'duedate': duedate, 'hours': hours})
             flash(f' {form.taskname.data} Task Added!', 'success')
-            return redirect(url_for('login'))
+            return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)
