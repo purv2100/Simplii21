@@ -101,7 +101,8 @@ def task():
                 startdate = request.form.get('startdate')
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
-                mongo.db.tasks.insert({'email':email, 'taskname': taskname, 'category': category, 'startdate': startdate,'duedate': duedate, 'hours': hours})
+                status = request.form.get('status')
+                mongo.db.tasks.insert({'email':email, 'taskname': taskname, 'category': category, 'startdate': startdate,'duedate': duedate, 'status':status, 'hours': hours})
             flash(f' {form.taskname.data} Task Added!', 'success')
             return redirect(url_for('home'))
     else:
