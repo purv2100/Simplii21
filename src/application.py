@@ -47,7 +47,9 @@ def forgotPassword():
 
 @app.route("/dashboard")
 def dashboard():
-    return render_template('dashboard.html')
+    if session.get('email'):
+        tasks = mongo.db.tasks.find()
+    return render_template('dashboard.html',tasks=tasks)
 @app.route("/about")
 def about():
 # ############################ 
@@ -89,7 +91,6 @@ def task():
 # Input: Task, Category, start date, end date, number of hours
 # Output: Value update in database and redirected to home login page
 # ########################## 
-    print(session)
     if session.get('email'):
         form = TaskForm()
         if form.validate_on_submit():

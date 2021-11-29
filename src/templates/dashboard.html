@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
 <div class="card status-card col-md" style="width: auto;">
-    <i class="material-icons card-icons">task</i>
     <div class="card-body">
         <h5 class="card-title">All Tasks</h5>
     </div>
@@ -17,21 +16,19 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in all_tasks %}
+            {% for item in tasks %}
             <tr>
-                <td>{{ item.2 }}</td>
-                {% if item.4 == 'Done' %}
-                <td style="background-color: lightgreen;">{{ item.4 }}</td>
-                {% elif item.4 == 'Waiting' %}
-                <td style="background-color: lightyellow;">{{ item.4 }}</td>
-                {% elif item.4 == 'Stuck' %}
-                <td style="background-color: lightcoral;">{{ item.4 }}</td>
+                <td>{{ item['taskname'] }}</td>
+                {% if item['status'] == 'Done' %}
+                <td style="background-color: lightgreen;">{{ item['status'] }}</td>
+                {% elif item['status'] == 'Blocked' %}
+                <td style="background-color: lightcoral;">{{ item['status'] }}</td>
                 {% else %}
-                <td style="background-color: lightblue;">{{ item.4 }}</td>
+                <td style="background-color: lightblue;">{{ item['status'] }}</td>
                 {% endif %}
-                <td>{{ item.9 }}</td>
-                <td>{{ item.11 }}</td>
-                <td>{{ item.12 }}</td>
+                <td>{{ item['category'] }}</td>
+                <td>{{ item['startdate'] }}</td>
+                <td>{{ item['duedate'] }}</td>
                 <td style="text-align: center;"><a href="/edit_task"><i class="material-icons">edit</i></a></td>
             </tr>
             {% endfor %}
