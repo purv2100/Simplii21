@@ -160,7 +160,7 @@ def updateTask():
             return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('home'))
-    return render_template('task.html', title='Task', form=form)
+    return render_template('updateTask.html', title='Task', form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
