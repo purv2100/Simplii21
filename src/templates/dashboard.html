@@ -4,7 +4,7 @@
     <div class="card-body">
         <h5 class="card-title">All Tasks</h5>
     </div>
-    <table data-toggle="table" data-flat="true" data-search="true">
+    <table data-toggle="table" data-flat="true" data-search="true" id="myTable">
         <thead>
             <tr style="background-color: #D5D8DD; text-align: center;">
                 <th>Task</th>
@@ -29,10 +29,10 @@
                 <td>{{ item['category'] }}</td>
                 <td>{{ item['startdate'] }}</td>
                 <td>{{ item['duedate'] }}</td>
-                <td style="text-align: center;"><a href="/edit_task"><i class="material-icons">edit</i></a></td>
+                <td style="text-align: center;"><button class='editButton'>edit</button></td>
             </tr>
             {% endfor %}
-
+            
         </tbody>
     </table>
 </div>

@@ -8,7 +8,7 @@ from flask import json
 from flask.helpers import make_response
 from flask.json import jsonify
 from flask_mail import Mail, Message
-from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm
+from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import bcrypt
 
 from flask_login import LoginManager, login_required
@@ -106,6 +106,58 @@ def task():
                 mongo.db.tasks.insert({'email':email, 'taskname': taskname, 'category': category, 'startdate': startdate,'duedate': duedate, 'status':status, 'hours': hours})
             flash(f' {form.taskname.data} Task Added!', 'success')
             return redirect(url_for('home'))
+    else:
+        return redirect(url_for('home'))
+    return render_template('task.html', title='Task', form=form)
+
+@app.route("/editTask", methods = ['GET','POST'])
+def editTask():
+    if request.method == 'POST':
+        email = session.get('email')
+        task = request.form.get('task')
+        status = request.form.get('status')
+        category = request.form.get('category')
+        id = mongo.db.tasks.find_one({'email':email,'taskname':task,'status':status,'category':category})
+        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'],'status':id['status'],'hours':id['hours']}), 200, {
+                    'ContentType': 'application/json'}
+    else:
+        return "Failed"
+    
+    
+@app.route("/updateTask",methods=['GET','POST'])
+def updateTask():
+    if session.get('email'):
+        params = request.url.split('?')[1].split('&');
+        for i in range(len(params)):
+            params[i] = params[i].split('=')
+        for i in range(len(params)):
+            if "%" in params[i][1]:
+                index = params[i][1].index('%')
+                params[i][1] = params[i][1][:index] + " " + params[i][1][index+3:]
+        d = {}
+        for i in params:
+            d[i[0]] = i[1]
+
+        form = UpdateForm()
+
+        form.taskname.data = d['taskname']
+        form.category.data = d['category']
+        form.status.data = d['status']
+        form.hours.data = d['hours']
+
+        if form.validate_on_submit():
+            if request.method == 'POST':
+                email = session.get('email')
+                taskname = request.form.get('taskname')
+                category = request.form.get('category')
+                startdate = request.form.get('startdate')
+                duedate = request.form.get('duedate')
+                hours = request.form.get('hours')
+                status = request.form.get('status')
+                mongo.db.tasks.update({'email':email, 'taskname': d['taskname'], 'startdate': d['startdate'],'duedate': d['duedate']},
+                                    {'$set':{'taskname': taskname, 'startdate': startdate,'duedate': duedate,'category':category,'status':status,'hours':hours}})
+            flash(f' {form.taskname.data} Task Updated!', 'success')
+            return redirect(url_for('dashboard'))
     else:
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)

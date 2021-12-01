@@ -36,6 +36,18 @@ class TaskForm(FlaskForm):
                            validators=[DataRequired(), Length(min=1, max=20)])
     submit = SubmitField('Add')
 
+class UpdateForm(FlaskForm):
+    taskname = StringField('Taskname',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    category = StringField('Category',
+                           validators=[DataRequired(), Length(min=2, max=20)])
+    startdate = DateField('Start Date', format='%Y-%m-%d')
+    duedate = DateField('End Date', format='%Y-%m-%d')
+    status = SelectField('Status', choices=[('In Progress', "In Progress"), ("Done", "Done"),("Blocked", "Blocked")])
+    hours = StringField('Hours',
+                           validators=[DataRequired(), Length(min=1, max=20)])
+    submit = SubmitField('Update')
+
 
 class LoginForm(FlaskForm):
     email = StringField('Email',
