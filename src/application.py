@@ -47,6 +47,7 @@ def forgotPassword():
 
 @app.route("/dashboard")
 def dashboard():
+    tasks = ''
     if session.get('email'):
         tasks = mongo.db.tasks.find()
     return render_template('dashboard.html',tasks=tasks)
