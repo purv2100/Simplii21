@@ -58,6 +58,11 @@ class BasicTestCase(unittest.TestCase):
         ans=self.app.get('/dummy')
         self.assertEqual(ans.status_code,200)
 
+    def test_delete(self):
+        self.app=application.app.test_client()
+        ans=self.app.get('/deleteTask')
+        self.assertEqual(ans.status_code,200)
+
 
 if __name__ == '__main__':
     unittest.main()
