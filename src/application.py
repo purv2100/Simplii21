@@ -12,7 +12,6 @@ from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPassword
 import bcrypt
 
 from flask_login import LoginManager, login_required
-from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.secret_key = 'secret'
@@ -82,6 +81,22 @@ def register():
     else:
         return redirect(url_for('home'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route("/deleteTask", methods = ['GET','POST'])
+def deleteTask():
+    if request.method == 'POST':
+        email = session.get('email')
+        task = request.form.get('task')
+        status = request.form.get('status')
+        category = request.form.get('category')
+        id = mongo.db.tasks.find_one({'email':email,'taskname':task,'status':status,'category':category},{'_id'})
+        print("Hereeeeeeeeeeeeeee",id['_id'])
+        mongo.db.tasks.delete_one({'_id':id['_id']})
+        return "Success"
+    else:
+        return "Failed"
+
+
 
 @app.route("/task", methods=['GET', 'POST'])
 def task():
