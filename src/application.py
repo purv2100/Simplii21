@@ -50,13 +50,16 @@ def dashboard():
     if session.get('email'):
         tasks = mongo.db.tasks.find({'email':session.get('email')})
     return render_template('dashboard.html',tasks=tasks)
+
+
 @app.route("/about")
 def about():
 # ############################ 
 # about() function displays About Us page (about.html) template
 # route "/about" will redirect to home() function. 
 # ########################## 
-    return redirect(url_for('dummy'))
+    return render_template('about.html', title='About')
+ 
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
