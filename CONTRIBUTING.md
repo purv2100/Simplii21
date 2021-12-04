@@ -1,67 +1,88 @@
-# Contributing to this project
+# Contributing to Simplii 3.0!!
+<h3>Hello!👋</h3>
+<p>Firstly, thank you so much for showing interest in BurnOut 2.0 and contributing to our project.👍</p>
+The following are a set of guidelines for contributing to BurnOut. We are open to suggestions to enhance our project so feel free to propose changes to this document in a pull request.
 
-Follow the set of guidelines below to contribute to Math.fun!
 
-## Code of Conduct
+### Table of contents
+[Code of Conduct](#code-of-conduct)
 
-By participating, you are expected to uphold this code. Please report unacceptable behavior to [Krishika Shivnani, Arpitha Vijayakumar, Ishan Bhatt, Apurva Sonavane, Prema Naga Unnati Nadupalli]
+[How Can I Contribute?](#how-can-i-contribute)
+ * [Reporting Bugs](#reporting-bugs)
+ * [Suggesting enhancements](#suggesting-enhancements)
+ * [Pull Requests Methods](#pull-requests-methods)
 
-Prerequistes required before starting this project
+[Style Guides](#style-guides)
 
-1. Must be a graduate student at NC State University
-2. Must be a student in Software Engineering Course in Fall 2021
-3. Have proficiency in Python
+[Need additional help?](#need-additional-help)
 
-## How can I Contribute?
- 
-### Reporting Bugs
 
-This section guides you through submitting a bug report for SENG20-G19 SE_Project1. 
-Following these guidelines helps maintainers and the community understand your report, reproduce the behavior and find related reports.
 
-Before Submitting A Bug Report
+### Code of Conduct
+Everyone participating in this project needs to abide by the aPAS - A Personal Agile Scheduler Code of Conduct that can be found under the main repository link as a CODE_OF_CONDUCT.md file. By participating, you are expected to uphold this code. Please report unacceptable behavior to any of the original team members listed at the bottom of [README.md](README.md).
 
-Check the debugging guide
+## How Can I Contribute?
 
-Check the FAQs on the forum for a list of common questions and problems.
-Determine which repository the problem should be reported in.
 
-Perform a cursory search to see if the problem has already been reported. 
+  ## Reporting Bugs
 
-## How Do I Submit A (Good) Bug Report?
+  This section guides you through submitting a bug report for SE Group 26. 
 
-Use a clear and descriptive title for the issue to identify the problem.
+  When you are creating a bug report, please ensure that you include as many details as possible to understand the issue.
 
-Describe the exact steps which reproduce the problem in as many details as possible.
+  ## How Do I Submit A Bug Report?
+   <p>Bugs are tracked as GitHub issues. After you've determined which repository your bug is related to, create an issue on that repository.
+    Explain the problem and include additional details to help maintainers reproduce the problem:</p>
+   <ul>
+    <li><b>Use a clear and descriptive title</b> for the issue to identify the problem.</li>
+    <li><b>Describe the exact steps which reproduce the problem in as many details as possible.</li></b>
+    <li><b>Provide specific examples to demonstrate the steps.</b> Include links to files or GitHub projects, or copy/pasteable snippets, which you use in those     examples. If you're providing snippets in the issue, use Markdown code blocks.</li>
+    <li><b>If the problem is related to performance or memory, then ensure that you include a CPU profile capture with your report.</b></li>
+    <li><b>Include screenshots and animated GIFs which show you following the described steps and clearly demonstrate the problem.</li></b>
+    <li><b>If the problem wasn't triggered by a specific action</b>, describe what you were doing before the problem happened and share more information using the guidelines below.</li>
+    </ul>
+  
+  ## Suggesting Enhancements
+  This section guides you through submitting a suggestion for BurnOut, including completely new features and minor improvements to existing functionality. 
 
-Provide specific examples to demonstrate the steps. 
+  Enhancement suggestions are tracked as GitHub issues. 
+  After you've determined which repository your enhancement suggestion is related to, create an issue on that repository and provide the information like title, step-by-step description, specific examples.\
+  Giving more detailed information will help us understand the suggestion better. 
+  
+  #### Provide details like 
+  1) What is the enhancement? 
+  2) Suggestions to implement the enhancement
 
-Describe the behavior you observed after following the steps and point out what exactly is the problem with that behavior.
+  ## Pull Requests Methods
+  The process described here has several goals: 
 
-Explain which behavior you expected to see instead and why.
+  - Maintain BurnOut 2.0 quality 
+  - Fix problems that are important to the users 
+  - Engage the community in working towards the best possible BurnOut 
+  - Enable a sustainable system for Atom's maintainers to review contributions
 
-Include screenshots and animated GIFs which show you following the described steps and clearly demonstrate the problem. 
+  Ensure that you follow the steps mentioned below in order to have your contribution reviewed by the maintainers:
+  - Add a description of the modification.
+  - Insert a clear and descriptive title.
 
-If the problem is related to performance or memory, include a CPU profile capture with your report.
+### <h2>Style Guides</h2>
+  ## Git Commit Messages
 
-## Pull Requests
+  - Describe why any particular modification is being made.
 
-The process described here has several goals:
+  - Give a detailed description about the limitations of current code.
 
-Maintain the projects quality
+  - Use the imperative mood ("Move cursor to..." not "Moves cursor to...")
 
-Fix problems that are important to users
+  - Limit the first line to 72 characters or less
 
-Enable a sustainable system for the projects maintainers to review contributions
+  - Link an issue to the change
 
-## Tips to Extend
+  ## Python Style Guides :
 
-Check the Projects tab for TO-DO list and pick the feature you find interesting to work on.
+  All Python code is linted with Pylint. Ensure that before you commit any changes, your code passes all the default pylint checks. Pylint can be installed with
+  `pip install pylint`.
 
-Create a branch and implement the feature in Python and test it locally.
 
-Write corresponding test cases to ensure it is not breaking the existing system.
-
-Create pull request and request for the code review. Once the request is approved, merge to main.
-
-Any suggestions to improve the application is appreciated. Please request a feature/report bugs through issues section.
+### <h2>Need Additional Help?</h2>
+<p>Due to any reason, if you feel like you have reservations related to the process, feel free to reach us out at [apatil25@ncsu.edu] Github process can be a bit complex and we don't want to lose your valuable contributions because of that reason. We are extremely glad that you have visited us and will make our project much better.</p>
