@@ -33,7 +33,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
   - [Login](#login)
   - [Adding tasks](#adding-tasks)
   - [Task Recommendation and Display](#task-recommendation-and-display)
-  - [Modifying the tasks](#modifying-the-tasks)
+  - [Modifying tasks Updating and Deleting](#modifying-tasks-updating-and-deleting)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Delta](#delta)
@@ -44,10 +44,10 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 
 ## Why use Simplii?
 
--User can add tasks based on their difficulty levels- Physical or Intellectual work and then work on it depending on their priority.
--User can keep a track of the upcoming tasks by checking their deadlines and then work towards it.
--User can easily check the progress of his work by checking the status tab.
--Tasks are recommended to the users based on their upcoming deadlines for the user's convenience.
+-User can add tasks based on their difficulty levels- Physical or Intellectual work and then work on it depending on their priority.<br>
+-User can keep a track of the upcoming tasks by checking their deadlines and then work towards it.<br>
+-User can easily check the progress of his work by checking the status tab.<br>
+-Tasks are recommended to the users based on their upcoming deadlines for the user's convenience.<br>
 
 <p align= "center">
 <img width="600" height ="500" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png"> 
