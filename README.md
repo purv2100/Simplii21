@@ -63,8 +63,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
   - [Register](#register)
   - [Login](#login)
   - [Adding tasks](#adding-tasks)
-  - [Displaying tasks on the dashboard based on their type](#displaying-tasks-on-the-dashboard-based-on-their-type)
-  - [Task Recommendation](#task-recommendation)
+  - [Task Recommendation and Display](#task-recommendation-and-display)
   - [Modifying the tasks](#modifying-the-tasks)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
@@ -119,21 +118,34 @@ In the new version of Simplii, we have resolved all these bugs and added new fun
  
  ## Register:
  
+
+https://user-images.githubusercontent.com/89509351/144703691-aa8a10cd-db81-48f9-bc21-467f82a53378.mp4
+
+
  
  ## Login:
- 
+ https://user-images.githubusercontent.com/89509351/144703694-09252613-a2f7-4dff-a574-b4a20cb69fd4.mp4
  
  ## Adding Tasks:
  
+
+https://user-images.githubusercontent.com/89509351/144703705-0628f2a2-8004-442c-8612-a5de40de92be.mp4
+
+
  
- ## Displaying tasks on the dashboard based on their functionalities:
+ ## Task Recommendation and Display:
+ 
  
 
- ## Task Recommendation
+https://user-images.githubusercontent.com/89509351/144703718-a2f478e3-b4ea-4fa2-a784-9a3b5c335a57.mp4
  
  
  ## Modifying the tasks - Updating and Deleting:
  
+
+https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-b08f-516593cb861e.mp4
+
+
 
 
 ## Steps for execution
