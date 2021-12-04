@@ -17,6 +17,7 @@ df = pd.DataFrame(list_record)
 
 start = df['startdate'].tolist()
 due = df['duedate'].tolist()
+email = df['email'].tolist()
 
 format = '%Y-%m-%d'
 
@@ -28,10 +29,10 @@ for i in due:
     dt.append(datetime.datetime.strptime(i, format).date())
 
 in_prog = df.loc[df['status'] == 'In Progress']
-in_prog = in_prog.drop(['email', '_id', 'status'], axis=1)
+in_prog = in_prog.drop(['_id', 'status'], axis=1)
 
 blocked = df.loc[df['status'] == 'Blocked']
-blocked =blocked.drop(['email', '_id', 'status'], axis=1)
+blocked =blocked.drop(['_id', 'status'], axis=1)
 
 sip,dip,sb,db =[],[],[],[]
 start1 = in_prog['startdate'].tolist()
@@ -58,11 +59,15 @@ in_prog['duedate']= pd.to_datetime(in_prog['duedate'])
 blocked['startdate']= pd.to_datetime(blocked['startdate'])
 blocked['duedate']= pd.to_datetime(blocked['duedate'])
 
+df1 = in_prog.loc[(in_prog['startdate'] <= pd.to_datetime('today').floor('D')) & (in_prog['duedate'] >= pd.to_datetime('today').floor('D')) & (in_prog['email'] == email[0])]
+df2 = blocked.loc[(blocked['duedate'] >= pd.to_datetime('today').floor('D')) & (blocked['email'] == email[0])]
 
-df1 = in_prog.loc[(in_prog['startdate'] <= pd.to_datetime('today').floor('D')) & (in_prog['duedate'] >= pd.to_datetime('today').floor('D'))]
-df2 = blocked.loc[(blocked['duedate'] >= pd.to_datetime('today').floor('D'))]
-df1 =blocked.drop(['startdate'], axis=1)
-df2 =blocked.drop(['startdate'], axis=1)
+#print(df1)
+#print(df2)
+
+#df1 = df1.loc[df1['email'] == email[0]]
+#df2 = df2.loc[df2['email'] == email[0]]
+
 
 
 #(blocked['startdate'] <= pd.to_datetime('today').floor('D')) & 

@@ -1,26 +1,14 @@
 Here's your task recommendation on tasks you're working...
 
-taskname	category	duedate	hours
-hello	Intellectual	2021-12-16	2
-Gym	physical	2021-12-02	4
-Karate Class	physical	2021-11-30	4
-Buy Groceries	physical	2021-12-05	2
-Feed cat	physical	2021-12-01	0.5
-Running	physical	2021-12-12	2
-Fix bugs in code	Intellectual	2021-12-04	3
-complete UI design	Intellectual	2021-12-09	2
-Google coding test	Intellectual	2021-12-03	3
+email	taskname	category	startdate	duedate	hours
+dwight@dm.org	complete SE project	Intellectual	2021-11-30	2021-12-04	4
 
 
 Here are some task recommnedation so you don't miss the deadlines...
 
-taskname	category	duedate	hours
-hello	Intellectual	2021-12-16	2
-Gym	physical	2021-12-02	4
-Karate Class	physical	2021-11-30	4
-Buy Groceries	physical	2021-12-05	2
-Feed cat	physical	2021-12-01	0.5
-Running	physical	2021-12-12	2
-Fix bugs in code	Intellectual	2021-12-04	3
-complete UI design	Intellectual	2021-12-09	2
-Google coding test	Intellectual	2021-12-03	3
+email	taskname	category	startdate	duedate	hours
+dwight@dm.org	hello	Intellectual	2021-12-12	2021-12-16	2
+dwight@dm.org	Running	physical	2021-12-12	2021-12-12	2
+dwight@dm.org	Fix bugs in code	Intellectual	2021-12-02	2021-12-04	3
+dwight@dm.org	complete UI design	Intellectual	2021-12-06	2021-12-09	2
+dwight@dm.org	HRT test	Intellectual	2021-12-02	2021-12-12	3
