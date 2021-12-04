@@ -1,6 +1,4 @@
 
-# Simplii
-**Task Scheduler Web App**
 
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -51,9 +49,9 @@
     <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Request Feature</a>
 </p>
 
-# Simplii
+# SIMPLII
 
-<h3>Having trouble in taking care of your daily tasks and managing them? </h3>
+<h3>Having trouble in keeping track of your daily tasks and managing them? </h3>
 
 Introducing to Simplii- an online task tracker that will assist you in keeping track of all your day-to-day activity so that you can manage your work efficiently. Task-tracking can be a tardy process and we have fixed this pain with the help of Simplii. Organize your work, track time, and update the status of your tasks simply with our easy-to-use application.
 
@@ -67,14 +65,15 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 - [Why use Simplii?](#why-use-simplii)
 - [Implementation](#implementation)
 - [Built with:](#built-with)
-- [Core Functionalities of the Application:](#core-functionalities)
+- [Core Functionalities of the Application:](#core-functionalities-of-the-application)
   - [Register](#register)
   - [Login](#login)
   - [Adding tasks](#adding-tasks)
   - [Displaying tasks on the dashboard based on their type](#displaying-tasks-on-the-dashboard-based-on-their-type)
-  - [Modifying the tasks](#Modifying-the-tasks)
+  - [Modifying the tasks](#Modifying-the-tasks-updating-nd-deleting)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
+- [Delta](#delta)
 - [Future Scope](#future-scope)
 - [Team Members](#team-members)
 - [Contribution](#contribution)
@@ -88,9 +87,9 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 -Tasks are recommended to the users based on their upcoming deadlines for the user's convenience.
 
 <p align= "center">
-<img width="600" height ="500 alt="Screen Shot 2021-12-03 at 10 57 07 PM" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png">
-
+<img width="600" height ="500" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png"> 
 </p>
+
 
 
 ## Implementation:
@@ -113,25 +112,25 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 </table>
 
 
-# Core Functionalities of the Application
+## Core Functionalities of the Application:
  
- ## Register
- 
- 
- ## Login
+ ## Register:
  
  
- ## Adding Tasks
+ ## Login:
  
  
- ## Displaying tasks on the dashboard based on their functionalities
+ ## Adding Tasks:
  
  
- ## Modifying the tasks
+ ## Displaying tasks on the dashboard based on their functionalities:
+ 
+ 
+ ## Modifying the tasks- Updating and Deleting:
  
 
 
-# Steps for execution
+## Steps for execution
  
  Step 1:
  Install MongoDB using the following link:
@@ -161,10 +160,67 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
     Open the URL in your browser:  
       http://127.0.0.1:5000/
       
-# Source Code
+## Source Code
   
   Link to the repository:
   https://github.com/atharva1996/Simplii
+                                                                                                                                                  
+ ## Delta
+ 
+ <b> a) Task Tracking based on the type of work</b>
+        <li>The earlier version of Simplii just used to do the simple task of keeping track of different kinds of task. However, there was no functionality to                  differentiate the tasks.
+        <li>In our updated version of Simplii, the tasks can be tracked based on their types. 
+                For instance, there are two types of tasks- Physical and Intellectual, so the users can easily keep  track of their tasks based on the work                         type.
+    
+ <b>b) Task modification is now simplified!</b>
+        <li>In the previous version of Simplii, the tasks did not have the modification functionality in which the user could update some details of his task.                  Moreover, the delete functionality completely failed. When the user tried to delete one task, all the tasks would get deleted. Thus, it was highly                  inefficient.
+        <li>In our updated version of Simplii, we have eliminated that bug by adding the modification function where the users can easily update and delete the                 tasks as per their convenience.
+    
+ <b>c) Status Tab is added so that users can easily keep a progress of their work.</b>
+        <li>In the previous version of Simplii, there was no functionality of viewing the status of jobs and then segregating them based on their status.
+        <li>In our updated version of Simplii, we have added the status tab on dashboard and also created a drop-down functionality so that the users can view                 tasks and update them by selecting the task category(Physical or Intellectual) and the task status(In progress, Done, Blocked).</b>
+    
+   ## Future Scope
+  
+  The  following features can be implemented in the future scope of this application:
+ 
+   1. Create a mobile application for the web version of the application.
+   2. Make the website view port adaptable - the website should look good on phone, tablet and computer.
+   
+   ## Team Members
+   
+  <table>
+  <tr>
+    <td align="center"><a href="https://github.com/atharva1996"><img src="https://avatars.githubusercontent.com/u/16671348?v=4" width="100px;" alt=""/><br /><sub>     <b>Atharva Patil</b></sub></a></td>
+    <td align="center"><a href="https://github.com/AtharvaJ10"><img src="https://avatars.githubusercontent.com/u/49825649?v=4" width="100px;" alt=""/><br /><sub>       <b>Atharva Joshi</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Banpreet123"><img src="https://avatars.githubusercontent.com/u/64312538?s=400&u=f4bb34b674d6dcf2491e8051303835fb79d0f45f&v=4" width="100px;" alt=""/><br /><sub>       <b>Banpreet Singh</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/vaish68"><img src="https://avatars.githubusercontent.com/u/89509351?v=4" width="100px;" alt=""/><br /><sub>        <b>Vaishnavi Patil</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/shivam-pednekar"><img src="https://avatars.githubusercontent.com/u/62328699?v=4" width="100px;" alt=""/><br />       <sub><b>Shivam Pednekar</b></sub></a><br /></td>
+  </tr>
+</table>
+
+  ## Contribution
+  
+  Please refer the CONTRIBUTING.md file for instructions on how to contribute to our repository.
+
+  ## License
+  
+  This project is licensed under the MIT License.
+  
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
+                                                                                                                                                   
   
   
 
