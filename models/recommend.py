@@ -68,6 +68,8 @@ df2 = blocked.loc[(blocked['duedate'] >= pd.to_datetime('today').floor('D')) & (
 #df1 = df1.loc[df1['email'] == email[0]]
 #df2 = df2.loc[df2['email'] == email[0]]
 
+df1 = df1.drop(['email'], axis=1)
+df2 = df2.drop(['email'], axis=1)
 
 
 #(blocked['startdate'] <= pd.to_datetime('today').floor('D')) & 
@@ -86,10 +88,10 @@ with open(os.path.join(sys.path[0], "task_recommendation.txt"), 'wt') as f:
 #RECOMMENDATIONS IN CSV FILE
 with open(os.path.join(sys.path[0], "task_recommendation.csv"), 'wt') as f:
     x = df1.to_csv(index=False, header=True)
-    y = df2.to_csv(index=False, header=True)
+    y = df2.to_csv(index=False, header=False)
 
-    f.write("Here's your task recommendation on tasks you're working...\n\n")
+    #f.write("Here's your task recommendation on tasks you're working...\n\n")
     f.write(x)
-    f.write("\n\n")
-    f.write("Here are some task recommnedation so you don't miss the deadlines...\n\n")
+    #f.write("\n\n")
+    #f.write("Here are some task recommnedation so you don't miss the deadlines...\n\n")
     f.write(y)

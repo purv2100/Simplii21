@@ -10,6 +10,9 @@ from flask.json import jsonify
 from flask_mail import Mail, Message
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import bcrypt
+import os
+import csv
+import sys
 
 from flask_login import LoginManager, login_required
 
@@ -43,6 +46,17 @@ def home():
 @app.route("/forgotPassword")
 def forgotPassword():
     return redirect(url_for('dummy'))
+
+@app.route("/recommend")
+def recommend():
+    data =[]
+    with open(os.path.join(sys.path[0], "../models/task_recommendation.csv")) as f:
+        reader = csv.DictReader(f)
+
+        for row in reader:
+            data.append(dict(row))
+
+    return render_template('recommend.html',data=data, list=list)
 
 @app.route("/dashboard")
 def dashboard():
