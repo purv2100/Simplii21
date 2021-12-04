@@ -43,12 +43,6 @@
 <img src="https://img.shields.io/tokei/lines/github/deekay2310/Simplii" /></a>
 <br>
 
-<p align="center">
-    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Report Bug</a>
-    /
-    <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Request Feature</a>
-</p>
-
 # SIMPLII
 
 <h3>Having trouble in keeping track of your daily tasks and managing them? </h3>
@@ -70,7 +64,8 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
   - [Login](#login)
   - [Adding tasks](#adding-tasks)
   - [Displaying tasks on the dashboard based on their type](#displaying-tasks-on-the-dashboard-based-on-their-type)
-  - [Modifying the tasks](#Modifying-the-tasks-updating-nd-deleting)
+  - [Task Recommendation](#task-recommendation)
+  - [Modifying the tasks](#modifying-the-tasks)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Delta](#delta)
@@ -79,7 +74,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 - [Contribution](#contribution)
 - [License](#license)
 
-## Why use Simplii
+## Why use Simplii?
 
 -User can add tasks based on their difficulty levels- Physical or Intellectual work and then work on it depending on their priority.
 -User can keep a track of the upcoming tasks by checking their deadlines and then work towards it.
@@ -93,6 +88,14 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 
 
 ## Implementation:
+The video below describes the previous version of Simplii
+
+https://user-images.githubusercontent.com/89509351/144701576-5f2d6677-a741-4d58-b1fe-9a2b012f2b8e.mp4
+
+As you walk through this old version of Simplii, you can observe many errors. Firstly, when the user adds a task, it gets displayed 3 times on the dashboard. Moreover, when the user tries to delete the task, all the tasks in the dashboard get deleted instead of just deleting that single task
+
+In the new version of Simplii, we have resolved all these bugs and added new functionalities.
+
  
  
 
@@ -125,8 +128,11 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
  
  ## Displaying tasks on the dashboard based on their functionalities:
  
+
+ ## Task Recommendation
  
- ## Modifying the tasks- Updating and Deleting:
+ 
+ ## Modifying the tasks - Updating and Deleting:
  
 
 
@@ -163,7 +169,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 ## Source Code
   
   Link to the repository:
-  https://github.com/atharva1996/Simplii
+    https://github.com/atharva1996/Simplii
                                                                                                                                                   
  ## Delta
  
@@ -173,12 +179,16 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
                 For instance, there are two types of tasks- Physical and Intellectual, so the users can easily keep  track of their tasks based on the work                         type.
     
  <b>b) Task modification is now simplified!</b>
-        <li>In the previous version of Simplii, the tasks did not have the modification functionality in which the user could update some details of his task.                  Moreover, the delete functionality completely failed. When the user tried to delete one task, all the tasks would get deleted. Thus, it was highly                  inefficient.
+        <li>In the previous version of Simplii, the tasks did not have the modification functionality in which the user could update some details of his task.                  Moreover, the delete functionality completely failed. When the user tried to delete one task, all his other tasks would get deleted. Thus, it was                   highly  inefficient.
         <li>In our updated version of Simplii, we have eliminated that bug by adding the modification function where the users can easily update and delete the                 tasks as per their convenience.
     
  <b>c) Status Tab is added so that users can easily keep a progress of their work.</b>
         <li>In the previous version of Simplii, there was no functionality of viewing the status of jobs and then segregating them based on their status.
         <li>In our updated version of Simplii, we have added the status tab on dashboard and also created a drop-down functionality so that the users can view                 tasks and update them by selecting the task category(Physical or Intellectual) and the task status(In progress, Done, Blocked).</b>
+        
+ <b>d) Task Recommendation functionality </b>
+        <li>In the previous version of Simplii, tasks were not recommended to the user and thus, the user was unable to keep a track of his progress.
+        <li>In this updated version of Simplii, there is a functionality of task recommendation where tasks will be diplayed to the user based on their earliest               deadlines. Thus, all the tasks will get managed and user will not have to worry about his schedule.</li>
     
    ## Future Scope
   
