@@ -10,7 +10,7 @@
 |1|Docs: what: point descriptions of each class/function (in isolation)|Evidence in GH|
 |.5|Number of commits: by different people	in GH|Evidence in GH|
 |1|issues are being closed|Evidence in GH|
-|.5|issues are discussed before they are closed	even if you discuss in slack, need a sumamry statement here|[a link](https://discord.gg/stWtsHGP)|
+|.5|issues are discussed before they are closed	even if you discuss in slack, need a sumamry statement here|[Discord](https://discord.gg/stWtsHGP)|
 |.5|Use of syntax checkers|Used Autopep8|
 |1|Issues reports: there are many|Evidence in GH|
 |.5|Use of code formatters|Used autopep8|
