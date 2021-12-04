@@ -26,7 +26,7 @@ class BasicTestCase(unittest.TestCase):
     def test_about(self):
         self.app=application.app.test_client()
         ans=self.app.get('/about')
-        self.assertEqual(ans.status_code,302)
+        self.assertEqual(ans.status_code,200)
 
     def test_register(self):
         self.app=application.app.test_client()
