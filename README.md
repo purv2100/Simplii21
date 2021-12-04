@@ -165,7 +165,7 @@ https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-
         
  <b>d) Task Recommendation functionality </b>
         <li>In the previous version of Simplii, tasks were not recommended to the user and thus, the user was unable to keep a track of his progress.
-        <li>In this updated version of Simplii, there is a functionality of task recommendation where tasks will be diplayed to the user based on their earliest               deadlines. Thus, all the tasks will get managed and user will not have to worry about his schedule.</li>
+        <li>In this updated version of Simplii, there is a functionality of task recommendation where tasks will be recommended in an order such that the user can complete each of them in the given time frame. Thus, all the tasks will get managed and user will not have to worry about his schedule.</li>
     
    ## Future Scope
   
@@ -173,6 +173,9 @@ https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-
  
    1. Create a mobile application for the web version of the application.
    2. Make the website view port adaptable - the website should look good on phone, tablet and computer.
+   3. Create chatbot for the web portal
+   4. Create Alerts when the Task deadline is approaching
+   5. Add an emergency schedule and recommend tasks based on the new schedule.
    
    ## Team Members
    
