@@ -8,6 +8,10 @@
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
+
+## Link to Demonstration Video of the Project: 
+https://youtu.be/GecaW1x1y8k
+
 # SIMPLII
 
 <h3>Having trouble in keeping track of your daily tasks and managing them? </h3>
