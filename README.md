@@ -3,7 +3,7 @@
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Build Status](https://app.travis-ci.com/UnnatiPrema/Simplii.svg?branch=main)](https://app.travis-ci.com/UnnatiPrema/Simplii)
+[![Build Status](https://app.travis-ci.com/atharva1996/Simplii.svg?branch=main)](https://app.travis-ci.com/atharva1996/Simplii)
 ![Code Coverage](https://github.com/atharva1996/Simplii/blob/main/src/coverage.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
