@@ -47,11 +47,23 @@ def home():
 
 @app.route("/forgotPassword")
 def forgotPassword():
+    ############################
+    # forgotPassword() redirects the user to dummy template.
+    # route "/forgotPassword" will redirect to forgotPassword() function.
+    # input: The function takes session as the input
+    # Output: Out function will redirect to the dummy page
+    # ##########################
     return redirect(url_for('dummy'))
 
 
 @app.route("/recommend")
 def recommend():
+    ############################
+    # recommend() function opens the task_recommendation.csv file and displays the data of the file
+    # route "/recommend" will redirect to recommend() function.
+    # input: The function opens the task_recommendation.csv
+    # Output: Our function will redirect to the recommend page for showing the data
+    # ##########################
     data = []
     with open(os.path.join(sys.path[0], "../models/task_recommendation.csv")) as f:
         reader = csv.DictReader(f)
@@ -64,6 +76,12 @@ def recommend():
 
 @app.route("/dashboard")
 def dashboard():
+    ############################
+    # dashboard() function displays the tasks of the user
+    # route "/dashboard" will redirect to dashboard() function.
+    # input: The function takes session as the input and fetches user tasks from Database
+    # Output: Our function will redirect to the dashboard page with user tasks being displayed
+    # ##########################
     tasks = ''
     if session.get('email'):
         tasks = mongo.db.tasks.find({'email': session.get('email')})
@@ -74,7 +92,7 @@ def dashboard():
 def about():
     # ############################
     # about() function displays About Us page (about.html) template
-    # route "/about" will redirect to home() function.
+    # route "/about" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
 
@@ -106,6 +124,12 @@ def register():
 
 @app.route("/deleteTask", methods=['GET', 'POST'])
 def deleteTask():
+    ############################
+    # deleteTask() function will delete the particular user task from database.
+    # route "/deleteTask" will redirect to deleteTask() function.
+    # input: The function takes email, task, status, category as the input and fetches from the database
+    # Output: Out function will delete the particular user task from database
+    # ##########################
     if request.method == 'POST':
         email = session.get('email')
         task = request.form.get('task')
@@ -157,6 +181,12 @@ def task():
 
 @app.route("/editTask", methods=['GET', 'POST'])
 def editTask():
+    ############################
+    # editTask() function helps the user to edit a particular task and update in database.
+    # route "/editTask" will redirect to editTask() function.
+    # input: The function takes email, task, status, category as the input
+    # Output: Out function will update new values in the database
+    # ##########################
     if request.method == 'POST':
         email = session.get('email')
         task = request.form.get('task')
@@ -172,6 +202,12 @@ def editTask():
 
 @app.route("/updateTask", methods=['GET', 'POST'])
 def updateTask():
+    ############################
+    # updateTask() function displays the updateTask.html page for updations
+    # route "/updateTask" will redirect to updateTask() function.
+    # input: The function takes variious task values as Input
+    # Output: Out function will redirect to the updateTask page
+    # ##########################
     if session.get('email'):
         params = request.url.split('?')[1].split('&')
         for i in range(len(params)):
