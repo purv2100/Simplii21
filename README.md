@@ -1,3 +1,4 @@
+
 # Simplii
 **Task Scheduler Web App**
 
@@ -50,23 +51,51 @@
     <a href="https://github.com/deekay2310/Simplii/issues/new/choose">Request Feature</a>
 </p>
 
-## Why schedule tasks on this app?
+# Simplii
 
-Do you feel that your basic task scheduling apps should also track your mood and suggest a task accordingly? We hear it. We are trying to build a tool that will enable fast execution of our tasks under any mood. `Simplii` parameterizes emotions, deadlines, task difficulty and moods to suggest a task to be done keeping you at your productive best.
+<h3>Having trouble in taking care of your daily tasks and managing them? </h3>
+
+Introducing to Simplii- an online task tracker that will assist you in keeping track of all your day-to-day activity so that you can manage your work efficiently. Task-tracking can be a tardy process and we have fixed this pain with the help of Simplii. Organize your work, track time, and update the status of your tasks simply with our easy-to-use application.
 
 <p align="center">
-<a><img height=200 width=200 
-src="https://user-images.githubusercontent.com/89432698/140456823-42f69435-d792-4687-bb20-aaa551016df1.png"></a>
-<a><img height=200 width=200 
-src="https://user-images.githubusercontent.com/89432698/140457341-b37dcb30-7127-440e-80ba-e5a46826532c.jpeg"></a></p>
+<img width="614" alt="Screen Shot 2021-12-03 at 10 11 02 PM" src="https://user-images.githubusercontent.com/89509351/144695927-bf2e2524-5723-46d2-a946-4aab3bc6931e.png">
+</p>
 
 
-## Visual Walkthrough:
+# Table of Contents  
 
-https://user-images.githubusercontent.com/17769434/135383467-e197d4ca-74f8-4737-a979-4390026cb71d.mp4
+- [Why use Simplii?](#why-use-simplii)
+- [Implementation](#implementation)
+- [Built with:](#built-with)
+- [Core Functionalities of the Application:](#core-functionalities)
+  - [Register](#register)
+  - [Login](#login)
+  - [Adding tasks](#adding-tasks)
+  - [Displaying tasks on the dashboard based on their type](#displaying-tasks-on-the-dashboard-based-on-their-type)
+  - [Modifying the tasks](#Modifying-the-tasks)
+- [Steps for Execution:](#steps-for-execution)
+- [Source Code](#source-code)
+- [Future Scope](#future-scope)
+- [Team Members](#team-members)
+- [Contribution](#contribution)
+- [License](#license)
+
+## Why use Simplii
+
+-User can add tasks based on their difficulty levels- Physical or Intellectual work and then work on it depending on their priority.
+-User can keep a track of the upcoming tasks by checking their deadlines and then work towards it.
+-User can easily check the progress of his work by checking the status tab.
+-Tasks are recommended to the users based on their upcoming deadlines for the user's convenience.
+
+<p align= "center">
+<img width="600" height ="500 alt="Screen Shot 2021-12-03 at 10 57 07 PM" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png">
+
+</p>
 
 
-https://user-images.githubusercontent.com/89432698/140456563-6b1126c5-7830-4fc5-bcac-a9463b96c135.mp4
+## Implementation:
+ 
+ 
 
 
 
@@ -78,64 +107,80 @@ https://user-images.githubusercontent.com/89432698/140456563-6b1126c5-7830-4fc5-
 <td align="center"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="40" height="40"/><b>HTML5</b></td>
 <td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="40" height="40"/><b>CSS3</b></td>
 <td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bootstrap/bootstrap-original.svg" width="40" height="40"/><b>Bootstrap</b></td>
-<td align="center"><img src ="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jquery/jquery-original.svg" width="40" height="40"/><b>jQuery</b></td>
 <td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/flask/flask-original.svg" width="40" height="40"/><b>Flask</b></td>
-<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/mongodb/mongodb-original.svg" width="40" height="40"/><b>MongoDB</b></td>
-
-
-
-    
+<td align="center"><img src ="https://raw.githubusercontent.com/devicons/devicon/v2.14.0/icons/mongodb/mongodb-original.svg" width="40" height="40"/><b>MongoDB</b></td>  
   </tr>
 </table>
 
-## Architecture:
 
-ER Diagram                 |  Application Flowchart
-:-------------------------:|:-------------------------:
-<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/SE_ERDiagram.png" width="500" height="350" />  | <img src="https://github.com/ivbhatt/Simplii/blob/main/docs/architectureImages/webappFlowchart.png" width="500" height="350" />
+# Core Functionalities of the Application
+ 
+ ## Register
+ 
+ 
+ ## Login
+ 
+ 
+ ## Adding Tasks
+ 
+ 
+ ## Displaying tasks on the dashboard based on their functionalities
+ 
+ 
+ ## Modifying the tasks
+ 
 
-## Quick look:
 
-- ### Website Screenshots
-<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Screenshot_Header.PNG" width="1000" height="350" />
-<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Task%20list%20Screenshot.PNG" width="1000" height="750" />
-<img src="https://github.com/ivbhatt/Simplii/blob/main/docs/Footer%20Screenshot.PNG" width="1000" height="150" />
-
-## Getting Started: 
-- ### Prerequisite:
-  - Download [Python3.x](https://www.python.org/downloads/) on your system.
-
-- ### Installation: 
-  E.g If you downloaded `Python 3.9.7` above, then
+# Steps for execution
+ 
+ Step 1:
+ Install MongoDB using the following link:
+ 
+ https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows
+ 
+ Step 2: 
+  Git Clone the Repository 
   
-  **Steps to setup virtual environment**
-  - Create a virtual environment using
-    `python 3.9 -m venv project_venv`
-  - Activate the virtual environment 
-    `source project_venv/bin/activate`
-  - Build the virtual environment:(must be present in project directory)
-    `pip install -r requirements.txt`
+    git clone https://github.com/atharva1996/Simplii.git
+    
+  (OR) Download the .zip file on your local machine
   
-- ### How to Run:
-    **To run the application locally:**
-    - Clone [this (Simplii) github repo] (https://github.com/deekay2310/Simplii)
-    - Run `flask run`
-    - Site will be hosted at:
-      `http://127.0.0.1:5000/`
+    https://github.com/atharva1996/Simplii.git
+  
+ Step 3:
+   Install the required packages by running the following command in the terminal 
+   
+    pip install -r requirements.txt
+    
+ Step 4:
+    Run the following command in the terminal
+    
+    python application.py
+    
+ Step 5:
+    Open the URL in your browser:  
+      http://127.0.0.1:5000/
+      
+# Source Code
+  
+  Link to the repository:
+  https://github.com/atharva1996/Simplii
+  
+  
 
-## Contributors
-<center>
-  <table>
-    <tr>
-        <td align="center"><a href="https://github.com/deekay2310"><img src="https://avatars.githubusercontent.com/u/29257773?v=4" width="100px;" alt=""/><br /><sub><b>Dev Kumar</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/PrakruthiSomashekar"><img src="https://avatars.githubusercontent.com/u/62984587?v=4" width="100px;" alt=""/><br /><sub><b>Prakruthi Somashekar</b></sub></a></td>
-    <td align="center"><a href="https://github.com/radhikaraman20"><img src="https://avatars.githubusercontent.com/u/89432698?s=400&v=4" width="100px;" alt=""/><br /><sub><b>Radhika Raman</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/RohanSinha96"><img src="https://avatars.githubusercontent.com/u/15325746?v=4" width="100px;" alt=""/><br /><sub><b>Rohan Sinha</b></sub></a><br /></td>
-      <td align="center"><a href="https://github.com/SunidhiHegde"><img src="https://avatars.githubusercontent.com/u/62884191?v=4" width="100px;" alt=""/><br /><sub><b>Sunidhi Hegde</b></sub></a><br /></td>
-    </tr>
-  </table>
-</center>
 
-## Support
-For any queries and help, please reach out to us at: simplii.reminder@gmail.com
+      
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
 
