@@ -308,6 +308,12 @@ def dummy():
     return response"""
     return "Page Under Maintenance"
 
+@app.route("/emailReminder", methods=['GET'])
+def emailReminder():
+    msg = Message('Hello from the other side!', sender = 'simplii043@gmail.com', recipients = ['kkheni11@gmail.com'])
+    msg.body = "hey, sending out email from flask!!!"
+    mail.send(msg)
+    return "Message sent"
 
 if __name__ == '__main__':
     app.run(debug=True)
