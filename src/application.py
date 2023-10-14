@@ -13,21 +13,24 @@ import bcrypt
 import os
 import csv
 import sys
-
+from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = 'secret'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+app.secret_key = os.getenv('SECRET_KEY')
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 mongo = PyMongo(app)
 
-"""app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = "bogusdummy123@gmail.com"
-app.config['MAIL_PASSWORD'] = "helloworld123!"
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 mail = Mail(app)
-"""
+
 
 
 @app.route("/")
