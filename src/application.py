@@ -8,27 +8,31 @@ from flask import json
 from flask.helpers import make_response
 from flask.json import jsonify
 from flask_mail import Mail, Message
+from apscheduler.schedulers.background import BackgroundScheduler
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import bcrypt
 import os
 import csv
 import sys
-
+from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 
+load_dotenv()
+
 app = Flask(__name__)
-app.secret_key = 'secret'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+app.secret_key = os.getenv('SECRET_KEY')
+app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 mongo = PyMongo(app)
 
-"""app.config['MAIL_SERVER'] = 'smtp.gmail.com'
-app.config['MAIL_PORT'] = 465
+app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
+app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
+app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = "bogusdummy123@gmail.com"
-app.config['MAIL_PASSWORD'] = "helloworld123!"
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 mail = Mail(app)
-"""
 
+scheduler = BackgroundScheduler()
 
 @app.route("/")
 @app.route("/home")
@@ -305,6 +309,28 @@ def dummy():
     return response"""
     return "Page Under Maintenance"
 
+def emailReminder():
+    # ############################
+    # emailReminder() function is called by cron job that runs at 8 am every day
+    # This function will check if there is any uncompleted task that is due the next day
+    # If yes, then it remind user to complete that task
+    # Output: send mails to users about uncompleted tasks
+    # ##########################
+    today = datetime.now()
+    tomorrow = today + timedelta(days=1)
+    tomorrow = tomorrow.strftime('%Y-%m-%d')
+    tasks = mongo.db.tasks.find({"duedate": tomorrow, "status": "In Progress"})
+
+    for task in tasks:
+        with app.app_context():
+            msg = Message('Task due tomorrow', sender = os.getenv('MAIL_USERNAME'), recipients = [ task['email'] ])
+            msg.body = "Hey, your task " + task['taskname'] + " is due tomorrow"
+            mail.send(msg)
+
+    return "Message sent"
+
+scheduler.add_job(emailReminder, 'cron', hour=8, minute=0)
+scheduler.start()
 
 if __name__ == '__main__':
     app.run(debug=True)

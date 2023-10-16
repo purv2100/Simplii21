@@ -8,3 +8,4 @@ static/tasks/todo/*
 .vscode
 !static/tasks/completed/.completed
 !static/tasks/todo/.todo
+.env
