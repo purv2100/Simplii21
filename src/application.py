@@ -8,6 +8,7 @@ from flask import json
 from flask.helpers import make_response
 from flask.json import jsonify
 from flask_mail import Mail, Message
+from apscheduler.schedulers.background import BackgroundScheduler
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import bcrypt
 import os
@@ -31,7 +32,7 @@ app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 mail = Mail(app)
 
-
+scheduler = BackgroundScheduler()
 
 @app.route("/")
 @app.route("/home")
@@ -308,12 +309,28 @@ def dummy():
     return response"""
     return "Page Under Maintenance"
 
-@app.route("/emailReminder", methods=['GET'])
 def emailReminder():
-    msg = Message('Hello from the other side!', sender = 'simplii043@gmail.com', recipients = ['kkheni11@gmail.com'])
-    msg.body = "hey, sending out email from flask!!!"
-    mail.send(msg)
+    # ############################
+    # emailReminder() function is called by cron job that runs at 8 am every day
+    # This function will check if there is any uncompleted task that is due the next day
+    # If yes, then it remind user to complete that task
+    # Output: send mails to users about uncompleted tasks
+    # ##########################
+    today = datetime.now()
+    tomorrow = today + timedelta(days=1)
+    tomorrow = tomorrow.strftime('%Y-%m-%d')
+    tasks = mongo.db.tasks.find({"duedate": tomorrow, "status": "In Progress"})
+
+    for task in tasks:
+        with app.app_context():
+            msg = Message('Task due tomorrow', sender = os.getenv('MAIL_USERNAME'), recipients = [ task['email'] ])
+            msg.body = "Hey, your task " + task['taskname'] + " is due tomorrow"
+            mail.send(msg)
+
     return "Message sent"
+
+scheduler.add_job(emailReminder, 'cron', hour=8, minute=0)
+scheduler.start()
 
 if __name__ == '__main__':
     app.run(debug=True)
