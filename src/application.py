@@ -167,7 +167,7 @@ def register():
                 username = request.form.get('username')
                 email = request.form.get('email')
                 password = request.form.get('password')
-                mongo.db.users.insert({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
+                mongo.db.users.insert_one({'name': username, 'email': email, 'pwd': bcrypt.hashpw(
                     password.encode("utf-8"), bcrypt.gensalt()), 'temp': None})
             flash(f'Account created for {form.username.data}!', 'success')
             return redirect(url_for('home'))
@@ -219,15 +219,25 @@ def task():
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
                 status = request.form.get('status')
-                mongo.db.tasks.insert({'email': email,
-                                       'taskname': taskname,
-                                       'category': category,
-                                       'startdate': startdate,
-                                       'duedate': duedate,
-                                       'status': status,
-                                       'hours': hours})
-            flash(f' {form.taskname.data} Task Added!', 'success')
-            return redirect(url_for('home'))
+
+                date_format = "%Y-%m-%d"
+                datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                print(datediff, "difffffff")
+                print("start date", startdate)
+                if (not is_integer(hours)):
+                    flash(f' Error hours should be numeric!', 'danger')
+                elif (datediff.days < 0):
+                    flash(f' DueDate should be a future date!', 'danger')
+                else:
+                    mongo.db.tasks.insert_one({'email': email,
+                                           'taskname': taskname,
+                                           'category': category,
+                                           'startdate': startdate,
+                                           'duedate': duedate,
+                                           'status': status,
+                                           'hours': hours})
+                    flash(f' {form.taskname.data} Task Added!', 'success')
+                    return redirect(url_for('home'))
     else:
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)
@@ -254,6 +264,16 @@ def editTask():
         return "Failed"
 
 
+def is_integer(s):
+    try:
+        # Try to convert the string to an integer
+        int_value = int(s)
+        return True
+    except ValueError:
+        # ValueError is raised if the conversion fails
+        return False
+
+
 @app.route("/updateTask", methods=['GET', 'POST'])
 def updateTask():
     ############################
@@ -270,7 +290,7 @@ def updateTask():
             if "%" in params[i][1]:
                 index = params[i][1].index('%')
                 params[i][1] = params[i][1][:index] + \
-                    " " + params[i][1][index + 3:]
+                               " " + params[i][1][index + 3:]
         d = {}
         for i in params:
             d[i[0]] = i[1]
@@ -281,6 +301,11 @@ def updateTask():
         form.category.data = d['category']
         form.status.data = d['status']
         form.hours.data = d['hours']
+        date_format = "%Y-%m-%d"
+        form.startdate.data = datetime.strptime(d['startdate'], date_format)
+        form.duedate.data = datetime.strptime(d['duedate'], date_format)
+
+        print(d['startdate'], "start")
 
         if form.validate_on_submit():
             if request.method == 'POST':
@@ -291,10 +316,23 @@ def updateTask():
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
                 status = request.form.get('status')
-                mongo.db.tasks.update({'email': email, 'taskname': d['taskname'], 'startdate': d['startdate'], 'duedate': d['duedate']},
-                                      {'$set': {'taskname': taskname, 'startdate': startdate, 'duedate': duedate, 'category': category, 'status': status, 'hours': hours}})
-            flash(f' {form.taskname.data} Task Updated!', 'success')
-            return redirect(url_for('dashboard'))
+                datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                print(datediff, "difffffff")
+                print("start date", startdate)
+                if (not is_integer(hours)):
+                    flash(f' Error hours should be numeric!', 'danger')
+                elif (datediff.days < 0):
+                    flash(f' DueDate should be a future date!', 'danger')
+                else:
+                    mongo.db.tasks.update_one({'email': email, 'taskname': d['taskname'], 'startdate': d['startdate'],
+                                               'duedate': d['duedate']},
+                                              {'$set': {'taskname': taskname, 'startdate': startdate,
+                                                        'duedate': duedate, 'category': category, 'status': status,
+                                                        'hours': hours}})
+                    flash(f' {form.taskname.data} Task Updated!', 'success')
+                    return redirect(url_for('dashboard'))
+
+
     else:
         return redirect(url_for('home'))
     return render_template('updateTask.html', title='Task', form=form)

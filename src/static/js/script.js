@@ -66,7 +66,7 @@ $(document).ready(function(){
             },
             success: function(response){
                 resdata = JSON.parse(response)
-                var url = "/updateTask?taskname=" + resdata.taskname + "&category=" + resdata.category + "&startdate=" + resdata.startdate + "&duedate="+resdata.duedate+"&status="+resdata.status+"&hours="+resdata.hours;
+                var url = "/updateTask?taskname=" + resdata.taskname + "&category=" + currentRow.find("td:eq(2)").html() + "&startdate=" + resdata.startdate + "&duedate="+resdata.duedate+"&status="+resdata.status+"&hours="+resdata.hours;
                 window.location.href = url;
             }
         })
