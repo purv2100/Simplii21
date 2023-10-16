@@ -16,7 +16,7 @@ import csv
 import sys
 from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
-
+import uuid
 load_dotenv()
 
 app = Flask(__name__)
@@ -49,7 +49,44 @@ def home():
         return redirect(url_for('login'))
 
 
-@app.route("/forgotPassword")
+def generate_reset_token(email):
+    token=str(uuid.uuid1())
+    mongo.db.users.update_one({'email': email, },
+                                      {'$set': {'token':token}})
+    return token
+
+def send_reset_email(email, token):
+    msg = Message('Password Reset Request', sender='simplii043@gmail.com', recipients=[email])
+    msg.body = f'''To reset your password, visit the following link: {url_for('reset_password', token=token, _external=True)}
+
+If you did not make this request, simply ignore this email.
+'''
+    mail.send(msg)
+
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if request.method == 'POST':
+        # Validate the token (you may want to add more security checks)
+        user = mongo.db.users.find_one({'token': token})
+        password=request.form.get('password')
+        print(password)
+        if user:
+            # Update the password
+            
+            mongo.db.users.update_one({'token':token}, {'$set': {'pwd': bcrypt.hashpw(
+                    password.encode("utf-8"), bcrypt.gensalt())}})
+
+            # Remove the reset token
+            mongo.db.users.update_one({'token':token}, {'$unset': {'token': 1}})
+
+            flash('Password reset successfully. You can now log in with your new password.', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid or expired token. Please try again.', 'danger')
+
+    return render_template('resetPass.html', token=token)
+
+@app.route('/forgotPassword', methods=['GET', 'POST'])
 def forgotPassword():
     ############################
     # forgotPassword() redirects the user to dummy template.
@@ -57,7 +94,20 @@ def forgotPassword():
     # input: The function takes session as the input
     # Output: Out function will redirect to the dummy page
     # ##########################
-    return redirect(url_for('dummy'))
+    if not session.get('email'):
+        form = ResetPasswordForm()
+        if request.method == 'POST':
+            email = request.form.get('email')
+            user = mongo.db.users.find_one({'email': email})
+            if user:
+                token = generate_reset_token(email)
+                send_reset_email(user['email'], token)
+                flash('Password reset email sent. Check your inbox.', 'info')
+            else:
+                flash('Email not found. Please register.', 'danger')
+
+            print(email)
+    return render_template('forgotPass.html', title='Forget', form=form)
 
 
 @app.route("/recommend")
