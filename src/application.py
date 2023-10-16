@@ -313,11 +313,11 @@ def login():
         form = LoginForm()
         if form.validate_on_submit():
             temp = mongo.db.users.find_one({'email': form.email.data}, {
-                'email', 'pwd'})
+                'email', 'pwd', 'temp'})
             if temp is not None and temp['email'] == form.email.data and (
                 bcrypt.checkpw(
                     form.password.data.encode("utf-8"),
-                    temp['pwd']) or temp['temp'] == form.password.data):
+                    temp['pwd']) or temp == form.password.data):
                 flash('You have been logged in!', 'success')
                 session['email'] = temp['email']
                 return redirect(url_for('dashboard'))
