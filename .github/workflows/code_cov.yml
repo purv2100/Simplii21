@@ -19,7 +19,7 @@ jobs:
         python-version: 3.11.5
     - name: Install dependencies
       run: |
-        pip install pytest-cov
+        pip install pytest-cov==4.1.0
         pip install -r requirements.txt
         echo requirements installed
     - name: 'Create env file'
