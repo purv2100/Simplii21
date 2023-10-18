@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationE
 import os
 import sys
 sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
-from apps import App
+from src.apps import App
 
 
 class RegistrationForm(FlaskForm):
