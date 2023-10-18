@@ -16,8 +16,7 @@ import sys
 from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 import uuid
-sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
-from src.forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
+from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 load_dotenv()
 
 app = Flask(__name__)

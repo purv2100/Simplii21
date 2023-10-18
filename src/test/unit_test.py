@@ -1,8 +1,8 @@
 import unittest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
-from src.application import app
+currentdir - os.path.dirname(os .path. abspath(inspect -getfile(inspect .current frame ()))) parentdir = os.path. dirname (currentdir) sys-path.insert(0, parentdir)
+from application import app
 
 class BasicTestCase(unittest.TestCase):
 
