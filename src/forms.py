@@ -38,6 +38,8 @@ class TaskForm(FlaskForm):
             ('In Progress', "In Progress"), ("Done", "Done"), ("Blocked", "Blocked")])
     hours = StringField('Hours',
                         validators=[DataRequired(), Length(min=1, max=20)])
+    description = StringField('Description',
+                           validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Add')
 
 
@@ -53,6 +55,8 @@ class UpdateForm(FlaskForm):
             ('In Progress', "In Progress"), ("Done", "Done"), ("Blocked", "Blocked")])
     hours = StringField('Hours',
                         validators=[DataRequired(), Length(min=1, max=20)])
+    description = StringField('Description',
+                           validators=[DataRequired(), Length(min=2, max=500)])
     submit = SubmitField('Update')
 
 

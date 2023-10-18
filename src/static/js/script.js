@@ -66,7 +66,7 @@ $(document).ready(function(){
             },
             success: function(response){
                 resdata = JSON.parse(response)
-                var url = "/updateTask?taskname=" + resdata.taskname + "&category=" + currentRow.find("td:eq(2)").html() + "&startdate=" + resdata.startdate + "&duedate="+resdata.duedate+"&status="+resdata.status+"&hours="+resdata.hours;
+                var url = "/updateTask?taskname=" + resdata.taskname + "&category=" + currentRow.find("td:eq(2)").html() + "&startdate=" + resdata.startdate + "&duedate="+resdata.duedate+"&status="+resdata.status+"&hours="+resdata.hours+"&des="+resdata.description;
                 window.location.href = url;
             }
         })

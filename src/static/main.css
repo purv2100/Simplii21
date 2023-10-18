@@ -8,6 +8,16 @@
       color: #333333;
       margin-top: 5rem;
     }
+  table{
+    table-layout: fixed;
+  }
+  td{
+    word-wrap: break-word;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
     
     h1, h2, h3, h4, h5, h6 {
       color: #444444;

@@ -219,9 +219,10 @@ def task():
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
                 status = request.form.get('status')
+                description = request.form.get('description')
 
                 date_format = "%Y-%m-%d"
-                datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                datediff = datetime.strptime(duedate, date_format) - datetime.strptime(startdate, date_format)
                 print(datediff, "difffffff")
                 print("start date", startdate)
                 if (not is_integer(hours)):
@@ -235,7 +236,8 @@ def task():
                                            'startdate': startdate,
                                            'duedate': duedate,
                                            'status': status,
-                                           'hours': hours})
+                                           'hours': hours,
+                                           'description': description})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
     else:
@@ -258,7 +260,8 @@ def editTask():
         category = request.form.get('category')
         id = mongo.db.tasks.find_one(
             {'email': email, 'taskname': task, 'status': status, 'category': category})
-        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours']}), 200, {
+        # print(id, '_______-----______---- ID ------_____-----____')
+        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description' : id['description']}), 200, {
             'ContentType': 'application/json'}
     else:
         return "Failed"
@@ -284,6 +287,7 @@ def updateTask():
     # ##########################
     if session.get('email'):
         params = request.url.split('?')[1].split('&')
+        # print(params, "______------_____------______--- PARAMMMMSSSSSSSSS")
         for i in range(len(params)):
             params[i] = params[i].split('=')
         for i in range(len(params)):
@@ -295,17 +299,20 @@ def updateTask():
         for i in params:
             d[i[0]] = i[1]
 
+        # print(d)
+
         form = UpdateForm()
 
         form.taskname.data = d['taskname']
         form.category.data = d['category']
         form.status.data = d['status']
         form.hours.data = d['hours']
+        form.description.data = d['des']
         date_format = "%Y-%m-%d"
         form.startdate.data = datetime.strptime(d['startdate'], date_format)
         form.duedate.data = datetime.strptime(d['duedate'], date_format)
 
-        print(d['startdate'], "start")
+        # print(d['startdate'], "start")
 
         if form.validate_on_submit():
             if request.method == 'POST':
@@ -317,6 +324,7 @@ def updateTask():
                 hours = request.form.get('hours')
                 status = request.form.get('status')
                 datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                description = request.form.get('description')
                 print(datediff, "difffffff")
                 print("start date", startdate)
                 if (not is_integer(hours)):
@@ -328,7 +336,7 @@ def updateTask():
                                                'duedate': d['duedate']},
                                               {'$set': {'taskname': taskname, 'startdate': startdate,
                                                         'duedate': duedate, 'category': category, 'status': status,
-                                                        'hours': hours}})
+                                                        'hours': hours, 'description': description}})
                     flash(f' {form.taskname.data} Task Updated!', 'success')
                     return redirect(url_for('dashboard'))
 
