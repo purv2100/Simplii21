@@ -9,7 +9,6 @@ from flask.helpers import make_response
 from flask.json import jsonify
 from flask_mail import Mail, Message
 from apscheduler.schedulers.background import BackgroundScheduler
-from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import bcrypt
 import os
 import csv
@@ -17,6 +16,8 @@ import sys
 from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 import uuid
+sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
+from src.forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 load_dotenv()
 
 app = Flask(__name__)

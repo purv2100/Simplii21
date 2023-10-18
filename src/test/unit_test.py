@@ -1,8 +1,8 @@
 import unittest
 import sys
 import os
-sys.path.insert(0, os.path.join(os.getcwd(), '/../src'))
-from application import app
+sys.path.insert(0, os.path.join(os.getcwd(), 'src'))
+from src.application import app
 
 class BasicTestCase(unittest.TestCase):
 
