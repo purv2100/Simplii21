@@ -3,11 +3,11 @@
 [![DOI](https://zenodo.org/badge/404911045.svg)](https://zenodo.org/badge/latestdoi/404911045)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Build Status](https://app.travis-ci.com/atharva1996/Simplii.svg?branch=main)](https://app.travis-ci.com/atharva1996/Simplii)
-![Code Coverage](https://github.com/atharva1996/Simplii/blob/main/src/coverage.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
-![github workflow](https://github.com/deekay2310/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
+[![Build Status](https://app.travis-ci.com/atharva1996/Simplii.svg?branch=main)](https://app.travis-ci.com/nisarg210/Simplii)
+![Code Coverage](https://github.com/nisarg210/Simplii/blob/main/src/coverage.svg)
+![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
+![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
 
 ## Link to Demonstration Video of the Project: 
 https://youtu.be/GecaW1x1y8k
@@ -26,7 +26,6 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 # Table of Contents  
 
 - [Why use Simplii?](#why-use-simplii)
-- [Implementation](#implementation)
 - [Built with:](#built-with)
 - [Core Functionalities of the Application:](#core-functionalities-of-the-application)
   - [Register](#register)
@@ -53,16 +52,6 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 <img width="600" height ="500" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png"> 
 </p>
 
-
-
-## Implementation:
-The video below describes the previous version of Simplii
-
-https://user-images.githubusercontent.com/89509351/144701576-5f2d6677-a741-4d58-b1fe-9a2b012f2b8e.mp4
-
-As you walk through this old version of Simplii, you can observe many errors. Firstly, when the user adds a task, it gets displayed 3 times on the dashboard. Moreover, when the user tries to delete the task, all the tasks in the dashboard get deleted instead of just deleting that single task
-
-In the new version of Simplii, we have resolved all these bugs and added new functionalities.
 
  
  
@@ -127,11 +116,11 @@ https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-
  Step 2: 
   Git Clone the Repository 
   
-    git clone https://github.com/atharva1996/Simplii.git
+    git clone https://github.com/nisarg210/Simplii.git
     
   (OR) Download the .zip file on your local machine
   
-    https://github.com/atharva1996/Simplii.git
+    https://github.com/nisarg210/Simplii.git
   
  Step 3:
    Install the required packages by running the following command in the terminal 
@@ -150,27 +139,27 @@ https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-
 ## Source Code
   
   Link to the repository:
-    https://github.com/atharva1996/Simplii
+    https://github.com/nisarg210/Simplii
                                                                                                                                                   
  ## Delta
  
  <b> a) Task Tracking based on the type of work</b>
-        <li>The earlier version of Simplii just used to do the simple task of keeping track of different kinds of task. However, there was no functionality to                  differentiate the tasks.
-        <li>In our updated version of Simplii, the tasks can be tracked based on their types. 
-                For instance, there are two types of tasks- Physical and Intellectual, so the users can easily keep  track of their tasks based on the work                         type.
+        <li>The earlier version of Simplii just used to add the category of task as text.
+        <li>In our updated version of Simplii, the tasks can be tracked based on their types. We have two types Intellectual & Physical.
     
- <b>b) Task modification is now simplified!</b>
-        <li>In the previous version of Simplii, the tasks did not have the modification functionality in which the user could update some details of his task.                  Moreover, the delete functionality completely failed. When the user tried to delete one task, all his other tasks would get deleted. Thus, it was                   highly  inefficient.
-        <li>In our updated version of Simplii, we have eliminated that bug by adding the modification function where the users can easily update and delete the                 tasks as per their convenience.
+ <b>b) Email Remainder Sysytem (New Feature)</b>
     
- <b>c) Status Tab is added so that users can easily keep a progress of their work.</b>
-        <li>In the previous version of Simplii, there was no functionality of viewing the status of jobs and then segregating them based on their status.
-        <li>In our updated version of Simplii, we have added the status tab on dashboard and also created a drop-down functionality so that the users can view                 tasks and update them by selecting the task category(Physical or Intellectual) and the task status(In progress, Done, Blocked).</b>
+ <b>c) Added critical information like credintials, DB connection strings in enviornment file. (Enhancement)</b>
         
- <b>d) Task Recommendation functionality </b>
-        <li>In the previous version of Simplii, tasks were not recommended to the user and thus, the user was unable to keep a track of his progress.
-        <li>In this updated version of Simplii, there is a functionality of task recommendation where tasks will be recommended in an order such that the user can complete each of them in the given time frame. Thus, all the tasks will get managed and user will not have to worry about his schedule.</li>
+ <b>d) Implement Reset Password (New Feature)</b>
+  <b>e) Add description feild for task (New Feature)</b>
+ <b>f) Fixed on wrong password system breakdown error. (Bug Fix)</b>
+ <b>g) Fixed on data fetch in update page data in some feilds were missing. (Bug Fix)</b>
+ <b>h) Added validations for input field of forms. (Bug Fix)</b>
+        <li> Hours -> Interger, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
     
+        
+  
    ## Future Scope
   
   The  following features can be implemented in the future scope of this application:
@@ -178,18 +167,16 @@ https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-
    1. Create a mobile application for the web version of the application.
    2. Make the website view port adaptable - the website should look good on phone, tablet and computer.
    3. Create chatbot for the web portal
-   4. Create Alerts when the Task deadline is approaching
-   5. Add an emergency schedule and recommend tasks based on the new schedule.
+   4. Recommend tasks.
    
    ## Team Members
    
   <table>
   <tr>
-    <td align="center"><a href="https://github.com/atharva1996"><img src="https://avatars.githubusercontent.com/u/16671348?v=4" width="100px;" alt=""/><br /><sub>     <b>Atharva Patil</b></sub></a></td>
-    <td align="center"><a href="https://github.com/AtharvaJ10"><img src="https://avatars.githubusercontent.com/u/49825649?v=4" width="100px;" alt=""/><br /><sub>       <b>Atharva Joshi</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Banpreet123"><img src="https://avatars.githubusercontent.com/u/64312538?s=400&u=f4bb34b674d6dcf2491e8051303835fb79d0f45f&v=4" width="100px;" alt=""/><br /><sub>       <b>Banpreet Singh</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/vaish68"><img src="https://avatars.githubusercontent.com/u/89509351?v=4" width="100px;" alt=""/><br /><sub>        <b>Vaishnavi Patil</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/shivam-pednekar"><img src="https://avatars.githubusercontent.com/u/62328699?v=4" width="100px;" alt=""/><br />       <sub><b>Shivam Pednekar</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/kskheni"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       <b>Kaushal Kheni</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/nisarg210"><img src="https://avatars.githubusercontent.com/u/58519704?v=4" width="100px;" alt=""/><br /><sub>     <b>Nisarg Prajapati</b></sub></a></td>
+    <td align="center"><a href="https://github.com/surya-sukumar"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       <b>Surya Sukumar</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/Mihir1310"><img src="https://avatars.githubusercontent.com/u/82660793?v=4" width="100px;" alt=""/><br /><sub>        <b>Mihir Bhanderi</b></sub></a><br /></td>
   </tr>
 </table>
 
