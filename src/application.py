@@ -110,8 +110,8 @@ def forgotPassword():
     return render_template('forgotPass.html', title='Forget', form=form)
 
 
-@app.route("/recommend")
-def recommend():
+@app.route("/friends")
+def friends():
     ############################
     # recommend() function opens the task_recommendation.csv file and displays the data of the file
     # route "/recommend" will redirect to recommend() function.
@@ -142,14 +142,21 @@ def dashboard():
     return render_template('dashboard.html', tasks=tasks)
 
 
-@app.route("/about")
-def about():
+@app.route("/analytics")
+def analytics():
     # ############################
     # about() function displays About Us page (about.html) template
     # route "/about" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
 
+@app.route("/view_tasks")
+def view_tasks():
+    # ############################
+    # about() function displays About Us page (about.html) template
+    # route "/about" will redirect to about() function.
+    # ##########################
+    return render_template('about.html', title='About')
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
