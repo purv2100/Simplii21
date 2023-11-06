@@ -23,16 +23,16 @@ import pandas as pd
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.secret_key = 'secret'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
 mongo = PyMongo(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
+app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
 mail = Mail(app)
 
 scheduler = BackgroundScheduler()
@@ -115,20 +115,47 @@ def forgotPassword():
 
 @app.route("/friends")
 def friends():
-    ############################
-    # recommend() function opens the task_recommendation.csv file and displays the data of the file
-    # route "/recommend" will redirect to recommend() function.
-    # input: The function opens the task_recommendation.csv
-    # Output: Our function will redirect to the recommend page for showing the data
+    # ############################
+    # friends() function displays the list of friends corrsponding to given email
+    # route "/friends" will redirect to friends() function which redirects to friends.html page.
+    # friends() function will show a list of "My friends", "Add Friends" functionality, "send Request" and Pending Approvals" functionality
+    # Details corresponding to given email address are fetched from the database entries
+    # Input: Email
+    # Output: My friends, Pending Approvals, Sent Requests and Add new friends
     # ##########################
-    data = []
-    with open(os.path.join(sys.path[0], "../models/task_recommendation.csv")) as f:
-        reader = csv.DictReader(f)
+    email = session.get('email')
 
-        for row in reader:
-            data.append(dict(row))
+    if email is not None:
+        myFriends = list(mongo.db.friends.find(
+            {'sender': email, 'accept': True}, {'sender', 'receiver', 'accept'}))
+        myFriendsList = list()
 
-    return render_template('recommend.html', data=data, list=list)
+        for f in myFriends:
+            myFriendsList.append(f['receiver'])
+
+        print(myFriends)
+        allUsers = list(mongo.db.user.find({}, {'name', 'email'}))
+
+        pendingRequests = list(mongo.db.friends.find(
+            {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
+        pendingReceivers = list()
+        for p in pendingRequests:
+            pendingReceivers.append(p['receiver'])
+
+        pendingApproves = list()
+        pendingApprovals = list(mongo.db.friends.find(
+            {'receiver': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
+        for p in pendingApprovals:
+            pendingApproves.append(p['sender'])
+
+        print(pendingApproves)
+    else:
+        return redirect(url_for('login'))
+
+    # print(pendingRequests)
+    return render_template('friends.html', allUsers=allUsers, pendingRequests=pendingRequests, active=email,
+                           pendingReceivers=pendingReceivers, pendingApproves=pendingApproves, myFriends=myFriends, myFriendsList=myFriendsList)
+
 
 
 @app.route("/dashboard")
