@@ -24,18 +24,18 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'secret'
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+app.config['MONGO_URI'] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
-app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
-mail = Mail(app)
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
 scheduler = BackgroundScheduler()
+
 
 @app.route("/")
 @app.route("/home")
@@ -53,41 +53,47 @@ def home():
 
 
 def generate_reset_token(email):
-    token=str(uuid.uuid1())
+    token = str(uuid.uuid1())
     mongo.db.users.update_one({'email': email, },
-                                      {'$set': {'token':token}})
+                              {'$set': {'token': token}})
     return token
 
+
 def send_reset_email(email, token):
-    msg = Message('Password Reset Request', sender='simplii043@gmail.com', recipients=[email])
+    msg = Message('Password Reset Request',
+                  sender='simplii043@gmail.com', recipients=[email])
     msg.body = f'''To reset your password, visit the following link: {url_for('reset_password', token=token, _external=True)}
 
 If you did not make this request, simply ignore this email.
 '''
     mail.send(msg)
 
+
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if request.method == 'POST':
         # Validate the token (you may want to add more security checks)
         user = mongo.db.users.find_one({'token': token})
-        password=request.form.get('password')
+        password = request.form.get('password')
         print(password)
         if user:
             # Update the password
-            
-            mongo.db.users.update_one({'token':token}, {'$set': {'pwd': bcrypt.hashpw(
-                    password.encode("utf-8"), bcrypt.gensalt())}})
+
+            mongo.db.users.update_one({'token': token}, {'$set': {'pwd': bcrypt.hashpw(
+                password.encode("utf-8"), bcrypt.gensalt())}})
 
             # Remove the reset token
-            mongo.db.users.update_one({'token':token}, {'$unset': {'token': 1}})
+            mongo.db.users.update_one(
+                {'token': token}, {'$unset': {'token': 1}})
 
-            flash('Password reset successfully. You can now log in with your new password.', 'success')
+            flash(
+                'Password reset successfully. You can now log in with your new password.', 'success')
             return redirect(url_for('home'))
         else:
             flash('Invalid or expired token. Please try again.', 'danger')
 
     return render_template('resetPass.html', token=token)
+
 
 @app.route('/forgotPassword', methods=['GET', 'POST'])
 def forgotPassword():
@@ -157,7 +163,6 @@ def friends():
                            pendingReceivers=pendingReceivers, pendingApproves=pendingApproves, myFriends=myFriends, myFriendsList=myFriendsList)
 
 
-
 @app.route("/dashboard")
 def dashboard():
     ############################
@@ -200,10 +205,10 @@ def analytics():
     # Customize the y-axis ticks to show integer values
     fig.update_yaxes(dtick=1)
 
-
     # Convert the Plotly figure to HTML
     chart_html = fig.to_html(full_html=False)
     return render_template('analytics.html', chart_html=chart_html, title='Analytics')
+
 
 @app.route("/view_tasks")
 def view_tasks():
@@ -212,6 +217,7 @@ def view_tasks():
     # route "/about" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -284,7 +290,8 @@ def task():
                 description = request.form.get('description')
 
                 date_format = "%Y-%m-%d"
-                datediff = datetime.strptime(duedate, date_format) - datetime.strptime(startdate, date_format)
+                datediff = datetime.strptime(
+                    duedate, date_format) - datetime.strptime(startdate, date_format)
                 print(datediff, "difffffff")
                 print("start date", startdate)
                 if (not is_integer(hours)):
@@ -293,13 +300,13 @@ def task():
                     flash(f' DueDate should be a future date!', 'danger')
                 else:
                     mongo.db.tasks.insert_one({'email': email,
-                                           'taskname': taskname,
-                                           'category': category,
-                                           'startdate': startdate,
-                                           'duedate': duedate,
-                                           'status': status,
-                                           'hours': hours,
-                                           'description': description})
+                                               'taskname': taskname,
+                                               'category': category,
+                                               'startdate': startdate,
+                                               'duedate': duedate,
+                                               'status': status,
+                                               'hours': hours,
+                                               'description': description})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
     else:
@@ -323,7 +330,7 @@ def editTask():
         id = mongo.db.tasks.find_one(
             {'email': email, 'taskname': task, 'status': status, 'category': category})
         # print(id, '_______-----______---- ID ------_____-----____')
-        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description' : id['description']}), 200, {
+        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description': id['description']}), 200, {
             'ContentType': 'application/json'}
     else:
         return "Failed"
@@ -356,7 +363,7 @@ def updateTask():
             if "%" in params[i][1]:
                 index = params[i][1].index('%')
                 params[i][1] = params[i][1][:index] + \
-                               " " + params[i][1][index + 3:]
+                    " " + params[i][1][index + 3:]
         d = {}
         for i in params:
             d[i[0]] = i[1]
@@ -385,7 +392,8 @@ def updateTask():
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
                 status = request.form.get('status')
-                datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                datediff = datetime.strptime(
+                    duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
                 description = request.form.get('description')
                 print(datediff, "difffffff")
                 print("start date", startdate)
@@ -401,7 +409,6 @@ def updateTask():
                                                         'hours': hours, 'description': description}})
                     flash(f' {form.taskname.data} Task Updated!', 'success')
                     return redirect(url_for('dashboard'))
-
 
     else:
         return redirect(url_for('home'))
@@ -467,6 +474,7 @@ def dummy():
     return response"""
     return "Page Under Maintenance"
 
+
 def emailReminder():
     # ############################
     # emailReminder() function is called by cron job that runs at 8 am every day
@@ -481,11 +489,14 @@ def emailReminder():
 
     for task in tasks:
         with app.app_context():
-            msg = Message('Task due tomorrow', sender = os.getenv('MAIL_USERNAME'), recipients = [ task['email'] ])
-            msg.body = "Hey, your task " + task['taskname'] + " is due tomorrow"
+            msg = Message('Task due tomorrow', sender=os.getenv(
+                'MAIL_USERNAME'), recipients=[task['email']])
+            msg.body = "Hey, your task " + \
+                task['taskname'] + " is due tomorrow"
             mail.send(msg)
 
     return "Message sent"
+
 
 scheduler.add_job(emailReminder, 'cron', hour=8, minute=0)
 scheduler.start()
