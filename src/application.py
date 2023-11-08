@@ -192,14 +192,9 @@ def deleteTask():
     # Output: Out function will delete the particular user task from database
     # ##########################
     if request.method == 'POST':
-        email = session.get('email')
         task = request.form.get('task')
-        status = request.form.get('status')
-        category = request.form.get('category')
-        id = mongo.db.tasks.find_one(
-            {'email': email, 'taskname': task, 'status': status, 'category': category}, {'_id'})
-        print("Hereeeeeeeeeeeeeee", id['_id'])
-        mongo.db.tasks.delete_one({'_id': id['_id']})
+        mongo.db.tasks.delete_many({'taskname':task})
+        print("Task", task, "deleted!!")
         return "Success"
     else:
         return "Failed"
@@ -215,41 +210,70 @@ def task():
     # Output: Value update in database and redirected to home login page
     # ##########################
     if session.get('email'):
-        form = TaskForm()
+        form = TaskForm(session.get('email'))
         if form.validate_on_submit():
             print("inside form")
             if request.method == 'POST':
                 email = session.get('email')
                 taskname = request.form.get('taskname')
+                friendsemail = request.form.getlist('invitees')
                 category = request.form.get('category')
                 startdate = request.form.get('startdate')
-                duedate = request.form.get('duedate')
-                hours = request.form.get('hours')
-                status = request.form.get('status')
+                start_time = request.form.get('start_time')
+                end_time = request.form.get('end_time')
                 description = request.form.get('description')
-
-                date_format = "%Y-%m-%d"
-                datediff = datetime.strptime(duedate, date_format) - datetime.strptime(startdate, date_format)
-                print(datediff, "difffffff")
-                print("start date", startdate)
-                if (not is_integer(hours)):
-                    flash(f' Error hours should be numeric!', 'danger')
-                elif (datediff.days < 0):
-                    flash(f' DueDate should be a future date!', 'danger')
-                else:
+                print(friendsemail)
+                check = mongo.db.tasks.find_one({'taskname': taskname})
+                if not check:
                     mongo.db.tasks.insert_one({'email': email,
-                                           'taskname': taskname,
-                                           'category': category,
-                                           'startdate': startdate,
-                                           'duedate': duedate,
-                                           'status': status,
-                                           'hours': hours,
-                                           'description': description})
+                                            'taskname': taskname,
+                                            'category': category,
+                                            'startdate': startdate,
+                                            'starttime': start_time,
+                                            'endtime': end_time,
+                                            'description': description,
+                                            'progress': 0,
+                                            'completed':False})
+                    
+                    for friendemail in friendsemail:
+                        mongo.db.tasks.insert_one({'email': friendemail,
+                                                'taskname': taskname,
+                                                'category': category,
+                                                'startdate': startdate,
+                                                'starttime': start_time,
+                                                'endtime': end_time,
+                                                'description': description,
+                                                'progress':0,
+                                                'completed':False})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
+                else:
+                    flash(
+                        'Task name already taken. Please find another task name. Thank you!',
+                        'danger')
+                    return redirect(url_for('task'))
     else:
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)
+
+@app.route("/completeTask", methods = ['POST'])
+def completeTask():
+    if session.get('email'):
+        email = session.get('email')
+        task = request.form.get('task')
+        mongo.db.tasks.update_one({'email':email, 'taskname':task}, {'$set': {'completed':True}})
+        tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
+        total_tasks=0
+        total_completed_tasks=0
+        for tsk in tasks:
+            if tsk['completed']:
+                total_completed_tasks+=1
+            total_tasks+=1
+
+        mongo.db.tasks.update_many({'taskname':task}, {'$set': {'progress':round(total_completed_tasks/total_tasks,2)*100}})
+
+        flash(f' {task} Task Completed!', 'success')
+    return redirect(url_for('home'))
 
 
 @app.route("/editTask", methods=['GET', 'POST'])
