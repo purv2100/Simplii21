@@ -17,7 +17,7 @@ def get_friends(session_email):
     app_object = App()
     mongo = app_object.mongo
     friends = mongo.db.friends.find({'sender': session_email}, {'receiver', 'accept'})
-    friend_list = []
+    friend_list = [("Please Select", "Please Select")]
     for friend in friends:
         if friend['accept']:
             friend_list.append((friend['receiver'], friend['receiver']))
