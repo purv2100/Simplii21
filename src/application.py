@@ -210,8 +210,8 @@ def analytics():
     return render_template('analytics.html', chart_html=chart_html, title='Analytics')
 
 
-@app.route("/view_tasks")
-def view_tasks():
+@app.route("/about_us")
+def about_us():
     # ############################
     # about() function displays About Us page (about.html) template
     # route "/about" will redirect to about() function.
@@ -277,7 +277,7 @@ def task():
             if request.method == 'POST':
                 email = session.get('email')
                 taskname = request.form.get('taskname')
-                friendsemail = request.form.getlist('invitees')
+                friendsemail = request.form.getlist('invitees')+["Please Select"]
                 category = request.form.get('category')
                 startdate = request.form.get('startdate')
                 start_time = request.form.get('start_time')
@@ -297,15 +297,16 @@ def task():
                                             'completed':False})
                     
                     for friendemail in friendsemail:
-                        mongo.db.tasks.insert_one({'email': friendemail,
-                                                'taskname': taskname,
-                                                'category': category,
-                                                'startdate': startdate,
-                                                'starttime': start_time,
-                                                'endtime': end_time,
-                                                'description': description,
-                                                'progress':0,
-                                                'completed':False})
+                        if friendemail!="Please Select":
+                            mongo.db.tasks.insert_one({'email': friendemail,
+                                                    'taskname': taskname,
+                                                    'category': category,
+                                                    'startdate': startdate,
+                                                    'starttime': start_time,
+                                                    'endtime': end_time,
+                                                    'description': description,
+                                                    'progress':0,
+                                                    'completed':False})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
                 else:
