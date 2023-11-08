@@ -17,11 +17,14 @@ from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 import uuid
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
+import plotly.express as px
+import pandas as pd
+
 load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = os.getenv('SECRET_KEY')
-app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+app.secret_key = 'secret'
+app.config['MONGO_URI'] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
@@ -30,9 +33,9 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-mail = Mail(app)
 
 scheduler = BackgroundScheduler()
+
 
 @app.route("/")
 @app.route("/home")
@@ -50,41 +53,47 @@ def home():
 
 
 def generate_reset_token(email):
-    token=str(uuid.uuid1())
+    token = str(uuid.uuid1())
     mongo.db.users.update_one({'email': email, },
-                                      {'$set': {'token':token}})
+                              {'$set': {'token': token}})
     return token
 
+
 def send_reset_email(email, token):
-    msg = Message('Password Reset Request', sender='simplii043@gmail.com', recipients=[email])
+    msg = Message('Password Reset Request',
+                  sender='simplii043@gmail.com', recipients=[email])
     msg.body = f'''To reset your password, visit the following link: {url_for('reset_password', token=token, _external=True)}
 
 If you did not make this request, simply ignore this email.
 '''
     mail.send(msg)
 
+
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
     if request.method == 'POST':
         # Validate the token (you may want to add more security checks)
         user = mongo.db.users.find_one({'token': token})
-        password=request.form.get('password')
+        password = request.form.get('password')
         print(password)
         if user:
             # Update the password
-            
-            mongo.db.users.update_one({'token':token}, {'$set': {'pwd': bcrypt.hashpw(
-                    password.encode("utf-8"), bcrypt.gensalt())}})
+
+            mongo.db.users.update_one({'token': token}, {'$set': {'pwd': bcrypt.hashpw(
+                password.encode("utf-8"), bcrypt.gensalt())}})
 
             # Remove the reset token
-            mongo.db.users.update_one({'token':token}, {'$unset': {'token': 1}})
+            mongo.db.users.update_one(
+                {'token': token}, {'$unset': {'token': 1}})
 
-            flash('Password reset successfully. You can now log in with your new password.', 'success')
+            flash(
+                'Password reset successfully. You can now log in with your new password.', 'success')
             return redirect(url_for('home'))
         else:
             flash('Invalid or expired token. Please try again.', 'danger')
 
     return render_template('resetPass.html', token=token)
+
 
 @app.route('/forgotPassword', methods=['GET', 'POST'])
 def forgotPassword():
@@ -112,20 +121,46 @@ def forgotPassword():
 
 @app.route("/friends")
 def friends():
-    ############################
-    # recommend() function opens the task_recommendation.csv file and displays the data of the file
-    # route "/recommend" will redirect to recommend() function.
-    # input: The function opens the task_recommendation.csv
-    # Output: Our function will redirect to the recommend page for showing the data
+    # ############################
+    # friends() function displays the list of friends corrsponding to given email
+    # route "/friends" will redirect to friends() function which redirects to friends.html page.
+    # friends() function will show a list of "My friends", "Add Friends" functionality, "send Request" and Pending Approvals" functionality
+    # Details corresponding to given email address are fetched from the database entries
+    # Input: Email
+    # Output: My friends, Pending Approvals, Sent Requests and Add new friends
     # ##########################
-    data = []
-    with open(os.path.join(sys.path[0], "../models/task_recommendation.csv")) as f:
-        reader = csv.DictReader(f)
+    email = session.get('email')
 
-        for row in reader:
-            data.append(dict(row))
+    if email is not None:
+        myFriends = list(mongo.db.friends.find(
+            {'sender': email, 'accept': True}, {'sender', 'receiver', 'accept'}))
+        myFriendsList = list()
 
-    return render_template('recommend.html', data=data, list=list)
+        for f in myFriends:
+            myFriendsList.append(f['receiver'])
+
+        print(myFriends)
+        allUsers = list(mongo.db.user.find({}, {'name', 'email'}))
+
+        pendingRequests = list(mongo.db.friends.find(
+            {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
+        pendingReceivers = list()
+        for p in pendingRequests:
+            pendingReceivers.append(p['receiver'])
+
+        pendingApproves = list()
+        pendingApprovals = list(mongo.db.friends.find(
+            {'receiver': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
+        for p in pendingApprovals:
+            pendingApproves.append(p['sender'])
+
+        print(pendingApproves)
+    else:
+        return redirect(url_for('login'))
+
+    # print(pendingRequests)
+    return render_template('friends.html', allUsers=allUsers, pendingRequests=pendingRequests, active=email,
+                           pendingReceivers=pendingReceivers, pendingApproves=pendingApproves, myFriends=myFriends, myFriendsList=myFriendsList)
 
 
 @app.route("/dashboard")
@@ -145,10 +180,35 @@ def dashboard():
 @app.route("/analytics")
 def analytics():
     # ############################
-    # about() function displays About Us page (about.html) template
-    # route "/about" will redirect to about() function.
+    # analytics() function displays visualizations related to tasks of the user.
+    # route "/analytics" will redirect to analytics() function.
     # ##########################
-    return render_template('about.html', title='About')
+    email = session.get('email')
+    data = mongo.db.tasks.find({'email': email}, {'category'})
+    data_list = list(data)
+    data = pd.DataFrame(data_list)
+
+    # Create a histogram using Plotly Express
+    fig = px.histogram(data, x='category', nbins=3, title="Histogram Example")
+
+    # You can customize the layout and appearance of the histogram, e.g., titles, labels, colors, etc.
+    fig.update_layout(
+        xaxis_title="Categories",
+        yaxis_title="Frequency",
+        font=dict(family="Arial", size=18, color="black"),
+        paper_bgcolor="white",
+        plot_bgcolor="lightgray",
+        width=550,
+        height=550,
+    )
+
+    # Customize the y-axis ticks to show integer values
+    fig.update_yaxes(dtick=1)
+
+    # Convert the Plotly figure to HTML
+    chart_html = fig.to_html(full_html=False)
+    return render_template('analytics.html', chart_html=chart_html, title='Analytics')
+
 
 @app.route("/view_tasks")
 def view_tasks():
@@ -157,6 +217,7 @@ def view_tasks():
     # route "/about" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
+
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
@@ -292,7 +353,7 @@ def editTask():
         id = mongo.db.tasks.find_one(
             {'email': email, 'taskname': task, 'status': status, 'category': category})
         # print(id, '_______-----______---- ID ------_____-----____')
-        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description' : id['description']}), 200, {
+        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description': id['description']}), 200, {
             'ContentType': 'application/json'}
     else:
         return "Failed"
@@ -325,7 +386,7 @@ def updateTask():
             if "%" in params[i][1]:
                 index = params[i][1].index('%')
                 params[i][1] = params[i][1][:index] + \
-                               " " + params[i][1][index + 3:]
+                    " " + params[i][1][index + 3:]
         d = {}
         for i in params:
             d[i[0]] = i[1]
@@ -354,7 +415,8 @@ def updateTask():
                 duedate = request.form.get('duedate')
                 hours = request.form.get('hours')
                 status = request.form.get('status')
-                datediff = datetime.strptime(duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
+                datediff = datetime.strptime(
+                    duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
                 description = request.form.get('description')
                 print(datediff, "difffffff")
                 print("start date", startdate)
@@ -370,7 +432,6 @@ def updateTask():
                                                         'hours': hours, 'description': description}})
                     flash(f' {form.taskname.data} Task Updated!', 'success')
                     return redirect(url_for('dashboard'))
-
 
     else:
         return redirect(url_for('home'))
@@ -436,6 +497,7 @@ def dummy():
     return response"""
     return "Page Under Maintenance"
 
+
 def emailReminder():
     # ############################
     # emailReminder() function is called by cron job that runs at 8 am every day
@@ -450,11 +512,14 @@ def emailReminder():
 
     for task in tasks:
         with app.app_context():
-            msg = Message('Task due tomorrow', sender = os.getenv('MAIL_USERNAME'), recipients = [ task['email'] ])
-            msg.body = "Hey, your task " + task['taskname'] + " is due tomorrow"
+            msg = Message('Task due tomorrow', sender=os.getenv(
+                'MAIL_USERNAME'), recipients=[task['email']])
+            msg.body = "Hey, your task " + \
+                task['taskname'] + " is due tomorrow"
             mail.send(msg)
 
     return "Message sent"
+
 
 scheduler.add_job(emailReminder, 'cron', hour=8, minute=0)
 scheduler.start()
