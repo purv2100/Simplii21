@@ -6,6 +6,49 @@ function retrieveFromLocalStorage(key){
     return localStorage.getItem(key)
 }
 
+function sendRequest(e, clickedId) {
+    $.ajax({
+        type: "POST",
+        url: "/ajaxsendrequest",
+        data: {
+            "receiver": clickedId
+        },
+        success: function (response) {
+            location.reload()
+            console.log(JSON.parse(response))
+        }
+    })
+}
+
+function cancelRequest(e, clickedId) {
+    $.ajax({
+        type: "POST",
+        url: "/ajaxcancelrequest",
+        data: {
+            "receiver": clickedId
+        },
+        success: function (response) {
+            location.reload()
+            console.log(JSON.parse(response))
+        }
+    })
+}
+
+function approveRequest(e, clickedId) {
+    $.ajax({
+        type: "POST",
+        url: "/ajaxapproverequest",
+        data: {
+            "receiver": clickedId
+        },
+        success: function (response) {
+            location.reload()
+            console.log(JSON.parse(response))
+        }
+    })
+}
+
+
 function logout(){
     $.ajax({
         type: "POST",

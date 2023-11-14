@@ -19,8 +19,9 @@
     <details style="margin: 5px; background:white;">
         <summary>{{friend.name}}</summary>
         <p class="article-content" name="friend">{{friend.email}}</p>
-        <button type="button" class="btn btn-primary" onclick="return sendRequest(event,this.id)"
-            id="{{friend.email}}">Send Request</button>
+        <button type="button" class="btn btn-primary" onclick="ajaxsendrequest(event, '{{ friend.email }}')"
+            id="{{ friend.email }}">Send Request</button>
+
     </details>
     {% endif %}
     {% endfor %}

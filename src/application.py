@@ -139,8 +139,9 @@ def friends():
         for f in myFriends:
             myFriendsList.append(f['receiver'])
 
-        print(myFriends)
-        allUsers = list(mongo.db.user.find({}, {'name', 'email'}))
+        # print(myFriends)
+        allUsers = list(mongo.db.users.find({}, {'name', 'email'}))
+        # print(allUsers)
 
         pendingRequests = list(mongo.db.friends.find(
             {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
@@ -154,13 +155,79 @@ def friends():
         for p in pendingApprovals:
             pendingApproves.append(p['sender'])
 
-        print(pendingApproves)
+        # print(pendingApproves)
     else:
         return redirect(url_for('login'))
 
     # print(pendingRequests)
     return render_template('friends.html', allUsers=allUsers, pendingRequests=pendingRequests, active=email,
                            pendingReceivers=pendingReceivers, pendingApproves=pendingApproves, myFriends=myFriends, myFriendsList=myFriendsList)
+
+
+@app.route("/ajaxsendrequest", methods=['POST'])
+def ajaxsendrequest():
+    # ############################
+    # ajaxsendrequest() is a function that updates friend request information into database
+    # route "/ajaxsendrequest" will redirect to ajaxsendrequest() function.
+    # Details corresponding to given email address are fetched from the database entries and send request details updated
+    # Input: Email, receiver
+    # Output: DB entry of receiver info into database and return TRUE if success and FALSE otherwise
+    # ##########################
+    email = get_session = session.get('email')
+    if get_session is not None:
+        receiver = request.form.get('receiver')
+        res = mongo.db.friends.insert_one(
+            {'sender': email, 'receiver': receiver, 'accept': False})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
+
+
+@app.route("/ajaxcancelrequest", methods=['POST'])
+def ajaxcancelrequest():
+    # ############################
+    # ajaxcancelrequest() is a function that updates friend request information into database
+    # route "/ajaxcancelrequest" will redirect to ajaxcancelrequest() function.
+    # Details corresponding to given email address are fetched from the database entries and cancel request details updated
+    # Input: Email, receiver
+    # Output: DB deletion of receiver info into database and return TRUE if success and FALSE otherwise
+    # ##########################
+    email = get_session = session.get('email')
+    if get_session is not None:
+        receiver = request.form.get('receiver')
+        res = mongo.db.friends.delete_one(
+            {'sender': email, 'receiver': receiver})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
+
+
+@app.route("/ajaxapproverequest", methods=['POST'])
+def ajaxapproverequest():
+    # ############################
+    # ajaxapproverequest() is a function that updates friend request information into database
+    # route "/ajaxapproverequest" will redirect to ajaxapproverequest() function.
+    # Details corresponding to given email address are fetched from the database entries and approve request details updated
+    # Input: Email, receiver
+    # Output: DB updation of accept as TRUE info into database and return TRUE if success and FALSE otherwise
+    # ##########################
+    email = get_session = session.get('email')
+    if get_session is not None:
+        receiver = request.form.get('receiver')
+        print(email, receiver)
+        res = mongo.db.friends.update_one({'sender': receiver, 'receiver': email}, {
+                                          "$set": {'sender': receiver, 'receiver': email, 'accept': True}})
+        mongo.db.friends.insert_one(
+            {'sender': email, 'receiver': receiver, 'accept': True})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
 
 
 @app.route("/dashboard")
