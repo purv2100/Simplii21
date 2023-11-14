@@ -24,16 +24,15 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'secret'
-app.config['MONGO_URI'] = os.getenv("MONGO_URI")
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
 mongo = PyMongo(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-
+app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
 scheduler = BackgroundScheduler()
 
 
@@ -173,8 +172,8 @@ def ajaxsendrequest():
     # Input: Email, receiver
     # Output: DB entry of receiver info into database and return TRUE if success and FALSE otherwise
     # ##########################
-    email = get_session = session.get('email')
-    if get_session is not None:
+    email = session.get('email')
+    if email is not None:
         receiver = request.form.get('receiver')
         res = mongo.db.friends.insert_one(
             {'sender': email, 'receiver': receiver, 'accept': False})
