@@ -65,3 +65,12 @@ $(document).ready(function(){
         
     });
 });
+
+// sidebar collapse toggle
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
