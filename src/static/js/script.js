@@ -117,3 +117,37 @@ $(document).ready(function () {
 
     });
 });
+
+$(document).ready(function(){
+
+    // code to read selected table row cell data (values).
+    $("#myTable").on('click','.completeButton',function(){
+        // get the current row
+        var currentRow=$(this).closest("tr"); 
+            
+        var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
+        console.log(col1);
+        $.ajax({
+            type: "POST",
+            url: "/completeTask",
+            data:{
+                "task":col1,
+            },
+            success: function(response){
+                resdata = JSON.parse(response)
+                var url = "/dashboard"
+                window.location.href = url;
+            }
+        })
+        
+    });
+});
+
+// sidebar collapse toggle
+$(document).ready(function () {
+
+    $('#sidebarCollapse').on('click', function() {
+        $('#sidebar').toggleClass('active');
+    });
+
+});
