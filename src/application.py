@@ -120,14 +120,26 @@ def forgotPassword():
 
 @app.route("/friends")
 def friends():
-    # ############################
-    # friends() function displays the list of friends corrsponding to given email
-    # route "/friends" will redirect to friends() function which redirects to friends.html page.
-    # friends() function will show a list of "My friends", "Add Friends" functionality, "send Request" and Pending Approvals" functionality
-    # Details corresponding to given email address are fetched from the database entries
-    # Input: Email
-    # Output: My friends, Pending Approvals, Sent Requests and Add new friends
-    # ##########################
+    """
+    friends() function displays the list of friends corresponding to the given email.
+    The route "/friends" will redirect to the friends() function, which further redirects to the friends.html page.
+    The friends() function presents a list of "My friends," "Add Friends" functionality, "Send Request," and "Pending Approvals."
+    Details corresponding to the given email address are fetched from the database entries.
+
+    Input:
+        Email (retrieved from the session)
+
+    Output:
+        Rendered template 'friends.html' with the following variables:
+        - allUsers: A list of all users with their names and emails
+        - pendingRequests: A list of friend requests sent by the user that are pending approval
+        - active: The email address of the current user
+        - pendingReceivers: A list of users who have sent friend requests to the current user (pending approval)
+        - pendingApproves: A list of users whose friend requests to the current user are pending approval
+        - myFriends: A list of accepted friend relationships (sender, receiver, accept=True)
+        - myFriendsList: A list of email addresses corresponding to the user's accepted friends
+
+    """
     email = session.get('email')
 
     if email is not None:
@@ -165,13 +177,20 @@ def friends():
 
 @app.route("/ajaxsendrequest", methods=['POST'])
 def ajaxsendrequest():
-    # ############################
-    # ajaxsendrequest() is a function that updates friend request information into database
-    # route "/ajaxsendrequest" will redirect to ajaxsendrequest() function.
-    # Details corresponding to given email address are fetched from the database entries and send request details updated
-    # Input: Email, receiver
-    # Output: DB entry of receiver info into database and return TRUE if success and FALSE otherwise
-    # ##########################
+    """
+    ajaxsendrequest() is a function that updates friend request information in the database.
+    The route "/ajaxsendrequest" redirects to ajaxsendrequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and send request details are updated.
+
+    Input:
+        - Email (retrieved from the session)
+        - Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database entry of receiver information in the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
+    
     email = session.get('email')
     if email is not None:
         receiver = request.form.get('receiver')
@@ -186,13 +205,19 @@ def ajaxsendrequest():
 
 @app.route("/ajaxcancelrequest", methods=['POST'])
 def ajaxcancelrequest():
-    # ############################
-    # ajaxcancelrequest() is a function that updates friend request information into database
-    # route "/ajaxcancelrequest" will redirect to ajaxcancelrequest() function.
-    # Details corresponding to given email address are fetched from the database entries and cancel request details updated
-    # Input: Email, receiver
-    # Output: DB deletion of receiver info into database and return TRUE if success and FALSE otherwise
-    # ##########################
+    """
+    ajaxsendrequest() is a function that updates friend request information into the database.
+    The route "/ajaxsendrequest" will redirect to the ajaxsendrequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and send request details are updated.
+
+    Input:
+        Email (retrieved from the session)
+        Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database entry of receiver information into the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
     email = get_session = session.get('email')
     if get_session is not None:
         receiver = request.form.get('receiver')
@@ -207,13 +232,19 @@ def ajaxcancelrequest():
 
 @app.route("/ajaxapproverequest", methods=['POST'])
 def ajaxapproverequest():
-    # ############################
-    # ajaxapproverequest() is a function that updates friend request information into database
-    # route "/ajaxapproverequest" will redirect to ajaxapproverequest() function.
-    # Details corresponding to given email address are fetched from the database entries and approve request details updated
-    # Input: Email, receiver
-    # Output: DB updation of accept as TRUE info into database and return TRUE if success and FALSE otherwise
-    # ##########################
+    """
+    ajaxapproverequest() is a function that updates friend request information into the database.
+    The route "/ajaxapproverequest" will redirect to the ajaxapproverequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and approve request details are updated.
+
+    Input:
+        Email (retrieved from the session)
+        Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database update of accept as TRUE information into the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
     email = get_session = session.get('email')
     if get_session is not None:
         receiver = request.form.get('receiver')
