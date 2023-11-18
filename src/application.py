@@ -18,7 +18,12 @@ from flask_login import LoginManager, login_required
 import uuid
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import plotly.express as px
+import plotly.graph_objs as go
+
+from plotly.subplots import make_subplots
+
 import pandas as pd
+import dash
 
 load_dotenv()
 
@@ -176,6 +181,14 @@ def dashboard():
         tasks = mongo.db.tasks.find({'email': session.get('email')})
     return render_template('dashboard.html', tasks=tasks)
 
+def get_first_day_of_week(date):
+    # Calculate the difference between the current day and Monday (0)
+    days_to_monday = date.weekday()
+
+    # Subtract the difference to get the first day of the week
+    first_day_of_week = date - timedelta(days=days_to_monday)
+
+    return first_day_of_week
 
 @app.route("/analytics")
 def analytics():
@@ -184,13 +197,17 @@ def analytics():
     # route "/analytics" will redirect to analytics() function.
     # ##########################
     email = session.get('email')
-    data = mongo.db.tasks.find({'email': email}, {'category'})
+    # Check if there are any tasks in the database.
+    data = mongo.db.tasks.find({'email': email})
     if data is not None:
-        data_list = list(data)
-        data = pd.DataFrame(data_list)
+        # ----------------------------------------------------------------------------------------
+        # Histogram of tasks based on 'Category': Easy, Medium, Hard 
+        data_hist = mongo.db.tasks.find({'email': email}, {'category'})
+        data_hist_list = list(data_hist)
+        data_hist = pd.DataFrame(data_hist_list)
 
         # Create a histogram using Plotly Express
-        fig = px.histogram(data, x='category', nbins=3, title="Histogram Example")
+        fig = px.histogram(data_hist, x='category', nbins=3, title="Histogram Example")
 
         # You can customize the layout and appearance of the histogram, e.g., titles, labels, colors, etc.
         fig.update_layout(
@@ -207,8 +224,115 @@ def analytics():
         fig.update_yaxes(dtick=1)
 
         # Convert the Plotly figure to HTML
-        chart_html = fig.to_html(full_html=False)
-        return render_template('analytics.html', chart_html=chart_html, title='Analytics')
+        hist_html = fig.to_html(full_html=False)
+
+        # ----------------------------------------------------------------------------------------
+        # Side-by-side bar chart of expected hours and actual hours required to complete the task
+        # Only consider the tasks which are complete. i.e. progress = 1
+        data_exp_act = mongo.db.tasks.find({'email':email, 'completed':True}, {'taskname', 'starttime', 'endtime', 'actualhours'})
+
+        data_exp_act_df = pd.DataFrame(columns = ['Name', 'Expected Hours', 'Actual Hours'])
+        time_format = "%H:%M"
+        i=0
+        for task in data_exp_act:
+            start_time = datetime.strptime(task['starttime'], time_format)
+            end_time = datetime.strptime(task['endtime'], time_format)
+            expected_hours = (end_time - start_time).total_seconds()/3600
+            data_exp_act_df.loc[i] = [task['taskname'], expected_hours, task['actualhours']]
+            i+=1
+
+        print(data_exp_act_df)
+        # Set a fixed bar width
+        bar_width = 0.4
+
+        # Calculate the total width occupied by bars and gaps
+        total_width = len(data_exp_act_df) * ((2 * bar_width)+0.1)   # 0.1 is the sum of bargap and bargroupgap
+
+        # Calculate the figure size based on the total width
+        fig_width = max(4, total_width)  # Ensure a minimum width
+
+        # Create trace for Value1 with custom bar color
+        trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'], name='Expected Hours', marker=dict(color='green'), width=bar_width)
+
+        # Create trace for Value2 with a different bar color
+        trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'], name='Actual Hours', marker=dict(color='cyan'), width=bar_width)
+
+        # Create layout
+        layout = go.Layout(barmode='group', title='Side-by-Side Bar Chart', xaxis=dict(title='Task Name'), yaxis=dict(title='Hours to Complete'), width=fig_width*80, height=400)
+
+        # Create figure
+        fig = go.Figure(data=[trace1, trace2], layout=layout)
+        exp_act_html = fig.to_html(full_html=False)
+
+        # ----------------------------------------------------------------------------------------
+        # Time chart to show distribution of completed tasks across different years,
+        # different months and different weeks.
+
+        timeline_data = mongo.db.tasks.find({'email':email, 'completed':True}, {'startdate'})
+        timeline_list = list(timeline_data)
+        timeline_df = pd.DataFrame(timeline_list)
+
+        timeline_df['startdate'] = [datetime.strptime(date, "%Y-%m-%d") for date in timeline_df['startdate']]
+
+        year = [start_date.year for start_date in timeline_df['startdate']]
+        timeline_df['year'] = year
+
+        timeline_df['week'] = timeline_df['startdate'].dt.strftime('Week %U, %Y')
+
+        timeline_df['month_year'] = timeline_df['startdate'].dt.strftime('%b \'%y')
+
+        # Year-wise distribution of tasks
+        layout = go.Layout(title='Yearwise distribution of tasks', xaxis=dict(title='Year'), yaxis=dict(title='Frequency'))
+
+        year_hist = go.Histogram(x=timeline_df['year'], name='Completed tasks by year')
+        fig = go.Figure(data=[year_hist], layout=layout)
+        fig.update_xaxes(dtick = 1)
+
+        # Convert the Plotly figure to HTML
+        by_year_html = fig.to_html(full_html=False)
+
+        # Monthly distribution of tasks
+        layout = go.Layout(title='Monthly distribution of tasks', xaxis=dict(title='Month'), yaxis=dict(title='Frequency'))
+
+        month_hist = go.Histogram(x=timeline_df['month_year'], name='Completed tasks by month')
+        fig = go.Figure(data=[month_hist], layout=layout)
+        fig.update_xaxes(dtick = 1)
+
+        # Convert the Plotly figure to HTML
+        by_month_html = fig.to_html(full_html=False)
+
+        # Weekly distribution of tasks
+        layout = go.Layout(title='Weekly distribution of tasks', xaxis=dict(title='Week'), yaxis=dict(title='Frequency'))
+
+        week_hist = go.Histogram(x=timeline_df['week'], name='Completed tasks by week')
+        fig = go.Figure(data=[week_hist], layout=layout)
+        fig.update_xaxes(dtick = 1)
+
+        # Convert the Plotly figure to HTML
+        by_week_html = fig.to_html(full_html=False)
+
+        #----------------------------------------------------------------------------------------------
+        # Pie chart to show complete and incomplete tasks.
+
+        pie_data = mongo.db.tasks.find({'email': email}, {'completed'})
+        pie_data_list = list(pie_data)
+        pie_df = pd.DataFrame(pie_data_list)
+
+        map_category = {True: "Complete", False: "Incomplete"}
+
+        count_completed = pie_df['completed'].value_counts().reset_index()
+        count_completed.columns = ['Category', 'count']
+        count_completed['Category_New'] =  [map_category[category] for category in count_completed['Category']]
+        print(count_completed['Category_New'])
+
+        
+
+        fig = px.pie(count_completed, names='Category_New', values='count', title='Pie Chart Example')
+
+        # Convert the Plotly figure to HTML
+        pie_html = fig.to_html(full_html=False)
+
+        return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html = by_week_html, pie_html = pie_html, title='Analytics')
     return render_template('dashboard.html')
 
 

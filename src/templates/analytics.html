@@ -1,6 +1,43 @@
 {% extends "layout.html" %}
 {% block content %}
-<div>
-    {{ chart_html|safe }}
-</div>
+    <div>
+        {{ hist_html|safe }}
+    </div>
+    <div>
+        {{ exp_act_html|safe }}
+    </div>
+    <div>
+        {{ pie_html|safe }}
+    </div>
+
+    <!-- Tabs Section -->
+    <div class="tabs-section">
+        <ul class="nav nav-tabs" id="chartTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="tab1" data-toggle="tab" href="#chart1" role="tab" aria-controls="chart1" aria-selected="true">Tab 1</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab2" data-toggle="tab" href="#chart2" role="tab" aria-controls="chart2" aria-selected="false">Tab 2</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tab3" data-toggle="tab" href="#chart3" role="tab" aria-controls="chart3" aria-selected="false">Tab 3</a>
+            </li>
+            <!-- Add more tabs as needed -->
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="chart1" role="tabpanel" aria-labelledby="tab1">
+                <!-- Content for Tab 1 (e.g., chart1) -->
+                {{ by_year_html|safe }}
+            </div>
+            <div class="tab-pane fade" id="chart2" role="tabpanel" aria-labelledby="tab2">
+                <!-- Content for Tab 2 (e.g., chart2) -->
+                {{ by_month_html|safe }}
+            </div>
+            <div class="tab-pane fade" id="chart3" role="tabpanel" aria-labelledby="tab3">
+                <!-- Content for Tab 2 (e.g., chart2) -->
+                {{ by_week_html|safe }}
+            </div>
+            <!-- Add more tab panes as needed -->
+        </div>
+    </div>
 {% endblock content %}
