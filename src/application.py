@@ -229,7 +229,7 @@ def ajaxapproverequest():
         'ContentType:': 'application/json'}
 
 
-@app.route("/dashboard")
+@app.route("/dashboard") 
 def dashboard():
     ############################
     # dashboard() function displays the tasks of the user

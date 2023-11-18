@@ -15,8 +15,8 @@ function sendRequest(e, clickedId) {
             "receiver": clickedId
         },
         success: function (response) {
-            location.reload()
-            console.log(JSON.parse(response))
+            location.reload();
+            console.log(JSON.parse(response));
         }
     })
 }

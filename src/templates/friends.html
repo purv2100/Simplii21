@@ -1,6 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<style>
+    .custom-button {
+        background-color: #5bc0de;
+        /* Customize the background color */
+        color: #fff;
+        /* Customize the text color */
+        border: 1px solid #46b8da;
+        /* Customize the border color */
+        padding: 5px 10px;
+        /* Adjust padding as needed */
+        border-radius: 4px;
+        /* Optional: Round the corners */
+    }
+</style>
+
 <details>
     <summary>Friends</summary>
     {% for friend in myFriends %}
@@ -27,7 +42,12 @@
 </details>
 <br>
 <details>
-    <summary>Sent Requests</summary>
+    <summary>Sent Requests ({{ pendingRequests|length }})</summary>
+    <div class="card" id="sentRequestsCard">
+        
+        <span id="sentRequestsCount" class="badge badge-pill badge-info">{{ pendingRequests|length }}</span>
+        <br>
+    </div>
     {% for req in pendingRequests %}
     <div>
         <span>{{req.receiver}}</span>
@@ -40,7 +60,12 @@
 
 <br>
 <details>
-    <summary>Pending Approvals</summary>
+    <summary>Pending Approvals ({{ pendingApproves|length }})</summary>
+    <div class="card" id="pendingApprovalsCard">
+        <span id="pendingApprovalsCount" class="badge badge-pill badge-info">{{ pendingApproves|length }}</span>
+        <br>
+    </div>
+
     {% for req in pendingApproves %}
     <div>
         <span>{{req}}</span>
