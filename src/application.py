@@ -141,7 +141,8 @@ def friends():
             myFriendsList.append(f['receiver'])
 
         print(myFriends)
-        allUsers = list(mongo.db.user.find({}, {'name', 'email'}))
+        allUsers = list(mongo.db.users.find({}, {'name', 'email'}))
+        print(allUsers)
 
         pendingRequests = list(mongo.db.friends.find(
             {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
@@ -295,6 +296,7 @@ def task():
                                             'endtime': end_time,
                                             'description': description,
                                             'progress': 0,
+                                            'actualhours': 0,
                                             'completed':False})
                     
                     for friendemail in friendsemail:
@@ -306,7 +308,8 @@ def task():
                                                     'starttime': start_time,
                                                     'endtime': end_time,
                                                     'description': description,
-                                                    'progress':0,
+                                                    'progress': 0,
+                                                    'acutalhours': 0,
                                                     'completed':False})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
@@ -324,18 +327,26 @@ def completeTask():
     if session.get('email'):
         email = session.get('email')
         task = request.form.get('task')
-        mongo.db.tasks.update_one({'email':email, 'taskname':task}, {'$set': {'completed':True}})
-        tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
-        total_tasks=0
-        total_completed_tasks=0
-        for tsk in tasks:
-            if tsk['completed']:
-                total_completed_tasks+=1
-            total_tasks+=1
+        is_completed = mongo.db.tasks.find_one({'taskname': task, 'email': email},{'completed'})
+        print(is_completed)
+        if is_completed['completed']:
+            flash('Task already completed!', 'danger')
+        else:
+            actualhours = request.form.get('actualhours')
+            print(actualhours)
+            print("Actual hours taken", int(actualhours))
+            mongo.db.tasks.update_one({'email':email, 'taskname':task}, {'$set': {'completed':True, 'actualhours':int(actualhours)}})
+            tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
+            total_tasks=0
+            total_completed_tasks=0
+            for tsk in tasks:
+                if tsk['completed']:
+                    total_completed_tasks+=1
+                total_tasks+=1
 
-        mongo.db.tasks.update_many({'taskname':task}, {'$set': {'progress':round(total_completed_tasks/total_tasks,2)*100}})
+            mongo.db.tasks.update_many({'taskname':task}, {'$set': {'progress':round(total_completed_tasks/total_tasks,2)*100}})
 
-        flash(f' {task} Task Completed!', 'success')
+            flash(f' {task} Task Completed!', 'success')
     return redirect(url_for('home'))
 
 
