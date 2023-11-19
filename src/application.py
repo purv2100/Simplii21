@@ -305,7 +305,7 @@ def analytics():
         data_hist = pd.DataFrame(data_hist_list)
 
         # Create a histogram using Plotly Express
-        fig = px.histogram(data_hist, x='category', color_discrete_sequence=['rgba(11, 127, 171, 1)'], nbins=3)
+        fig = px.histogram(data_hist, x='category', color_discrete_sequence=['rgba(166, 145, 92, 1)'], nbins=3)
 
         # You can customize the layout and appearance of the histogram, e.g., titles, labels, colors, etc.
         fig.update_layout(
@@ -363,7 +363,7 @@ def analytics():
         trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'], name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
 
         # Create layout
-        layout = go.Layout(barmode='group', title='Side-by-Side Bar Chart', xaxis=dict(title='Task Name'), yaxis=dict(title='Hours to Complete'))
+        layout = go.Layout(barmode='group', title='Expected Hours Vs Actual Hours to complete a task')
 
         # Create figure
         fig = go.Figure(data=[trace1, trace2], layout=layout)
@@ -374,14 +374,14 @@ def analytics():
                 linewidth=2,    # Set the line width of the x-axis
                 linecolor='black',  # Set the line color of the x-axis
                 tickfont=dict(size=16),
-                title='Category'
+                title='Task Name'
             ),
             yaxis=dict(
                 showline=True,  # Display the y-axis line
                 linewidth=2,    # Set the line width of the y-axis
                 linecolor='black',  # Set the line color of the y-axis
                 tickfont=dict(size=16),
-                title='Count of Tasks'
+                title='Hours'
             ),
             plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
             paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
@@ -389,7 +389,7 @@ def analytics():
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
-            title_text='Task Complexity Histogram',  # Title text
+            title_text='Expected Hours Vs Actual Hours to complete a task',  # Title text
             title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
@@ -415,7 +415,7 @@ def analytics():
         timeline_df['month_year'] = timeline_df['startdate'].dt.strftime('%b \'%y')
 
         # Year-wise distribution of tasks
-        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=['rgba(22, 160, 133, 1)'])
         
         fig.update_xaxes(dtick = 1)
 
@@ -425,7 +425,7 @@ def analytics():
                 linewidth=2,    # Set the line width of the x-axis
                 linecolor='black',  # Set the line color of the x-axis
                 tickfont=dict(size=16),
-                title='Category'
+                title='Year'
             ),
             yaxis=dict(
                 showline=True,  # Display the y-axis line
@@ -440,7 +440,7 @@ def analytics():
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
-            title_text='Task Complexity Histogram',  # Title text
+            title_text='Year-wise distribution of completed tasks',  # Title text
             title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
@@ -450,7 +450,7 @@ def analytics():
         by_year_html = fig.to_html(full_html=False)
 
         # Monthly distribution of tasks
-        fig = px.histogram(timeline_df, x='month_year', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+        fig = px.histogram(timeline_df, x='month_year', color_discrete_sequence=['rgba(245, 230, 83, 1)'])
 
         fig.update_xaxes(dtick = 1)
 
@@ -460,7 +460,7 @@ def analytics():
                 linewidth=2,    # Set the line width of the x-axis
                 linecolor='black',  # Set the line color of the x-axis
                 tickfont=dict(size=16),
-                title='Category'
+                title='Month'
             ),
             yaxis=dict(
                 showline=True,  # Display the y-axis line
@@ -475,7 +475,7 @@ def analytics():
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
-            title_text='Task Complexity Histogram',  # Title text
+            title_text='Monthly distribution of completed tasks',  # Title text
             title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
@@ -485,7 +485,7 @@ def analytics():
         by_month_html = fig.to_html(full_html=False)
 
         # Weekly distribution of tasks
-        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=['rgba(219, 10, 91, 1)'])
 
         fig.update_xaxes(dtick = 1)
 
@@ -495,7 +495,7 @@ def analytics():
                 linewidth=2,    # Set the line width of the x-axis
                 linecolor='black',  # Set the line color of the x-axis
                 tickfont=dict(size=16),
-                title='Category'
+                title='Week'
             ),
             yaxis=dict(
                 showline=True,  # Display the y-axis line
@@ -510,7 +510,7 @@ def analytics():
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
-            title_text='Task Complexity Histogram',  # Title text
+            title_text='Weekly distribution of completed tasks',  # Title text
             title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
