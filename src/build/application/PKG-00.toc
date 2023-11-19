@@ -1,0 +1,52 @@
+("D:\\Fall '23\\Software "
+ 'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\application.pkg',
+ {'BINARY': True,
+  'DATA': True,
+  'EXECUTABLE': True,
+  'EXTENSION': True,
+  'PYMODULE': True,
+  'PYSOURCE': True,
+  'PYZ': False,
+  'SPLASH': True,
+  'SYMLINK': False},
+ [('pyi-contents-directory _internal', '', 'OPTION'),
+  ('PYZ-00.pyz',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\PYZ-00.pyz',
+   'PYZ'),
+  ('struct',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\localpycs\\struct.pyc',
+   'PYMODULE'),
+  ('pyimod01_archive',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\localpycs\\pyimod01_archive.pyc',
+   'PYMODULE'),
+  ('pyimod02_importers',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\localpycs\\pyimod02_importers.pyc',
+   'PYMODULE'),
+  ('pyimod03_ctypes',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\localpycs\\pyimod03_ctypes.pyc',
+   'PYMODULE'),
+  ('pyimod04_pywin32',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\build\\application\\localpycs\\pyimod04_pywin32.pyc',
+   'PYMODULE'),
+  ('pyiboot01_bootstrap',
+   'c:\\program '
+   'files\\python38\\lib\\site-packages\\PyInstaller\\loader\\pyiboot01_bootstrap.py',
+   'PYSOURCE'),
+  ('application',
+   "D:\\Fall '23\\Software "
+   'Engineering\\Simplii\\Simplii-Group74-2023\\src\\application.py',
+   'PYSOURCE')],
+ 'python38.dll',
+ True,
+ False,
+ False,
+ [],
+ None,
+ None,
+ None)
