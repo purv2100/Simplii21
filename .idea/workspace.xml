@@ -5,7 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b87a211f-9e43-48fe-add2-28323d5bd69a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/static/images/site_logo6.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/test_application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Simplii-Group74-2023.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Simplii-Group74-2023.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/dashboard.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/dashboard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/templates/friends.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/friends.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/templates/layout.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -34,7 +50,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "last_opened_file_path": "E:/NCSU/CSC510_Software Engineering/Project3/Simplii-Group74-2023"
   }
 }]]></component>

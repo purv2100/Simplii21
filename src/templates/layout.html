@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- Font Awesome JS -->
+    <script src="https://kit.fontawesome.com/5cab5da716.js" crossorigin="anonymous"></script>
     
     {% if title %}
       <title>Simplii - {{ title }}</title>
@@ -17,13 +20,41 @@
     {% endif %}
 </head>
 <body>
-    <header class="site-header">
-      <nav class="navbar navbar-expand-md fixed-top nav-color">
+    <div class="wrapper">
+        <!-- Sidebar -->
+      {% if session.get("email") %}
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <img src="static/images/site_logo3.png" alt="site logo">
+            </div>
+
+            <!-- Sidebar List Items -->
+            <ul class="list-unstyled components">
+                <li class="active">
+                    <a href="{{ url_for('about_us') }}">Home</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('task') }}">Add Tasks</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('friends') }}">Friends</a>
+                </li>
+                <li>
+                    <a href="{{ url_for('analytics') }}">Analytics</a>
+                </li>
+            </ul>
+        </nav>
+        {% endif %}
+
+            <div id="content">
+                    <header class="site-header">
+      <nav class="navbar navbar-expand-md  nav-color">
         <div class="container">
           {% if not session.get("email") %}
-            <a class="navbar-brand mr-4 text-white" href="{{url_for('login')}}">Simplii</a>
-          {% else %}
-            <a class="navbar-brand mr-4 text-white" href="{{url_for('about_us')}}">Simplii</a>
+            <a class="navbar-brand mr-4 text-black" href="{{url_for('login')}}">Simplii</a>
           {% endif %}
 
           <div class="collapse navbar-collapse" id="navbarToggle">
@@ -32,12 +63,14 @@
               <a class="nav-item nav-link" href="{{ url_for('login') }}">Home</a>
             </div>
             {% else %}
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
-              <a class="nav-item nav-link" href="{{ url_for('task') }}">Add Tasks</a>
-              <a class="nav-item nav-link" href="{{ url_for('friends') }}">Friends</a>
-              <a class="nav-item nav-link" href="{{ url_for('analytics') }}">Analytics</a>
-            </div>
+                <div class="navbar-nav mr-auto">
+                    <div class="container-fluid">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+                            <span>Menu</span>
+                        </button>
+                    </div>
+                </div>
             {% endif %}
             <!-- Navbar Right Side -->
             {% if not session.get("email"): %}
@@ -47,7 +80,7 @@
             </div>
             {% else %}
             <div class="navbar-nav">
-              <a class="nav-item nav-link">Welcome, {{ session.get("name") }}</a>
+              <a class="nav-item nav-link">Welcome, {{ session.get("email") }}</a>
               <button class="nav-item nav-link btn btn-link" onclick="logout()">Log Out</button>
             </div>
             {% endif %}
@@ -71,7 +104,8 @@
         </div>
       </div>
     </main>
-
+            </div>
+    </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

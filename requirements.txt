@@ -21,6 +21,7 @@ MarkupSafe==2.0.1
 pycparser==2.20
 pymongo==4.5.0
 python-dateutil==2.8.2
+pytest==7.4.3
 six==1.16.0
 Werkzeug==2.0.1
 WTForms==2.3.3
