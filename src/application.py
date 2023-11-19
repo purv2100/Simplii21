@@ -18,7 +18,12 @@ from flask_login import LoginManager, login_required
 import uuid
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import plotly.express as px
+import plotly.graph_objs as go
+
+from plotly.subplots import make_subplots
+
 import pandas as pd
+import dash
 
 load_dotenv()
 
@@ -274,6 +279,14 @@ def dashboard():
         tasks = mongo.db.tasks.find({'email': session.get('email')})
     return render_template('dashboard.html', tasks=tasks)
 
+def get_first_day_of_week(date):
+    # Calculate the difference between the current day and Monday (0)
+    days_to_monday = date.weekday()
+
+    # Subtract the difference to get the first day of the week
+    first_day_of_week = date - timedelta(days=days_to_monday)
+
+    return first_day_of_week
 
 @app.route("/analytics")
 def analytics():
@@ -282,31 +295,266 @@ def analytics():
     # route "/analytics" will redirect to analytics() function.
     # ##########################
     email = session.get('email')
-    data = mongo.db.tasks.find({'email': email}, {'category'})
+    # Check if there are any tasks in the database.
+    data = mongo.db.tasks.find({'email': email})
     if data is not None:
-        data_list = list(data)
-        data = pd.DataFrame(data_list)
+        # ----------------------------------------------------------------------------------------
+        # Histogram of tasks based on 'Category': Easy, Medium, Hard 
+        data_hist = mongo.db.tasks.find({'email': email}, {'category'})
+        data_hist_list = list(data_hist)
+        data_hist = pd.DataFrame(data_hist_list)
 
         # Create a histogram using Plotly Express
-        fig = px.histogram(data, x='category', nbins=3, title="Histogram Example")
+        fig = px.histogram(data_hist, x='category', color_discrete_sequence=['rgba(11, 127, 171, 1)'], nbins=3)
 
         # You can customize the layout and appearance of the histogram, e.g., titles, labels, colors, etc.
         fig.update_layout(
-            xaxis_title="Categories",
-            yaxis_title="Frequency",
-            font=dict(family="Arial", size=18, color="black"),
-            paper_bgcolor="white",
-            plot_bgcolor="lightgray",
-            width=550,
-            height=550,
+            xaxis=dict(
+                showline=True,  # Display the x-axis line
+                linewidth=2,    # Set the line width of the x-axis
+                linecolor='black',  # Set the line color of the x-axis
+                tickfont=dict(size=16),
+                title='Category'
+            ),
+            yaxis=dict(
+                showline=True,  # Display the y-axis line
+                linewidth=2,    # Set the line width of the y-axis
+                linecolor='black',  # Set the line color of the y-axis
+                tickfont=dict(size=16),
+                title='Count of Tasks'
+            ),
+            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            bargap = 0.3,
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Task Complexity Histogram',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
         )
 
         # Customize the y-axis ticks to show integer values
         fig.update_yaxes(dtick=1)
 
         # Convert the Plotly figure to HTML
-        chart_html = fig.to_html(full_html=False)
-        return render_template('analytics.html', chart_html=chart_html, title='Analytics')
+        hist_html = fig.to_html(full_html=False)
+
+        # ----------------------------------------------------------------------------------------
+        # Side-by-side bar chart of expected hours and actual hours required to complete the task
+        # Only consider the tasks which are complete. i.e. progress = 1
+        data_exp_act = mongo.db.tasks.find({'email':email, 'completed':True}, {'taskname', 'starttime', 'endtime', 'actualhours'})
+
+        data_exp_act_df = pd.DataFrame(columns = ['Name', 'Expected Hours', 'Actual Hours'])
+        time_format = "%H:%M"
+        i=0
+        for task in data_exp_act:
+            start_time = datetime.strptime(task['starttime'], time_format)
+            end_time = datetime.strptime(task['endtime'], time_format)
+            expected_hours = (end_time - start_time).total_seconds()/3600
+            data_exp_act_df.loc[i] = [task['taskname'], expected_hours, task['actualhours']]
+            i+=1
+
+        # Create trace for Value1 with custom bar color
+        trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'], name='Expected Hours', marker=dict(color='rgba(230, 126, 34, 1)'))
+
+        # Create trace for Value2 with a different bar color
+        trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'], name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
+
+        # Create layout
+        layout = go.Layout(barmode='group', title='Side-by-Side Bar Chart', xaxis=dict(title='Task Name'), yaxis=dict(title='Hours to Complete'))
+
+        # Create figure
+        fig = go.Figure(data=[trace1, trace2], layout=layout)
+
+        fig.update_layout(
+            xaxis=dict(
+                showline=True,  # Display the x-axis line
+                linewidth=2,    # Set the line width of the x-axis
+                linecolor='black',  # Set the line color of the x-axis
+                tickfont=dict(size=16),
+                title='Category'
+            ),
+            yaxis=dict(
+                showline=True,  # Display the y-axis line
+                linewidth=2,    # Set the line width of the y-axis
+                linecolor='black',  # Set the line color of the y-axis
+                tickfont=dict(size=16),
+                title='Count of Tasks'
+            ),
+            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            bargap = 0.3,
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Task Complexity Histogram',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
+        )
+
+        exp_act_html = fig.to_html(full_html=False)
+
+        # ----------------------------------------------------------------------------------------
+        # Time chart to show distribution of completed tasks across different years,
+        # different months and different weeks.
+
+        timeline_data = mongo.db.tasks.find({'email':email, 'completed':True}, {'startdate'})
+        timeline_list = list(timeline_data)
+        timeline_df = pd.DataFrame(timeline_list)
+
+        timeline_df['startdate'] = [datetime.strptime(date, "%Y-%m-%d") for date in timeline_df['startdate']]
+
+        year = [start_date.year for start_date in timeline_df['startdate']]
+        timeline_df['year'] = year
+
+        timeline_df['week'] = timeline_df['startdate'].dt.strftime('Week %U, %Y')
+
+        timeline_df['month_year'] = timeline_df['startdate'].dt.strftime('%b \'%y')
+
+        # Year-wise distribution of tasks
+        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+        
+        fig.update_xaxes(dtick = 1)
+
+        fig.update_layout(
+            xaxis=dict(
+                showline=True,  # Display the x-axis line
+                linewidth=2,    # Set the line width of the x-axis
+                linecolor='black',  # Set the line color of the x-axis
+                tickfont=dict(size=16),
+                title='Category'
+            ),
+            yaxis=dict(
+                showline=True,  # Display the y-axis line
+                linewidth=2,    # Set the line width of the y-axis
+                linecolor='black',  # Set the line color of the y-axis
+                tickfont=dict(size=16),
+                title='Count of Tasks'
+            ),
+            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            bargap = 0.3,
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Task Complexity Histogram',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
+        )
+
+        # Convert the Plotly figure to HTML
+        by_year_html = fig.to_html(full_html=False)
+
+        # Monthly distribution of tasks
+        fig = px.histogram(timeline_df, x='month_year', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+
+        fig.update_xaxes(dtick = 1)
+
+        fig.update_layout(
+            xaxis=dict(
+                showline=True,  # Display the x-axis line
+                linewidth=2,    # Set the line width of the x-axis
+                linecolor='black',  # Set the line color of the x-axis
+                tickfont=dict(size=16),
+                title='Category'
+            ),
+            yaxis=dict(
+                showline=True,  # Display the y-axis line
+                linewidth=2,    # Set the line width of the y-axis
+                linecolor='black',  # Set the line color of the y-axis
+                tickfont=dict(size=16),
+                title='Count of Tasks'
+            ),
+            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            bargap = 0.3,
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Task Complexity Histogram',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
+        )
+
+        # Convert the Plotly figure to HTML
+        by_month_html = fig.to_html(full_html=False)
+
+        # Weekly distribution of tasks
+        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=['rgba(150, 54, 148, 1)'])
+
+        fig.update_xaxes(dtick = 1)
+
+        fig.update_layout(
+            xaxis=dict(
+                showline=True,  # Display the x-axis line
+                linewidth=2,    # Set the line width of the x-axis
+                linecolor='black',  # Set the line color of the x-axis
+                tickfont=dict(size=16),
+                title='Category'
+            ),
+            yaxis=dict(
+                showline=True,  # Display the y-axis line
+                linewidth=2,    # Set the line width of the y-axis
+                linecolor='black',  # Set the line color of the y-axis
+                tickfont=dict(size=16),
+                title='Count of Tasks'
+            ),
+            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            bargap = 0.3,
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Task Complexity Histogram',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
+        )
+
+        # Convert the Plotly figure to HTML
+        by_week_html = fig.to_html(full_html=False)
+
+        #----------------------------------------------------------------------------------------------
+        # Pie chart to show complete and incomplete tasks.
+
+        pie_data = mongo.db.tasks.find({'email': email}, {'completed'})
+        pie_data_list = list(pie_data)
+        pie_df = pd.DataFrame(pie_data_list)
+
+        map_category = {True: "Complete", False: "Incomplete"}
+
+        count_completed = pie_df['completed'].value_counts().reset_index()
+        count_completed.columns = ['Category', 'count']
+        count_completed['Category'] =  [map_category[category] for category in count_completed['Category']]
+    
+        fig = px.pie(count_completed, names='Category', values='count')
+
+        fig.update_layout(
+            plot_bgcolor='rgba(46, 204, 113, 0.5)',  # Background color for the plot area
+            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            legend=dict(
+                font=dict(size=16)  # Adjust the size of the legend font
+            ),
+            title_text='Completed vs Incomplete Tasks',  # Title text
+            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            title_x=0.04,  # Center the title horizontally
+            title_y=0.95  # Adjust the vertical position of the title
+        )
+        custom_colors = ['rgba(13, 180, 185, 1)', 'rgba(236, 100, 75, 1)']
+        fig.update_traces(
+            marker=dict(colors=custom_colors),
+            hole=0.4  # Set the size of the hole to create a donut chart (0 to 1, where 0 is no hole and 1 is a full circle)
+        )
+
+        # Convert the Plotly figure to HTML
+        pie_html = fig.to_html(full_html=False)
+
+        return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html = by_week_html, pie_html = pie_html, title='Analytics')
     return render_template('dashboard.html')
 
 
