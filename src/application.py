@@ -24,7 +24,7 @@ load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'secret'
-app.config['MONGO_URI'] = os.getenv("MONGO_URI")
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
 mongo = PyMongo(app)
 
 
@@ -32,9 +32,8 @@ app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
 app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
-app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
-app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
-
+app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
+app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
 scheduler = BackgroundScheduler()
 
 
@@ -122,14 +121,26 @@ def forgotPassword():
 
 @app.route("/friends")
 def friends():
-    # ############################
-    # friends() function displays the list of friends corrsponding to given email
-    # route "/friends" will redirect to friends() function which redirects to friends.html page.
-    # friends() function will show a list of "My friends", "Add Friends" functionality, "send Request" and Pending Approvals" functionality
-    # Details corresponding to given email address are fetched from the database entries
-    # Input: Email
-    # Output: My friends, Pending Approvals, Sent Requests and Add new friends
-    # ##########################
+    """
+    friends() function displays the list of friends corresponding to the given email.
+    The route "/friends" will redirect to the friends() function, which further redirects to the friends.html page.
+    The friends() function presents a list of "My friends," "Add Friends" functionality, "Send Request," and "Pending Approvals."
+    Details corresponding to the given email address are fetched from the database entries.
+
+    Input:
+        Email (retrieved from the session)
+
+    Output:
+        Rendered template 'friends.html' with the following variables:
+        - allUsers: A list of all users with their names and emails
+        - pendingRequests: A list of friend requests sent by the user that are pending approval
+        - active: The email address of the current user
+        - pendingReceivers: A list of users who have sent friend requests to the current user (pending approval)
+        - pendingApproves: A list of users whose friend requests to the current user are pending approval
+        - myFriends: A list of accepted friend relationships (sender, receiver, accept=True)
+        - myFriendsList: A list of email addresses corresponding to the user's accepted friends
+
+    """
     email = session.get('email')
 
     if email is not None:
@@ -143,7 +154,7 @@ def friends():
         print(myFriends)
         allUsers = list(mongo.db.users.find({}, {'name', 'email'}))
         print(allUsers)
-
+        
         pendingRequests = list(mongo.db.friends.find(
             {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
         pendingReceivers = list()
@@ -156,7 +167,7 @@ def friends():
         for p in pendingApprovals:
             pendingApproves.append(p['sender'])
 
-        print(pendingApproves)
+        # print(pendingApproves)
     else:
         return redirect(url_for('login'))
 
@@ -165,7 +176,92 @@ def friends():
                            pendingReceivers=pendingReceivers, pendingApproves=pendingApproves, myFriends=myFriends, myFriendsList=myFriendsList)
 
 
-@app.route("/dashboard")
+@app.route("/ajaxsendrequest", methods=['POST'])
+def ajaxsendrequest():
+    """
+    ajaxsendrequest() is a function that updates friend request information in the database.
+    The route "/ajaxsendrequest" redirects to ajaxsendrequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and send request details are updated.
+
+    Input:
+        - Email (retrieved from the session)
+        - Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database entry of receiver information in the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
+    
+    email = session.get('email')
+    if email is not None:
+        receiver = request.form.get('receiver')
+        res = mongo.db.friends.insert_one(
+            {'sender': email, 'receiver': receiver, 'accept': False})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
+
+
+@app.route("/ajaxcancelrequest", methods=['POST'])
+def ajaxcancelrequest():
+    """
+    ajaxsendrequest() is a function that updates friend request information into the database.
+    The route "/ajaxsendrequest" will redirect to the ajaxsendrequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and send request details are updated.
+
+    Input:
+        Email (retrieved from the session)
+        Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database entry of receiver information into the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
+    email = get_session = session.get('email')
+    if get_session is not None:
+        receiver = request.form.get('receiver')
+        res = mongo.db.friends.delete_one(
+            {'sender': email, 'receiver': receiver})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
+
+
+@app.route("/ajaxapproverequest", methods=['POST'])
+def ajaxapproverequest():
+    """
+    ajaxapproverequest() is a function that updates friend request information into the database.
+    The route "/ajaxapproverequest" will redirect to the ajaxapproverequest() function.
+    Details corresponding to the given email address are fetched from the database entries, and approve request details are updated.
+
+    Input:
+        Email (retrieved from the session)
+        Receiver (retrieved from the form data in the request)
+
+    Output:
+        - Database update of accept as TRUE information into the database.
+        - Returns JSON response with status True if the operation is successful, and False otherwise.
+    """
+    email = get_session = session.get('email')
+    if get_session is not None:
+        receiver = request.form.get('receiver')
+        print(email, receiver)
+        res = mongo.db.friends.update_one({'sender': receiver, 'receiver': email}, {
+                                          "$set": {'sender': receiver, 'receiver': email, 'accept': True}})
+        mongo.db.friends.insert_one(
+            {'sender': email, 'receiver': receiver, 'accept': True})
+        if res:
+            return json.dumps({'status': True}), 200, {
+                'ContentType': 'application/json'}
+    return json.dumps({'status': False}), 500, {
+        'ContentType:': 'application/json'}
+
+
+@app.route("/dashboard") 
 def dashboard():
     ############################
     # dashboard() function displays the tasks of the user
