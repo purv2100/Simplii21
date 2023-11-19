@@ -7,43 +7,25 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
-        $("#ddlStatus,#ddlCategory").on("change", function () {
-            var Status = $('#ddlStatus').find("option:selected").val();
+        $("#ddlCategory").on("change", function () {
             var Category = $('#ddlCategory').find("option:selected").val();
-            SearchData(Status, Category)
+            SearchData(Category)
         });
     });
-    function SearchData(Status, Category) {
-        if (Status.toUpperCase() == 'ALL' && age.toUpperCase() == 'ALL') {
-            $('myTable tbody tr').show();
-        } else {
+    function SearchData(Category) {
+        if (Category.toUpperCase() == 'ALL') {
+            $('#myTable tbody tr').show();
+        } 
+        else 
+        {
+            // Hide all rows first
+            $('#myTable tbody tr').hide();
+            // Show rows matching the selected "Category"
             $('#myTable tbody tr:has(td)').each(function () {
-                var rowStatus = $.trim($(this).find('td:eq(1)').text());
                 var rowCategory = $.trim($(this).find('td:eq(2)').text());
-                if (Status.toUpperCase() != 'ALL' && Category.toUpperCase() != 'ALL') {
-                    if (rowStatus.toUpperCase() == Status.toUpperCase() && rowCategory == Category) {
-                        $(this).show();
-                    } else {
-                        $(this).hide();
-                    }
-                } else if ($(this).find('td:eq(1)').text() != '' || $(this).find('td:eq(1)').text() != '') {
-                    if (Status != 'all') {
-                        if (rowStatus.toUpperCase() == Status.toUpperCase()) {
-                            $(this).show();
-                        } else {
-                            $(this).hide();
-                        }
-                    }
-                    if (Category != 'all') {
-                        if (rowCategory == Category) {
-                            $(this).show();
-                        }
-                        else {
-                            $(this).hide();
-                        }
-                    }
+                if (rowCategory.toUpperCase() == Category.toUpperCase()) {
+                    $(this).show();
                 }
- 
             });
         }
     }
@@ -74,19 +56,12 @@
             <div class="row">
                 <div class="col-sm-7">
                     <div class="filter-group">
-                        <label>Status</label>
-                        <select class="cl_status" id="ddlStatus">
-                            <option value="all">Select status </option>
-                                <option value="In Progress">In Progress</option>
-                                <option value="Done">Done</option>
-                                <option value="Blocked">Blocked</option>
-                        </select>
-                        &nbsp  &nbsp &nbsp &nbsp &nbsp
                         <label>Category</label>
                             <select class="cl_category" id="ddlCategory">
                                 <option value="all">Select category </option>
-                                <option value="Physical">physical</option>
-                                <option value="Intellectual">intellectual</option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
                             </select>
                             &nbsp
                     </div>
@@ -98,31 +73,25 @@
         <thead>
             <tr style="background-color: #D5D8DD; text-align: center;">
                 <th>Task</th>
-                <th data-sortable="true">Status</th>
+                <th data-sortable="true">Progress</th>
                 <th data-sortable="true">Category</th>
                 <th>Start Date</th>
-                <th>Due Date</th>
                 <th>Description</th>
-                <th>Edit</th>
+                <th>Actual Hours</th>
+                <th>Complete</th>
                 <th>Delete</th>
             </tr>
         </thead>
         <tbody>
             {% for item in tasks %}
-            <tr>
+            <tr style="text-align: center;">
                 <td>{{ item['taskname'] }}</td>
-                {% if item['status'] == 'Done' %}
-                <td style="background-color: lightgreen;">{{ item['status'] }}</td>
-                {% elif item['status'] == 'Blocked' %}
-                <td style="background-color: lightcoral;">{{ item['status'] }}</td>
-                {% else %}
-                <td style="background-color: lightblue;">{{ item['status'] }}</td>
-                {% endif %}
+                <td>{{ item['progress'] }}%</td>
                 <td>{{ item['category'] }}</td>
                 <td>{{ item['startdate'] }}</td>
-                <td>{{ item['duedate'] }}</td>
                 <td>{{ item['description'] }}</td>
-                <td style="text-align: center;"><button class='editButton'>edit</button></td>
+                <td><input type="number" id="actualhours" name="actualhours" min="1" max="24"></td>
+                <td style="text-align: center;"><button class='completeButton'>Complete</button></td>
                 <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
             </tr>
             {% endfor %}
