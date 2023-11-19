@@ -48,13 +48,14 @@ $(document).ready(function(){
         // get the current row
         var currentRow=$(this).closest("tr"); 
             
-        var col1=currentRow.find("td:eq(0)").text(); // get current row 1st TD value
-        console.log(col1);
+        var task=currentRow.find("td:eq(0)").text(); // get taskname value
+        var actualhours = $("#actualhours").val();// get actual hours value
         $.ajax({
             type: "POST",
             url: "/completeTask",
             data:{
-                "task":col1,
+                "task":task,
+                "actualhours":actualhours
             },
             success: function(response){
                 resdata = JSON.parse(response)
