@@ -840,23 +840,6 @@ def logout():
     session.clear()
     return "success"
 
-
-@app.route("/dummy", methods=['GET'])
-def dummy():
-    # ############################
-    # dummy() function performs the functionality displaying the message "feature will be added soon"
-    # route "/dummy" will redirect to dummy() function.
-    # Output: redirects to dummy.html
-    # ##########################
-    """response = make_response(
-                redirect(url_for('home'),200),
-            )
-    response.headers["Content-Type"] = "application/json",
-    response.headers["token"] = "123456"
-    return response"""
-    return "Page Under Maintenance"
-
-
 def emailReminder():
     # ############################
     # emailReminder() function is called by cron job that runs at 8 am every day
