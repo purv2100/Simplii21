@@ -566,7 +566,7 @@ def login():
                     form.password.data.encode("utf-8"),
                     temp['pwd']) or temp == form.password.data):
                 flash('You have been logged in!', 'success')
-                session['name'] = temp['name']
+                session['email'] = temp['email']
                 return redirect(url_for('dashboard'))
             else:
                 flash(
