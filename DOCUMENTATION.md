@@ -1,25 +1,16 @@
 # Functionalities added to the older version:
-### Making flash cards using ChatGPT
-In the previous version, flash cards were created using google(People also asked section which was not accurate enough for generating Flash card answers. In this version, you have the option to choose to create the flash cards using ChatGPT 4 which is more accuarate and reliable)
+### Revamped and Intuitive UI
+In the previous version, the UI was very basic and did not have origniality. We reworked the UI and added a menu button that closes and opens up a sidebar and contains all of our functinalities. Other than that, we removed the recommend task functionality as it did not recommend or schedule tasks and only viewed tasks in a random order.
 
-### Drop down menu added
-We changed the user interface and added a drop down menu. now users can choose whether google or ChatGPT generated the flash cards for them.
+### Friends
+We added friends section, where you could see all your friends, add friends, view pending requests and approvals of friend requests and a framework to share your task history with your friends.
 
+### Reworked Adding Task Functionality
+We reworked adding task functionality and added 2 new and important features. First, associating your friends with task that the user is going to add. If the friend is associated, the task is also assigned to that friend and the task won't be fully completed until and unless all of the users, associated with the task, won't complete from their side. Second, we added "Start Time" and "End Time" fields that take in the time expected starting time and end time of the task. This functionality will be used in the newly added analytics section.
 
-### Answer search
-In the previous version, only a relevant web link for a question was being extracted. In this version, we search the web for the relevant answers as well, and then find the best answer. Therefore, we do only show the user different questions but provide an end-to-end solution with both questions and answers.
-
-### Anki Integration
-We integrated a software tool called Anki with the current code, so that the question and answers can be stored as flashcards on Anki.
-
-### Anki Decks
-For each lecture, we create a deck, and then create multiple cards in the deck. Each card in the denotes a single question answer pair. We also developed logic to correctly store the cards, for Anki to use later.
-
-### Improved UI
-We made several improvements to the UI. For example, user can provide custom deck names, and specify where to store decks. We also made the onboarding easier to make the process of generating decks easier.
-
-### Improved Test coverage (64% -> 96%)
-We significantly improved the test coverage from 64% to 96%. To improve the coverage, we did not only write several additional tests, but also removed any redundant code that was not being used. 
+### Analytics Section
+We have also analytics section about the tasks which helps user gain insights and make better decisions. We provide analytics by 4 different types of visualizations:
+- 
 
 ### Improved Documentation
 We generated the code documentation using a new format called Pycco. We also revamped the readme and other docs for better readability and user experience.
