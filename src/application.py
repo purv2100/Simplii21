@@ -23,7 +23,6 @@ import plotly.graph_objs as go
 from plotly.subplots import make_subplots
 
 import pandas as pd
-import dash
 
 load_dotenv()
 
