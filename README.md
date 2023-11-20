@@ -32,7 +32,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
   - [Adding tasks](#adding-tasks)
   - [Task Recommendation and Display](#task-recommendation-and-display)
   - [Modifying tasks Updating and Deleting](#modifying-tasks-updating-and-deleting)
-- [Successful Case Studies](#successful-usecase)
+- [Successful Case Studies](#successful-usecases)
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Delta](#delta)
