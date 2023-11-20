@@ -295,8 +295,8 @@ def analytics():
     # ##########################
     email = session.get('email')
     # Check if there are any tasks in the database.
-    data = mongo.db.tasks.find({'email': email})
-    if data is not None:
+    data = mongo.db.tasks.find_one({'email': email})
+    if data:
         # ----------------------------------------------------------------------------------------
         # Histogram of tasks based on 'Category': Easy, Medium, Hard 
         data_hist = mongo.db.tasks.find({'email': email}, {'category'})
