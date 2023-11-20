@@ -10,7 +10,7 @@
 * In the event of disagreements, an open and transparent discussion will be held, and efforts will be made to reach a consensus. If consensus cannot be reached, a majority vote among the core contributors will be used to make decisions.
 
 3. Roles and Responsibilities:
-* Project Lead: Purv Patel will serve as the project lead, responsible for overall project coordination, release management, and resolving conflicts.
+* Project Lead: (Contributor Name) will serve as the project lead, responsible for overall project coordination, release management, and resolving conflicts.
 * Development Lead: Each core contributor will have specific development responsibilities, such as feature development, code reviews, and bug fixes.
 * Community Engagement: Core contributors will actively engage with the community, address user feedback, and guide contributors.
 
