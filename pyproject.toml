@@ -1,0 +1,25 @@
+[project]
+name = "Simplii_App"
+version = "0.0.1"
+authors = [
+  { name="Aditi Salunkhe", email="acsalunk@ncsu.edu"},
+  { name="Purv Patel", email="ppatel36@ncsu.edu"},
+  { name="Ishan Mistry", email="ihmistry@ncsu.edu"},
+  { name="Lixing Zheng", email="lzheng26@ncsu.edu"}
+]
+description = "Simplii_App - Group-74"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/aditicsalunkhe/Simplii-Group74-2023"
+Issues = "https://github.com/aditicsalunkhe/Simplii-Group74-2023/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
