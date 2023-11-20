@@ -102,8 +102,25 @@ https://user-images.githubusercontent.com/89509351/144703718-a2f478e3-b4ea-4fa2-
 
 https://user-images.githubusercontent.com/89509351/144703727-e757e3e4-3776-470f-b08f-516593cb861e.mp4
 
+## Successful Usecases
 
+**Case Study:** Aarti
 
+**Background:** Software Developer at MiniOrangeX
+
+**Scenario:**
+Aarti was struggling to manage lots of tasks at her company.
+She started using Simplii, and now she is able to manage all the tasks without any hassle.
+She also got better at managing and understanding tasks when she got some valuable insights from the visualizations provided by the analytics section.
+
+**Case Study:** Lorenzo
+
+**Background:** Computer Science Grad Student
+
+**Scenario:**
+Lorenzo wanted a tool where his project group could assign and manage tasks within the group.
+His group started using Simplii, and now they smoothly completed the project by managing tasks within project members easily.
+Also, they were able to publish their task report based on the visualizations provided by the analytics section.
 
 ## Steps for execution
  
