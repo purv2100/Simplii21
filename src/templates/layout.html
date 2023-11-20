@@ -49,20 +49,20 @@
         </nav>
         {% endif %}
 
-            <div id="content">
-                    <header class="site-header">
-      <nav class="navbar navbar-expand-md  nav-color">
-        <div class="container">
-          {% if not session.get("email") %}
-            <a class="navbar-brand mr-4 text-black" href="{{url_for('login')}}">Simplii</a>
-          {% endif %}
+    <div id="content">
+        <header class="site-header">
+            {% if not session.get("email") %}
+             <nav class="navbar navbar-expand-md  nav-color-violet">
+             {% else %}
+              <nav class="navbar navbar-expand-md  nav-color">
+             {% endif %}
+                 <div class="container">
+                      {% if not session.get("email") %}
+                        <a class="navbar-brand mr-4" href="{{url_for('login')}}">Simplii</a>
+                      {% endif %}
 
           <div class="collapse navbar-collapse" id="navbarToggle">
-            {% if not session.get("email"): %}
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('login') }}">Home</a>
-            </div>
-            {% else %}
+            {% if session.get("email"): %}
                 <div class="navbar-nav mr-auto">
                     <div class="container-fluid">
                         <button type="button" id="sidebarCollapse" class="btn btn-info">
@@ -74,14 +74,14 @@
             {% endif %}
             <!-- Navbar Right Side -->
             {% if not session.get("email"): %}
-            <div class="navbar-nav">
+            <div class="navbar-nav ml-auto navbar-lr">
               <a class="nav-item nav-link" href="{{ url_for('login') }}" id="login">Login</a>
               <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
             </div>
             {% else %}
-            <div class="navbar-nav">
-              <a class="nav-item nav-link">Welcome, {{ session.get("email") }}</a>
-              <button class="nav-item nav-link btn btn-link" onclick="logout()">Log Out</button>
+            <div class="navbar-nav ml-auto">
+              <a class="nav-item nav-link ">Welcome, {{ session.get("name") }}</a>
+              <button class="nav-item nav-link btn btn-link " onclick="logout()">Log Out</button>
             </div>
             {% endif %}
           </div>
