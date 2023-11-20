@@ -3,7 +3,7 @@
 * Purv Patel (ppatel36@ncsu.edu)
 * Aditi Salunkhe (acsalunk@ncsu.edu)
 * Ishan Mistry (ihmistry@ncsu.edu)
-* Lixing Zheng (lzheng@ncsu.edu)
+* Lixing Zheng (lzheng26@ncsu.edu)
 
 2. Decision-Making:
 * Major decisions related to project direction, features, and releases will be made by consensus among the core contributors.
