@@ -295,8 +295,10 @@ def analytics():
     # ##########################
     email = session.get('email')
     # Check if there are any tasks in the database.
-    data = mongo.db.tasks.find({'email': email})
-    if data:
+    data = list(mongo.db.tasks.find({'email': email},{'email'}))
+    print(data)
+    if len(data) != 0:
+        print("here")
         # ----------------------------------------------------------------------------------------
         # Histogram of tasks based on 'Category': Easy, Medium, Hard 
         data_hist = mongo.db.tasks.find({'email': email}, {'category'})
@@ -554,7 +556,9 @@ def analytics():
         pie_html = fig.to_html(full_html=False)
 
         return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html = by_week_html, pie_html = pie_html, title='Analytics')
-    return render_template('dashboard.html')
+    flash('Please add some tasks before using analytics functionality', 'danger')
+
+    return redirect(url_for('task'))
 
 
 @app.route("/about_us")
@@ -693,29 +697,6 @@ def completeTask():
 
             flash(f' {task} Task Completed!', 'success')
     return redirect(url_for('home'))
-
-
-@app.route("/editTask", methods=['GET', 'POST'])
-def editTask():
-    ############################
-    # editTask() function helps the user to edit a particular task and update in database.
-    # route "/editTask" will redirect to editTask() function.
-    # input: The function takes email, task, status, category as the input
-    # Output: Out function will update new values in the database
-    # ##########################
-    if request.method == 'POST':
-        email = session.get('email')
-        task = request.form.get('task')
-        status = request.form.get('status')
-        category = request.form.get('category')
-        id = mongo.db.tasks.find_one(
-            {'email': email, 'taskname': task, 'status': status, 'category': category})
-        # print(id, '_______-----______---- ID ------_____-----____')
-        return json.dumps({'taskname': id['taskname'], 'catgeory': id['category'], 'startdate': id['startdate'], 'duedate': id['duedate'], 'status': id['status'], 'hours': id['hours'], 'description': id['description']}), 200, {
-            'ContentType': 'application/json'}
-    else:
-        return "Failed"
-
 
 def is_integer(s):
     try:
