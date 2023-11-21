@@ -36,6 +36,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 - [Steps for Execution:](#steps-for-execution)
 - [Source Code](#source-code)
 - [Delta](#delta)
+- [Project`s Funding](#projects-funding)
 - [Future Scope](#future-scope)
 - [Team Members](#team-members)
 - [Contribution](#contribution)
@@ -177,7 +178,7 @@ Also, they were able to publish their task report based on the visualizations pr
 
   ## Project`s Funding
   
-    Our project is currently not funded, and we operate on a volunteer and open-source basis, and currently,improvement of the project solely relies on the dedication           of our team and contributions from the open-source community. 
+  Our project is currently not funded, and we operate on a volunteer and open-source basis, and currently, improvement of the project solely relies on the dedication           of our team and contributions from the open-source community. 
   
    ## Future Scope
   
