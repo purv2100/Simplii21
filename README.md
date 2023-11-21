@@ -58,7 +58,8 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 </p>
 
 
- 
+ /Resources/Simplii_Group74_PromoVid.mp4
+ Press play to see the video
  
 
 
