@@ -42,6 +42,8 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 - [Team Members](#team-members)
 - [Contribution](#contribution)
 - [License](#license)
+- [Recommended Citation](#recommended-citation)
+
 
 ## Why use Simplii?
 
@@ -233,7 +235,8 @@ Also, they were able to publish their task report based on the visualizations pr
 
   You can cite us like this:
   
-  Simplii. Version 1.0. Aditi Salunkhe, Purv Patel, Ishan Mistry, Lixing Zheng. 2023. [https://github.com/aditicsalunkhe/Simplii-Group74-2023]
+  Simplii. Version 1.0. Aditi Salunkhe, Purv Patel, Ishan Mistry, Lixing Zheng. 2023.<br> 
+  [https://github.com/aditicsalunkhe/Simplii-Group74-2023]
   
                                                                                                                                                    
                                                                                                                                                    
