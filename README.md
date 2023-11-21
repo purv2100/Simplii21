@@ -216,10 +216,14 @@ Also, they were able to publish their task report based on the visualizations pr
    
   <table>
   <tr>
-  <td align="center"><a href="https://github.com/kskheni"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       <b>Kaushal Kheni</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/nisarg210"><img src="https://avatars.githubusercontent.com/u/58519704?v=4" width="100px;" alt=""/><br /><sub>     <b>Nisarg Prajapati</b></sub></a></td>
-    <td align="center"><a href="https://github.com/surya-sukumar"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       <b>Surya Sukumar</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/Mihir1310"><img src="https://avatars.githubusercontent.com/u/82660793?v=4" width="100px;" alt=""/><br /><sub>        <b>Mihir Bhanderi</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       
+    <b>Aditi Salunkhe</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/58519704?v=4" width="100px;" alt=""/><br /><sub>     
+    <b>Purv Patel</b></sub></a></td>
+  <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
+    <b>Ishan Mistry</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/82660793?v=4" width="100px;" alt=""/><br /><sub>        
+    <b>Lixing Zheng</b></sub></a><br /></td>
   </tr>
 </table>
 
