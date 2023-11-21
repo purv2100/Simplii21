@@ -124,23 +124,20 @@ The `forgotPassword()` function handles the password reset functionality. The ro
 
 ##### `friends()`
 
-friends() function displays the list of friends corresponding to the given email.
-The route "/friends" will redirect to the friends() function, which further redirects to the friends.html page.
-The friends() function presents a list of "My friends," "Add Friends" functionality, "Send Request," and "Pending Approvals."
-Details corresponding to the given email address are fetched from the database entries.
+The `friends()` function displays the list of friends corresponding to the given email. The route "/friends" will redirect to the `friends()` function, which further redirects to the 'friends.html' page. The `friends()` function presents a list of functionalities such as "My Friends," "Add Friends," "Send Request," and "Pending Approvals." Details corresponding to the given email address are fetched from the database entries.
 
-Input:
-    Email (retrieved from the session)
+**Input:**
+- Email (retrieved from the session)
 
-Output:
-    Rendered template 'friends.html' with the following variables:
-    - allUsers: A list of all users with their names and emails
-    - pendingRequests: A list of friend requests sent by the user that are pending approval
-    - active: The email address of the current user
-    - pendingReceivers: A list of users who have sent friend requests to the current user (pending approval)
-    - pendingApproves: A list of users whose friend requests to the current user are pending approval
-    - myFriends: A list of accepted friend relationships (sender, receiver, accept=True)
-    - myFriendsList: A list of email addresses corresponding to the user's accepted friends
+**Output:**
+- Rendered template 'friends.html' with the following variables:
+  - `allUsers`: A list of all users with their names and emails.
+  - `pendingRequests`: A list of friend requests sent by the user that are pending approval.
+  - `active`: The email address of the current user.
+  - `pendingReceivers`: A list of users who have sent friend requests to the current user (pending approval).
+  - `pendingApproves`: A list of users whose friend requests to the current user are pending approval.
+  - `myFriends`: A list of accepted friend relationships (sender, receiver, accept=True).
+  - `myFriendsList`: A list of email addresses corresponding to the user's accepted friends.
 
 ##### `home()`
 
