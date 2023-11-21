@@ -128,6 +128,18 @@ Lorenzo wanted a tool where his project group could assign and manage tasks with
 His group started using Simplii, and now they smoothly completed the project by managing tasks within project members easily.
 Also, they were able to publish their task report based on the visualizations provided by the analytics section.
 
+**Case Study:** Emily
+
+**Background:** Program Manager at Fanbook
+
+**Scenario:**
+Emily`s typical working day involved tons of different tasks waiting be be handled with different priorities and deadlines, such as
+meeting with colleagues, demonstrating program progress to stakeholders, picking up school kids, buy groceries at supermarket and so on.
+She was suffering with forgetting and messing up things to do.
+After friends introducing Simplii to her, Emily began to list and manage daily tasks on the website by leveraging Simplii`s easy-to-use and well-rounded
+functionalities. Since then, both of her work and personal life became well organized since she could easily get summary and insights about what she had done and were
+planned to do in future.
+
 ## Steps for execution
  
  Step 1:
