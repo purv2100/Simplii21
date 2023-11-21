@@ -244,7 +244,7 @@ Also, they were able to publish their task report based on the visualizations pr
   [https://github.com/aditicsalunkhe/Simplii-Group74-2023]
 
   ## Contact Us
-  Please Feel free to email us with any concern. Your interests on Simplii is always the strongest motivation source for us.
+  Please feel free to email us with any concern. Your interests on Simplii are always the strongest motivation sources for us.
 
   - Aditi Salunkhe [acsalunk@ncsu.edu](mailto:acsalunk@ncsu.edu)
   - Purv Patel [ppatel36@ncsu.edu](mailto:ppatel36@ncsu.edu)
