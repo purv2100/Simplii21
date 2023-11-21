@@ -174,8 +174,9 @@ Also, they were able to publish their task report based on the visualizations pr
  <b>g) Fixed on data fetch in update page data in some feilds were missing. (Bug Fix)</b>
  <b>h) Added validations for input field of forms. (Bug Fix)</b>
         <li> Hours -> Interger, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
-    
-        
+
+  ## Project`s Funding
+    Our project is currently not funded, and we operate on a volunteer and open-source basis, and currently,improvement of the project solely relies on the dedication of our team and contributions from the open-source community.     
   
    ## Future Scope
   
