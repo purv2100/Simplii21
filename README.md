@@ -133,7 +133,7 @@ Also, they were able to publish their task report based on the visualizations pr
 **Background:** Program Manager at Fanbook
 
 **Scenario:**
-Emily`s typical working day involved tons of different tasks waiting be be handled with different priorities and deadlines, such as
+Emily's typical working day involved tons of different tasks waiting be be handled with different priorities and deadlines, such as
 meeting with colleagues, demonstrating program progress to stakeholders, picking up school kids, buy groceries at supermarket and so on.
 She was suffering with forgetting and messing up things to do.
 After friends introducing Simplii to her, Emily began to list and manage daily tasks on the website by leveraging Simplii`s easy-to-use and well-rounded
