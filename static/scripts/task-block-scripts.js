@@ -1,3 +1,10 @@
+/*
+   Copyright 2023 Simplii from Group74 NCSU CSC510
+
+   Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+*/
+
+
 function showVal(newVal){
     document.getElementById("valBox").innerHTML=newVal;
 }
