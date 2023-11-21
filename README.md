@@ -43,6 +43,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 - [Contribution](#contribution)
 - [License](#license)
 - [Recommended Citation](#recommended-citation)
+- [Contact Us](#contact-us)
 
 
 ## Why use Simplii?
@@ -241,7 +242,14 @@ Also, they were able to publish their task report based on the visualizations pr
   
   Simplii. Version 1.0. Aditi Salunkhe, Purv Patel, Ishan Mistry, Lixing Zheng. 2023.<br> 
   [https://github.com/aditicsalunkhe/Simplii-Group74-2023]
-  
+
+  ## Contact Us
+  Please Feel free to email us with any concern. Your attention on Simplii is the strongest motivation source for us.
+
+  <li>Aditi Salunkhe [acsalunk@ncsu.edu](mailto:acsalunk@ncsu.edu)
+  <li>Purv Patel [ppatel36@ncsu.edu](mailto:ppatel36@ncsu.edu)
+  <li>Ishan Mistry [ihmistry@ncsu.edu](mailto:ihmistry@ncsu.edu)
+  <li>Lixing Zheng [lzheng26@ncsu.edu](mailto:lzheng26@ncsu.edu)
                                                                                                                                                    
                                                                                                                                                    
                                                                                                                                                    
