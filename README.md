@@ -179,23 +179,23 @@ Also, they were able to publish their task report based on the visualizations pr
 
   ## Project Roadmap
   **Future three months**:
-     * Add task completion evaluation for "Add Task" function. By doing so, users can also learn how good he/she finishes the task
-     * Implement search functionality in dashboard so that users could quickly get the information for the task he want
-     * Include more analytic graph type options in "Analytics" fuction, such as pie chart, line chart and scatter chart.
-     * Optimize "Friends" section to allow users to upload avatar, set friend permission level, request notification and so on
+     - Add task completion evaluation for "Add Task" function. By doing so, users can also learn how good he/she finishes the task
+     - Implement search functionality in dashboard so that users could quickly get the information for the task he want
+     - Include more analytic graph type options in "Analytics" fuction, such as pie chart, line chart and scatter chart.
+     - Optimize "Friends" section to allow users to upload avatar, set friend permission level, request notification and so on
      
   **Future six months**:
-     * Beautify UI elements: optimize color palette; diversify content layout; better font family; CSS animation and so on.
-     * Adapt website to show correctly and gracefully on different platforms(PC, laptop, tablet, mobile phone).
-     * Develop web browser extension version for Simplii
+     - Beautify UI elements: optimize color palette; diversify content layout; better font family; CSS animation and so on.
+     - Adapt website to show correctly and gracefully on different platforms(PC, laptop, tablet, mobile phone).
+     - Develop web browser extension version for Simplii
      
   **Future twelve months**:
-     * Run integration test for different functionalities
-     * Run functional test for the whole system
-     * Run black box test to pass through user acceptance level
-     * Select and purchase a cloud service to deploy the website
-     * Set up a marketing team to attract target users to try our website and collect feedback accordingly
-     * Build a deployment and operation team to manage the website after official launch
+     - Run integration test for different functionalities
+     - Run functional test for the whole system
+     - Run black box test to pass through user acceptance level
+     - Select and purchase a cloud service to deploy the website
+     - Set up a marketing team to attract target users to try our website and collect feedback accordingly
+     - Build a deployment and operation team to manage the website after official launch
     
   ## Project Funding
   
