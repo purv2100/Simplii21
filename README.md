@@ -222,7 +222,7 @@ Also, they were able to publish their task report based on the visualizations pr
     <b>Purv Patel</b></sub></a></td>
   <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
     <b>Ishan Mistry</b></sub></a><br /></td>
-  <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/82660793?v=4" width="100px;" alt=""/><br /><sub>        
+  <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/24827205?v=4" width="100px;" alt=""/><br /><sub>        
     <b>Lixing Zheng</b></sub></a><br /></td>
   </tr>
 </table>
