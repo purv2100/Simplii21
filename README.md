@@ -21,7 +21,11 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 <img width="614" alt="Screen Shot 2021-12-03 at 10 11 02 PM" src="https://user-images.githubusercontent.com/89509351/144695927-bf2e2524-5723-46d2-a946-4aab3bc6931e.png">
 </p>
 
-https://raw.githubusercontent.com/WangWangIsDog/Simplii-Group74-2023/main/Resources/Simplii_Group74_PromoVid.mp4
+
+
+
+https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171
+
 
 
 
