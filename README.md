@@ -45,7 +45,6 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 - [Delta](#delta)
 - [Project Roadmap](#project-roadmap)
 - [Project Funding](#project-funding)
-- [Future Scope](#future-scope)
 - [Team Members](#team-members)
 - [Contribution](#contribution)
 - [License](#license)
@@ -221,14 +220,6 @@ planned to do in future.
   
   Our project is currently not funded, and we operate on a volunteer and open-source basis, and currently, improvement of the project solely relies on the dedication           of our team and contributions from the open-source community. 
   
-   ## Future Scope
-  
-  The  following features can be implemented in the future scope of this application:
- 
-   1. Create a mobile application for the web version of the application.
-   2. Make the website view port adaptable - the website should look good on phone, tablet and computer.
-   3. Create chatbot for the web portal
-   4. Recommend tasks.
    
    ## Team Members
    
