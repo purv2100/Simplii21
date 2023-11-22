@@ -11,8 +11,11 @@
 
 ## Link to Demonstration Video of the Project: 
 https://drive.google.com/file/d/1rApSm9mfYJVBAC05cEsd61l3WbkrtomQ/view?usp=sharing
-# SIMPLII
 
+# Introduction
+<p align="center">
+  <img src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/blob/main/src/static/images/site_logo3.png" />
+</p>
 <h3>Having trouble in keeping track of your daily tasks and managing them? </h3>
 
 Introducing to Simplii- an online task tracker that will assist you in keeping track of all your day-to-day activity so that you can manage your work efficiently. Task-tracking can be a tardy process and we have fixed this pain with the help of Simplii. Organize your work, track time, and update the status of your tasks simply with our easy-to-use application.
