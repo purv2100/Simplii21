@@ -18,15 +18,12 @@ https://drive.google.com/file/d/1rApSm9mfYJVBAC05cEsd61l3WbkrtomQ/view?usp=shari
 Introducing to Simplii- an online task tracker that will assist you in keeping track of all your day-to-day activity so that you can manage your work efficiently. Task-tracking can be a tardy process and we have fixed this pain with the help of Simplii. Organize your work, track time, and update the status of your tasks simply with our easy-to-use application.
 
 <p align="center">
-<img width="614" alt="Screen Shot 2021-12-03 at 10 11 02 PM" src="https://user-images.githubusercontent.com/89509351/144695927-bf2e2524-5723-46d2-a946-4aab3bc6931e.png">
+<img width="307" alt="Screen Shot 2021-12-03 at 10 11 02 PM" src="https://user-images.githubusercontent.com/89509351/144695927-bf2e2524-5723-46d2-a946-4aab3bc6931e.png">
 </p>
 
-
-
+Watch our promotion video:
 
 https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171
-
-
 
 
 # Table of Contents  
@@ -61,7 +58,7 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 -Tasks are recommended to the users based on their upcoming deadlines for the user's convenience.<br>
 
 <p align= "center">
-<img width="600" height ="500" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png"> 
+<img width="300" height ="250" src="https://user-images.githubusercontent.com/89509351/144696048-8968db92-e41a-44b1-a720-66a482e0ed4a.png"> 
 </p>
 
  
