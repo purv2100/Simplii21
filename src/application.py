@@ -19,6 +19,7 @@ import uuid
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import plotly.express as px
 import plotly.graph_objs as go
+import random
 
 from plotly.subplots import make_subplots
 
@@ -616,7 +617,35 @@ def forum():
         user_email = session.get('email')
         user = session.get('name')
 
-        if 'thread_id' in request.form and 'reply_content' in request.form:
+        # Get a random color for the new thread
+        random_color = "#{:06x}".format(random.randint(0, 0xFFFFFF))
+
+        # Check if the form submission is for a new thread
+        if 'thread_title' in request.form and 'thread_content' in request.form:
+            thread_title = request.form['thread_title']
+            thread_content = request.form['thread_content']
+
+            # Create a new thread document
+            new_thread = {
+                'user_email': user_email,
+                'user': user,
+                'title': thread_title,
+                'content': thread_content,
+                'timestamp': datetime.utcnow(),
+                'replies': []  # This will store the replies for this thread
+            }
+            # Add the random color to the new thread document
+            new_thread['color'] = random_color
+            # Insert the new thread into the 'threads' collection
+            thread_id = threads_collection.insert_one(new_thread).inserted_id
+
+            print(f"New Thread ID: {thread_id}")
+
+            # Redirect back to the forum page after creating the new thread
+            return redirect(url_for('forum'))
+
+        # Check if the form submission is for a reply to an existing thread
+        elif 'thread_id' in request.form and 'reply_content' in request.form:
             thread_id = ObjectId(request.form['thread_id'])
             reply_content = request.form['reply_content']
 
@@ -627,8 +656,8 @@ def forum():
                                        'content': reply_content, 'timestamp': datetime.utcnow()}}}
             )
 
-        # Redirect back to the forum page after processing the reply
-        return redirect(url_for('forum'))
+            # Redirect back to the forum page after processing the reply
+            return redirect(url_for('forum'))
 
     else:
         # Retrieve all threads from the 'threads' collection
