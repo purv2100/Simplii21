@@ -614,6 +614,7 @@ def forum():
 
         # Get the user's email from the session
         user_email = session.get('email')
+        user = session.get('name')
 
         if 'thread_id' in request.form and 'reply_content' in request.form:
             thread_id = ObjectId(request.form['thread_id'])
@@ -622,7 +623,7 @@ def forum():
             # Update the thread document with the new reply
             threads_collection.update_one(
                 {'_id': thread_id},
-                {'$push': {'replies': {'user_email': user_email,
+                {'$push': {'replies': {'user_email': user_email, 'user': user,
                                        'content': reply_content, 'timestamp': datetime.utcnow()}}}
             )
 

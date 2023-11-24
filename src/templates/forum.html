@@ -45,7 +45,7 @@
                     <!-- Replies for the Thread -->
                     {% for reply in thread.replies %}
                     <div class="card-body">
-                        <p class="card-text"><strong>{{ reply.user_email }}:</strong> {{ reply.content }}</p>
+                        <p class="card-text"><strong>{{ reply.user }}:</strong> {{ reply.content }}</p>
                     </div>
                     {% endfor %}
 
