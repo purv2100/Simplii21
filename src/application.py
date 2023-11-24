@@ -609,6 +609,46 @@ def about_us():
 
 @app.route("/forum", methods=['GET', 'POST'])
 def forum():
+    """
+    forum() is a Flask route function that handles both GET and POST requests for the "/forum" route.
+    If the request method is POST, it processes form submissions for creating new threads or replying to existing threads.
+    If the request method is GET, it retrieves all threads from the 'threads' collection and renders the 'forum.html' template.
+
+    POST Request (Creating a new thread):
+        Input:
+            - thread_title: Title of the new thread
+            - thread_content: Content of the new thread
+
+        Output:
+            - Creates a new thread document in the 'threads' collection with the following details:
+                - user_email: Email of the user from the session
+                - user: User's name from the session
+                - title: Title of the thread
+                - content: Content of the thread
+                - timestamp: UTC timestamp of the thread creation
+                - replies: An empty list to store replies for this thread
+                - color: A randomly generated color code for the thread
+            - Redirects back to the forum page after creating the new thread.
+
+    POST Request (Replying to an existing thread):
+        Input:
+            - thread_id: ObjectId of the thread to which the user is replying
+            - reply_content: Content of the reply
+
+        Output:
+            - Updates the specified thread document in the 'threads' collection by adding a new reply with the following details:
+                - user_email: Email of the user from the session
+                - user: User's name from the session
+                - content: Content of the reply
+                - timestamp: UTC timestamp of the reply
+            - Redirects back to the forum page after processing the reply.
+
+    GET Request:
+        Output:
+            - Retrieves all threads from the 'threads' collection.
+            - Renders the 'forum.html' template with the title 'Forum' and the list of threads.
+
+    """
     if request.method == 'POST':
         # Assuming you have a 'threads' collection in your MongoDB
         threads_collection = mongo.db.threads
