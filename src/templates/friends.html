@@ -14,26 +14,53 @@
         border-radius: 4px;
         /* Optional: Round the corners */
     }
+
+    .card {
+        position: relative;
+    }
+
+    .badge-count {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        font-size: 1.2em;
+        /* Adjust the font size as needed */
+    }
 </style>
 
+
 <details>
-    <summary>Friends</summary>
-    {% for friend in myFriends %}
-    <div>
-        <span>{{friend.receiver}}</span>
+    <summary>
+        Friends
+        <span id="friendsCount" class="badge badge-pill badge-info badge-count">{{ myFriends|length }}</span>
+    </summary>
+    <div class="card" id="friendsCard">
+        {% for friend in myFriends %}
+        {% if friend not in pendingRequests %}
+        <div>
+            <span>{{ friend.receiver }}</span>
+        </div>
+        <br>
+        {% endif %}
+        {% endfor %}
     </div>
-    <br>
-    {% endfor %}
 </details>
 <br>
+
 <details>
-    <summary>Add Friends</summary>
+    <summary>
+        Add Friends
+        <span id="addFriendsCount" class="badge badge-pill badge-info badge-count">{{ allUsers|length -
+            pendingRequests|length }}</span>
+    </summary>
     {% for friend in allUsers %}
     {% if friend.email != active and friend.email not in pendingReceivers and friend.email not in pendingApproves and
     friend.email not in myFriendsList %}
     <details style="margin: 5px; background:white;">
-        <summary>{{friend.name}}</summary>
-        <p class="article-content" name="friend">{{friend.email}}</p>
+        <summary>{{ friend.name }}
+            <span id="addFriendsCount" class="badge badge-pill badge-info badge-count"></span>
+        </summary>
+        <p class="article-content" name="friend">{{ friend.email }}</p>
         <button type="button" class="btn btn-primary" onclick="sendRequest(event, '{{ friend.email }}')"
             id="{{ friend.email }}">Send Request</button>
     </details>
@@ -41,55 +68,56 @@
     {% endfor %}
 </details>
 <br>
+
 <details>
-    <summary>Sent Requests ({{ pendingRequests|length }})</summary>
+    <summary>
+        Sent Requests
+        <span id="sentRequestsCount" class="badge badge-pill badge-info badge-count">{{ pendingRequests|length }}</span>
+    </summary>
     <div class="card" id="sentRequestsCard">
-        
-        <span id="sentRequestsCount" class="badge badge-pill badge-info">{{ pendingRequests|length }}</span>
+        {% for req in pendingRequests %}
+        <div>
+            <span>{{ req.receiver }}</span>
+            <button onclick="return cancelRequest(event,this.id)" id="{{ req.receiver }}"
+                class="btn btn-danger inline ml-5">Cancel Request</button>
+        </div>
         <br>
+        {% endfor %}
     </div>
-    {% for req in pendingRequests %}
-    <div>
-        <span>{{req.receiver}}</span>
-        <button onclick="return cancelRequest(event,this.id)" id="{{req.receiver}}"
-            class="btn btn-danger inline ml-5">Cancel Request</button>
-    </div>
-    <br>
-    {% endfor %}
 </details>
-
 <br>
+
 <details>
-    <summary>Pending Approvals ({{ pendingApproves|length }})</summary>
+    <summary>
+        Pending Approvals
+        <span id="pendingApprovalsCount" class="badge badge-pill badge-info badge-count">{{ pendingApproves|length
+            }}</span>
+    </summary>
     <div class="card" id="pendingApprovalsCard">
-        <span id="pendingApprovalsCount" class="badge badge-pill badge-info">{{ pendingApproves|length }}</span>
+        {% for req in pendingApproves %}
+        <div>
+            <span>{{ req }}</span>
+            <button onclick="return approveRequest(event,this.id)" id="{{ req }}"
+                class="btn btn-success inline ml-5">Approve</button>
+        </div>
         <br>
+        {% endfor %}
     </div>
-
-    {% for req in pendingApproves %}
-    <div>
-        <span>{{req}}</span>
-        <button onclick="return approveRequest(event,this.id)" id="{{req}}"
-            class="btn btn-success inline ml-5">Approve</button>
-    </div>
-    <br>
-    {% endfor %}
 </details>
 <br>
+
 <details>
-    <summary>Share data with Friends (Type friend's email ID comma separated)</summary>
-
+    <summary>
+        Share data with Friends (Type friend's email ID comma separated)
+    </summary>
     <div>
-
         <form method="POST" action="/send_email">
             <textarea id="share" name="share" rows="4" cols="50"></textarea>
             <button type="submit" class="btn btn-success inline ml-5">Nudge Friends </button>
         </form>
     </div>
     <br>
-
 </details>
 <br>
-
 
 {% endblock content %}

@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<h1>Discussion Forum</h1>
+
+<!-- Card for creating a new thread -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title">Create a New Thread</h2>
+        <form action="{{ url_for('forum') }}" method="post">
+            <label for="thread_title">Thread Title:</label>
+            <input type="text" id="thread_title" name="thread_title" class="form-control" required>
+            <br>
+            <label for="thread_content">Thread Content:</label>
+            <textarea id="thread_content" name="thread_content" class="form-control" rows="4" required></textarea>
+            <br>
+            <button type="submit" class="btn btn-success">Create Thread</button>
+        </form>
+    </div>
+</div>
+
+<!-- Card for existing threads -->
+<div class="card">
+    <div class="card-body">
+
+        <!-- Grid layout for each thread -->
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+
+            {% for thread in threads %}
+            <div class="col mb-4">
+
+                <!-- Individual thread card -->
+                <div class="card h-100">
+
+                    <!-- Thread Title Card -->
+                    <div class="card-body">
+                        <h5 class="card-title">{{ thread.title }}</h5>
+                    </div>
+
+                    <!-- Thread Content Card -->
+                    <div class="card-body">
+                        <p class="card-text">{{ thread.content }}</p>
+                    </div>
+
+                    <!-- Replies for the Thread -->
+                    {% for reply in thread.replies %}
+                    <div class="card-body">
+                        <p class="card-text"><strong>{{ reply.user_email }}:</strong> {{ reply.content }}</p>
+                    </div>
+                    {% endfor %}
+
+                    <!-- Reply Form Card -->
+                    <div class="card-body">
+                        <form action="{{ url_for('forum') }}" method="post">
+                            <input type="hidden" name="thread_id" value="{{ thread._id }}">
+                            <label for="replyContent{{ thread._id }}">Your Reply:</label>
+                            <textarea id="replyContent{{ thread._id }}" name="reply_content" class="form-control"
+                                rows="2" required></textarea>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Post Reply</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock content %}

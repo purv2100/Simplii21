@@ -4,7 +4,7 @@ from flask import Flask, session
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 from src.application import create_app
-from .forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
+from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 
 
 @pytest.fixture
@@ -25,12 +25,12 @@ def client():
     os.environ.pop('MAIL_PASSWORD', None)
 
 
-def test_home_redirects_to_login(client):
+def test_home_redirects_to_login(client: Any):
     response = client.get('/')
     assert response.status_code == 302  # Redirect status code
 
 
-def test_login_success(client):
+def test_login_success(client: Any):
     # Assuming a user exists in the test database
     # with email: 'test@example.com' and password: 'testpassword'
     response = client.post('/login', data=dict(
@@ -41,7 +41,7 @@ def test_login_success(client):
     assert session.get('email') == 'test@example.com'
 
 
-def test_login_failure(client):
+def test_login_failure(client: Any):
     response = client.post('/login', data=dict(
         email='nonexistent@example.com',
         password='wrongpassword'
@@ -50,7 +50,7 @@ def test_login_failure(client):
     assert session.get('email') is None
 
 
-def test_logout(client):
+def test_logout(client: Any):
     # Assuming a user is already logged in
     with client.session_transaction() as sess:
         sess['email'] = 'test@example.com'

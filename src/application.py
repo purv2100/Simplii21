@@ -158,7 +158,7 @@ def friends():
         print(myFriends)
         allUsers = list(mongo.db.users.find({}, {'name', 'email'}))
         print(allUsers)
-        
+
         pendingRequests = list(mongo.db.friends.find(
             {'sender': email, 'accept': False}, {'sender', 'receiver', 'accept'}))
         pendingReceivers = list()
@@ -195,7 +195,7 @@ def ajaxsendrequest():
         - Database entry of receiver information in the database.
         - Returns JSON response with status True if the operation is successful, and False otherwise.
     """
-    
+
     email = session.get('email')
     if email is not None:
         receiver = request.form.get('receiver')
@@ -265,7 +265,7 @@ def ajaxapproverequest():
         'ContentType:': 'application/json'}
 
 
-@app.route("/dashboard") 
+@app.route("/dashboard")
 def dashboard():
     ############################
     # dashboard() function displays the tasks of the user
@@ -278,6 +278,7 @@ def dashboard():
         tasks = mongo.db.tasks.find({'email': session.get('email')})
     return render_template('dashboard.html', tasks=tasks)
 
+
 def get_first_day_of_week(date):
     # Calculate the difference between the current day and Monday (0)
     days_to_monday = date.weekday()
@@ -287,6 +288,7 @@ def get_first_day_of_week(date):
 
     return first_day_of_week
 
+
 @app.route("/analytics")
 def analytics():
     # ############################
@@ -295,18 +297,19 @@ def analytics():
     # ##########################
     email = session.get('email')
     # Check if there are any tasks in the database.
-    data = list(mongo.db.tasks.find({'email': email},{'email'}))
+    data = list(mongo.db.tasks.find({'email': email}, {'email'}))
     print(data)
     if len(data) != 0:
         print("here")
         # ----------------------------------------------------------------------------------------
-        # Histogram of tasks based on 'Category': Easy, Medium, Hard 
+        # Histogram of tasks based on 'Category': Easy, Medium, Hard
         data_hist = mongo.db.tasks.find({'email': email}, {'category'})
         data_hist_list = list(data_hist)
         data_hist = pd.DataFrame(data_hist_list)
 
         # Create a histogram using Plotly Express
-        fig = px.histogram(data_hist, x='category', color_discrete_sequence=['rgba(166, 145, 92, 1)'], nbins=3)
+        fig = px.histogram(data_hist, x='category', color_discrete_sequence=[
+                           'rgba(166, 145, 92, 1)'], nbins=3)
 
         # You can customize the layout and appearance of the histogram, e.g., titles, labels, colors, etc.
         fig.update_layout(
@@ -324,14 +327,17 @@ def analytics():
                 tickfont=dict(size=16),
                 title='Count of Tasks'
             ),
-            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
-            bargap = 0.3,
+            # Background color for the plot area
+            plot_bgcolor='rgba(232, 232, 232, 1)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
+            bargap=0.3,
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Task Complexity Histogram',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
@@ -345,26 +351,32 @@ def analytics():
         # ----------------------------------------------------------------------------------------
         # Side-by-side bar chart of expected hours and actual hours required to complete the task
         # Only consider the tasks which are complete. i.e. progress = 1
-        data_exp_act = mongo.db.tasks.find({'email':email, 'completed':True}, {'taskname', 'starttime', 'endtime', 'actualhours'})
+        data_exp_act = mongo.db.tasks.find({'email': email, 'completed': True}, {
+                                           'taskname', 'starttime', 'endtime', 'actualhours'})
 
-        data_exp_act_df = pd.DataFrame(columns = ['Name', 'Expected Hours', 'Actual Hours'])
+        data_exp_act_df = pd.DataFrame(
+            columns=['Name', 'Expected Hours', 'Actual Hours'])
         time_format = "%H:%M"
-        i=0
+        i = 0
         for task in data_exp_act:
             start_time = datetime.strptime(task['starttime'], time_format)
             end_time = datetime.strptime(task['endtime'], time_format)
             expected_hours = (end_time - start_time).total_seconds()/3600
-            data_exp_act_df.loc[i] = [task['taskname'], expected_hours, task['actualhours']]
-            i+=1
+            data_exp_act_df.loc[i] = [task['taskname'],
+                                      expected_hours, task['actualhours']]
+            i += 1
 
         # Create trace for Value1 with custom bar color
-        trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'], name='Expected Hours', marker=dict(color='rgba(230, 126, 34, 1)'))
+        trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'],
+                        name='Expected Hours', marker=dict(color='rgba(230, 126, 34, 1)'))
 
         # Create trace for Value2 with a different bar color
-        trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'], name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
+        trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'],
+                        name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
 
         # Create layout
-        layout = go.Layout(barmode='group', title='Expected Hours Vs Actual Hours to complete a task')
+        layout = go.Layout(
+            barmode='group', title='Expected Hours Vs Actual Hours to complete a task')
 
         # Create figure
         fig = go.Figure(data=[trace1, trace2], layout=layout)
@@ -384,14 +396,17 @@ def analytics():
                 tickfont=dict(size=16),
                 title='Hours'
             ),
-            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
-            bargap = 0.3,
+            # Background color for the plot area
+            plot_bgcolor='rgba(232, 232, 232, 1)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
+            bargap=0.3,
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Expected Hours Vs Actual Hours to complete a task',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
@@ -402,23 +417,28 @@ def analytics():
         # Time chart to show distribution of completed tasks across different years,
         # different months and different weeks.
 
-        timeline_data = mongo.db.tasks.find({'email':email, 'completed':True}, {'startdate'})
+        timeline_data = mongo.db.tasks.find(
+            {'email': email, 'completed': True}, {'startdate'})
         timeline_list = list(timeline_data)
         timeline_df = pd.DataFrame(timeline_list)
 
-        timeline_df['startdate'] = [datetime.strptime(date, "%Y-%m-%d") for date in timeline_df['startdate']]
+        timeline_df['startdate'] = [datetime.strptime(
+            date, "%Y-%m-%d") for date in timeline_df['startdate']]
 
         year = [start_date.year for start_date in timeline_df['startdate']]
         timeline_df['year'] = year
 
-        timeline_df['week'] = timeline_df['startdate'].dt.strftime('Week %U, %Y')
+        timeline_df['week'] = timeline_df['startdate'].dt.strftime(
+            'Week %U, %Y')
 
-        timeline_df['month_year'] = timeline_df['startdate'].dt.strftime('%b \'%y')
+        timeline_df['month_year'] = timeline_df['startdate'].dt.strftime(
+            '%b \'%y')
 
         # Year-wise distribution of tasks
-        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=['rgba(22, 160, 133, 1)'])
-        
-        fig.update_xaxes(dtick = 1)
+        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=[
+                           'rgba(22, 160, 133, 1)'])
+
+        fig.update_xaxes(dtick=1)
 
         fig.update_layout(
             xaxis=dict(
@@ -435,14 +455,17 @@ def analytics():
                 tickfont=dict(size=16),
                 title='Count of Tasks'
             ),
-            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
-            bargap = 0.3,
+            # Background color for the plot area
+            plot_bgcolor='rgba(232, 232, 232, 1)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
+            bargap=0.3,
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Year-wise distribution of completed tasks',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
@@ -451,9 +474,10 @@ def analytics():
         by_year_html = fig.to_html(full_html=False)
 
         # Monthly distribution of tasks
-        fig = px.histogram(timeline_df, x='month_year', color_discrete_sequence=['rgba(245, 230, 83, 1)'])
+        fig = px.histogram(timeline_df, x='month_year',
+                           color_discrete_sequence=['rgba(245, 230, 83, 1)'])
 
-        fig.update_xaxes(dtick = 1)
+        fig.update_xaxes(dtick=1)
 
         fig.update_layout(
             xaxis=dict(
@@ -470,14 +494,17 @@ def analytics():
                 tickfont=dict(size=16),
                 title='Count of Tasks'
             ),
-            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
-            bargap = 0.3,
+            # Background color for the plot area
+            plot_bgcolor='rgba(232, 232, 232, 1)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
+            bargap=0.3,
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Monthly distribution of completed tasks',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
@@ -486,9 +513,10 @@ def analytics():
         by_month_html = fig.to_html(full_html=False)
 
         # Weekly distribution of tasks
-        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=['rgba(219, 10, 91, 1)'])
+        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=[
+                           'rgba(219, 10, 91, 1)'])
 
-        fig.update_xaxes(dtick = 1)
+        fig.update_xaxes(dtick=1)
 
         fig.update_layout(
             xaxis=dict(
@@ -505,14 +533,17 @@ def analytics():
                 tickfont=dict(size=16),
                 title='Count of Tasks'
             ),
-            plot_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
-            bargap = 0.3,
+            # Background color for the plot area
+            plot_bgcolor='rgba(232, 232, 232, 1)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
+            bargap=0.3,
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Weekly distribution of completed tasks',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
@@ -520,7 +551,7 @@ def analytics():
         # Convert the Plotly figure to HTML
         by_week_html = fig.to_html(full_html=False)
 
-        #----------------------------------------------------------------------------------------------
+        # ----------------------------------------------------------------------------------------------
         # Pie chart to show complete and incomplete tasks.
 
         pie_data = mongo.db.tasks.find({'email': email}, {'completed'})
@@ -531,31 +562,36 @@ def analytics():
 
         count_completed = pie_df['completed'].value_counts().reset_index()
         count_completed.columns = ['Category', 'count']
-        count_completed['Category'] =  [map_category[category] for category in count_completed['Category']]
-    
+        count_completed['Category'] = [map_category[category]
+                                       for category in count_completed['Category']]
+
         fig = px.pie(count_completed, names='Category', values='count')
 
         fig.update_layout(
-            plot_bgcolor='rgba(46, 204, 113, 0.5)',  # Background color for the plot area
-            paper_bgcolor='rgba(232, 232, 232, 1)',  # Background color for the entire chart area
+            # Background color for the plot area
+            plot_bgcolor='rgba(46, 204, 113, 0.5)',
+            # Background color for the entire chart area
+            paper_bgcolor='rgba(232, 232, 232, 1)',
             legend=dict(
                 font=dict(size=16)  # Adjust the size of the legend font
             ),
             title_text='Completed vs Incomplete Tasks',  # Title text
-            title_font=dict(size=20, color='black', family='Arial'),  # Customize font size, color, family
+            # Customize font size, color, family
+            title_font=dict(size=20, color='black', family='Arial'),
             title_x=0.04,  # Center the title horizontally
             title_y=0.95  # Adjust the vertical position of the title
         )
         custom_colors = ['rgba(13, 180, 185, 1)', 'rgba(236, 100, 75, 1)']
         fig.update_traces(
             marker=dict(colors=custom_colors),
-            hole=0.4  # Set the size of the hole to create a donut chart (0 to 1, where 0 is no hole and 1 is a full circle)
+            # Set the size of the hole to create a donut chart (0 to 1, where 0 is no hole and 1 is a full circle)
+            hole=0.4
         )
 
         # Convert the Plotly figure to HTML
         pie_html = fig.to_html(full_html=False)
 
-        return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html = by_week_html, pie_html = pie_html, title='Analytics')
+        return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html=by_week_html, pie_html=pie_html, title='Analytics')
     flash('Please add some tasks before using analytics functionality', 'danger')
 
     return redirect(url_for('task'))
@@ -568,6 +604,36 @@ def about_us():
     # route "/about" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
+
+
+@app.route("/forum", methods=['GET', 'POST'])
+def forum():
+    if request.method == 'POST':
+        # Assuming you have a 'threads' collection in your MongoDB
+        threads_collection = mongo.db.threads
+
+        # Get the user's email from the session
+        user_email = session.get('email')
+
+        if 'thread_id' in request.form and 'reply_content' in request.form:
+            thread_id = ObjectId(request.form['thread_id'])
+            reply_content = request.form['reply_content']
+
+            # Update the thread document with the new reply
+            threads_collection.update_one(
+                {'_id': thread_id},
+                {'$push': {'replies': {'user_email': user_email,
+                                       'content': reply_content, 'timestamp': datetime.utcnow()}}}
+            )
+
+        # Redirect back to the forum page after processing the reply
+        return redirect(url_for('forum'))
+
+    else:
+        # Retrieve all threads from the 'threads' collection
+        threads = mongo.db.threads.find()
+
+        return render_template('forum.html', title='Forum', threads=threads)
 
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -605,7 +671,7 @@ def deleteTask():
     # ##########################
     if request.method == 'POST':
         task = request.form.get('task')
-        mongo.db.tasks.delete_many({'taskname':task})
+        mongo.db.tasks.delete_many({'taskname': task})
         print("Task", task, "deleted!!")
         return "Success"
     else:
@@ -628,7 +694,8 @@ def task():
             if request.method == 'POST':
                 email = session.get('email')
                 taskname = request.form.get('taskname')
-                friendsemail = request.form.getlist('invitees')+["Please Select"]
+                friendsemail = request.form.getlist(
+                    'invitees')+["Please Select"]
                 category = request.form.get('category')
                 startdate = request.form.get('startdate')
                 start_time = request.form.get('start_time')
@@ -638,28 +705,28 @@ def task():
                 check = mongo.db.tasks.find_one({'taskname': taskname})
                 if not check:
                     mongo.db.tasks.insert_one({'email': email,
-                                            'taskname': taskname,
-                                            'category': category,
-                                            'startdate': startdate,
-                                            'starttime': start_time,
-                                            'endtime': end_time,
-                                            'description': description,
-                                            'progress': 0,
-                                            'actualhours': 0,
-                                            'completed':False})
-                    
+                                               'taskname': taskname,
+                                               'category': category,
+                                               'startdate': startdate,
+                                               'starttime': start_time,
+                                               'endtime': end_time,
+                                               'description': description,
+                                               'progress': 0,
+                                               'actualhours': 0,
+                                               'completed': False})
+
                     for friendemail in friendsemail:
-                        if friendemail!="Please Select":
+                        if friendemail != "Please Select":
                             mongo.db.tasks.insert_one({'email': friendemail,
-                                                    'taskname': taskname,
-                                                    'category': category,
-                                                    'startdate': startdate,
-                                                    'starttime': start_time,
-                                                    'endtime': end_time,
-                                                    'description': description,
-                                                    'progress': 0,
-                                                    'acutalhours': 0,
-                                                    'completed':False})
+                                                       'taskname': taskname,
+                                                       'category': category,
+                                                       'startdate': startdate,
+                                                       'starttime': start_time,
+                                                       'endtime': end_time,
+                                                       'description': description,
+                                                       'progress': 0,
+                                                       'acutalhours': 0,
+                                                       'completed': False})
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
                 else:
@@ -671,12 +738,14 @@ def task():
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)
 
-@app.route("/completeTask", methods = ['POST'])
+
+@app.route("/completeTask", methods=['POST'])
 def completeTask():
     if session.get('email'):
         email = session.get('email')
         task = request.form.get('task')
-        is_completed = mongo.db.tasks.find_one({'taskname': task, 'email': email},{'completed'})
+        is_completed = mongo.db.tasks.find_one(
+            {'taskname': task, 'email': email}, {'completed'})
         print(is_completed)
         if is_completed['completed']:
             flash('Task already completed!', 'danger')
@@ -684,19 +753,22 @@ def completeTask():
             actualhours = request.form.get('actualhours')
             print(actualhours)
             print("Actual hours taken", int(actualhours))
-            mongo.db.tasks.update_one({'email':email, 'taskname':task}, {'$set': {'completed':True, 'actualhours':int(actualhours)}})
+            mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
+                                      '$set': {'completed': True, 'actualhours': int(actualhours)}})
             tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
-            total_tasks=0
-            total_completed_tasks=0
+            total_tasks = 0
+            total_completed_tasks = 0
             for tsk in tasks:
                 if tsk['completed']:
-                    total_completed_tasks+=1
-                total_tasks+=1
+                    total_completed_tasks += 1
+                total_tasks += 1
 
-            mongo.db.tasks.update_many({'taskname':task}, {'$set': {'progress':round(total_completed_tasks/total_tasks,2)*100}})
+            mongo.db.tasks.update_many({'taskname': task}, {
+                                       '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
 
             flash(f' {task} Task Completed!', 'success')
     return redirect(url_for('home'))
+
 
 def is_integer(s):
     try:
@@ -820,6 +892,7 @@ def logout():
     # ##########################
     session.clear()
     return "success"
+
 
 def emailReminder():
     # ############################
