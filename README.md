@@ -185,23 +185,32 @@ planned to do in future.
         <li>The earlier version of Simplii just used to add the category of task as text.
         <li>In our updated version of Simplii, the tasks can be tracked based on their types. We have two types Intellectual & Physical.
     
- <b>b) Email Remainder Sysytem (New Feature)</b>
+ <b>b) Email Remainder System (New Feature)</b>
     
- <b>c) Added critical information like credintials, DB connection strings in enviornment file. (Enhancement)</b>
+ <b>c) Added critical information like credentials, DB connection strings in the environment file. (Enhancement)</b>
         
- <b>d) Implement Reset Password (New Feature)</b>
-  <b>e) Add description feild for task (New Feature)</b>
- <b>f) Fixed on wrong password system breakdown error. (Bug Fix)</b>  
- <b>g) Fixed on data fetch in update page data in some feilds were missing. (Bug Fix)</b>   
- <b>h) Added validations for input field of forms. (Bug Fix)</b>   
-        <li> Hours -> Interger, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
+ <b>d) Implement Reset Password. (New Feature)</b>
+
+ <b>e) Add a description field for the task. (New Feature)</b>   
+
+ <b>f) Added a discussion forum in the main navigation Menu. (New Feature)</b>
+       <li> Users can brag about their progress on the forum
+       <li> Users can find accountability buddies based on their interests
+       <li> Users can share tips and tools that helped them in their journey.
+ 
+ <b>g) Fixed on wrong password system breakdown error. (Bug Fix)</b>  
+ 
+ <b>h) Fixed on data fetch in update page data in some fields were missing. (Bug Fix)</b>   
+ 
+ <b>i) Added validations for input field of forms. (Bug Fix)</b>   
+        <li> Hours -> Integer, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
 
   ## Project Roadmap
   **Future three months**:
      <li> Add task completion evaluation for "Add Task" function. By doing so, users can also learn how good he/she finishes the task
-     <li> Implement search functionality in dashboard so that users could quickly get the information for the task he want
-     <li> Include more analytic graph type options in "Analytics" fuction, such as pie chart, line chart and scatter chart.
-     <li> Optimize "Friends" section to allow users to upload avatar, set friend permission level, request notification and so on
+     <li> Implement search functionality in dashboard so that users can quickly get the information for the task he want
+     <li> Include more analytic graph type options in "Analytics" function, such as pie chart, line chart and scatter chart.
+     <li> Optimize "Friends" section to allow users to upload avatars, set friend permission level, request notification and so on
      
   **Future six months**:
      <li> Beautify UI elements: optimize color palette; diversify content layout; better font family; CSS animation and so on.
@@ -210,7 +219,7 @@ planned to do in future.
      
   **Future twelve months**:
      <li> Run integration test for different functionalities
-     <li> Run functional test for the whole system
+     <li> Run functional tests for the whole system
      <li> Run black box test to pass through user acceptance level
      <li> Select and purchase a cloud service to deploy the website
      <li> Set up a marketing team to attract target users to try our website and collect feedback accordingly
