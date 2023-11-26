@@ -1,3 +1,9 @@
+#
+# Copyright 2023 Simplii from Group74 NCSU CSC510
+#
+# Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+#
+
 from flask_wtf import FlaskForm
 from wtforms.fields.html5 import DateField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TimeField, ValidationError, SelectMultipleField, SelectField

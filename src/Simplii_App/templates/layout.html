@@ -1,117 +1,134 @@
+<!--
+   Copyright 2023 Simplii from Group74 NCSU CSC510
+
+   Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+-->
+
 <!DOCTYPE html>
 <html>
+
 <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
 
-    <!-- Font Awesome JS -->
-    <script src="https://kit.fontawesome.com/5cab5da716.js" crossorigin="anonymous"></script>
-    
-    {% if title %}
-      <title>Simplii - {{ title }}</title>
-    {% else %}
-      <title>Simplii</title>
-    {% endif %}
+  <!-- Font Awesome JS -->
+  <script src="https://kit.fontawesome.com/5cab5da716.js" crossorigin="anonymous"></script>
+
+  {% if title %}
+  <title>Simplii - {{ title }}</title>
+  {% else %}
+  <title>Simplii</title>
+  {% endif %}
 </head>
+
 <body>
-    <div class="wrapper">
-        <!-- Sidebar -->
-      {% if session.get("email") %}
-        <nav id="sidebar">
-            <div class="sidebar-header">
-                <img src="static/images/site_logo3.png" alt="site logo">
-            </div>
+  <div class="wrapper">
+    <!-- Sidebar -->
+    {% if session.get("email") %}
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <img src="static/images/site_logo3.png" alt="site logo">
+      </div>
 
-            <!-- Sidebar List Items -->
-            <ul class="list-unstyled components">
-                <li class="active">
-                    <a href="{{ url_for('about_us') }}">Home</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('dashboard') }}">Dashboard</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('task') }}">Add Tasks</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('friends') }}">Friends</a>
-                </li>
-                <li>
-                    <a href="{{ url_for('analytics') }}">Analytics</a>
-                </li>
-            </ul>
-        </nav>
-        {% endif %}
+      <!-- Sidebar List Items -->
+      <ul class="list-unstyled components">
+        <li class="active">
+          <a href="{{ url_for('about_us') }}">Home</a>
+        </li>
+        <li>
+          <a href="{{ url_for('dashboard') }}">Dashboard</a>
+        </li>
+        <li>
+          <a href="{{ url_for('task') }}">Add Tasks</a>
+        </li>
+        <li>
+          <a href="{{ url_for('friends') }}">Friends</a>
+        </li>
+        <li>
+          <a href="{{ url_for('analytics') }}">Analytics</a>
+        </li>
+        <li>
+          <a href="{{ url_for('forum') }}">Forum</a>
+        </li>
+      </ul>
+    </nav>
+    {% endif %}
 
-            <div id="content">
-                    <header class="site-header">
-      <nav class="navbar navbar-expand-md  nav-color">
-        <div class="container">
-          {% if not session.get("email") %}
-            <a class="navbar-brand mr-4 text-black" href="{{url_for('login')}}">Simplii</a>
-          {% endif %}
+    <div id="content">
+      <header class="site-header">
+        {% if not session.get("email") %}
+        <nav class="navbar navbar-expand-md  nav-color-violet">
+          {% else %}
+          <nav class="navbar navbar-expand-md  nav-color">
+            {% endif %}
+            <div class="container">
+              {% if not session.get("email") %}
+              <a class="navbar-brand mr-4" href="{{url_for('login')}}">Simplii</a>
+              {% endif %}
 
-          <div class="collapse navbar-collapse" id="navbarToggle">
-            {% if not session.get("email"): %}
-            <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" href="{{ url_for('login') }}">Home</a>
-            </div>
-            {% else %}
+              <div class="collapse navbar-collapse" id="navbarToggle">
+                {% if session.get("email"): %}
                 <div class="navbar-nav mr-auto">
-                    <div class="container-fluid">
-                        <button type="button" id="sidebarCollapse" class="btn btn-info">
-                            <i class="fas fa-align-left"></i>
-                            <span>Menu</span>
-                        </button>
-                    </div>
+                  <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                      <i class="fas fa-align-left"></i>
+                      <span>Menu</span>
+                    </button>
+                  </div>
                 </div>
-            {% endif %}
-            <!-- Navbar Right Side -->
-            {% if not session.get("email"): %}
-            <div class="navbar-nav">
-              <a class="nav-item nav-link" href="{{ url_for('login') }}" id="login">Login</a>
-              <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                {% endif %}
+                <!-- Navbar Right Side -->
+                {% if not session.get("email"): %}
+                <div class="navbar-nav ml-auto navbar-lr">
+                  <a class="nav-item nav-link" href="{{ url_for('login') }}" id="login">Login</a>
+                  <a class="nav-item nav-link" href="{{ url_for('register') }}">Register</a>
+                </div>
+                {% else %}
+                <div class="navbar-nav ml-auto">
+                  <a class="nav-item nav-link ">Welcome, {{ session.get("name") }}</a>
+                  <button class="nav-item nav-link btn btn-link " onclick="logout()">Log Out</button>
+                </div>
+                {% endif %}
+              </div>
             </div>
-            {% else %}
-            <div class="navbar-nav">
-              <a class="nav-item nav-link">Welcome, {{ session.get("email") }}</a>
-              <button class="nav-item nav-link btn btn-link" onclick="logout()">Log Out</button>
+          </nav>
+      </header>
+      <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-12">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
             </div>
+            {% endfor %}
             {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
           </div>
         </div>
-      </nav>
-    </header>
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-12">
-          {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-              {% for category, message in messages %}
-                <div class="alert alert-{{ category }}">
-                  {{ message }}
-                </div>
-              {% endfor %}
-            {% endif %}
-          {% endwith %}
-          {% block content %}{% endblock %}
-        </div>
-      </div>
-    </main>
-            </div>
+      </main>
     </div>
+  </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script src="../static/js/script.js"></script>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+  <script src="../static/js/script.js"></script>
 </body>
+
 </html>

@@ -1,3 +1,9 @@
+/*
+   Copyright 2023 Simplii from Group74 NCSU CSC510
+
+   Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
@@ -6,6 +12,7 @@
     font-family: 'Roboto', sans-serif;
     color: #cbbde2;
   }
+
   body {
       background: #fafafa;
       color: #333333;
@@ -31,14 +38,28 @@
     }
     
     .site-header .navbar-nav .nav-link {
-      color: #cbd5db;
+      color: #000000;
+      font-family: 'Roboto', sans-serif;
     }
     
     .site-header .navbar-nav .nav-link:hover {
-      color: #ffffff;
+      color: #868686;
     }
     
     .site-header .navbar-nav .nav-link.active {
+      font-weight: 500;
+    }
+
+    .site-header .navbar-lr .nav-link {
+      color: #ffffff;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    .site-header .navbar-lr .nav-link:hover {
+      color: #868686;
+    }
+
+    .site-header .navbar-lr .nav-link.active {
       font-weight: 500;
     }
     
@@ -218,6 +239,10 @@
         background-color: #fdfdfe;
   }
 
+.site-header .nav-color-violet {
+        background-color: #9D76C1;
+  }
+
   .list-unstyled.components li {
     text-align: center; /* Center the text within each list item */
     padding: 10px; /* Add padding for spacing if needed */
@@ -228,6 +253,13 @@
 .sidebar-header img {
     width: 80%;
     height: auto;
+}
+
+.navbar-brand {
+    color: #ffffff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2em;
+    font-weight: bold;
 }
 
 

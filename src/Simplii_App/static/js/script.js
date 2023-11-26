@@ -1,3 +1,10 @@
+/*
+   Copyright 2023 Simplii from Group74 NCSU CSC510
+
+   Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+*/
+
+
 function addToLocalStorage(key, data) {
     localStorage.setItem(key) = data;
 }
@@ -49,6 +56,9 @@ function approveRequest(e, clickedId) {
     })
 }
 
+function updateBadgeCount(sectionId, count) {
+    document.getElementById(sectionId + 'Count').innerText = count;
+}
 
 function logout() {
     $.ajax({
@@ -93,16 +103,16 @@ $(document).ready(function () {
     // code to read selected table row cell data (values).
     $("#myTable").on('click', '.completeButton', function () {
         // get the current row
-        var currentRow=$(this).closest("tr"); 
-            
-        var task=currentRow.find("td:eq(0)").text(); // get taskname value
+        var currentRow = $(this).closest("tr");
+
+        var task = currentRow.find("td:eq(0)").text(); // get taskname value
         var actualhours = $("#actualhours").val();// get actual hours value
         $.ajax({
             type: "POST",
             url: "/completeTask",
-            data:{
-                "task":task,
-                "actualhours":actualhours
+            data: {
+                "task": task,
+                "actualhours": actualhours
             },
             success: function (response) {
                 resdata = JSON.parse(response)
