@@ -1,0 +1,101 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<style>
+    .card-title,
+    .card-text {
+        margin-bottom: 0.5rem;
+    }
+
+    .reply-card {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Define different border colors for thread cards and adjust border size */
+    .thread-card-1 {
+        border: 2.6px solid #007bff;
+        /* Blue border */
+        color: #007bff;
+        /* Blue text color */
+    }
+
+    .thread-card-2 {
+        border: 2.6px solid #28a745;
+        /* Green border */
+        color: #28a745;
+        /* Green text color */
+    }
+
+    .thread-card-3 {
+        border: 2.6px solid #dc3545;
+        /* Red border */
+        color: #dc3545;
+        /* Red text color */
+    }
+</style>
+
+<h1>Discussion Forum</h1>
+
+<!-- Card for creating a new thread -->
+<div class="card mb-3">
+    <div class="card-body">
+        <h2 class="card-title">Create a New Thread</h2>
+        <form action="{{ url_for('forum') }}" method="post">
+            <label for="thread_title">Thread Title:</label>
+            <input type="text" id="thread_title" name="thread_title" class="form-control" required>
+            <br>
+            <label for="thread_content">Thread Content:</label>
+            <textarea id="thread_content" name="thread_content" class="form-control" rows="4" required></textarea>
+            <br>
+            <button type="submit" class="btn btn-success">Create Thread</button>
+        </form>
+    </div>
+</div>
+
+<!-- Card for existing threads -->
+<div class="card">
+    <div class="card-body">
+
+        {% for thread in threads|reverse %}
+        <!-- Individual thread card with dynamic class based on thread number -->
+        <div
+            class="card mb-4 {% if loop.index % 3 == 1 %}thread-card-1{% elif loop.index % 3 == 2 %}thread-card-2{% elif loop.index % 3 == 0 %}thread-card-3{% endif %}">
+
+            <!-- Thread Title Card with adjusted color -->
+            <div class="card-body">
+                <h5 class="card-title" style="color: inherit;">{{ thread.title }}</h5>
+            </div>
+
+            <!-- Thread Content Card with adjusted color -->
+            <div class="card-body">
+                <p class="card-text" style="color: inherit;">{{ thread.content }}</p>
+            </div>
+
+            <!-- Replies for the Thread in a separate card -->
+            {% for reply in thread.replies %}
+            <div class="card mb-2 reply-card">
+                <div class="card-body">
+                    <p class="card-text"><strong>{{ reply.user }}:</strong> {{ reply.content }}</p>
+                </div>
+            </div>
+            {% endfor %}
+
+            <!-- Reply Form Card -->
+            <div class="card-body">
+                <form action="{{ url_for('forum') }}" method="post">
+                    <input type="hidden" name="thread_id" value="{{ thread._id }}">
+                    <label for="replyContent{{ thread._id }}">Your Reply:</label>
+                    <textarea id="replyContent{{ thread._id }}" name="reply_content" class="form-control" rows="2"
+                        required></textarea>
+                    <br>
+                    <button type="submit" class="btn btn-primary">Post Reply</button>
+                </form>
+            </div>
+
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock content %}
