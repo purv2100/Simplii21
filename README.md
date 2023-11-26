@@ -191,9 +191,9 @@ planned to do in future.
         
  <b>d) Implement Reset Password (New Feature)</b>
   <b>e) Add description feild for task (New Feature)</b>
- <b>f) Fixed on wrong password system breakdown error. (Bug Fix)</b>
- <b>g) Fixed on data fetch in update page data in some feilds were missing. (Bug Fix)</b>
- <b>h) Added validations for input field of forms. (Bug Fix)</b>
+ <b>f) Fixed on wrong password system breakdown error. (Bug Fix)</b>  
+ <b>g) Fixed on data fetch in update page data in some feilds were missing. (Bug Fix)</b>   
+ <b>h) Added validations for input field of forms. (Bug Fix)</b>   
         <li> Hours -> Interger, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
 
   ## Project Roadmap
