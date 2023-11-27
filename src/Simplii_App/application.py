@@ -282,8 +282,9 @@ def dashboard():
     # ##########################
     tasks = ''
     if session.get('email'):
-        tasks = mongo.db.tasks.find({'email': session.get('email')})
-    return render_template('dashboard.html', tasks=tasks)
+        incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
+        completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})
+    return render_template('dashboard.html', incomplete_tasks=incomplete_tasks, completed_tasks=completed_tasks)
 
 
 def get_first_day_of_week(date):
@@ -749,8 +750,10 @@ def deleteTask():
         task = request.form.get('task')
         mongo.db.tasks.delete_many({'taskname': task})
         print("Task", task, "deleted!!")
+        flash('Task Deleted', 'success')
         return "Success"
     else:
+        flash('Task Not Deleted', 'danger')
         return "Failed"
 
 
@@ -820,31 +823,24 @@ def completeTask():
     if session.get('email'):
         email = session.get('email')
         task = request.form.get('task')
-        is_completed = mongo.db.tasks.find_one(
-            {'taskname': task, 'email': email}, {'completed'})
-        print(is_completed)
-        if is_completed['completed']:
-            flash('Task already completed!', 'danger')
-        else:
-            actualhours = request.form.get('actualhours')
-            print(actualhours)
-            print("Actual hours taken", int(actualhours))
-            mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
-                                      '$set': {'completed': True, 'actualhours': int(actualhours)}})
-            tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
-            total_tasks = 0
-            total_completed_tasks = 0
-            for tsk in tasks:
-                if tsk['completed']:
-                    total_completed_tasks += 1
-                total_tasks += 1
+        actualhours = request.form.get('actualhours')
+        print(actualhours)
+        print("Actual hours taken", int(actualhours))
+        mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
+                                    '$set': {'completed': True, 'actualhours': int(actualhours)}})
+        tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
+        total_tasks = 0
+        total_completed_tasks = 0
+        for tsk in tasks:
+            if tsk['completed']:
+                total_completed_tasks += 1
+            total_tasks += 1
 
-            mongo.db.tasks.update_many({'taskname': task}, {
-                                       '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
+        mongo.db.tasks.update_many({'taskname': task}, {
+                                    '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
 
-            flash(f' {task} Task Completed!', 'success')
-    return redirect(url_for('home'))
-
+        flash(f' {task} Task Completed!', 'success')
+        return 'success'
 
 def is_integer(s):
     try:
