@@ -3,8 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
-from Simplii_App.forms.forms import *
-from Simplii_App.apps.apps import App
+from forms import *
+from apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -361,8 +361,13 @@ def analytics():
         # ----------------------------------------------------------------------------------------
         # Side-by-side bar chart of expected hours and actual hours required to complete the task
         # Only consider the tasks which are complete. i.e. progress = 1
-        data_exp_act = mongo.db.tasks.find({'email': email, 'completed': True}, {
-                                           'taskname', 'starttime', 'endtime', 'actualhours'})
+        data_exp_act = list(mongo.db.tasks.find({'email': email, 'completed': True}, {
+                                           'taskname', 'starttime', 'endtime', 'actualhours'}))
+        exp_act_html = None
+        by_year_html = None
+        by_month_html = None
+        by_week_html = None
+
         if len(data_exp_act) != 0:
             data_exp_act_df = pd.DataFrame(
                 columns=['Name', 'Expected Hours', 'Actual Hours'])
@@ -600,7 +605,6 @@ def analytics():
 
         # Convert the Plotly figure to HTML
         pie_html = fig.to_html(full_html=False)
-
         return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html=by_week_html, pie_html=pie_html, title='Analytics')
     flash('Please add some tasks before using analytics functionality', 'danger')
 
