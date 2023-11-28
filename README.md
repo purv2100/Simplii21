@@ -81,16 +81,26 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 
 ## Core Functionalities of the Application:
  
- **1. Register:** <br>
+  **1. Register and login:** <br>
   <img src="/static/images/register_and_login.gif" width="70%" height="70%"/>   <br>
-
-
  
- **2. Add a task:** <br>
+  **2. Add a task:** <br>
   <img src="/static/images/add_task.gif" width="70%" height="70%"/>  <br>
 
+  **3. Tasks dashboard:** <br>
+  <img src="/static/images/view_tasks.gif" width="70%" height="70%"/>  <br>
 
-  **2. Add a task:** 
+  **4. Friends:** <br>
+  <img src="/static/images/friends.gif" width="70%" height="70%"/>  <br>
+
+  **5. Analytics:** <br>
+  <img src="/static/images/analytics.gif" width="70%" height="70%"/>  <br>
+
+  **6. Forum:** <br>
+  <img src="/static/images/forum.gif" width="70%" height="70%"/>  <br>
+
+  **7. Reward:** <br>
+  <img src="/static/images/reward.gif" width="70%" height="70%"/>  <br>
 
 ## Successful Usecases
 
