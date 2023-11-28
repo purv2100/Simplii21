@@ -80,7 +80,7 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 ## Core Functionalities of the Application:
  
  1. Register: <br>
-  ![Alt Text](https://github.com/aditicsalunkhe/Simplii-Group74-2023/blob/main/static/images/register_login.gif)
+  ![Alt Text](https://github.com/aditicsalunkhe/Simplii-Group74-2023/blob/main/static/images/register_and_login.gif)
 
 
  
