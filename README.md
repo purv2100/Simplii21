@@ -5,10 +5,10 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Build Status](https://app.travis-ci.com/atharva1996/Simplii.svg?branch=main)](https://app.travis-ci.com/nisarg210/Simplii)
 [![codecov](https://codecov.io/gh/aditicsalunkhe/Simplii-Group74-2023/graph/badge.svg?token=6ROHQ5GMQ7)](https://codecov.io/gh/aditicsalunkhe/Simplii-Group74-2023)
-![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/style_checker.yml/badge.svg)
-![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
-![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
-![github workflow](https://github.com/OWNER/REPOSITORY/actions/workflows/code_cov.yml/badge.svg)
+![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/style_checker.yml/badge.svg)
+![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/syntax_checker.yml/badge.svg)
+![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/close_as_a_feature.yml/badge.svg)
+![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/code_cov.yml/badge.svg)
 
 ## Link to Demonstration Video of the Project: 
 https://drive.google.com/file/d/1rApSm9mfYJVBAC05cEsd61l3WbkrtomQ/view?usp=sharing
