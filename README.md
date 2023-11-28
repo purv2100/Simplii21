@@ -12,7 +12,7 @@
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/unit_test.yml/badge.svg)
 
 ## Link to Demonstration Video of the Project: 
-https://drive.google.com/file/d/1rApSm9mfYJVBAC05cEsd61l3WbkrtomQ/view?usp=sharing
+https://drive.google.com/file/d/10ysKfwcecwr28sYiTgUISVuCjco6RFj2/view?usp=sharing
 
 # Introduction
 <h3>Having trouble in keeping track of your daily tasks and managing them? </h3>
@@ -169,7 +169,8 @@ planned to do in future.
  Step 5:
     Open the URL in your browser:  
       http://127.0.0.1:5000/
-      
+
+ While executing testing, uncomment the unit_test.py and test_application.py in the test subdirectory.
                                                                                                                                                   
  ## Delta
 1. Front end layout re-design and implementation. <br>
