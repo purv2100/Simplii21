@@ -4,6 +4,7 @@ from flask import Flask, session
 from flask_pymongo import PyMongo
 from dotenv import load_dotenv
 from src.application import create_app
+from typing import Any
 from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 
 
