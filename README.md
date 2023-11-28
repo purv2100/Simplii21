@@ -31,7 +31,7 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 Watch our promotion video:
 
 <div align="center">
-  <video src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171" width="70%" />
+  <video src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171" width="500px" />
 </div>
 
 
