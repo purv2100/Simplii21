@@ -3,8 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
-from forms import *
-from apps import App
+from .forms.forms import *
+from .apps.apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -48,6 +48,7 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
 app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
 
+app.config['WTF_CSRF_ENABLED'] = False
 scheduler = BackgroundScheduler()
 
 @app.route("/")
@@ -283,6 +284,8 @@ def dashboard():
     # Output: Our function will redirect to the dashboard page with user tasks being displayed
     # ##########################
     tasks = ''
+    incomplete_tasks = None
+    completed_tasks = None
     if session.get('email'):
         incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
         completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})
@@ -305,7 +308,11 @@ def analytics():
     # analytics() function displays visualizations related to tasks of the user.
     # route "/analytics" will redirect to analytics() function.
     # ##########################
+    mongo = PyMongo(app)
     email = session.get('email')
+    if app.config['TESTING']:
+        app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
+        mongo = PyMongo(app)
     # Check if there are any tasks in the database.
     data = list(mongo.db.tasks.find({'email': email}, {'email'}))
     print(data)
@@ -662,6 +669,9 @@ def forum():
             - Renders the 'forum.html' template with the title 'Forum' and the list of threads.
 
     """
+    if app.config['TESTING']:
+            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
+            mongo = PyMongo(app)
     if request.method == 'POST':
         # Assuming you have a 'threads' collection in your MongoDB
         threads_collection = mongo.db.threads
@@ -776,11 +786,15 @@ def task():
     # ##########################
     if session.get('email'):
         form = TaskForm(session.get('email'))
+        if app.config['TESTING']:
+            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
+            mongo = PyMongo(app)
         if form.validate_on_submit():
             print("inside form")
             if request.method == 'POST':
                 email = session.get('email')
                 taskname = request.form.get('taskname')
+
                 friendsemail = request.form.getlist(
                     'invitees')+["Please Select"]
                 category = request.form.get('category')
@@ -788,9 +802,9 @@ def task():
                 start_time = request.form.get('start_time')
                 end_time = request.form.get('end_time')
                 description = request.form.get('description')
-                print(friendsemail)
                 check = mongo.db.tasks.find_one({'taskname': taskname})
                 if not check:
+                    print("Aditi")
                     mongo.db.tasks.insert_one({'email': email,
                                                'taskname': taskname,
                                                'category': category,
@@ -801,7 +815,7 @@ def task():
                                                'progress': 0,
                                                'actualhours': 0,
                                                'completed': False})
-
+                    print(friendsemail)
                     for friendemail in friendsemail:
                         if friendemail != "Please Select":
                             mongo.db.tasks.insert_one({'email': friendemail,
@@ -814,9 +828,14 @@ def task():
                                                        'progress': 0,
                                                        'acutalhours': 0,
                                                        'completed': False})
+                    
+                    app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+                    mongo = PyMongo(app)
                     flash(f' {form.taskname.data} Task Added!', 'success')
                     return redirect(url_for('home'))
                 else:
+                    app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+                    mongo = PyMongo(app)
                     flash(
                         'Task name already taken. Please find another task name. Thank you!',
                         'danger')
@@ -836,9 +855,12 @@ def completeTask():
     # ##########################
     if session.get('email'):
         email = session.get('email')
+        if app.config['TESTING']:
+            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
+            mongo = PyMongo(app)
         task = request.form.get('task')
         actualhours = request.form.get('actualhours')
-        print(type(actualhours))
+        print(actualhours)
         print("Actual hours taken", int(actualhours))
         mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
                                     '$set': {'completed': True, 'actualhours': int(actualhours)}})
@@ -855,31 +877,6 @@ def completeTask():
 
         flash(f' {task} Task Completed!', 'success')
         return 'success'
-    
-@app.route("/rewards", methods=['GET'])
-def rewards():
-    if session.get('email'):
-        email = session.get('email')
-        tasks = list(mongo.db.tasks.find({'email': email}, {'category', 'completed'}))
-        complete_rewards = 0
-        incomplete_rewards = 0
-        for task in tasks:
-            print(task)
-            if task['category'] == 'easy':
-                difficulty_multiplier = 1  
-            elif task['category'] == 'medium':
-                difficulty_multiplier = 2
-            else:
-                difficulty_multiplier = 3
-            
-            if task['completed']:
-                complete_rewards+=difficulty_multiplier
-            if not task['completed']:
-                incomplete_rewards+=difficulty_multiplier
-            
-        return render_template('rewards.html', title = 'Rewards', complete_rewards=complete_rewards, incomplete_rewards=incomplete_rewards)
-        
-
 
 def is_integer(s):
     try:
@@ -889,6 +886,7 @@ def is_integer(s):
     except ValueError:
         # ValueError is raised if the conversion fails
         return False
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
