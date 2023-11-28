@@ -165,7 +165,7 @@ planned to do in future.
  Step 4:
     Run the following command in the terminal
     
-    python /src/application.py
+    python3.10 -m application
     
  Step 5:
     Open the URL in your browser:  
