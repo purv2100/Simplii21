@@ -34,6 +34,9 @@ Watch our promotion video:
   <video src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171" width="500px" />
 </div>
 
+<div align="center">
+  <video src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171"  width="500px" height="auto" style="max-width: 100%;"> </video>
+</div>
 
 # Table of Contents  
 
