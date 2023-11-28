@@ -22,8 +22,8 @@ jobs:
       - name: Push changes
         if: steps.git-check.outputs.modified == 'true'
         run: |
-          git config --global user.name 'PrakruthiSomashekar'
-          git config --global user.email 'prakruthi1796@gmail.com'
-          git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ deekay2310/Simplii }}
+          git config --global user.name 'Aditi Salunkhe'
+          git config --global user.email 'salunkheaditi99@gmail.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GIT_TOKEN }}@github.com/${{ aditicsalunkhe/Simplii-Group74-2023 }}
           git commit -am "Automated autoyapf fixes"
           git push
