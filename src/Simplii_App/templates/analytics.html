@@ -7,11 +7,13 @@
 {% extends "layout.html" %}
 {% block content %}
     <!-- Row 1 -->
+    {% if exp_act_html is not none %}
     <div class="row mb-4"> <!-- Added margin-bottom for spacing -->
         <div class="col-md-12">
             {{ exp_act_html|safe }}
         </div>
     </div>
+    {% endif %}
 
     <!-- Row 2 -->
     <div class="row mb-4"> <!-- Added margin-bottom for spacing -->
@@ -24,6 +26,7 @@
     </div>
 
     <!-- Row 3 -->
+    {% if by_year_html is not none %}
     <div class="row mb-4"> <!-- Added margin-bottom for spacing -->
         <div class="col-md-3"></div>  <!-- Empty column to center the chart -->
         <div class="col-md-6">
@@ -60,4 +63,5 @@
         </div>
         <div class="col-md-3"></div>  <!-- Empty column to center the chart -->
     </div>
+    {% endif %}
 {% endblock content %}

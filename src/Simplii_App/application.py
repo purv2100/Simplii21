@@ -3,6 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
+from forms import *
+from apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -22,22 +24,22 @@ import sys
 from dotenv import load_dotenv
 from flask_login import LoginManager, login_required
 import uuid
-from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
+# from forms import ForgotPasswordForm, RegistrationForm, LoginForm, ResetPasswordForm, PostingForm, ApplyForm, TaskForm, UpdateForm
 import plotly.express as px
 import plotly.graph_objs as go
 import random
 
 from plotly.subplots import make_subplots
-
 import pandas as pd
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = 'secret'
+
+# Set up MongoDB Database
 app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
 mongo = PyMongo(app)
-
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
 app.config['MAIL_PORT'] = os.getenv('MAIL_PORT')
@@ -45,8 +47,8 @@ app.config['MAIL_USE_TLS'] = False
 app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
 app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
-scheduler = BackgroundScheduler()
 
+scheduler = BackgroundScheduler()
 
 @app.route("/")
 @app.route("/home")
@@ -109,10 +111,10 @@ def reset_password(token):
 @app.route('/forgotPassword', methods=['GET', 'POST'])
 def forgotPassword():
     ############################
-    # forgotPassword() redirects the user to dummy template.
+    # forgotPassword() redirects the user to template.
     # route "/forgotPassword" will redirect to forgotPassword() function.
     # input: The function takes session as the input
-    # Output: Out function will redirect to the dummy page
+    # Output: 
     # ##########################
     if not session.get('email'):
         form = ResetPasswordForm()
@@ -282,8 +284,9 @@ def dashboard():
     # ##########################
     tasks = ''
     if session.get('email'):
-        tasks = mongo.db.tasks.find({'email': session.get('email')})
-    return render_template('dashboard.html', tasks=tasks)
+        incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
+        completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})
+    return render_template('dashboard.html', incomplete_tasks=incomplete_tasks, completed_tasks=completed_tasks)
 
 
 def get_first_day_of_week(date):
@@ -358,205 +361,210 @@ def analytics():
         # ----------------------------------------------------------------------------------------
         # Side-by-side bar chart of expected hours and actual hours required to complete the task
         # Only consider the tasks which are complete. i.e. progress = 1
-        data_exp_act = mongo.db.tasks.find({'email': email, 'completed': True}, {
-                                           'taskname', 'starttime', 'endtime', 'actualhours'})
+        data_exp_act = list(mongo.db.tasks.find({'email': email, 'completed': True}, {
+                                           'taskname', 'starttime', 'endtime', 'actualhours'}))
+        exp_act_html = None
+        by_year_html = None
+        by_month_html = None
+        by_week_html = None
 
-        data_exp_act_df = pd.DataFrame(
-            columns=['Name', 'Expected Hours', 'Actual Hours'])
-        time_format = "%H:%M"
-        i = 0
-        for task in data_exp_act:
-            start_time = datetime.strptime(task['starttime'], time_format)
-            end_time = datetime.strptime(task['endtime'], time_format)
-            expected_hours = (end_time - start_time).total_seconds()/3600
-            data_exp_act_df.loc[i] = [task['taskname'],
-                                      expected_hours, task['actualhours']]
-            i += 1
+        if len(data_exp_act) != 0:
+            data_exp_act_df = pd.DataFrame(
+                columns=['Name', 'Expected Hours', 'Actual Hours'])
+            time_format = "%H:%M"
+            i = 0
+            for task in data_exp_act:
+                start_time = datetime.strptime(task['starttime'], time_format)
+                end_time = datetime.strptime(task['endtime'], time_format)
+                expected_hours = (end_time - start_time).total_seconds()/3600
+                data_exp_act_df.loc[i] = [task['taskname'],
+                                        expected_hours, task['actualhours']]
+                i += 1
 
-        # Create trace for Value1 with custom bar color
-        trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'],
-                        name='Expected Hours', marker=dict(color='rgba(230, 126, 34, 1)'))
+            # Create trace for Value1 with custom bar color
+            trace1 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Expected Hours'],
+                            name='Expected Hours', marker=dict(color='rgba(230, 126, 34, 1)'))
 
-        # Create trace for Value2 with a different bar color
-        trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'],
-                        name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
+            # Create trace for Value2 with a different bar color
+            trace2 = go.Bar(x=data_exp_act_df['Name'], y=data_exp_act_df['Actual Hours'],
+                            name='Actual Hours', marker=dict(color='rgba(44, 130, 201, 1)'))
 
-        # Create layout
-        layout = go.Layout(
-            barmode='group', title='Expected Hours Vs Actual Hours to complete a task')
+            # Create layout
+            layout = go.Layout(
+                barmode='group', title='Expected Hours Vs Actual Hours to complete a task')
 
-        # Create figure
-        fig = go.Figure(data=[trace1, trace2], layout=layout)
+            # Create figure
+            fig = go.Figure(data=[trace1, trace2], layout=layout)
 
-        fig.update_layout(
-            xaxis=dict(
-                showline=True,  # Display the x-axis line
-                linewidth=2,    # Set the line width of the x-axis
-                linecolor='black',  # Set the line color of the x-axis
-                tickfont=dict(size=16),
-                title='Task Name'
-            ),
-            yaxis=dict(
-                showline=True,  # Display the y-axis line
-                linewidth=2,    # Set the line width of the y-axis
-                linecolor='black',  # Set the line color of the y-axis
-                tickfont=dict(size=16),
-                title='Hours'
-            ),
-            # Background color for the plot area
-            plot_bgcolor='rgba(232, 232, 232, 1)',
-            # Background color for the entire chart area
-            paper_bgcolor='rgba(232, 232, 232, 1)',
-            bargap=0.3,
-            legend=dict(
-                font=dict(size=16)  # Adjust the size of the legend font
-            ),
-            title_text='Expected Hours Vs Actual Hours to complete a task',  # Title text
-            # Customize font size, color, family
-            title_font=dict(size=20, color='black', family='Arial'),
-            title_x=0.04,  # Center the title horizontally
-            title_y=0.95  # Adjust the vertical position of the title
-        )
+            fig.update_layout(
+                xaxis=dict(
+                    showline=True,  # Display the x-axis line
+                    linewidth=2,    # Set the line width of the x-axis
+                    linecolor='black',  # Set the line color of the x-axis
+                    tickfont=dict(size=16),
+                    title='Task Name'
+                ),
+                yaxis=dict(
+                    showline=True,  # Display the y-axis line
+                    linewidth=2,    # Set the line width of the y-axis
+                    linecolor='black',  # Set the line color of the y-axis
+                    tickfont=dict(size=16),
+                    title='Hours'
+                ),
+                # Background color for the plot area
+                plot_bgcolor='rgba(232, 232, 232, 1)',
+                # Background color for the entire chart area
+                paper_bgcolor='rgba(232, 232, 232, 1)',
+                bargap=0.3,
+                legend=dict(
+                    font=dict(size=16)  # Adjust the size of the legend font
+                ),
+                title_text='Expected Hours Vs Actual Hours to complete a task',  # Title text
+                # Customize font size, color, family
+                title_font=dict(size=20, color='black', family='Arial'),
+                title_x=0.04,  # Center the title horizontally
+                title_y=0.95  # Adjust the vertical position of the title
+            )
 
-        exp_act_html = fig.to_html(full_html=False)
+            exp_act_html = fig.to_html(full_html=False)
 
-        # ----------------------------------------------------------------------------------------
-        # Time chart to show distribution of completed tasks across different years,
-        # different months and different weeks.
+            # ----------------------------------------------------------------------------------------
+            # Time chart to show distribution of completed tasks across different years,
+            # different months and different weeks.
 
-        timeline_data = mongo.db.tasks.find(
-            {'email': email, 'completed': True}, {'startdate'})
-        timeline_list = list(timeline_data)
-        timeline_df = pd.DataFrame(timeline_list)
+            timeline_data = mongo.db.tasks.find(
+                {'email': email, 'completed': True}, {'startdate'})
+            timeline_list = list(timeline_data)
+            timeline_df = pd.DataFrame(timeline_list)
 
-        timeline_df['startdate'] = [datetime.strptime(
-            date, "%Y-%m-%d") for date in timeline_df['startdate']]
+            timeline_df['startdate'] = [datetime.strptime(
+                date, "%Y-%m-%d") for date in timeline_df['startdate']]
 
-        year = [start_date.year for start_date in timeline_df['startdate']]
-        timeline_df['year'] = year
+            year = [start_date.year for start_date in timeline_df['startdate']]
+            timeline_df['year'] = year
 
-        timeline_df['week'] = timeline_df['startdate'].dt.strftime(
-            'Week %U, %Y')
+            timeline_df['week'] = timeline_df['startdate'].dt.strftime(
+                'Week %U, %Y')
 
-        timeline_df['month_year'] = timeline_df['startdate'].dt.strftime(
-            '%b \'%y')
+            timeline_df['month_year'] = timeline_df['startdate'].dt.strftime(
+                '%b \'%y')
 
-        # Year-wise distribution of tasks
-        fig = px.histogram(timeline_df, x='year', color_discrete_sequence=[
-                           'rgba(22, 160, 133, 1)'])
+            # Year-wise distribution of tasks
+            fig = px.histogram(timeline_df, x='year', color_discrete_sequence=[
+                            'rgba(22, 160, 133, 1)'])
 
-        fig.update_xaxes(dtick=1)
+            fig.update_xaxes(dtick=1)
 
-        fig.update_layout(
-            xaxis=dict(
-                showline=True,  # Display the x-axis line
-                linewidth=2,    # Set the line width of the x-axis
-                linecolor='black',  # Set the line color of the x-axis
-                tickfont=dict(size=16),
-                title='Year'
-            ),
-            yaxis=dict(
-                showline=True,  # Display the y-axis line
-                linewidth=2,    # Set the line width of the y-axis
-                linecolor='black',  # Set the line color of the y-axis
-                tickfont=dict(size=16),
-                title='Count of Tasks'
-            ),
-            # Background color for the plot area
-            plot_bgcolor='rgba(232, 232, 232, 1)',
-            # Background color for the entire chart area
-            paper_bgcolor='rgba(232, 232, 232, 1)',
-            bargap=0.3,
-            legend=dict(
-                font=dict(size=16)  # Adjust the size of the legend font
-            ),
-            title_text='Year-wise distribution of completed tasks',  # Title text
-            # Customize font size, color, family
-            title_font=dict(size=20, color='black', family='Arial'),
-            title_x=0.04,  # Center the title horizontally
-            title_y=0.95  # Adjust the vertical position of the title
-        )
+            fig.update_layout(
+                xaxis=dict(
+                    showline=True,  # Display the x-axis line
+                    linewidth=2,    # Set the line width of the x-axis
+                    linecolor='black',  # Set the line color of the x-axis
+                    tickfont=dict(size=16),
+                    title='Year'
+                ),
+                yaxis=dict(
+                    showline=True,  # Display the y-axis line
+                    linewidth=2,    # Set the line width of the y-axis
+                    linecolor='black',  # Set the line color of the y-axis
+                    tickfont=dict(size=16),
+                    title='Count of Tasks'
+                ),
+                # Background color for the plot area
+                plot_bgcolor='rgba(232, 232, 232, 1)',
+                # Background color for the entire chart area
+                paper_bgcolor='rgba(232, 232, 232, 1)',
+                bargap=0.3,
+                legend=dict(
+                    font=dict(size=16)  # Adjust the size of the legend font
+                ),
+                title_text='Year-wise distribution of completed tasks',  # Title text
+                # Customize font size, color, family
+                title_font=dict(size=20, color='black', family='Arial'),
+                title_x=0.04,  # Center the title horizontally
+                title_y=0.95  # Adjust the vertical position of the title
+            )
 
-        # Convert the Plotly figure to HTML
-        by_year_html = fig.to_html(full_html=False)
+            # Convert the Plotly figure to HTML
+            by_year_html = fig.to_html(full_html=False)
 
-        # Monthly distribution of tasks
-        fig = px.histogram(timeline_df, x='month_year',
-                           color_discrete_sequence=['rgba(245, 230, 83, 1)'])
+            # Monthly distribution of tasks
+            fig = px.histogram(timeline_df, x='month_year',
+                            color_discrete_sequence=['rgba(245, 230, 83, 1)'])
 
-        fig.update_xaxes(dtick=1)
+            fig.update_xaxes(dtick=1)
 
-        fig.update_layout(
-            xaxis=dict(
-                showline=True,  # Display the x-axis line
-                linewidth=2,    # Set the line width of the x-axis
-                linecolor='black',  # Set the line color of the x-axis
-                tickfont=dict(size=16),
-                title='Month'
-            ),
-            yaxis=dict(
-                showline=True,  # Display the y-axis line
-                linewidth=2,    # Set the line width of the y-axis
-                linecolor='black',  # Set the line color of the y-axis
-                tickfont=dict(size=16),
-                title='Count of Tasks'
-            ),
-            # Background color for the plot area
-            plot_bgcolor='rgba(232, 232, 232, 1)',
-            # Background color for the entire chart area
-            paper_bgcolor='rgba(232, 232, 232, 1)',
-            bargap=0.3,
-            legend=dict(
-                font=dict(size=16)  # Adjust the size of the legend font
-            ),
-            title_text='Monthly distribution of completed tasks',  # Title text
-            # Customize font size, color, family
-            title_font=dict(size=20, color='black', family='Arial'),
-            title_x=0.04,  # Center the title horizontally
-            title_y=0.95  # Adjust the vertical position of the title
-        )
+            fig.update_layout(
+                xaxis=dict(
+                    showline=True,  # Display the x-axis line
+                    linewidth=2,    # Set the line width of the x-axis
+                    linecolor='black',  # Set the line color of the x-axis
+                    tickfont=dict(size=16),
+                    title='Month'
+                ),
+                yaxis=dict(
+                    showline=True,  # Display the y-axis line
+                    linewidth=2,    # Set the line width of the y-axis
+                    linecolor='black',  # Set the line color of the y-axis
+                    tickfont=dict(size=16),
+                    title='Count of Tasks'
+                ),
+                # Background color for the plot area
+                plot_bgcolor='rgba(232, 232, 232, 1)',
+                # Background color for the entire chart area
+                paper_bgcolor='rgba(232, 232, 232, 1)',
+                bargap=0.3,
+                legend=dict(
+                    font=dict(size=16)  # Adjust the size of the legend font
+                ),
+                title_text='Monthly distribution of completed tasks',  # Title text
+                # Customize font size, color, family
+                title_font=dict(size=20, color='black', family='Arial'),
+                title_x=0.04,  # Center the title horizontally
+                title_y=0.95  # Adjust the vertical position of the title
+            )
 
-        # Convert the Plotly figure to HTML
-        by_month_html = fig.to_html(full_html=False)
+            # Convert the Plotly figure to HTML
+            by_month_html = fig.to_html(full_html=False)
 
-        # Weekly distribution of tasks
-        fig = px.histogram(timeline_df, x='week', color_discrete_sequence=[
-                           'rgba(219, 10, 91, 1)'])
+            # Weekly distribution of tasks
+            fig = px.histogram(timeline_df, x='week', color_discrete_sequence=[
+                            'rgba(219, 10, 91, 1)'])
 
-        fig.update_xaxes(dtick=1)
+            fig.update_xaxes(dtick=1)
 
-        fig.update_layout(
-            xaxis=dict(
-                showline=True,  # Display the x-axis line
-                linewidth=2,    # Set the line width of the x-axis
-                linecolor='black',  # Set the line color of the x-axis
-                tickfont=dict(size=16),
-                title='Week'
-            ),
-            yaxis=dict(
-                showline=True,  # Display the y-axis line
-                linewidth=2,    # Set the line width of the y-axis
-                linecolor='black',  # Set the line color of the y-axis
-                tickfont=dict(size=16),
-                title='Count of Tasks'
-            ),
-            # Background color for the plot area
-            plot_bgcolor='rgba(232, 232, 232, 1)',
-            # Background color for the entire chart area
-            paper_bgcolor='rgba(232, 232, 232, 1)',
-            bargap=0.3,
-            legend=dict(
-                font=dict(size=16)  # Adjust the size of the legend font
-            ),
-            title_text='Weekly distribution of completed tasks',  # Title text
-            # Customize font size, color, family
-            title_font=dict(size=20, color='black', family='Arial'),
-            title_x=0.04,  # Center the title horizontally
-            title_y=0.95  # Adjust the vertical position of the title
-        )
+            fig.update_layout(
+                xaxis=dict(
+                    showline=True,  # Display the x-axis line
+                    linewidth=2,    # Set the line width of the x-axis
+                    linecolor='black',  # Set the line color of the x-axis
+                    tickfont=dict(size=16),
+                    title='Week'
+                ),
+                yaxis=dict(
+                    showline=True,  # Display the y-axis line
+                    linewidth=2,    # Set the line width of the y-axis
+                    linecolor='black',  # Set the line color of the y-axis
+                    tickfont=dict(size=16),
+                    title='Count of Tasks'
+                ),
+                # Background color for the plot area
+                plot_bgcolor='rgba(232, 232, 232, 1)',
+                # Background color for the entire chart area
+                paper_bgcolor='rgba(232, 232, 232, 1)',
+                bargap=0.3,
+                legend=dict(
+                    font=dict(size=16)  # Adjust the size of the legend font
+                ),
+                title_text='Weekly distribution of completed tasks',  # Title text
+                # Customize font size, color, family
+                title_font=dict(size=20, color='black', family='Arial'),
+                title_x=0.04,  # Center the title horizontally
+                title_y=0.95  # Adjust the vertical position of the title
+            )
 
-        # Convert the Plotly figure to HTML
-        by_week_html = fig.to_html(full_html=False)
+            # Convert the Plotly figure to HTML
+            by_week_html = fig.to_html(full_html=False)
 
         # ----------------------------------------------------------------------------------------------
         # Pie chart to show complete and incomplete tasks.
@@ -597,7 +605,6 @@ def analytics():
 
         # Convert the Plotly figure to HTML
         pie_html = fig.to_html(full_html=False)
-
         return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html=by_week_html, pie_html=pie_html, title='Analytics')
     flash('Please add some tasks before using analytics functionality', 'danger')
 
@@ -607,8 +614,8 @@ def analytics():
 @app.route("/about_us")
 def about_us():
     # ############################
-    # about() function displays About Us page (about.html) template
-    # route "/about" will redirect to about() function.
+    # about_us() function displays About Us page (about.html) template
+    # route "/about_us" will redirect to about() function.
     # ##########################
     return render_template('about.html', title='About')
 
@@ -717,7 +724,8 @@ def register():
     # ############################
     # register() function displays the Registration portal (register.html) template
     # route "/register" will redirect to register() function.
-    # RegistrationForm() called and if the form is submitted then various values are fetched and updated into database
+    # RegistrationForm() called and if the form is submitted then various values are fetched
+    # and updated into database
     # Input: Username, Email, Password, Confirm Password
     # Output: Value update in database and redirected to home login page
     # ##########################
@@ -749,8 +757,10 @@ def deleteTask():
         task = request.form.get('task')
         mongo.db.tasks.delete_many({'taskname': task})
         print("Task", task, "deleted!!")
+        flash('Task Deleted', 'success')
         return "Success"
     else:
+        flash('Task Not Deleted', 'danger')
         return "Failed"
 
 
@@ -759,7 +769,8 @@ def task():
     # ############################
     # task() function displays the Add Task portal (task.html) template
     # route "/task" will redirect to task() function.
-    # TaskForm() called and if the form is submitted then new task values are fetched and updated into database
+    # TaskForm() is called and when the form is submitted,
+    # new task values are fetched and updated into database
     # Input: Task, Category, start date, end date, number of hours
     # Output: Value update in database and redirected to home login page
     # ##########################
@@ -817,34 +828,33 @@ def task():
 
 @app.route("/completeTask", methods=['POST'])
 def completeTask():
+    ############################
+    # completeTask() function marks the task as complete in the database
+    # route "/completeTask" will redirect to completeTask() function.
+    # input: The function take the value of complete flag as Input
+    # Output: Function will mark task as complete in database.
+    # ##########################
     if session.get('email'):
         email = session.get('email')
         task = request.form.get('task')
-        is_completed = mongo.db.tasks.find_one(
-            {'taskname': task, 'email': email}, {'completed'})
-        print(is_completed)
-        if is_completed['completed']:
-            flash('Task already completed!', 'danger')
-        else:
-            actualhours = request.form.get('actualhours')
-            print(actualhours)
-            print("Actual hours taken", int(actualhours))
-            mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
-                                      '$set': {'completed': True, 'actualhours': int(actualhours)}})
-            tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
-            total_tasks = 0
-            total_completed_tasks = 0
-            for tsk in tasks:
-                if tsk['completed']:
-                    total_completed_tasks += 1
-                total_tasks += 1
+        actualhours = request.form.get('actualhours')
+        print(actualhours)
+        print("Actual hours taken", int(actualhours))
+        mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
+                                    '$set': {'completed': True, 'actualhours': int(actualhours)}})
+        tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
+        total_tasks = 0
+        total_completed_tasks = 0
+        for tsk in tasks:
+            if tsk['completed']:
+                total_completed_tasks += 1
+            total_tasks += 1
 
-            mongo.db.tasks.update_many({'taskname': task}, {
-                                       '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
+        mongo.db.tasks.update_many({'taskname': task}, {
+                                    '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
 
-            flash(f' {task} Task Completed!', 'success')
-    return redirect(url_for('home'))
-
+        flash(f' {task} Task Completed!', 'success')
+        return 'success'
 
 def is_integer(s):
     try:
@@ -861,7 +871,7 @@ def updateTask():
     ############################
     # updateTask() function displays the updateTask.html page for updations
     # route "/updateTask" will redirect to updateTask() function.
-    # input: The function takes variious task values as Input
+    # input: The function takes various task values as Input
     # Output: Out function will redirect to the updateTask page
     # ##########################
     if session.get('email'):
@@ -928,15 +938,17 @@ def updateTask():
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     # ############################
-    # login() function displays the Login form (login.html) template
+    # login() function displays the login form (login.html) template
     # route "/login" will redirect to login() function.
-    # LoginForm() called and if the form is submitted then various values are fetched and verified from the database entries
+    # LoginForm() called and if the form is submitted with all the details populated,
+    # then various values are fetched and verified from the database entries
     # Input: Email, Password, Login Type
     # Output: Account Authentication and redirecting to Dashboard
     # ##########################
     if not session.get('email'):
         form = LoginForm()
         if form.validate_on_submit():
+            flash('You have been logged in!')
             temp = mongo.db.users.find_one({'email': form.email.data}, {
                 'email', 'pwd', 'temp', 'name'})
             if temp is not None and temp['email'] == form.email.data and (
@@ -962,7 +974,7 @@ def login():
 @app.route("/logout", methods=['GET', 'POST'])
 def logout():
     # ############################
-    # logout() function just clears out the session and returns success
+    # logout() function clears out the session and returns success
     # route "/logout" will redirect to logout() function.
     # Output: session clear
     # ##########################
