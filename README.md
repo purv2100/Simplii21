@@ -79,10 +79,8 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 
 ## Core Functionalities of the Application:
  
- ## Register:
- 
-
-https://user-images.githubusercontent.com/89509351/144703691-aa8a10cd-db81-48f9-bc21-467f82a53378.mp4
+ 1. Register:
+  ![Alt Text](https://github.com/aditicsalunkhe/Simplii-Group74-2023/blob/main/static/img/Register_Login.gif)
 
 
  
