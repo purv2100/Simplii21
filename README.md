@@ -11,6 +11,11 @@
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/code_cov.yml/badge.svg)
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/unit_test.yml/badge.svg)
 
+
+<p align="center">
+  <img src="https://github.com/aditicsalunkhe/Group74-CalorieApp_Server/blob/main/src/static/images/site_logo3.png" />
+</p>
+
 ## Link to Demonstration Video of the Project: 
 https://drive.google.com/file/d/10ysKfwcecwr28sYiTgUISVuCjco6RFj2/view?usp=sharing
 
@@ -158,7 +163,7 @@ planned to do in future.
  Step 4:
     Run the following command in the terminal
     
-    python /src/Simplii_App/application.py
+    python /src/application.py
     
  Step 5:
     Open the URL in your browser:  
