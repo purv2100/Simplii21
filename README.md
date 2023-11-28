@@ -8,6 +8,7 @@
 ![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/style_checker.yml/badge.svg)
 ![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/syntax_checker.yml/badge.svg)
 ![github workflow](https://github.com/nisarg210/Simplii/actions/workflows/close_as_a_feature.yml/badge.svg)
+![github workflow](https://github.com/OWNER/REPOSITORY/actions/workflows/code_cov.yml/badge.svg)
 
 ## Link to Demonstration Video of the Project: 
 https://drive.google.com/file/d/1rApSm9mfYJVBAC05cEsd61l3WbkrtomQ/view?usp=sharing
