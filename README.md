@@ -176,8 +176,9 @@ planned to do in future.
 2. Add Friend section to introduce social functionality. <br>
 3. Add Analytic section to give users better forms of insight for tasking. <br>
 4. Add Forum section to enhance social functionality. <br>
-5. Improve documentation and test parts for the project. <br>
-6. Reslove bunch of bugs both from existing functions and new features. <br>
+5. Add Reward section to increase users` retention rate. <br>
+6. Improve documentation and test parts for the project. <br>
+7. Reslove bunch of bugs both from existing functions and new features. <br>
 
 
   ## Project Roadmap
