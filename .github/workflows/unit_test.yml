@@ -22,4 +22,4 @@ jobs:
           echo requirements installed
       - name: Run tests
         run: |
-          python -m test unit_test
+          python -m test.unit_test
