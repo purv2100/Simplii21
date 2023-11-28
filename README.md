@@ -13,7 +13,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/aditicsalunkhe/Group74-CalorieApp_Server/blob/main/src/static/images/site_logo3.png" />
+  <img src="src/static/images/site_logo3.png" />
 </p>
 
 ## Link to Demonstration Video of the Project: 
