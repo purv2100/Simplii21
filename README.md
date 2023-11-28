@@ -10,12 +10,12 @@
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/close_as_a_feature.yml/badge.svg)
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/code_cov.yml/badge.svg)
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/unit_test.yml/badge.svg)
-
+<br>
 
 <p align="center">
   <img src="src/static/images/site_logo3.png" />
 </p>
-
+<br>
 ## Link to Demonstration Video of the Project: 
 https://drive.google.com/file/d/10ysKfwcecwr28sYiTgUISVuCjco6RFj2/view?usp=sharing
 
