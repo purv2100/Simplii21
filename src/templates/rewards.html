@@ -1,0 +1,25 @@
+<!--
+   Copyright 2023 Simplii from Group74 NCSU CSC510
+
+   Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
+-->
+
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Rewards</h1>
+
+    <div>
+        <div>
+            <p>Your Rewards:</p>
+            <p>{{complete_rewards}}</p>
+        </div>
+        <div>
+            <p>Your Unclaimed Rewards:</p>
+            <p>{{incomplete_rewards}}</p>
+        </div>
+    </div>
+
+    <div>
+        <p>This is a paragraph where you can write a whole bunch of text to describe something. Feel free to add as much content as you need.</p>
+    </div>
+{% endblock content %}

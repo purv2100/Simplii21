@@ -21,6 +21,7 @@
   <!-- Font Awesome JS -->
   <script src="https://kit.fontawesome.com/5cab5da716.js" crossorigin="anonymous"></script>
 
+
   {% if title %}
   <title>Simplii - {{ title }}</title>
   {% else %}
@@ -57,7 +58,13 @@
         <li>
           <a href="{{ url_for('forum') }}">Forum</a>
         </li>
+        <li>
+          <a href="{{ url_for('rewards') }}">Rewards</a>
+        </li>
       </ul>
+      <div class="sidebar-bottom">
+        <p>&copy; 2023 CSC510 Group 74. All rights reserved.</p>
+      </div>
     </nav>
     {% endif %}
 
@@ -93,12 +100,16 @@
                 {% else %}
                 <div class="navbar-nav ml-auto">
                   <a class="nav-item nav-link ">Welcome, {{ session.get("name") }}</a>
-                  <button class="nav-item nav-link btn btn-link " onclick="logout()">Log Out</button>
+                  <button class="btn btn-info" onclick="logout()">
+                      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                      <span>Logout</span>
+                  </button>
                 </div>
                 {% endif %}
               </div>
             </div>
           </nav>
+        </nav>
       </header>
       <main role="main" class="container">
         <div class="row">

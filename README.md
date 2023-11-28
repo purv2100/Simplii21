@@ -233,7 +233,7 @@ planned to do in future.
   <tr>
   <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       
     <b>Aditi Salunkhe</b></sub></a><br /></td>
-  <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/58519704?v=4" width="100px;" alt=""/><br /><sub>     
+  <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/140658730?v=4" width="100px;" alt=""/><br /><sub>     
     <b>Purv Patel</b></sub></a></td>
   <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
     <b>Ishan Mistry</b></sub></a><br /></td>
