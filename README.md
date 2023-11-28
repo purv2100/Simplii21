@@ -38,15 +38,14 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
   - [Modifying tasks Updating and Deleting](#modifying-tasks-updating-and-deleting)
 - [Successful Case Studies](#successful-usecases)
 - [Steps for Execution:](#steps-for-execution)
-- [Source Code](#source-code)
 - [Delta](#delta)
 - [Project Roadmap](#project-roadmap)
 - [Project Funding](#project-funding)
-- [Team Members](#team-members)
 - [Contribution](#contribution)
 - [License](#license)
 - [Recommended Citation](#recommended-citation)
 - [Contact Us](#contact-us)
+- [Team Members](#team-members)
 
 
 ## Why use Simplii?
@@ -151,11 +150,11 @@ planned to do in future.
  Step 2: 
   Git Clone the Repository 
   
-    git clone https://github.com/nisarg210/Simplii.git
+    git clone https://github.com/aditicsalunkhe/Simplii-Group74-2023.git
     
   (OR) Download the .zip file on your local machine
   
-    https://github.com/nisarg210/Simplii.git
+    https://github.com/aditicsalunkhe/Simplii-Group74-2023.git
   
  Step 3:
    Install the required packages by running the following command in the terminal 
@@ -165,16 +164,12 @@ planned to do in future.
  Step 4:
     Run the following command in the terminal
     
-    python application.py
+    python /src/Simplii_App/application.py
     
  Step 5:
     Open the URL in your browser:  
       http://127.0.0.1:5000/
       
-## Source Code
-  
-  Link to the repository:
-    https://github.com/nisarg210/Simplii
                                                                                                                                                   
  ## Delta
  
@@ -226,22 +221,6 @@ planned to do in future.
   
   Our project is currently not funded, and we operate on a volunteer and open-source basis, and currently, improvement of the project solely relies on the dedication           of our team and contributions from the open-source community. 
   
-   
-   ## Team Members
-   
-  <table>
-  <tr>
-  <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       
-    <b>Aditi Salunkhe</b></sub></a><br /></td>
-  <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/140658730?v=4" width="100px;" alt=""/><br /><sub>     
-    <b>Purv Patel</b></sub></a></td>
-  <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
-    <b>Ishan Mistry</b></sub></a><br /></td>
-  <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/24827205?v=4" width="100px;" alt=""/><br /><sub>        
-    <b>Lixing Zheng</b></sub></a><br /></td>
-  </tr>
-</table>
-
   ## Contribution
   
   Please refer the CONTRIBUTING.md file for instructions on how to contribute to our repository.
@@ -264,7 +243,20 @@ planned to do in future.
   - Purv Patel [ppatel36@ncsu.edu](mailto:ppatel36@ncsu.edu)
   - Ishan Mistry [ihmistry@ncsu.edu](mailto:ihmistry@ncsu.edu)
   - Lixing Zheng [lzheng26@ncsu.edu](mailto:lzheng26@ncsu.edu)
-                                                                                                                                                   
+
+## Team Members   
+  <table>
+  <tr>
+  <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       
+    <b>Aditi Salunkhe</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/140658730?v=4" width="100px;" alt=""/><br /><sub>     
+    <b>Purv Patel</b></sub></a></td>
+  <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
+    <b>Ishan Mistry</b></sub></a><br /></td>
+  <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/24827205?v=4" width="100px;" alt=""/><br /><sub>        
+    <b>Lixing Zheng</b></sub></a><br /></td>
+  </tr>
+</table>                                                                                                                                            
                                                                                                                                                    
                                                                                                                                                    
                                                                                                                                                    
