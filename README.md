@@ -81,13 +81,13 @@ https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-
 
 ## Core Functionalities of the Application:
  
- 1. Register: <br>
+ 1. Register: <br><br>
   ![Alt Text](https://github.com/aditicsalunkhe/Simplii-Group74-2023/blob/main/static/images/register_and_login.gif)
 
 
  
- ## Login:
- https://user-images.githubusercontent.com/89509351/144703694-09252613-a2f7-4dff-a574-b4a20cb69fd4.mp4
+ 2. Add a task: <br><br>
+  <img src="/static/images/add_task.gif" width="70%" height="70%"/>
  
  ## Adding Tasks:
  
