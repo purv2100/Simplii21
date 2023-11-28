@@ -172,30 +172,13 @@ planned to do in future.
       
                                                                                                                                                   
  ## Delta
- 
- <b> a) Task Tracking based on the type of work</b>
-        <li>The earlier version of Simplii just used to add the category of task as text.
-        <li>In our updated version of Simplii, the tasks can be tracked based on their types. We have two types Intellectual & Physical.
-    
- <b>b) Email Remainder System (New Feature)</b>
-    
- <b>c) Added critical information like credentials, DB connection strings in the environment file. (Enhancement)</b>
-        
- <b>d) Implement Reset Password. (New Feature)</b>
+<b> 1. Front end layout re-design and implementation. </b>
+<b> 2. Add Friend section to introduce social functionality. </b>
+<b> 3. Add Analytic section to give users better forms of insight for tasking. </b>
+<b> 4. Add Forum section to enhance social functionality. </b>
+<b> 5. Improve documentation and test parts for the project.
+<b> 6. Reslove bunch of bugs both from existing functions and new features.
 
- <b>e) Add a description field for the task. (New Feature)</b>   
-
- <b>f) Added a discussion forum in the main navigation Menu. (New Feature)</b>
-       <li> Users can brag about their progress on the forum
-       <li> Users can find accountability buddies based on their interests
-       <li> Users can share tips and tools that helped them in their journey.
- 
- <b>g) Fixed on wrong password system breakdown error. (Bug Fix)</b>  
- 
- <b>h) Fixed on data fetch in update page data in some fields were missing. (Bug Fix)</b>   
- 
- <b>i) Added validations for input field of forms. (Bug Fix)</b>   
-        <li> Hours -> Integer, Task Name -> String</li><li>Start Date less than equal to DueDate</li>
 
   ## Project Roadmap
   **Future three months**:
