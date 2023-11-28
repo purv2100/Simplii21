@@ -838,7 +838,7 @@ def completeTask():
         email = session.get('email')
         task = request.form.get('task')
         actualhours = request.form.get('actualhours')
-        print(actualhours)
+        print(type(actualhours))
         print("Actual hours taken", int(actualhours))
         mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
                                     '$set': {'completed': True, 'actualhours': int(actualhours)}})
@@ -855,6 +855,31 @@ def completeTask():
 
         flash(f' {task} Task Completed!', 'success')
         return 'success'
+    
+@app.route("/rewards", methods=['GET'])
+def rewards():
+    if session.get('email'):
+        email = session.get('email')
+        tasks = list(mongo.db.tasks.find({'email': email}, {'category', 'completed'}))
+        complete_rewards = 0
+        incomplete_rewards = 0
+        for task in tasks:
+            print(task)
+            if task['category'] == 'easy':
+                difficulty_multiplier = 1  
+            elif task['category'] == 'medium':
+                difficulty_multiplier = 2
+            else:
+                difficulty_multiplier = 3
+            
+            if task['completed']:
+                complete_rewards+=difficulty_multiplier
+            if not task['completed']:
+                incomplete_rewards+=difficulty_multiplier
+            
+        return render_template('rewards.html', title = 'Rewards', complete_rewards=complete_rewards, incomplete_rewards=incomplete_rewards)
+        
+
 
 def is_integer(s):
     try:
@@ -864,76 +889,6 @@ def is_integer(s):
     except ValueError:
         # ValueError is raised if the conversion fails
         return False
-
-
-@app.route("/updateTask", methods=['GET', 'POST'])
-def updateTask():
-    ############################
-    # updateTask() function displays the updateTask.html page for updations
-    # route "/updateTask" will redirect to updateTask() function.
-    # input: The function takes various task values as Input
-    # Output: Out function will redirect to the updateTask page
-    # ##########################
-    if session.get('email'):
-        params = request.url.split('?')[1].split('&')
-        # print(params, "______------_____------______--- PARAMMMMSSSSSSSSS")
-        for i in range(len(params)):
-            params[i] = params[i].split('=')
-        for i in range(len(params)):
-            if "%" in params[i][1]:
-                index = params[i][1].index('%')
-                params[i][1] = params[i][1][:index] + \
-                    " " + params[i][1][index + 3:]
-        d = {}
-        for i in params:
-            d[i[0]] = i[1]
-
-        # print(d)
-
-        form = UpdateForm()
-
-        form.taskname.data = d['taskname']
-        form.category.data = d['category']
-        form.status.data = d['status']
-        form.hours.data = d['hours']
-        form.description.data = d['des']
-        date_format = "%Y-%m-%d"
-        form.startdate.data = datetime.strptime(d['startdate'], date_format)
-        form.duedate.data = datetime.strptime(d['duedate'], date_format)
-
-        # print(d['startdate'], "start")
-
-        if form.validate_on_submit():
-            if request.method == 'POST':
-                email = session.get('email')
-                taskname = request.form.get('taskname')
-                category = request.form.get('category')
-                startdate = request.form.get('startdate')
-                duedate = request.form.get('duedate')
-                hours = request.form.get('hours')
-                status = request.form.get('status')
-                datediff = datetime.strptime(
-                    duedate, "%Y-%m-%d") - datetime.strptime(startdate, "%Y-%m-%d")
-                description = request.form.get('description')
-                print(datediff, "difffffff")
-                print("start date", startdate)
-                if (not is_integer(hours)):
-                    flash(f' Error hours should be numeric!', 'danger')
-                elif (datediff.days < 0):
-                    flash(f' DueDate should be a future date!', 'danger')
-                else:
-                    mongo.db.tasks.update_one({'email': email, 'taskname': d['taskname'], 'startdate': d['startdate'],
-                                               'duedate': d['duedate']},
-                                              {'$set': {'taskname': taskname, 'startdate': startdate,
-                                                        'duedate': duedate, 'category': category, 'status': status,
-                                                        'hours': hours, 'description': description}})
-                    flash(f' {form.taskname.data} Task Updated!', 'success')
-                    return redirect(url_for('dashboard'))
-
-    else:
-        return redirect(url_for('home'))
-    return render_template('updateTask.html', title='Task', form=form)
-
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
