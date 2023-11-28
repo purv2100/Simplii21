@@ -5,7 +5,7 @@ import os
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 parentdir = os.path.dirname(currentdir) 
 sys.path.insert(0, parentdir)
-from Simplii_App.application import app
+from src.application import app
 class BasicTestCase(unittest.TestCase):
 
     def test_login(self):

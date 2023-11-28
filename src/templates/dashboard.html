@@ -89,18 +89,24 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in incomplete_tasks %}
-            <tr style="text-align: center;">
-                <td>{{ item['taskname'] }}</td>
-                <td>{{ item['progress'] }}%</td>
-                <td>{{ item['category'] }}</td>
-                <td>{{ item['startdate'] }}</td>
-                <td>{{ item['description'] }}</td>
-                <td><input type="number" id="actualhours" name="actualhours" min="1" max="24"></td>
-                <td style="text-align: center;"><button class='completeButton'>Complete</button></td>
-                <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
-            </tr>
-            {% endfor %}
+            {% if incomplete_tasks %}
+                {% for item in incomplete_tasks %}
+                <tr style="text-align: center;">
+                    <td>{{ item['taskname'] }}</td>
+                    <td>{{ item['progress'] }}%</td>
+                    <td>{{ item['category'] }}</td>
+                    <td>{{ item['startdate'] }}</td>
+                    <td>{{ item['description'] }}</td>
+                    <td><input type="number" id="actualhours" name="actualhours" min="1" max="24"></td>
+                    <td style="text-align: center;"><button class='completeButton'>Complete</button></td>
+                    <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No incomplete tasks available</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>
@@ -187,17 +193,23 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in completed_tasks %}
-            <tr style="text-align: center;">
-                <td>{{ item['taskname'] }}</td>
-                <td>{{ item['progress'] }}%</td>
-                <td>{{ item['category'] }}</td>
-                <td>{{ item['startdate'] }}</td>
-                <td>{{ item['description'] }}</td>
-                <td>{{ item['actualhours'] }}</td>
-                <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
-            </tr>
-            {% endfor %}
+            {% if complete_tasks %}
+                {% for item in completed_tasks %}
+                <tr style="text-align: center;">
+                    <td>{{ item['taskname'] }}</td>
+                    <td>{{ item['progress'] }}%</td>
+                    <td>{{ item['category'] }}</td>
+                    <td>{{ item['startdate'] }}</td>
+                    <td>{{ item['description'] }}</td>
+                    <td>{{ item['actualhours'] }}</td>
+                    <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="8" style="text-align: center;">No complete tasks available</td>
+                </tr>
+            {% endif %}
         </tbody>
     </table>
 </div>

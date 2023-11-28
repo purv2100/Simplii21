@@ -3,8 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
-from forms import *
-from apps import App
+from .forms.forms import *
+from .apps.apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -284,6 +284,8 @@ def dashboard():
     # Output: Our function will redirect to the dashboard page with user tasks being displayed
     # ##########################
     tasks = ''
+    incomplete_tasks = None
+    completed_tasks = None
     if session.get('email'):
         incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
         completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})

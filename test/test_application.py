@@ -3,8 +3,8 @@ import pytest
 from flask import Flask, session
 from flask_pymongo import PyMongo
 from flask_bcrypt import bcrypt
-from Simplii_App.application import app
-from Simplii_App.forms.forms import *
+from src.application import app
+from src.forms.forms import *
 import json
 
 @pytest.fixture
@@ -242,50 +242,50 @@ def test_forum(client):
             'thread_content': 'This is a test thread'
         }, follow_redirects=True)
 
-    # Check if the response status code is 200 (OK)
-    assert response_create_thread.status_code == 200
+        # Check if the response status code is 200 (OK)
+        assert response_create_thread.status_code == 200
 
-    # Check if the thread is created in the MongoDB collection
-    with app.app_context():
-        mongo = PyMongo(app)
-        created_thread = mongo.db.threads.find_one({'title': 'Test Thread'})
+        # Check if the thread is created in the MongoDB collection
+        with app.app_context():
+            mongo = PyMongo(app)
+            created_thread = mongo.db.threads.find_one({'title': 'Test Thread'})
 
-    assert created_thread is not None
-    assert created_thread['user_email'] == 'test@example.com'
-    assert created_thread['user'] == 'Test User'
-    assert created_thread['title'] == 'Test Thread'
-    assert created_thread['content'] == 'This is a test thread'
+        assert created_thread is not None
+        assert created_thread['user_email'] == 'test@example.com'
+        assert created_thread['user'] == 'Test User'
+        assert created_thread['title'] == 'Test Thread'
+        assert created_thread['content'] == 'This is a test thread'
 
-    # Simulate a request to reply to the created thread
-    response_reply_to_thread = client.post('/forum', data={
-        'thread_id': str(created_thread['_id']),
-        'reply_content': 'This is a test reply'
-    }, follow_redirects=True)
+        # Simulate a request to reply to the created thread
+        response_reply_to_thread = client.post('/forum', data={
+            'thread_id': str(created_thread['_id']),
+            'reply_content': 'This is a test reply'
+        }, follow_redirects=True)
 
-    # Check if the response status code is 200 (OK)
-    assert response_reply_to_thread.status_code == 200
+        # Check if the response status code is 200 (OK)
+        assert response_reply_to_thread.status_code == 200
 
-    # Check if the reply is added to the thread in the MongoDB collection
-    with app.app_context():
-        mongo = PyMongo(app)
-        updated_thread = mongo.db.threads.find_one({'_id': created_thread['_id']})
+        # Check if the reply is added to the thread in the MongoDB collection
+        with app.app_context():
+            mongo = PyMongo(app)
+            updated_thread = mongo.db.threads.find_one({'_id': created_thread['_id']})
 
-    assert updated_thread is not None
-    assert len(updated_thread['replies']) == 1
-    assert updated_thread['replies'][0]['user_email'] == 'test@example.com'
-    assert updated_thread['replies'][0]['user'] == 'Test User'
-    assert updated_thread['replies'][0]['content'] == 'This is a test reply'
+        assert updated_thread is not None
+        assert len(updated_thread['replies']) == 1
+        assert updated_thread['replies'][0]['user_email'] == 'test@example.com'
+        assert updated_thread['replies'][0]['user'] == 'Test User'
+        assert updated_thread['replies'][0]['content'] == 'This is a test reply'
 
-    # Simulate a request to retrieve all threads
-    response_get_threads = client.get('/forum')
+        # Simulate a request to retrieve all threads
+        response_get_threads = client.get('/forum')
 
-    # Check if the response status code is 200 (OK)
-    assert response_get_threads.status_code == 200
+        # Check if the response status code is 200 (OK)
+        assert response_get_threads.status_code == 200
 
-    # Check if the rendered template contains the created thread and reply
-    assert b'Test Thread' in response_get_threads.data
-    assert b'This is a test thread' in response_get_threads.data
-    assert b'This is a test reply' in response_get_threads.data
+        # Check if the rendered template contains the created thread and reply
+        assert b'Test Thread' in response_get_threads.data
+        assert b'This is a test thread' in response_get_threads.data
+        assert b'This is a test reply' in response_get_threads.data
 
 
 # def test_analytics(client):
