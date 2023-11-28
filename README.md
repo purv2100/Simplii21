@@ -230,11 +230,11 @@ planned to do in future.
 ## Team Members   
   <table>
   <tr>
-  <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/49781516?v=4" width="100px;" alt=""/><br /><sub>       
+  <td align="center"><a href="https://github.com/aditicsalunkhe"><img src="https://avatars.githubusercontent.com/u/111797405?v=4" width="100px;" alt=""/><br /><sub>       
     <b>Aditi Salunkhe</b></sub></a><br /></td>
   <td align="center"><a href="https://github.com/purv2100"><img src="https://avatars.githubusercontent.com/u/140658730?v=4" width="100px;" alt=""/><br /><sub>     
     <b>Purv Patel</b></sub></a></td>
-  <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/79688972?v=4" width="100px;" alt=""/><br /><sub>       
+  <td align="center"><a href="https://github.com/mistryishan25"><img src="https://avatars.githubusercontent.com/u/52032248?v=4" width="100px;" alt=""/><br /><sub>       
     <b>Ishan Mistry</b></sub></a><br /></td>
   <td align="center"><a href="https://github.com/WangWangIsDog"><img src="https://avatars.githubusercontent.com/u/24827205?v=4" width="100px;" alt=""/><br /><sub>        
     <b>Lixing Zheng</b></sub></a><br /></td>
