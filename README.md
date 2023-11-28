@@ -9,7 +9,7 @@
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/syntax_checker.yml/badge.svg)
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/close_as_a_feature.yml/badge.svg)
 ![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/code_cov.yml/badge.svg)
-![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/unit_test.yml/badge.svg)     <br><br>
+![github workflow](https://github.com/aditicsalunkhe/Simplii-Group74-2023/actions/workflows/unit_test.yml/badge.svg)     <br><br><br>
 
 
 <p align="center">
@@ -30,7 +30,9 @@ Introducing to Simplii- an online task tracker that will assist you in keeping t
 
 Watch our promotion video:
 
-https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171
+<div align="center">
+  <video src="https://github.com/aditicsalunkhe/Simplii-Group74-2023/assets/24827205/8bbf7225-5184-4679-8b14-a4bd769e6171" width="70%" />
+</div>
 
 
 # Table of Contents  
