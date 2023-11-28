@@ -308,6 +308,7 @@ def analytics():
     # analytics() function displays visualizations related to tasks of the user.
     # route "/analytics" will redirect to analytics() function.
     # ##########################
+    mongo = PyMongo(app)
     email = session.get('email')
     if app.config['TESTING']:
         app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
