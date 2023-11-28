@@ -3,8 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
-from Simplii_App.forms.forms import *
-from Simplii_App.apps.apps import App
+from forms import *
+from apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -285,8 +285,9 @@ def dashboard():
     # ##########################
     tasks = ''
     if session.get('email'):
-        tasks = mongo.db.tasks.find({'email': session.get('email')})
-    return render_template('dashboard.html', tasks=tasks)
+        incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
+        completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})
+    return render_template('dashboard.html', incomplete_tasks=incomplete_tasks, completed_tasks=completed_tasks)
 
 
 def get_first_day_of_week(date):
@@ -364,8 +365,13 @@ def analytics():
         # ----------------------------------------------------------------------------------------
         # Side-by-side bar chart of expected hours and actual hours required to complete the task
         # Only consider the tasks which are complete. i.e. progress = 1
-        data_exp_act = mongo.db.tasks.find({'email': email, 'completed': True}, {
-                                           'taskname', 'starttime', 'endtime', 'actualhours'})
+        data_exp_act = list(mongo.db.tasks.find({'email': email, 'completed': True}, {
+                                           'taskname', 'starttime', 'endtime', 'actualhours'}))
+        exp_act_html = None
+        by_year_html = None
+        by_month_html = None
+        by_week_html = None
+
         if len(data_exp_act) != 0:
             data_exp_act_df = pd.DataFrame(
                 columns=['Name', 'Expected Hours', 'Actual Hours'])
@@ -603,7 +609,6 @@ def analytics():
 
         # Convert the Plotly figure to HTML
         pie_html = fig.to_html(full_html=False)
-
         return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html=by_week_html, pie_html=pie_html, title='Analytics')
     flash('Please add some tasks before using analytics functionality', 'danger')
 
@@ -759,8 +764,10 @@ def deleteTask():
         task = request.form.get('task')
         mongo.db.tasks.delete_many({'taskname': task})
         print("Task", task, "deleted!!")
+        flash('Task Deleted', 'success')
         return "Success"
     else:
+        flash('Task Not Deleted', 'danger')
         return "Failed"
 
 
@@ -849,31 +856,24 @@ def completeTask():
             app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
             mongo = PyMongo(app)
         task = request.form.get('task')
-        is_completed = mongo.db.tasks.find_one(
-            {'taskname': task, 'email': email}, {'completed'})
-        print(is_completed)
-        if is_completed['completed']:
-            flash('Task already completed!', 'danger')
-        else:
-            actualhours = request.form.get('actualhours')
-            print(actualhours)
-            print("Actual hours taken", int(actualhours))
-            mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
-                                      '$set': {'completed': True, 'actualhours': int(actualhours)}})
-            tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
-            total_tasks = 0
-            total_completed_tasks = 0
-            for tsk in tasks:
-                if tsk['completed']:
-                    total_completed_tasks += 1
-                total_tasks += 1
+        actualhours = request.form.get('actualhours')
+        print(actualhours)
+        print("Actual hours taken", int(actualhours))
+        mongo.db.tasks.update_one({'email': email, 'taskname': task}, {
+                                    '$set': {'completed': True, 'actualhours': int(actualhours)}})
+        tasks = mongo.db.tasks.find({'taskname': task}, {'completed'})
+        total_tasks = 0
+        total_completed_tasks = 0
+        for tsk in tasks:
+            if tsk['completed']:
+                total_completed_tasks += 1
+            total_tasks += 1
 
-            mongo.db.tasks.update_many({'taskname': task}, {
-                                       '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
+        mongo.db.tasks.update_many({'taskname': task}, {
+                                    '$set': {'progress': round(total_completed_tasks/total_tasks, 2)*100}})
 
-            flash(f' {task} Task Completed!', 'success')
-    return redirect(url_for('home'))
-
+        flash(f' {task} Task Completed!', 'success')
+        return 'success'
 
 def is_integer(s):
     try:

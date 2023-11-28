@@ -6,39 +6,39 @@
 
 {% extends "layout.html" %}
 {% block content %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<!--Incomplete Tasks -->
 <div class="card status-card col-md" style="width: auto;">
     <div class="card-body">
-        <h5 class="card-title">All Tasks</h5>
+        <h5 class="card-title">Incomplete Tasks</h5>
     </div>
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
     <script type="text/javascript">
     $(document).ready(function () {
-        $("#ddlCategory").on("change", function () {
-            var Category = $('#ddlCategory').find("option:selected").val();
-            SearchData(Category)
+        $("#ddl1Category").on("change", function () {
+            var Category1 = $('#ddl1Category').find("option:selected").val();
+            SearchData1(Category1)
         });
     });
-    function SearchData(Category) {
-        if (Category.toUpperCase() == 'ALL') {
-            $('#myTable tbody tr').show();
+    function SearchData1(Category1) {
+        if (Category1.toUpperCase() == 'ALL') {
+            $('#myTable1 tbody tr').show();
         } 
         else 
         {
             // Hide all rows first
-            $('#myTable tbody tr').hide();
+            $('#myTable1 tbody tr').hide();
             // Show rows matching the selected "Category"
-            $('#myTable tbody tr:has(td)').each(function () {
-                var rowCategory = $.trim($(this).find('td:eq(2)').text());
-                if (rowCategory.toUpperCase() == Category.toUpperCase()) {
+            $('#myTable1 tbody tr:has(td)').each(function () {
+                var rowCategory1 = $.trim($(this).find('td:eq(2)').text());
+                if (rowCategory1.toUpperCase() == Category1.toUpperCase()) {
                     $(this).show();
                 }
             });
         }
     }
-</script>
-
-    
-<table data-toggle="table" data-flat="true" data-search="true" id="myTable" class="paginated table table-striped table-hover">
+    </script>
+  
+    <table data-toggle="table" data-flat="true" data-search="true" id="myTable1" class="paginated table table-striped table-hover">
         <div class="table-wrapper">
             <div class="table-title">
             </div>
@@ -63,7 +63,7 @@
                 <div class="col-sm-7">
                     <div class="filter-group">
                         <label>Category</label>
-                            <select class="cl_category" id="ddlCategory">
+                            <select class="cl_category" id="ddl1Category">
                                 <option value="all">Select category </option>
                                 <option value="Easy">Easy</option>
                                 <option value="Medium">Medium</option>
@@ -89,7 +89,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for item in tasks %}
+            {% for item in incomplete_tasks %}
             <tr style="text-align: center;">
                 <td>{{ item['taskname'] }}</td>
                 <td>{{ item['progress'] }}%</td>
@@ -101,7 +101,103 @@
                 <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
             </tr>
             {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Completed Tasks -->
+<div class="card status-card col-md" style="width: auto;">
+    <div class="card-body">
+        <h5 class="card-title">Completed Tasks</h5>
+    </div>
+    <script type="text/javascript">
+    $(document).ready(function () {
+        $("#ddl2Category").on("change", function () {
+            var Category2 = $('#ddl2Category').find("option:selected").val();
+            SearchData(Category2)
+        });
+    });
+    function SearchData(Category2) {
+        if (Category2.toUpperCase() == 'ALL') {
+            $('#myTable2 tbody tr').show();
+        } 
+        else 
+        {
+            // Hide all rows first
+            $('#myTable2 tbody tr').hide();
+            // Show rows matching the selected "Category"
+            $('#myTable2 tbody tr:has(td)').each(function () {
+                var rowCategory2 = $.trim($(this).find('td:eq(2)').text());
+                if (rowCategory2.toUpperCase() == Category2.toUpperCase()) {
+                    $(this).show();
+                }
+            });
+        }
+    }
+    </script>
+
+    
+    <table data-toggle="table" data-flat="true" data-search="true" id="myTable2" class="paginated table table-striped table-hover">
+        <div class="table-wrapper">
+            <div class="table-title">
+            </div>
+                <div class="table-filter">
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <div class="show-entries">
+                                <span>Show</span>
+                                <select class="form-control">
+                                    <option>5</option>
+                                    <option>10</option>
+                                </select>
+                                <span>entries</span>
+                                &nbsp
+                                &nbsp
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            &nbsp
+            <div class="row">
+                <div class="col-sm-7">
+                    <div class="filter-group">
+                        <label>Category</label>
+                            <select class="cl_category" id="ddl2Category">
+                                <option value="all">Select category </option>
+                                <option value="Easy">Easy</option>
+                                <option value="Medium">Medium</option>
+                                <option value="Hard">Hard</option>
+                            </select>
+                            &nbsp
+                    </div>
+                    <span class="filter-icon"><i class="fa fa-filter"></i></span>
+                </div>
+            </div>
             
+        </div>
+        <thead>
+            <tr style="background-color: #D5D8DD; text-align: center;">
+                <th>Task</th>
+                <th data-sortable="true">Progress</th>
+                <th data-sortable="true">Category</th>
+                <th>Start Date</th>
+                <th>Description</th>
+                <th>Actual Hours</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in completed_tasks %}
+            <tr style="text-align: center;">
+                <td>{{ item['taskname'] }}</td>
+                <td>{{ item['progress'] }}%</td>
+                <td>{{ item['category'] }}</td>
+                <td>{{ item['startdate'] }}</td>
+                <td>{{ item['description'] }}</td>
+                <td>{{ item['actualhours'] }}</td>
+                <td style="text-align: center;"><button class='deleteButton'>Delete</button></td>
+            </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
