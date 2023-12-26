@@ -9,7 +9,7 @@ from wtforms.fields.html5 import DateField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, TimeField, ValidationError, SelectMultipleField, SelectField
 # from wtforms.fields.core import SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from src.apps.apps import App
+from apps.apps import App
 
 def end_time_after_start_time(form, field):
     start_time = form.start_time.data
