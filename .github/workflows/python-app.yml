@@ -16,10 +16,10 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.9
+    - name: Set up Python 3.10
       uses: actions/setup-python@v4
       with:
-        python-version: 3.9
+        python-version: 3.10
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -31,8 +31,6 @@ jobs:
         echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
         echo MAIL_USERNAME=${{ secrets.MAIL_USERNAME }} >> .env
         echo MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }} >> .env
-        echo MAIL_SERVER=${{ secrets.MAIL_SERVER }} >> .env
-        echo MAIL_PORT=${{ secrets.MAIL_PORT }} >> .env
         echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
         cat .env
     - name: Lint with flake8
