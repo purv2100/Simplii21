@@ -12,6 +12,6 @@ class App:
     def __init__(self):
         self.app = Flask(__name__)
         self.app.secret_key = 'secret'
-        self.app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+        self.app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii21'
         self.mongo = PyMongo(self.app)
 

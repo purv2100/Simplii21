@@ -3,8 +3,8 @@
 #
 # Licensed under the MIT/X11 License (http://opensource.org/licenses/MIT)
 #
-from .forms.forms import *
-from .apps.apps import App
+from forms.forms import *
+from apps.apps import App
 
 from datetime import datetime, timedelta
 from bson.objectid import ObjectId
@@ -37,8 +37,9 @@ load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'secret'
 
+
 # Set up MongoDB Database
-app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii21'
 mongo = PyMongo(app)
 
 app.config['MAIL_SERVER'] = os.getenv('MAIL_SERVER')
@@ -49,7 +50,6 @@ app.config['MAIL_USERNAME'] = 'simpli7423@gmail.com'
 app.config['MAIL_PASSWORD'] = 'qjdc klot ntgx kdci'
 
 app.config['WTF_CSRF_ENABLED'] = False
-scheduler = BackgroundScheduler()
 
 @app.route("/")
 @app.route("/home")
@@ -281,15 +281,14 @@ def dashboard():
     # dashboard() function displays the tasks of the user
     # route "/dashboard" will redirect to dashboard() function.
     # input: The function takes session as the input and fetches user tasks from Database
-    # Output: Our function will redirect to the dashboard page with user tasks being displayed
+    # Output: The function will redirect to the dashboard page with user tasks being displayed
     # ##########################
-    tasks = ''
     incomplete_tasks = None
     completed_tasks = None
     if session.get('email'):
         incomplete_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': False})
         completed_tasks = mongo.db.tasks.find({'email': session.get('email'), 'completed': True})
-    return render_template('dashboard.html', incomplete_tasks=incomplete_tasks, completed_tasks=completed_tasks)
+    return render_template('dashboard.html', incomplete_tasks=list(incomplete_tasks), completed_tasks=list(completed_tasks))
 
 
 def get_first_day_of_week(date):
@@ -308,11 +307,7 @@ def analytics():
     # analytics() function displays visualizations related to tasks of the user.
     # route "/analytics" will redirect to analytics() function.
     # ##########################
-    mongo = PyMongo(app)
     email = session.get('email')
-    if app.config['TESTING']:
-        app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
-        mongo = PyMongo(app)
     # Check if there are any tasks in the database.
     data = list(mongo.db.tasks.find({'email': email}, {'email'}))
     print(data)
@@ -614,7 +609,7 @@ def analytics():
         pie_html = fig.to_html(full_html=False)
         return render_template('analytics.html', hist_html=hist_html, exp_act_html=exp_act_html, by_year_html=by_year_html, by_month_html=by_month_html, by_week_html=by_week_html, pie_html=pie_html, title='Analytics')
     flash('Please add some tasks before using analytics functionality', 'danger')
-
+    print("I am here")
     return redirect(url_for('task'))
 
 
@@ -669,9 +664,6 @@ def forum():
             - Renders the 'forum.html' template with the title 'Forum' and the list of threads.
 
     """
-    if app.config['TESTING']:
-            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
-            mongo = PyMongo(app)
     if request.method == 'POST':
         # Assuming you have a 'threads' collection in your MongoDB
         threads_collection = mongo.db.threads
@@ -718,7 +710,7 @@ def forum():
                 {'$push': {'replies': {'user_email': user_email, 'user': user,
                                        'content': reply_content, 'timestamp': datetime.utcnow()}}}
             )
-
+            print(app.config['MONGO_URI'])
             # Redirect back to the forum page after processing the reply
             return redirect(url_for('forum'))
 
@@ -785,61 +777,53 @@ def task():
     # Output: Value update in database and redirected to home login page
     # ##########################
     if session.get('email'):
+        print("Iamhere")
         form = TaskForm(session.get('email'))
-        if app.config['TESTING']:
-            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
-            mongo = PyMongo(app)
-        if form.validate_on_submit():
+        assert form.validate(), form.errors
+        if form.validate_on_submit() and request.method == 'POST':
             print("inside form")
-            if request.method == 'POST':
-                email = session.get('email')
-                taskname = request.form.get('taskname')
+            email = session.get('email')
+            taskname = request.form.get('taskname')
 
-                friendsemail = request.form.getlist(
-                    'invitees')+["Please Select"]
-                category = request.form.get('category')
-                startdate = request.form.get('startdate')
-                start_time = request.form.get('start_time')
-                end_time = request.form.get('end_time')
-                description = request.form.get('description')
-                check = mongo.db.tasks.find_one({'taskname': taskname})
-                if not check:
-                    print("Aditi")
-                    mongo.db.tasks.insert_one({'email': email,
-                                               'taskname': taskname,
-                                               'category': category,
-                                               'startdate': startdate,
-                                               'starttime': start_time,
-                                               'endtime': end_time,
-                                               'description': description,
-                                               'progress': 0,
-                                               'actualhours': 0,
-                                               'completed': False})
-                    print(friendsemail)
-                    for friendemail in friendsemail:
-                        if friendemail != "Please Select":
-                            mongo.db.tasks.insert_one({'email': friendemail,
-                                                       'taskname': taskname,
-                                                       'category': category,
-                                                       'startdate': startdate,
-                                                       'starttime': start_time,
-                                                       'endtime': end_time,
-                                                       'description': description,
-                                                       'progress': 0,
-                                                       'acutalhours': 0,
-                                                       'completed': False})
-                    
-                    app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
-                    mongo = PyMongo(app)
-                    flash(f' {form.taskname.data} Task Added!', 'success')
-                    return redirect(url_for('home'))
-                else:
-                    app.config['MONGO_URI'] = 'mongodb://localhost:27017/simplii'
-                    mongo = PyMongo(app)
-                    flash(
-                        'Task name already taken. Please find another task name. Thank you!',
-                        'danger')
-                    return redirect(url_for('task'))
+            friendsemail = request.form.getlist(
+                'invitees')+["Please Select"]
+            category = request.form.get('category')
+            startdate = request.form.get('startdate')
+            start_time = request.form.get('start_time')
+            end_time = request.form.get('end_time')
+            description = request.form.get('description')
+            check = mongo.db.tasks.find_one({'taskname': taskname})
+            if not check:
+                mongo.db.tasks.insert_one({'email': email,
+                                            'taskname': taskname,
+                                            'category': category,
+                                            'startdate': startdate,
+                                            'starttime': start_time,
+                                            'endtime': end_time,
+                                            'description': description,
+                                            'progress': 0,
+                                            'actualhours': 0,
+                                            'completed': False})
+                print(friendsemail)
+                for friendemail in friendsemail:
+                    if friendemail != "Please Select":
+                        mongo.db.tasks.insert_one({'email': friendemail,
+                                                    'taskname': taskname,
+                                                    'category': category,
+                                                    'startdate': startdate,
+                                                    'starttime': start_time,
+                                                    'endtime': end_time,
+                                                    'description': description,
+                                                    'progress': 0,
+                                                    'acutalhours': 0,
+                                                    'completed': False})
+                flash(f' {form.taskname.data} Task Added!', 'success')
+                return redirect(url_for('home'))
+            else:
+                flash(
+                    'Task name already taken. Please find another task name. Thank you!',
+                    'danger')
+                return redirect(url_for('task'))
     else:
         return redirect(url_for('home'))
     return render_template('task.html', title='Task', form=form)
@@ -855,9 +839,6 @@ def completeTask():
     # ##########################
     if session.get('email'):
         email = session.get('email')
-        if app.config['TESTING']:
-            app.config['MONGO_URI'] = 'mongodb://localhost:27017/test_simplii'
-            mongo = PyMongo(app)
         task = request.form.get('task')
         actualhours = request.form.get('actualhours')
         print(actualhours)
@@ -900,19 +881,22 @@ def login():
     # ##########################
     if not session.get('email'):
         form = LoginForm()
-        if form.validate_on_submit():
+        if form.validate_on_submit() and request.method=='POST':
             flash('You have been logged in!')
             temp = mongo.db.users.find_one({'email': form.email.data}, {
                 'email', 'pwd', 'temp', 'name'})
             if temp is not None and temp['email'] == form.email.data and (
                 bcrypt.checkpw(
                     form.password.data.encode("utf-8"),
-                    temp['pwd']) or temp == form.password.data):
+                    temp['pwd'])):
+                print(form.password.data.encode("utf-8"), temp['pwd'])
                 flash('You have been logged in!', 'success')
                 session['email'] = temp['email']
                 session['name'] = temp['name']
+                print('Iamhere')
                 return redirect(url_for('dashboard'))
             else:
+                print('I am here')
                 flash(
                     'Login Unsuccessful. Please check username and password',
                     'danger')
@@ -956,10 +940,6 @@ def emailReminder():
             mail.send(msg)
 
     return "Message sent"
-
-
-scheduler.add_job(emailReminder, 'cron', hour=8, minute=0)
-scheduler.start()
 
 if __name__ == '__main__':
     app.run(debug=True)
