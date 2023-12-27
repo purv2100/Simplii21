@@ -163,6 +163,14 @@ def test_login_with_email(client):
 
 def test_login_without_email(client):
 
+    #POST request to register route for testing case
+    response = client[0].post('/register', data={
+    'username': 'archeole21',
+    'email': 'apexarcheole@gmail.com',
+    'password': '1234',
+    'confirm_password': '1234'
+    })
+
     response = client[0].post('/login', data = {'email': 'apexarcheole@gmail.com', 'password': '1234'})
 
     #Assert that the respoonse is redirect
