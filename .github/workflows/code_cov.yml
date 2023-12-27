@@ -16,7 +16,7 @@ jobs:
         image: mongo:latest
         ports:
           - 27017:27017
-
+          
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
@@ -40,7 +40,10 @@ jobs:
         echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
         cat .env
     - name: Run the tests
-      run: pytest --cov=./
+      run: |
+        python -m src.application.py &
+        sleep 5
+        pytest --cov=./
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
