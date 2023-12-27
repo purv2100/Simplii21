@@ -14,6 +14,12 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.9
@@ -31,8 +37,6 @@ jobs:
         echo MONGO_URI=${{ secrets.MONGO_URI }} >> .env
         echo MAIL_USERNAME=${{ secrets.MAIL_USERNAME }} >> .env
         echo MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }} >> .env
-        echo MAIL_SERVER=${{ secrets.MAIL_SERVER }} >> .env
-        echo MAIL_PORT=${{ secrets.MAIL_PORT }} >> .env
         echo SECRET_KEY=${{ secrets.SECRET_KEY }} >> .env
         cat .env
     - name: Lint with flake8
